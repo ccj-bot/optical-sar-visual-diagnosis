@@ -37,9 +37,17 @@ def get_scene_config(config: dict[str, Any], scene: str) -> dict[str, Any]:
 
 
 def accounting_path_for(config: dict[str, Any], scene: str, key: str) -> str:
+    input_sources = config.get("input_sources", {})
+    if key in input_sources:
+        return str(input_sources[key].get("source_path", ""))
     scene_cfg = config.get("scenes", {}).get(scene, {})
     scene_sources = scene_cfg.get("accounting_sources", {})
     if key in scene_sources:
         return str(scene_sources[key])
     global_sources = config.get("accounting_sources", {})
     return str(global_sources.get(key, ""))
+
+
+def source_metadata_for(config: dict[str, Any], source_id: str) -> dict[str, Any]:
+    raw = config.get("input_sources", {}).get(source_id, {})
+    return dict(raw) if isinstance(raw, dict) else {}

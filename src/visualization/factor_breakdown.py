@@ -70,14 +70,16 @@ def render_factor_breakdown(
     width = sum(col_width for _, col_width in cols) + 80
     row_h = 38
     max_rows = max(1, min(len(candidates), 24))
-    height = 150 + row_h * (max_rows + 2)
+    height = 200 + row_h * (max_rows + 2)
     body = [
         f'<rect x="0" y="0" width="{width}" height="{height}" fill="#ffffff" />',
         label(28, 42, f"Factor Breakdown: {sample.get('sample_id')} | {sample.get('sample_type')}", 26),
         label(28, 76, "Missing factors are shown as missing; no synthetic factor values are generated.", 16, "#6b7280"),
+        label(28, 100, f"source={sample.get('source_id', '')} | kind={sample.get('source_kind', '')} | fallback_used={sample.get('_fallback_used', 'false')}", 15, "#374151"),
+        label(28, 122, "boundary: factor fields are audit context only, not selector or A008 scoring.", 15, "#6b7280"),
     ]
     x = 28
-    y = 118
+    y = 158
     for title, col_w in cols:
         body.append(f'<rect x="{x}" y="{y - 24}" width="{col_w}" height="30" fill="#f3f4f6" stroke="#e5e7eb" />')
         body.append(label(x + 8, y - 3, title, 14, "#374151"))

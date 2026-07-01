@@ -67,16 +67,20 @@ def render_candidate_overlay(
         )
     body.append("</g>")
 
+    candidate_header_y = 230 + len(families) * 28 + 28
     body.extend(
         [
-            label(table_x, 92, "source families", 22),
-            legend(table_x, 126, families),
-            label(table_x, 330, "candidates", 22),
-            f'<text x="{table_x}" y="360" font-size="16" fill="#6b7280">'
+            label(table_x, 92, f"source: {sample.get('source_id', '')} | {sample.get('source_kind', '')}", 16, "#374151"),
+            label(table_x, 114, f"fallback_used={sample.get('_fallback_used', 'false')} | posthoc_debug={str(posthoc_debug).lower()}", 16, "#374151"),
+            label(table_x, 136, "boundary: runtime/audit/posthoc kept separate; source family is provenance only", 15, "#6b7280"),
+            label(table_x, 176, "source families", 22),
+            legend(table_x, 210, families),
+            label(table_x, candidate_header_y, "candidates", 22),
+            f'<text x="{table_x}" y="{candidate_header_y + 30}" font-size="16" fill="#6b7280">'
             "IoU appears only when posthoc debug is enabled and an IoU field exists.</text>",
         ]
     )
-    y = 392
+    y = candidate_header_y + 62
     header = "rank | family | source | candidate_id"
     if posthoc_debug:
         header += " | IoU"

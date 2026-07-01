@@ -64,7 +64,7 @@ def render_transfer_panel(
     sigma = parse_float(sample.get("range_prior_sigma_px")) or float(scene_config.get("default_range_prior_sigma_px", 18.0))
 
     outer_w = 1680
-    outer_h = 760
+    outer_h = 800
     left_x = 28
     right_x = 858
     panel_w = 790
@@ -72,9 +72,11 @@ def render_transfer_panel(
     body = [
         f'<rect x="0" y="0" width="{outer_w}" height="{outer_h}" fill="#ffffff" />',
         label(28, 42, f"Optical-to-SAR Transfer Panel: {sample.get('sample_id')} | {sample.get('sample_type')}", 26),
-        label(left_x, 82, "optical frame", 20),
-        label(right_x, 82, "SAR frame with priors", 20),
-        f'<svg x="{left_x}" y="102" width="{panel_w}" height="{panel_h}" viewBox="0 0 {optical_w} {optical_h}">',
+        label(28, 66, f"source={sample.get('source_id', '')} | kind={sample.get('source_kind', '')} | candidates={sample.get('_candidate_count', '')} | fallback_used={sample.get('_fallback_used', 'false')}", 15, "#374151"),
+        label(28, 88, "boundary: optical provides a prior shell; SAR evidence must localize inside it; posthoc debug never alters candidates.", 15, "#6b7280"),
+        label(left_x, 112, "optical frame", 20),
+        label(right_x, 112, "SAR frame with priors", 20),
+        f'<svg x="{left_x}" y="132" width="{panel_w}" height="{panel_h}" viewBox="0 0 {optical_w} {optical_h}">',
         image_or_placeholder(sample.get("optical_frame_path", ""), 0, 0, optical_w, optical_h, "optical image"),
     ]
     optical_box = parse_xywh(sample.get("optical_box_xywh", ""))
@@ -86,7 +88,7 @@ def render_transfer_panel(
     body.extend(
         [
             "</svg>",
-            f'<svg x="{right_x}" y="102" width="{panel_w}" height="{panel_h}" viewBox="0 0 {sar_w} {sar_h}">',
+            f'<svg x="{right_x}" y="132" width="{panel_w}" height="{panel_h}" viewBox="0 0 {sar_w} {sar_h}">',
             image_or_placeholder(sample.get("sar_frame_path", ""), 0, 0, sar_w, sar_h, "SAR image"),
         ]
     )
@@ -142,8 +144,8 @@ def render_transfer_panel(
     body.extend(
         [
             "</svg>",
-            label(left_x, 744, "heading fields remain storage-axis conventions, not vehicle heading.", 16, "#6b7280"),
-            label(right_x, 744, "final boxes, if shown, are marked posthoc_only and never alter candidates.", 16, "#6b7280"),
+            label(left_x, 782, "heading fields remain storage-axis conventions, not vehicle heading.", 16, "#6b7280"),
+            label(right_x, 782, "final boxes, if shown, are marked posthoc_only and never alter candidates.", 16, "#6b7280"),
         ]
     )
     svg = (

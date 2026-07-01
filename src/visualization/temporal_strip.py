@@ -67,6 +67,8 @@ def render_temporal_strip(
     body = [
         f'<rect x="0" y="0" width="{outer_w}" height="{outer_h}" fill="#ffffff" />',
         label(28, 42, f"Temporal Strip: {sample.get('sample_id')} | {sample.get('sample_type')}", 26),
+        label(28, 66, f"source={sample.get('source_id', '')} | kind={sample.get('source_kind', '')} | fallback_used={sample.get('_fallback_used', 'false')}", 15, "#374151"),
+        label(28, 88, "context shell only; not identity-supported track-level temporal evidence", 15, "#6b7280"),
     ]
     factor = _candidate_for_family(candidates, "factor_inference")
     topk = _candidate_for_family(candidates, "factor_topk")
@@ -82,7 +84,7 @@ def render_temporal_strip(
     ]
     for idx, (frame_num, path) in enumerate(zip(frame_nums, frame_paths)):
         x = 28 + idx * (thumb_w + 24)
-        y = 82
+        y = 112
         body.append(label(x, y - 12, f"SAR {frame_num:06d}", 18))
         body.append(f'<svg x="{x}" y="{y}" width="{thumb_w}" height="{thumb_h}" viewBox="0 0 {sar_w} {sar_h}">')
         body.append(image_or_placeholder(path, 0, 0, sar_w, sar_h, f"SAR {frame_num:06d}"))
