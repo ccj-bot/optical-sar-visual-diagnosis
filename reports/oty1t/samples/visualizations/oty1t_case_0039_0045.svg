@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1188" height="616" font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="1188" height="616" fill="#ffffff" />
+<text x="24" y="34" font-size="22" fill="#111827">OTY1t case review: OTY1 0039 and 0045</text>
+<text x="24" y="58" font-size="13" fill="#475569">tracker_connected=false | confirmed_identity=false | shared_tracker_ids=[]</text>
+<text x="24" y="80" font-size="12" fill="#64748b">0039 tracker ids=[] | 0045 tracker ids=[&#x27;bt_0098&#x27;]</text>
+<text x="24" y="102" font-size="12" fill="#b45309">Visual review remains required. This is an OTY2 continuity hint only, not confirmed same-target identity.</text>
+<text x="24" y="124" font-size="12" fill="#64748b">No SAR alignment, SAR band, SAR GT, SAR evidence, final box, selector, training, or annotation proposal is shown.</text>
+<text x="24" y="132" font-size="14" fill="#111827">oty1_tracklet_0039</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000162.png" x="24" y="150" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="24.72" y="212.54" width="129.71" height="24.34" fill="none" stroke="#2563eb" stroke-width="3" />
+<text x="24" y="291.50" font-size="10" fill="#111827">f=162 | GM_RM019_000162_002 | conf=0.34</text>
+<text x="24" y="307.50" font-size="10" fill="#2563eb">tracker=unmatched</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000163.png" x="214" y="150" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="216.69" y="212.67" width="143.88" height="23.99" fill="none" stroke="#2563eb" stroke-width="3" />
+<text x="214" y="291.50" font-size="10" fill="#111827">f=163 | GM_RM019_000163_002 | conf=0.29</text>
+<text x="214" y="307.50" font-size="10" fill="#2563eb">tracker=unmatched</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000164.png" x="404" y="150" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="404.00" y="212.87" width="140.60" height="22.97" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="404" y="291.50" font-size="10" fill="#111827">f=164 | GM_RM019_000164_002 | conf=0.27</text>
+<text x="404" y="307.50" font-size="10" fill="#f97316">tracker=unmatched</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000165.png" x="594" y="150" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="594.00" y="212.92" width="128.27" height="25.57" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="594" y="291.50" font-size="10" fill="#111827">f=165 | GM_RM019_000165_002 | conf=0.26</text>
+<text x="594" y="307.50" font-size="10" fill="#f97316">tracker=unmatched</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000166.png" x="784" y="150" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="784.00" y="213.08" width="128.56" height="22.99" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="784" y="291.50" font-size="10" fill="#111827">f=166 | GM_RM019_000166_002 | conf=0.29</text>
+<text x="784" y="307.50" font-size="10" fill="#f97316">tracker=unmatched</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000167.png" x="974" y="150" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="974.00" y="213.25" width="128.90" height="25.39" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="974" y="291.50" font-size="10" fill="#111827">f=167 | GM_RM019_000167_001 | conf=0.31</text>
+<text x="974" y="307.50" font-size="10" fill="#f97316">tracker=unmatched</text>
+<text x="24" y="390" font-size="14" fill="#111827">oty1_tracklet_0045</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000171.png" x="24" y="408" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="79.67" y="469.30" width="109.98" height="61.61" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="24" y="549.50" font-size="10" fill="#111827">f=171 | GM_RM019_000171_001 | conf=0.28</text>
+<text x="24" y="565.50" font-size="10" fill="#f97316">tracker=unmatched</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000173.png" x="214" y="408" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="262.39" y="469.92" width="117.00" height="61.25" fill="none" stroke="#7c3aed" stroke-width="3" />
+<text x="214" y="549.50" font-size="10" fill="#111827">f=173 | GM_RM019_000173_001 | conf=0.69</text>
+<text x="214" y="565.50" font-size="10" fill="#7c3aed">tracker=bt_0098</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000175.png" x="404" y="408" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="473.58" y="473.38" width="96.20" height="57.96" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="404" y="549.50" font-size="10" fill="#111827">f=175 | GM_RM019_000175_001 | conf=0.95</text>
+<text x="404" y="565.50" font-size="10" fill="#f97316">tracker=bt_0098</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000177.png" x="594" y="408" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="685.97" y="477.61" width="73.85" height="53.79" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="594" y="549.50" font-size="10" fill="#111827">f=177 | GM_RM019_000177_001 | conf=0.95</text>
+<text x="594" y="565.50" font-size="10" fill="#f97316">tracker=bt_0098</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000179.png" x="784" y="408" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="898.29" y="483.95" width="51.60" height="47.56" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="784" y="549.50" font-size="10" fill="#111827">f=179 | GM_RM019_000179_001 | conf=0.96</text>
+<text x="784" y="565.50" font-size="10" fill="#f97316">tracker=bt_0098</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000181.png" x="974" y="408" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="1109.54" y="489.81" width="30.37" height="41.64" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="974" y="549.50" font-size="10" fill="#111827">f=181 | GM_RM019_000181_001 | conf=0.92</text>
+<text x="974" y="565.50" font-size="10" fill="#f97316">tracker=bt_0098</text>
+</svg>

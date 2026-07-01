@@ -1,0 +1,34 @@
+scene,tracker_name,event_type,tracker_track_id,related_tracker_track_id,optical_frame_num,frame_start,frame_end,event_score_proxy,event_reason,review_required
+GM_RM017,bytetrack,possible_id_switch,bt_0008,bt_0014,184,182,184,0.8576754551629485,nearby successive tracker hypotheses may represent an identity switch or fragment,True
+GM_RM017,bytetrack,fragment_bridge,bt_0008,bt_0014,184,182,184,0.8576754551629485,nearby track endpoint/start suggests possible tracker fragmentation bridge,True
+GM_RM017,bytetrack,ambiguous_association,bt_0008,bt_0010,151,151,151,0.574113672515287,two tracker hypotheses have close same-frame optical centers,True
+GM_RM017,bytetrack,ambiguous_association,bt_0008,bt_0010,152,152,152,0.5608042813112325,two tracker hypotheses have close same-frame optical centers,True
+GM_RM017,bytetrack,ambiguous_association,bt_0008,bt_0010,153,153,153,0.5587221899212055,two tracker hypotheses have close same-frame optical centers,True
+GM_RM017,bytetrack,ambiguous_association,bt_0008,bt_0010,154,154,154,0.5403094961831877,two tracker hypotheses have close same-frame optical centers,True
+GM_RM017,bytetrack,ambiguous_association,bt_0008,bt_0010,155,155,155,0.5113228378283566,two tracker hypotheses have close same-frame optical centers,True
+GM_RM017,bytetrack,ambiguous_association,bt_0010,bt_0012,162,162,162,0.5585642485482865,two tracker hypotheses have close same-frame optical centers,True
+GM_RM017,bytetrack,ambiguous_association,bt_0010,bt_0012,163,163,163,0.5402948008873463,two tracker hypotheses have close same-frame optical centers,True
+GM_RM017,bytetrack,ambiguous_association,bt_0010,bt_0012,164,164,164,0.5226049134648462,two tracker hypotheses have close same-frame optical centers,True
+GM_RM017,bytetrack,ambiguous_association,bt_0010,bt_0012,165,165,165,0.5025936330891079,two tracker hypotheses have close same-frame optical centers,True
+GM_RM017,bytetrack,track_lost,bt_0002,,130,129,130,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM017,bytetrack,track_lost,bt_0001,,165,164,165,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM017,bytetrack,track_lost,bt_0008,,183,182,183,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM017,bytetrack,track_lost,bt_0014,,185,184,185,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM017,bytetrack,track_lost,bt_0010,,198,197,198,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM017,bytetrack,track_lost,bt_0014,,200,199,200,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM017,bytetrack,track_lost,bt_0012,,211,210,211,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM017,bytetrack,track_lost,bt_0014,,214,213,214,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM017,bytetrack,track_reactivated,bt_0014,,198,184,198,1.0,tracker id reappeared after a missing optical frame gap,True
+GM_RM017,bytetrack,track_reactivated,bt_0014,,211,199,211,1.0,tracker id reappeared after a missing optical frame gap,True
+GM_RM017,bytetrack,track_start,bt_0001,,118,118,118,1.0,tracker id first assigned in detection-table replay,False
+GM_RM017,bytetrack,track_start,bt_0002,,121,121,121,1.0,tracker id first assigned in detection-table replay,False
+GM_RM017,bytetrack,track_end,bt_0002,,129,121,129,1.0,tracker hypothesis reached end of replay audit,False
+GM_RM017,bytetrack,track_start,bt_0008,,145,145,145,1.0,tracker id first assigned in detection-table replay,False
+GM_RM017,bytetrack,track_start,bt_0010,,151,151,151,1.0,tracker id first assigned in detection-table replay,False
+GM_RM017,bytetrack,track_start,bt_0012,,162,162,162,1.0,tracker id first assigned in detection-table replay,False
+GM_RM017,bytetrack,track_end,bt_0001,,164,118,164,1.0,tracker hypothesis reached end of replay audit,False
+GM_RM017,bytetrack,track_end,bt_0008,,182,145,182,1.0,tracker hypothesis reached end of replay audit,False
+GM_RM017,bytetrack,track_start,bt_0014,,184,184,184,1.0,tracker id first assigned in detection-table replay,False
+GM_RM017,bytetrack,track_end,bt_0010,,197,151,197,1.0,tracker hypothesis reached end of replay audit,False
+GM_RM017,bytetrack,track_end,bt_0012,,210,162,210,1.0,tracker hypothesis reached end of replay audit,False
+GM_RM017,bytetrack,track_end,bt_0014,,213,184,213,1.0,tracker hypothesis reached end of replay audit,False

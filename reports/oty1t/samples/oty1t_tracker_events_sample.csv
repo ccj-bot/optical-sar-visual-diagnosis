@@ -1,0 +1,81 @@
+scene,tracker_name,event_type,tracker_track_id,related_tracker_track_id,optical_frame_num,frame_start,frame_end,event_score_proxy,event_reason,review_required
+GM_RM019,bytetrack,possible_id_switch,bt_0001,bt_0009,13,11,13,0.6664677731928719,nearby successive tracker hypotheses may represent an identity switch or fragment,True
+GM_RM019,bytetrack,possible_id_switch,bt_0029,bt_0036,49,45,49,0.8340882128140978,nearby successive tracker hypotheses may represent an identity switch or fragment,True
+GM_RM019,bytetrack,possible_id_switch,bt_0042,bt_0070,84,82,84,0.9324011325204682,nearby successive tracker hypotheses may represent an identity switch or fragment,True
+GM_RM019,bytetrack,possible_id_switch,bt_0053,bt_0069,84,80,84,0.9573679827334673,nearby successive tracker hypotheses may represent an identity switch or fragment,True
+GM_RM019,bytetrack,possible_id_switch,bt_0067,bt_0070,84,80,84,0.9491185697286706,nearby successive tracker hypotheses may represent an identity switch or fragment,True
+GM_RM019,bytetrack,possible_id_switch,bt_0042,bt_0071,86,82,86,0.695803585672675,nearby successive tracker hypotheses may represent an identity switch or fragment,True
+GM_RM019,bytetrack,duplicate_track_overlap,bt_0001,bt_0002,1,1,1,0.5675022473127225,two tracker hypotheses overlap or are very close in the same optical frame,True
+GM_RM019,bytetrack,duplicate_track_overlap,bt_0001,bt_0002,2,2,2,0.5822253508189374,two tracker hypotheses overlap or are very close in the same optical frame,True
+GM_RM019,bytetrack,duplicate_track_overlap,bt_0053,bt_0057,71,71,71,0.5351484209119398,two tracker hypotheses overlap or are very close in the same optical frame,True
+GM_RM019,bytetrack,duplicate_track_overlap,bt_0067,bt_0042,80,80,80,0.8017233368117792,two tracker hypotheses overlap or are very close in the same optical frame,True
+GM_RM019,bytetrack,duplicate_track_overlap,bt_0069,bt_0073,87,87,87,0.7979973962029234,two tracker hypotheses overlap or are very close in the same optical frame,True
+GM_RM019,bytetrack,duplicate_track_overlap,bt_0071,bt_0070,87,87,87,0.5856312420014751,two tracker hypotheses overlap or are very close in the same optical frame,True
+GM_RM019,bytetrack,duplicate_track_overlap,bt_0069,bt_0073,88,88,88,0.7887869405524693,two tracker hypotheses overlap or are very close in the same optical frame,True
+GM_RM019,bytetrack,duplicate_track_overlap,bt_0093,bt_0080,127,127,127,0.5009118406480717,two tracker hypotheses overlap or are very close in the same optical frame,True
+GM_RM019,bytetrack,fragment_bridge,bt_0001,bt_0009,13,11,13,0.6664677731928719,nearby track endpoint/start suggests possible tracker fragmentation bridge,True
+GM_RM019,bytetrack,fragment_bridge,bt_0029,bt_0036,49,45,49,0.8340882128140978,nearby track endpoint/start suggests possible tracker fragmentation bridge,True
+GM_RM019,bytetrack,fragment_bridge,bt_0042,bt_0070,84,82,84,0.9324011325204682,nearby track endpoint/start suggests possible tracker fragmentation bridge,True
+GM_RM019,bytetrack,fragment_bridge,bt_0053,bt_0069,84,80,84,0.9573679827334673,nearby track endpoint/start suggests possible tracker fragmentation bridge,True
+GM_RM019,bytetrack,fragment_bridge,bt_0067,bt_0070,84,80,84,0.9491185697286706,nearby track endpoint/start suggests possible tracker fragmentation bridge,True
+GM_RM019,bytetrack,fragment_bridge,bt_0042,bt_0071,86,82,86,0.695803585672675,nearby track endpoint/start suggests possible tracker fragmentation bridge,True
+GM_RM019,bytetrack,ambiguous_association,bt_0001,bt_0002,0,0,0,0.5690147012140296,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0001,bt_0002,1,1,1,0.6630984427453167,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0001,bt_0002,2,2,2,0.6764227808013984,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0053,bt_0057,71,71,71,0.6332746633265405,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0067,bt_0042,80,80,80,0.8584609261142467,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0069,bt_0071,86,86,86,0.5206072404640102,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0069,bt_0071,87,87,87,0.5106809769779944,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0069,bt_0073,87,87,87,0.8556091552685445,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0071,bt_0070,87,87,87,0.6794834845221223,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0071,bt_0073,87,87,87,0.557763190142949,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0069,bt_0071,88,88,88,0.5024270443647061,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0069,bt_0073,88,88,88,0.8485269302030736,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0071,bt_0073,88,88,88,0.5506826624309904,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0093,bt_0080,125,125,125,0.5122400401863816,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0093,bt_0080,126,126,126,0.5744501439551001,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,ambiguous_association,bt_0093,bt_0080,127,127,127,0.6008750478604656,two tracker hypotheses have close same-frame optical centers,True
+GM_RM019,bytetrack,track_lost,bt_0002,,3,2,3,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0001,,12,11,12,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0009,,15,14,15,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0005,,42,41,42,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0024,,43,42,43,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0029,,46,45,46,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0036,,50,49,50,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0042,,57,56,57,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0042,,65,64,65,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0042,,67,66,67,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0057,,72,71,72,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0042,,73,72,73,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0042,,79,78,79,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0053,,81,80,81,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0067,,81,80,81,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0042,,83,82,83,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0070,,85,84,85,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0070,,88,87,88,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0073,,89,88,89,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0071,,93,92,93,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0069,,101,100,101,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0080,,121,120,121,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0093,,128,127,128,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0080,,141,140,141,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0094,,144,143,144,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0098,,163,162,163,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0111,,170,169,170,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0098,,183,182,183,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_lost,bt_0124,,262,261,262,1.0,track active in previous frame is not assigned in current frame,True
+GM_RM019,bytetrack,track_reactivated,bt_0042,,60,56,60,1.0,tracker id reappeared after a missing optical frame gap,True
+GM_RM019,bytetrack,track_reactivated,bt_0042,,66,64,66,1.0,tracker id reappeared after a missing optical frame gap,True
+GM_RM019,bytetrack,track_reactivated,bt_0042,,72,66,72,1.0,tracker id reappeared after a missing optical frame gap,True
+GM_RM019,bytetrack,track_reactivated,bt_0042,,76,72,76,1.0,tracker id reappeared after a missing optical frame gap,True
+GM_RM019,bytetrack,track_reactivated,bt_0042,,80,78,80,1.0,tracker id reappeared after a missing optical frame gap,True
+GM_RM019,bytetrack,track_reactivated,bt_0070,,87,84,87,1.0,tracker id reappeared after a missing optical frame gap,True
+GM_RM019,bytetrack,track_reactivated,bt_0080,,125,120,125,1.0,tracker id reappeared after a missing optical frame gap,True
+GM_RM019,bytetrack,track_reactivated,bt_0098,,172,162,172,1.0,tracker id reappeared after a missing optical frame gap,True
+GM_RM019,bytetrack,track_start,bt_0001,,0,0,0,1.0,tracker id first assigned in detection-table replay,False
+GM_RM019,bytetrack,track_start,bt_0002,,0,0,0,1.0,tracker id first assigned in detection-table replay,False
+GM_RM019,bytetrack,track_end,bt_0002,,2,0,2,1.0,tracker hypothesis reached end of replay audit,False
+GM_RM019,bytetrack,track_start,bt_0005,,5,5,5,1.0,tracker id first assigned in detection-table replay,False
+GM_RM019,bytetrack,track_end,bt_0001,,11,0,11,1.0,tracker hypothesis reached end of replay audit,False
+GM_RM019,bytetrack,track_start,bt_0009,,13,13,13,1.0,tracker id first assigned in detection-table replay,False
+GM_RM019,bytetrack,track_end,bt_0009,,14,13,14,1.0,tracker hypothesis reached end of replay audit,False
