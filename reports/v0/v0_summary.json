@@ -1,0 +1,117 @@
+{
+  "generated_at": "2026-07-01T12:41:33",
+  "config": "configs\\scene_config.yaml",
+  "manifest": "manifests\\v0_sample_manifest.csv",
+  "output_dir": "outputs\\v0_visual_diagnosis_20260701_124133",
+  "sample_count": 8,
+  "counts": {
+    "transfer_panels": 8,
+    "candidate_overlays": 8,
+    "factor_breakdowns": 8,
+    "temporal_strips": 8
+  },
+  "missing_path_count": 0,
+  "missing_path_report": "outputs\\v0_visual_diagnosis_20260701_124133\\missing_path_report.csv",
+  "reports": {
+    "findings_template": "reports\\v0_findings_template.md",
+    "problem_hypotheses": "reports\\v0_problem_hypotheses.md"
+  },
+  "scope_boundary": {
+    "selector": false,
+    "threshold": false,
+    "g2": false,
+    "a008_scoring": false,
+    "posthoc_iou_changes_candidates": false,
+    "copy_large_images_into_git": false
+  },
+  "entries": [
+    {
+      "sample_id": "v0_001",
+      "sample_type": "top1 bad but top20 good",
+      "scene": "GM_RM019",
+      "target_identity": "frameadd_gm_rm019_000004_000008_01",
+      "candidate_count": 17,
+      "transfer_panel": "transfer_panels/v0_001_transfer_panel.svg",
+      "candidate_overlay": "candidate_overlays/v0_001_candidate_overlay.svg",
+      "factor_breakdown": "factor_breakdowns/v0_001_factor_breakdown.svg",
+      "temporal_strip": "temporal_strips/v0_001_temporal_strip.svg"
+    },
+    {
+      "sample_id": "v0_002",
+      "sample_type": "candidate_pool_bad",
+      "scene": "GM_RM019",
+      "target_identity": "frameadd_gm_rm019_000013_000027_01",
+      "candidate_count": 17,
+      "transfer_panel": "transfer_panels/v0_002_transfer_panel.svg",
+      "candidate_overlay": "candidate_overlays/v0_002_candidate_overlay.svg",
+      "factor_breakdown": "factor_breakdowns/v0_002_factor_breakdown.svg",
+      "temporal_strip": "temporal_strips/v0_002_temporal_strip.svg"
+    },
+    {
+      "sample_id": "v0_003",
+      "sample_type": "wedge_best",
+      "scene": "GM_RM019",
+      "target_identity": "frameadd_gm_rm019_000004_000008_01",
+      "candidate_count": 17,
+      "transfer_panel": "transfer_panels/v0_003_transfer_panel.svg",
+      "candidate_overlay": "candidate_overlays/v0_003_candidate_overlay.svg",
+      "factor_breakdown": "factor_breakdowns/v0_003_factor_breakdown.svg",
+      "temporal_strip": "temporal_strips/v0_003_temporal_strip.svg"
+    },
+    {
+      "sample_id": "v0_004",
+      "sample_type": "ray_best",
+      "scene": "GM_RM019",
+      "target_identity": "frameadd_gm_rm019_000004_000008_01",
+      "candidate_count": 17,
+      "transfer_panel": "transfer_panels/v0_004_transfer_panel.svg",
+      "candidate_overlay": "candidate_overlays/v0_004_candidate_overlay.svg",
+      "factor_breakdown": "factor_breakdowns/v0_004_factor_breakdown.svg",
+      "temporal_strip": "temporal_strips/v0_004_temporal_strip.svg"
+    },
+    {
+      "sample_id": "v0_005",
+      "sample_type": "signed_best",
+      "scene": "GM_RM019",
+      "target_identity": "frameadd_gm_rm019_000004_000008_01",
+      "candidate_count": 17,
+      "transfer_panel": "transfer_panels/v0_005_transfer_panel.svg",
+      "candidate_overlay": "candidate_overlays/v0_005_candidate_overlay.svg",
+      "factor_breakdown": "factor_breakdowns/v0_005_factor_breakdown.svg",
+      "temporal_strip": "temporal_strips/v0_005_temporal_strip.svg"
+    },
+    {
+      "sample_id": "v0_006",
+      "sample_type": "sar_only_blocked",
+      "scene": "GM_RM019",
+      "target_identity": "gm_rm019_00001",
+      "candidate_count": 17,
+      "transfer_panel": "transfer_panels/v0_006_transfer_panel.svg",
+      "candidate_overlay": "candidate_overlays/v0_006_candidate_overlay.svg",
+      "factor_breakdown": "factor_breakdowns/v0_006_factor_breakdown.svg",
+      "temporal_strip": "temporal_strips/v0_006_temporal_strip.svg"
+    },
+    {
+      "sample_id": "v0_007",
+      "sample_type": "gmrm011_probe",
+      "scene": "GM_RM011",
+      "target_identity": "gmrm011_probe_000000",
+      "candidate_count": 0,
+      "transfer_panel": "transfer_panels/v0_007_transfer_panel.svg",
+      "candidate_overlay": "candidate_overlays/v0_007_candidate_overlay.svg",
+      "factor_breakdown": "factor_breakdowns/v0_007_factor_breakdown.svg",
+      "temporal_strip": "temporal_strips/v0_007_temporal_strip.svg"
+    },
+    {
+      "sample_id": "v0_008",
+      "sample_type": "gmrm017_reference",
+      "scene": "GM_RM017",
+      "target_identity": "gmrm017_reference_000000",
+      "candidate_count": 0,
+      "transfer_panel": "transfer_panels/v0_008_transfer_panel.svg",
+      "candidate_overlay": "candidate_overlays/v0_008_candidate_overlay.svg",
+      "factor_breakdown": "factor_breakdowns/v0_008_factor_breakdown.svg",
+      "temporal_strip": "temporal_strips/v0_008_temporal_strip.svg"
+    }
+  ]
+}
