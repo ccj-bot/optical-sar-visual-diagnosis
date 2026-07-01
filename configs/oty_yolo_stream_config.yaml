@@ -1,0 +1,69 @@
+{
+  "version": "oty0_yolo_first_detection_stream_audit",
+  "purpose": "raw_optical_frames_to_yolo_detection_stream_audit",
+  "notes": [
+    "This is JSON-compatible YAML.",
+    "YOLO confidence is an optical detector output filter for audit only; it is not a SAR selector threshold.",
+    "Existing CSV and SAR GT sources are posthoc/audit only and are never used to generate detections."
+  ],
+  "yolo": {
+    "preferred_model_path": "D:\\profile\\research\\workspace\\artifacts\\detector_weights\\yolo11l.pt",
+    "fallback_model_paths": [
+      "D:\\profile\\research\\workspace\\artifacts\\detector_weights\\yolo11m.pt",
+      "D:\\profile\\research\\workspace\\artifacts\\detector_weights\\yolo11s.pt",
+      "D:\\profile\\research\\workspace\\artifacts\\detector_weights\\yolo11n.pt",
+      "D:\\profile\\research\\yolov8n.pt"
+    ],
+    "yolo_command": "",
+    "imgsz": 960,
+    "batch_size": 16,
+    "device": "auto",
+    "confidence_threshold_for_detection_audit": 0.25,
+    "yolo_class_filter": {
+      "class_names": ["car", "truck", "bus"],
+      "class_ids": [],
+      "notes": "Filter is for optical YOLO detection audit output only; it is not a SAR selector threshold."
+    }
+  },
+  "alignment": {
+    "sar_fps_relative_to_optical": "",
+    "alignment_unknown": true,
+    "policy": "OTY0 does not assume optical frame i equals SAR frame i. OTY2 must audit SAR high-FPS alignment."
+  },
+  "posthoc_csv_sources": {
+    "review_queue": {
+      "path": "D:\\profile\\research\\workspace\\output\\hermes_annotation_consolidation_2026-05-20\\00_tables\\review_queue.csv",
+      "use_policy": "posthoc_audit_only_not_runtime_detection_source"
+    },
+    "final_gt_working": {
+      "path": "D:\\profile\\research\\workspace\\output\\hermes_annotation_consolidation_2026-05-20\\00_tables\\final_gt_working.csv",
+      "use_policy": "posthoc_gt_only_not_runtime_detection_source"
+    }
+  },
+  "scenes": {
+    "GM_RM019": {
+      "optical_frames_dir": "D:\\profile\\research\\data\\GM_RM019\\GM_RM019_frames",
+      "sar_frames_dir": "D:\\profile\\research\\data\\GM_RM019\\GM_RM019_SARframes",
+      "sar_gray_frames_dir": "D:\\profile\\research\\data\\GM_RM019\\GM_RM019_SARframes_gray",
+      "depth_dir": "D:\\profile\\research\\data\\GM_RM019\\GM_RM019_depth",
+      "frame_range": [0, 367],
+      "run_status": "primary"
+    },
+    "GM_RM011": {
+      "optical_frames_dir": "D:\\profile\\research\\data\\GM_RM011\\GM_RM011_frames",
+      "sar_frames_dir": "D:\\profile\\research\\data\\GM_RM011\\GM_RM011_SARframes",
+      "sar_gray_frames_dir": "D:\\profile\\research\\data\\GM_RM011\\GM_RM011_SARframes_gray",
+      "depth_dir": "D:\\profile\\research\\data\\GM_RM011\\GM_RM011_depth",
+      "frame_range": [0, 367],
+      "run_status": "planned_runnable_if_requested"
+    },
+    "GM_RM017": {
+      "optical_frames_dir": "D:\\profile\\research\\data\\GM_RM017\\GM_RM017_frames",
+      "sar_frames_dir": "D:\\profile\\research\\data\\GM_RM017\\GM_RM017_SARframes",
+      "sar_gray_frames_dir": "D:\\profile\\research\\data\\GM_RM017\\GM_RM017_SARframes_gray",
+      "depth_dir": "D:\\profile\\research\\data\\GM_RM017\\GM_RM017_depth",
+      "frame_range": [0, 367],
+      "run_status": "planned_runnable_if_requested"
+    }
+  }
+}
