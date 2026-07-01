@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="260" font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="980" height="260" fill="#ffffff" />
+<text x="24" y="34" font-size="22" fill="#111827">OTY1t 0039/0045 Failure Trace</text>
+<text x="24" y="62" font-size="13" fill="#64748b">Tracker ids are optical identity hypotheses only; confirmed_identity=false.</text>
+<text x="24" y="98" font-size="15" fill="#111827">tracker_connected=false | oty2_continuity_hint=false | visual_review_required=true</text>
+<text x="24" y="126" font-size="13" fill="#b45309">failure_mode=partial_component_unmatched_then_later_full_component_tracked</text>
+<text x="24" y="154" font-size="12" fill="#475569">0039 unmatched=8 | 0045 trackers=[&#x27;bt_0098&#x27;] | bt_0098=149-182</text>
+<text x="24" y="182" font-size="12" fill="#475569">OTY1a status=partial_to_full_box_transition_candidate | bridge_iou_proxy=0.541249116302846 | endpoint_distance=80.151171039759</text>
+<text x="24" y="222" font-size="12" fill="#64748b">No SAR frame, SAR GT, SAR evidence, final boxes, selector, training, or annotation proposal.</text>
+</svg>

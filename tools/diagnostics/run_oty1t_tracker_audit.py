@@ -31,12 +31,25 @@ from src.optical_state.state_features import BBox, center_distance, parse_float,
 from src.optical_state.tracklet_builder import normalize_detections  # noqa: E402
 from src.optical_state.tracker_audit import (  # noqa: E402
     TrackerAuditConfig,
+    botsort_dependency_facts,
     build_comparison_row,
     build_tracker_state_timeseries,
     build_tracker_tracks,
     bytetrack_dependency_facts,
     case_0039_0045_analysis,
+    run_botsort_detection_table_replay,
     run_bytetrack_detection_table_replay,
+)
+from src.optical_state.tracker_diagnosis import (  # noqa: E402
+    DiagnosisConfig,
+    build_case_0039_0045_failure_trace,
+    build_failure_bucket_summary,
+    build_unmatched_detection_audit,
+    cross_tracker_row,
+    event_distribution,
+    oty2_stable_input_recommendation,
+    render_case_failure_trace_svg,
+    write_case_0039_0045_failure_trace_markdown,
 )
 
 
@@ -174,6 +187,82 @@ COMPARISON_FIELDS = [
     "singleton_reduction_proxy",
     "fragment_reduction_proxy",
     "comparison_policy",
+]
+
+UNMATCHED_AUDIT_FIELDS = [
+    "scene",
+    "optical_frame_num",
+    "det_id",
+    "class_name",
+    "confidence",
+    "bbox_x1",
+    "bbox_y1",
+    "bbox_x2",
+    "bbox_y2",
+    "bbox_center_x",
+    "bbox_center_y",
+    "bbox_w",
+    "bbox_h",
+    "bbox_area",
+    "bbox_aspect",
+    "bottom_y",
+    "is_low_score_detection",
+    "boundary_contact",
+    "neighbor_ambiguity_proxy",
+    "nearest_tracked_track_id",
+    "nearest_tracked_center_distance_px",
+    "nearest_tracked_iou",
+    "overlaps_existing_tracker",
+    "near_existing_tracker",
+    "oty1_component_id_if_available",
+    "oty1_identity_status_if_available",
+    "oty1a_related_merge_edge_count",
+    "oty1a_related_nonambiguous_edge_count",
+    "oty1a_related_ambiguous_edge_count",
+    "diagnosis_bucket",
+    "diagnosis_reason",
+]
+
+FAILURE_BUCKET_FIELDS = [
+    "scene",
+    "tracker_name",
+    "diagnosis_bucket",
+    "row_count",
+    "mean_confidence",
+    "median_confidence",
+    "mean_nearest_tracked_distance_px",
+    "mean_nearest_tracked_iou",
+    "boundary_contact_rate",
+    "neighbor_ambiguity_rate",
+    "low_score_rate",
+    "oty1a_related_rate",
+    "interpretation",
+    "recommended_next_action",
+]
+
+CROSS_TRACKER_FIELDS = [
+    "scene",
+    "tracker_name",
+    "tracker_real_run",
+    "dependency_status",
+    "detection_rows_in",
+    "tracked_assignment_rows",
+    "unmatched_detection_rows",
+    "unmatched_rate",
+    "tracker_track_count",
+    "stable_hypothesis_count",
+    "fragmented_hypothesis_count",
+    "ambiguous_hypothesis_count",
+    "short_hypothesis_count",
+    "duplicate_overlap_count",
+    "possible_id_switch_count",
+    "lost_event_count",
+    "reactivated_event_count",
+    "case_0039_0045_tracker_connected",
+    "case_0039_0045_confirmed_identity",
+    "case_0039_0045_oty2_continuity_hint",
+    "oty2_stable_input_recommendation",
+    "largest_blocker",
 ]
 
 
@@ -375,6 +464,44 @@ def forbidden_input_fields(fieldnames: Sequence[str]) -> list[str]:
     return out
 
 
+def dependency_facts_for_tracker(tracker_name: str) -> dict[str, Any]:
+    if tracker_name == "bytetrack":
+        facts = bytetrack_dependency_facts()
+        facts["adapter_status"] = "detection_table_replay_adapter"
+        return facts
+    if tracker_name == "botsort":
+        return botsort_dependency_facts()
+    return {
+        "tracker_name": tracker_name,
+        "tracker_real_run": False,
+        "dependency_status": "missing_or_unsupported",
+        "blocker_reason": f"{tracker_name} is not installed or no stable detection-table replay adapter is integrated in OTY1t-P1/P2.",
+        "install_hint": "Integrate a runtime-safe detection-table replay adapter and install the tracker package before enabling real runs.",
+        "adapter_status": "blocker_contract_only",
+        "next_action": "Add and smoke-test a real adapter; do not synthesize tracking rows.",
+    }
+
+
+def run_tracker_detection_table_replay(
+    detections: Sequence[Mapping[str, Any]],
+    frame_numbers: Sequence[int],
+    config: TrackerAuditConfig,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    if config.tracker_name == "bytetrack":
+        return run_bytetrack_detection_table_replay(detections, frame_numbers, config)
+    if config.tracker_name == "botsort":
+        return run_botsort_detection_table_replay(detections, frame_numbers, config)
+    return [], [], dependency_facts_for_tracker(config.tracker_name)
+
+
+def tracker_available_from_facts(tracker_name: str, facts: Mapping[str, Any]) -> bool:
+    if tracker_name == "bytetrack":
+        return bool(facts.get("bytetrack_available"))
+    if tracker_name == "botsort":
+        return bool(facts.get("botsort_available"))
+    return False
+
+
 def count_status(rows: Sequence[Mapping[str, Any]], field: str, value: str) -> int:
     return sum(1 for row in rows if str(row.get(field, "")) == value)
 
@@ -492,7 +619,7 @@ def render_tracker_timeline_svg(
     parts = [
         f'<rect x="0" y="0" width="{width}" height="{height}" fill="#ffffff" />',
         f'<text x="24" y="34" font-size="22" fill="#111827">OTY1t tracker timeline: {html_escape(scene)}</text>',
-        '<text x="24" y="58" font-size="13" fill="#64748b">ByteTrack ids are optical identity hypotheses only. Runtime source is OTY0 YOLO detections; no SAR, GT, review, final boxes, or annotation proposal.</text>',
+        '<text x="24" y="58" font-size="13" fill="#64748b">Tracker ids are optical identity hypotheses only. Runtime source is OTY0 YOLO detections; no SAR, GT, review, final boxes, or annotation proposal.</text>',
         f'<line x1="{left}" y1="{top - 22}" x2="{left + plot_w}" y2="{top - 22}" stroke="#cbd5e1" />',
         f'<text x="{left}" y="{top - 30}" font-size="12" fill="#475569">frame {min_frame}</text>',
         f'<text x="{left + plot_w - 74}" y="{top - 30}" font-size="12" fill="#475569">frame {max_frame}</text>',
@@ -682,6 +809,232 @@ def write_case_review(path: Path, case: Mapping[str, Any], output_svg: Path | No
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def diagnosis_bucket_distribution(rows: Sequence[Mapping[str, Any]]) -> dict[str, int]:
+    out: dict[str, int] = {}
+    for row in rows:
+        bucket = str(row.get("diagnosis_bucket", ""))
+        out[bucket] = out.get(bucket, 0) + 1
+    return dict(sorted(out.items()))
+
+
+def write_tracker_diagnosis_report(
+    path: Path,
+    summary: Mapping[str, Any],
+    failure_buckets: Sequence[Mapping[str, Any]],
+    event_counts: Mapping[str, int],
+    case_trace: Mapping[str, Any],
+    cross_rows: Sequence[Mapping[str, Any]] | None = None,
+) -> None:
+    lines = [
+        "# OTY1t Tracker Diagnosis Report",
+        "",
+        f"Generated: `{summary.get('generated_at', '')}`",
+        f"Scene: `{summary.get('scene', '')}`",
+        f"Tracker: `{summary.get('tracker_name', '')}`",
+        "",
+        "## Boundary",
+        "",
+        "- Runtime tracking source: OTY0 YOLO detection table and optical frame inventory only.",
+        "- OTY1/OTY1a are comparison context only.",
+        "- No SAR alignment, SAR band, SAR GT coverage, SAR evidence sampling, selector, training, or annotation proposal was introduced.",
+        "- Tracker ids remain optical identity hypotheses, not confirmed identities.",
+        "",
+        "## Scene Diagnosis",
+        "",
+        f"- detection rows in: `{summary.get('detection_rows_in', 0)}`",
+        f"- tracked assignment rows: `{summary.get('tracked_assignment_rows', 0)}`",
+        f"- unmatched detection rows: `{summary.get('unmatched_detection_rows', 0)}`",
+        f"- tracker track count: `{summary.get('tracker_track_count', 0)}`",
+        f"- stable hypotheses: `{summary.get('stable_hypothesis_count', 0)}`",
+        f"- fragmented hypotheses: `{summary.get('fragmented_hypothesis_count', 0)}`",
+        f"- ambiguous hypotheses: `{summary.get('ambiguous_hypothesis_count', 0)}`",
+        f"- short hypotheses: `{summary.get('short_hypothesis_count', 0)}`",
+        "",
+        "## Unmatched Detection Distribution",
+        "",
+        "| diagnosis_bucket | row_count | interpretation | recommended_next_action |",
+        "| --- | ---: | --- | --- |",
+    ]
+    for row in failure_buckets:
+        lines.append(
+            f"| `{row.get('diagnosis_bucket', '')}` | {row.get('row_count', 0)} | "
+            f"{row.get('interpretation', '')} | {row.get('recommended_next_action', '')} |"
+        )
+    if not failure_buckets:
+        lines.append("| `none` | 0 | No unmatched detection rows were diagnosed. | none |")
+    lines.extend(
+        [
+            "",
+            "## Duplicate / Possible ID Switch Distribution",
+            "",
+            f"- duplicate_track_overlap: `{event_counts.get('duplicate_track_overlap', 0)}`",
+            f"- possible_id_switch: `{event_counts.get('possible_id_switch', 0)}`",
+            f"- fragment_bridge: `{event_counts.get('fragment_bridge', 0)}`",
+            f"- ambiguous_association: `{event_counts.get('ambiguous_association', 0)}`",
+            "",
+            "## 0039/0045 Failure Trace Summary",
+            "",
+            f"- tracker_connected: `{str(case_trace.get('tracker_connected', False)).lower()}`",
+            "- confirmed_identity: `false`",
+            f"- oty2_continuity_hint: `{str(case_trace.get('oty2_continuity_hint', False)).lower()}`",
+            f"- visual_review_required: `{str(case_trace.get('visual_review_required', True)).lower()}`",
+            f"- failure_mode: `{case_trace.get('failure_mode', '')}`",
+            f"- 0039 unmatched detection count: `{case_trace.get('0039_unmatched_detection_count', 0)}`",
+            f"- 0045 tracker ids: `{case_trace.get('track_ids_for_0045', [])}`",
+            "",
+            "## OTY2 Input Recommendation",
+            "",
+            f"- oty2_stable_input_recommendation: `{summary.get('oty2_stable_input_recommendation', '')}`",
+        ]
+    )
+    if summary.get("scene") == "GM_RM019" and str(summary.get("tracker_name")) == "bytetrack":
+        lines.append("")
+        lines.append("ByteTrack should remain an audit baseline and optional continuity source, not a stable identity stream for OTY2.")
+    lines.extend(
+        [
+            "",
+            "## Tracker Variant Recommendation",
+            "",
+            "Compare BoT-SORT against ByteTrack on unmatched rate, duplicate overlaps, possible ID switches, and 0039/0045 continuity. OC-SORT and StrongSORT must remain blocker-only until real adapters are integrated.",
+        ]
+    )
+    if cross_rows:
+        lines.extend(["", "## Cross-Tracker Snapshot", "", "| tracker | real_run | unmatched_rate | recommendation | blocker |", "| --- | --- | ---: | --- | --- |"])
+        for row in cross_rows:
+            lines.append(
+                f"| `{row.get('tracker_name', '')}` | `{str(row.get('tracker_real_run', False)).lower()}` | "
+                f"{row.get('unmatched_rate', '')} | `{row.get('oty2_stable_input_recommendation', '')}` | {row.get('largest_blocker', '')} |"
+            )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def write_tracker_blocker(path: Path, summary: Mapping[str, Any]) -> None:
+    facts = summary.get("tracker_dependency_facts", {})
+    if not isinstance(facts, Mapping):
+        facts = {}
+    lines = [
+        "# OTY1t Tracker Variant Blocker",
+        "",
+        f"- tracker_name: `{summary.get('tracker_name', '')}`",
+        f"- tracker_real_run: `{str(summary.get('tracker_real_run', False)).lower()}`",
+        f"- dependency_status: `{summary.get('dependency_status', facts.get('dependency_status', ''))}`",
+        f"- blocker_reason: `{summary.get('blocker_reason', summary.get('largest_blocker', ''))}`",
+        f"- install_hint: `{summary.get('install_hint', facts.get('install_hint', ''))}`",
+        f"- adapter_status: `{summary.get('adapter_status', facts.get('adapter_status', ''))}`",
+        f"- next_action: `{summary.get('next_action', facts.get('next_action', ''))}`",
+        "",
+        "No tracking rows were synthesized. This blocker output is allowed to enter cross-tracker comparison only as a non-real-run row.",
+    ]
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def latest_oty1t_summaries(output_root: str | Path, scene: str) -> list[dict[str, Any]]:
+    root = Path(output_root)
+    latest_by_tracker: dict[str, tuple[str, dict[str, Any]]] = {}
+    if not root.exists():
+        return []
+    for output_dir in sorted(root.glob("oty1t_tracker_audit_*")):
+        summary_path = output_dir / "oty1t_summary.json"
+        if not summary_path.exists():
+            continue
+        summary = read_json(summary_path)
+        if str(summary.get("scene", "")) != scene:
+            continue
+        tracker_name = str(summary.get("tracker_name", ""))
+        if not tracker_name:
+            continue
+        key = output_dir.name
+        if tracker_name not in latest_by_tracker or key > latest_by_tracker[tracker_name][0]:
+            latest_by_tracker[tracker_name] = (key, summary)
+    return [item[1] for item in sorted(latest_by_tracker.values(), key=lambda pair: pair[1].get("tracker_name", ""))]
+
+
+def write_cross_tracker_reports(output_root: str | Path, timestamp: str, scene: str) -> tuple[list[dict[str, Any]], dict[str, str]]:
+    summaries = latest_oty1t_summaries(output_root, scene)
+    rows = [cross_tracker_row(summary) for summary in summaries]
+    report_dir = REPO_ROOT / "reports" / "oty1t"
+    report_dir.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "timestamp": timestamp,
+        "scene": scene,
+        "tracker_rows": rows,
+        "boundary": {
+            "posthoc_sources_used_for_runtime_tracking": False,
+            "sar_alignment_entered": False,
+            "sar_band_entered": False,
+            "sar_gt_coverage_entered": False,
+            "annotation_proposal_entered": False,
+            "identity_truth_claimed": False,
+        },
+    }
+    json_path = report_dir / f"oty1t_cross_tracker_comparison_{timestamp}.json"
+    md_path = report_dir / f"oty1t_cross_tracker_comparison_{timestamp}.md"
+    write_json(json_path, payload)
+    lines = [
+        "# OTY1t Cross-Tracker Comparison",
+        "",
+        f"Generated: `{payload['generated_at']}`",
+        f"Scene: `{scene}`",
+        "",
+        "## Boundary",
+        "",
+        "Tracker outputs are optical identity hypotheses only. No confirmed identity, SAR alignment, SAR band, SAR GT coverage, SAR evidence sampling, selector, training, or annotation proposal was introduced.",
+        "",
+        "## Rows",
+        "",
+        "| tracker | real_run | dependency | detections | tracked | unmatched_rate | tracks | stable | ambiguous | duplicate | switch | 0039/0045 | recommendation | blocker |",
+        "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |",
+    ]
+    for row in rows:
+        lines.append(
+            f"| `{row.get('tracker_name', '')}` | `{str(row.get('tracker_real_run', False)).lower()}` | "
+            f"`{row.get('dependency_status', '')}` | {row.get('detection_rows_in', 0)} | "
+            f"{row.get('tracked_assignment_rows', 0)} | {row.get('unmatched_rate', '')} | "
+            f"{row.get('tracker_track_count', 0)} | {row.get('stable_hypothesis_count', 0)} | "
+            f"{row.get('ambiguous_hypothesis_count', 0)} | {row.get('duplicate_overlap_count', 0)} | "
+            f"{row.get('possible_id_switch_count', 0)} | `{str(row.get('case_0039_0045_tracker_connected', False)).lower()}` | "
+            f"`{row.get('oty2_stable_input_recommendation', '')}` | {row.get('largest_blocker', '')} |"
+        )
+    md_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return rows, {"cross_tracker_md": str(md_path), "cross_tracker_json": str(json_path)}
+
+
+def write_variant_blockers_sample(output_root: str | Path) -> Path:
+    sample_path = REPO_ROOT / "reports" / "oty1t" / "samples" / "oty1t_tracker_variant_blockers.md"
+    sample_path.parent.mkdir(parents=True, exist_ok=True)
+    latest_by_key: dict[tuple[str, str], tuple[str, dict[str, Any]]] = {}
+    root = Path(output_root)
+    if root.exists():
+        for output_dir in sorted(root.glob("oty1t_tracker_audit_*"), key=lambda path: path.name):
+            summary = read_json(output_dir / "oty1t_summary.json")
+            if summary and summary.get("tracker_real_run") is False:
+                key = (str(summary.get("scene", "")), str(summary.get("tracker_name", "")))
+                if key not in latest_by_key or output_dir.name > latest_by_key[key][0]:
+                    latest_by_key[key] = (output_dir.name, summary)
+    blocker_summaries = [item[1] for item in sorted(latest_by_key.values(), key=lambda item: (item[1].get("scene", ""), item[1].get("tracker_name", "")))]
+    lines = [
+        "# OTY1t Tracker Variant Blockers",
+        "",
+        "This file lists tracker variants that did not produce real tracking rows. No blocker row is a synthesized tracker result.",
+        "",
+        "| scene | tracker | dependency_status | adapter_status | blocker_reason | next_action |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+    for summary in blocker_summaries:
+        lines.append(
+            f"| `{summary.get('scene', '')}` | `{summary.get('tracker_name', '')}` | "
+            f"`{summary.get('dependency_status', '')}` | `{summary.get('adapter_status', '')}` | "
+            f"{summary.get('blocker_reason', summary.get('largest_blocker', ''))} | {summary.get('next_action', '')} |"
+        )
+    if not blocker_summaries:
+        lines.append("| `none` | `none` | `none` | `none` | no blocker outputs generated yet | none |")
+    sample_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return sample_path
+
+
 def write_report(path: Path, summary: Mapping[str, Any], blockers: Sequence[str]) -> None:
     lines = [
         "# OTY1t Standard MOT Tracker Audit",
@@ -806,7 +1159,7 @@ def write_report_samples(
         "scene_events_sample": str(scene_events),
     }
 
-    if str(summary.get("scene", "")) == "GM_RM019":
+    if str(summary.get("scene", "")) == "GM_RM019" and str(summary.get("tracker_name", "")) == "bytetrack":
         generic_tracks = sample_dir / "oty1t_tracker_tracks_sample.csv"
         generic_events = sample_dir / "oty1t_tracker_events_sample.csv"
         generic_case = sample_dir / "oty1t_case_0039_0045_tracker_review.md"
@@ -827,6 +1180,79 @@ def write_report_samples(
     return artifacts
 
 
+def write_diagnosis_samples(
+    timestamp: str,
+    summary: Mapping[str, Any],
+    failure_buckets: Sequence[Mapping[str, Any]],
+    unmatched_audit: Sequence[Mapping[str, Any]],
+    case_failure_trace: Mapping[str, Any],
+    local_failure_svg: Path,
+    max_sample_rows: int,
+) -> dict[str, str]:
+    report_dir = REPO_ROOT / "reports" / "oty1t"
+    sample_dir = report_dir / "samples"
+    sample_viz_dir = sample_dir / "visualizations"
+    report_dir.mkdir(parents=True, exist_ok=True)
+    sample_dir.mkdir(parents=True, exist_ok=True)
+    sample_viz_dir.mkdir(parents=True, exist_ok=True)
+
+    summary_md = report_dir / f"oty1t_tracker_diagnosis_summary_{timestamp}.md"
+    summary_json = report_dir / f"oty1t_tracker_diagnosis_summary_{timestamp}.json"
+    write_tracker_diagnosis_report(
+        summary_md,
+        summary,
+        failure_buckets,
+        summary.get("event_type_distribution", {}) if isinstance(summary.get("event_type_distribution"), Mapping) else {},
+        case_failure_trace,
+    )
+    write_json(summary_json, summary)
+    artifacts = {
+        "diagnosis_summary_md": str(summary_md),
+        "diagnosis_summary_json": str(summary_json),
+    }
+    if str(summary.get("scene", "")) == "GM_RM019" and str(summary.get("tracker_name", "")) == "bytetrack":
+        unmatched_sample = sample_dir / "oty1t_gm_rm019_unmatched_detection_audit_sample.csv"
+        bucket_sample = sample_dir / "oty1t_gm_rm019_failure_buckets_sample.csv"
+        failure_trace_md = sample_dir / "oty1t_case_0039_0045_failure_trace.md"
+        failure_trace_svg = sample_viz_dir / "oty1t_case_0039_0045_failure_trace.svg"
+        write_csv(unmatched_sample, sample_unmatched(unmatched_audit, max_sample_rows), UNMATCHED_AUDIT_FIELDS)
+        write_csv(bucket_sample, failure_buckets, FAILURE_BUCKET_FIELDS)
+        write_case_0039_0045_failure_trace_markdown(str(failure_trace_md), case_failure_trace)
+        if local_failure_svg.exists():
+            failure_trace_svg.write_text(local_failure_svg.read_text(encoding="utf-8"), encoding="utf-8")
+        artifacts.update(
+            {
+                "unmatched_detection_audit_sample": str(unmatched_sample),
+                "failure_buckets_sample": str(bucket_sample),
+                "case_failure_trace": str(failure_trace_md),
+                "case_failure_trace_visualization": str(failure_trace_svg),
+            }
+        )
+    return artifacts
+
+
+def sample_unmatched(rows: Sequence[Mapping[str, Any]], max_rows: int) -> list[dict[str, Any]]:
+    priority = {
+        "shape_transition_unmatched": 0,
+        "duplicate_or_overlap_rejected": 1,
+        "tracker_threshold_or_association_miss": 2,
+        "neighbor_ambiguous_unmatched": 3,
+        "boundary_or_truncated_unmatched": 4,
+        "late_fragment_unmatched": 5,
+        "low_score_unmatched": 6,
+        "unexplained_unmatched": 7,
+    }
+    ordered = sorted(
+        rows,
+        key=lambda row: (
+            priority.get(str(row.get("diagnosis_bucket", "")), 99),
+            parse_int(row.get("optical_frame_num")) or 0,
+            str(row.get("det_id", "")),
+        ),
+    )
+    return [dict(row) for row in ordered[:max_rows]]
+
+
 def blocker_summary(
     args: argparse.Namespace,
     output_dir: Path,
@@ -835,6 +1261,13 @@ def blocker_summary(
     dependency_facts: Mapping[str, Any],
     timestamp: str,
 ) -> dict[str, Any]:
+    blocker_reason = blockers[0] if blockers else str(dependency_facts.get("blocker_reason", "Tracker dependency unavailable."))
+    raw_row_count = 0
+    if detection_table is not None and detection_table.exists():
+        try:
+            raw_row_count = len(read_csv_rows(detection_table))
+        except OSError:
+            raw_row_count = 0
     summary = {
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "timestamp": timestamp,
@@ -844,8 +1277,16 @@ def blocker_summary(
         "detector_source": "oty0_yolo_detection_table",
         "input_oty0_detection_table": str(detection_table or ""),
         "output_dir": str(output_dir),
-        "detection_rows_in": 0,
+        "tracker_real_run": False,
+        "dependency_status": dependency_facts.get("dependency_status", "missing_or_unsupported"),
+        "blocker_reason": blocker_reason,
+        "install_hint": dependency_facts.get("install_hint", ""),
+        "adapter_status": dependency_facts.get("adapter_status", "blocker_contract_only"),
+        "next_action": dependency_facts.get("next_action", "Install dependency and implement a real detection-table replay adapter."),
+        "detection_rows_in": raw_row_count,
+        "raw_oty0_rows_in": raw_row_count,
         "tracked_assignment_rows": 0,
+        "unmatched_detection_rows": raw_row_count,
         "tracker_track_count": 0,
         "stable_hypothesis_count": 0,
         "fragmented_hypothesis_count": 0,
@@ -863,34 +1304,42 @@ def blocker_summary(
         "sar_band_entered": False,
         "sar_gt_coverage_entered": False,
         "annotation_proposal_entered": False,
+        "identity_truth_claimed": False,
         "tracker_dependency_facts": dict(dependency_facts),
-        "largest_blocker": blockers[0] if blockers else "Tracker dependency unavailable.",
+        "oty2_stable_input_recommendation": "not_recommended",
+        "largest_blocker": blocker_reason,
     }
     output_dir.mkdir(parents=True, exist_ok=True)
     write_csv(output_dir / "oty1t_tracker_detection_assignments.csv", [], ASSIGNMENT_FIELDS)
     write_csv(output_dir / "oty1t_tracker_tracks.csv", [], TRACK_FIELDS)
     write_csv(output_dir / "oty1t_tracker_state_timeseries.csv", [], STATE_FIELDS)
     write_csv(output_dir / "oty1t_tracker_events.csv", [], EVENT_FIELDS)
+    write_csv(output_dir / "oty1t_unmatched_detection_audit.csv", [], UNMATCHED_AUDIT_FIELDS)
+    write_csv(output_dir / "oty1t_tracker_failure_buckets.csv", [], FAILURE_BUCKET_FIELDS)
     write_csv(output_dir / "oty1t_comparison_with_oty1_oty1a.csv", [], COMPARISON_FIELDS)
     write_json(output_dir / "oty1t_summary.json", summary)
     write_report(output_dir / "oty1t_report.md", summary, blockers)
+    write_tracker_blocker(output_dir / "oty1t_tracker_blocker.md", summary)
     if detection_table is not None:
         write_runtime_boundary(output_dir / "oty1t_runtime_posthoc_boundary.md", detection_table)
+    cross_rows, cross_artifacts = write_cross_tracker_reports(args.output_root, timestamp, args.scene)
+    summary["reports_cross_tracker_artifacts"] = cross_artifacts
+    write_json(output_dir / "oty1t_summary.json", summary)
+    write_json(REPO_ROOT / "reports" / "oty1t" / f"oty1t_tracker_diagnosis_summary_{timestamp}.json", summary)
+    write_report(REPO_ROOT / "reports" / "oty1t" / f"oty1t_tracker_diagnosis_summary_{timestamp}.md", summary, blockers)
+    write_variant_blockers_sample(args.output_root)
     return summary
 
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
     timestamp = args.timestamp or datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_dir = Path(args.output_root) / f"oty1t_tracker_audit_{timestamp}"
+    output_dir = Path(args.output_root) / f"oty1t_tracker_audit_{args.tracker}_{timestamp}"
     viz_dir = output_dir / "visualizations"
     viz_dir.mkdir(parents=True, exist_ok=True)
 
-    if args.tracker != "bytetrack":
-        raise ValueError("This OTY1t runner currently implements ByteTrack audit only.")
-
     detection_table: Path | None = None
     blockers: list[str] = []
-    dependency_facts = bytetrack_dependency_facts()
+    dependency_facts = dependency_facts_for_tracker(args.tracker)
     try:
         detection_table = ensure_oty0_detection_table(args)
     except Exception as exc:
@@ -904,10 +1353,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         blockers.append("OTY0 detection table contains forbidden runtime-looking fields: " + ", ".join(forbidden_fields))
     if not raw_rows:
         blockers.append("OTY0 detection table is empty.")
-    if not dependency_facts.get("bytetrack_available"):
+    if not tracker_available_from_facts(args.tracker, dependency_facts):
         blockers.append(
-            "ByteTrack dependency unavailable: "
-            + str(dependency_facts.get("dependency_error", ""))
+            f"{args.tracker} dependency unavailable or unsupported for real detection-table replay: "
+            + str(dependency_facts.get("dependency_error", dependency_facts.get("blocker_reason", "")))
             + "; install hint: "
             + str(dependency_facts.get("install_hint", ""))
         )
@@ -938,7 +1387,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         possible_switch_distance_px=args.possible_switch_distance_px,
     )
 
-    assignments, events, dependency_facts = run_bytetrack_detection_table_replay(detections, frame_numbers, config)
+    assignments, events, dependency_facts = run_tracker_detection_table_replay(detections, frame_numbers, config)
     events = sort_events(list(events) + ambiguous_association_events(assignments, config))
     tracks = build_tracker_tracks(assignments, events, config)
     state_rows = build_tracker_state_timeseries(assignments, tracks, config)
@@ -960,6 +1409,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     oty1_summary = read_json(oty1_dir / "oty1_summary.json") if oty1_dir else {}
     oty1a_summary = read_json(oty1a_dir / "oty1a_summary.json") if oty1a_dir else {}
     oty1_state_rows = read_csv_rows(oty1_dir / "oty1_optical_tracklet_state_timeseries.csv") if oty1_dir else []
+    oty1a_merge_edges = read_csv_rows(oty1a_dir / "oty1a_fragment_merge_candidate_edges.csv") if oty1a_dir else []
     comparison = [build_comparison_row(args.scene, oty1_summary, oty1a_summary, tracks, events)]
     case = (
         case_0039_0045_analysis(assignments, oty1_state_rows, events)
@@ -977,26 +1427,54 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "oty2_continuity_hint": False,
         }
     )
+    diagnosis_config = DiagnosisConfig(
+        tracker_name=args.tracker,
+        track_high_thresh=args.track_high_thresh,
+        neighbor_distance_px=args.neighbor_distance_px,
+        contact_margin_px=args.contact_margin_px,
+        duplicate_iou_threshold=args.duplicate_iou_threshold,
+    )
+    unmatched_audit = build_unmatched_detection_audit(assignments, oty1_state_rows, oty1a_merge_edges, diagnosis_config)
+    failure_buckets = build_failure_bucket_summary(unmatched_audit, args.scene, args.tracker)
+    case_failure_trace = (
+        build_case_0039_0045_failure_trace(assignments, tracks, events, oty1_state_rows, oty1a_merge_edges, unmatched_audit)
+        if args.scene == "GM_RM019"
+        else {
+            "tracker_connected": False,
+            "confirmed_identity": False,
+            "oty2_continuity_hint": False,
+            "visual_review_required": False,
+            "failure_mode": "not_applicable_for_scene",
+        }
+    )
 
     output_dir.mkdir(parents=True, exist_ok=True)
     write_csv(output_dir / "oty1t_tracker_detection_assignments.csv", assignments, ASSIGNMENT_FIELDS)
     write_csv(output_dir / "oty1t_tracker_tracks.csv", tracks, TRACK_FIELDS)
     write_csv(output_dir / "oty1t_tracker_state_timeseries.csv", state_rows, STATE_FIELDS)
     write_csv(output_dir / "oty1t_tracker_events.csv", events, EVENT_FIELDS)
+    write_csv(output_dir / "oty1t_unmatched_detection_audit.csv", unmatched_audit, UNMATCHED_AUDIT_FIELDS)
+    write_csv(output_dir / "oty1t_tracker_failure_buckets.csv", failure_buckets, FAILURE_BUCKET_FIELDS)
     write_csv(output_dir / "oty1t_comparison_with_oty1_oty1a.csv", comparison, COMPARISON_FIELDS)
     write_runtime_boundary(output_dir / "oty1t_runtime_posthoc_boundary.md", detection_table)
 
     timeline_svg = viz_dir / "oty1t_tracker_timeline.svg"
     case_svg = viz_dir / "oty1t_case_0039_0045.svg"
+    failure_trace_svg = viz_dir / "oty1t_case_0039_0045_failure_trace.svg"
     render_tracker_timeline_svg(timeline_svg, tracks, state_rows, args.scene, args.max_visual_tracks)
     render_case_0039_0045_svg(case_svg, oty1_state_rows, assignments, case)
+    render_case_failure_trace_svg(str(failure_trace_svg), case_failure_trace)
     write_case_review(output_dir / "oty1t_case_0039_0045_tracker_review.md", case, case_svg)
+    write_case_0039_0045_failure_trace_markdown(
+        str(output_dir / "oty1t_case_0039_0045_failure_trace.md"),
+        case_failure_trace,
+    )
 
     hard_blockers: list[str] = []
     if not detections:
         hard_blockers.append("No usable OTY0 YOLO detections were parsed for the requested scene.")
     if not tracks:
-        hard_blockers.append("ByteTrack ran, but no tracker hypotheses were produced.")
+        hard_blockers.append(f"{args.tracker} ran, but no tracker hypotheses were produced.")
     if oty1_dir is None:
         hard_blockers.append("No OTY1 output was available for comparison.")
     if oty1a_dir is None:
@@ -1009,6 +1487,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "tracker_name": config.tracker_name,
         "tracker_input_mode": config.tracker_input_mode,
         "detector_source": config.detector_source,
+        "tracker_real_run": True,
+        "dependency_status": dependency_facts.get("dependency_status", "available"),
+        "blocker_reason": "",
+        "install_hint": dependency_facts.get("install_hint", ""),
+        "adapter_status": dependency_facts.get("adapter_status", "detection_table_replay_adapter"),
+        "next_action": "Use as audit baseline and compare tracker variants; do not treat tracker ids as confirmed identity.",
         "input_oty0_detection_table": str(detection_table),
         "input_oty1_output_dir_for_comparison": str(oty1_dir or ""),
         "input_oty1a_output_dir_for_comparison": str(oty1a_dir or ""),
@@ -1031,9 +1515,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "lost_event_count": count_events(events, "track_lost"),
         "reactivated_event_count": count_events(events, "track_reactivated"),
         "low_score_recovery_count": count_events(events, "low_score_recovery"),
+        "unmatched_bucket_distribution": diagnosis_bucket_distribution(unmatched_audit),
+        "event_type_distribution": event_distribution(events),
+        "failure_bucket_rows": len(failure_buckets),
         "case_0039_0045_tracker_connected": bool(case.get("tracker_connected", False)),
         "case_0039_0045_confirmed_identity": False,
         "case_0039_0045": dict(case),
+        "case_0039_0045_failure_trace": dict(case_failure_trace),
         "posthoc_sources_used_for_runtime_tracking": False,
         "sar_alignment_entered": False,
         "sar_band_entered": False,
@@ -1043,7 +1531,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "identity_truth_claimed": False,
         "tracker_dependency_facts": dict(dependency_facts),
         "largest_blocker": hard_blockers[0] if hard_blockers else "No hard OTY1t blocker; tracker ids remain optical hypotheses only.",
-        "oty2_recommendation": "GO for OTY2 temporal alignment audit only; do not generate SAR band before high-FPS optical-to-SAR time mapping is audited.",
+        "oty2_stable_input_recommendation": "",
+        "oty2_recommendation": "GO for OTY2 temporal alignment audit only; tracker output may be used only as optional continuity hints and must not generate SAR band before high-FPS optical-to-SAR time mapping is audited.",
         "audit_config": {
             "frame_rate": config.frame_rate,
             "track_high_thresh": config.track_high_thresh,
@@ -1066,17 +1555,30 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "tracks": str(output_dir / "oty1t_tracker_tracks.csv"),
             "state_timeseries": str(output_dir / "oty1t_tracker_state_timeseries.csv"),
             "events": str(output_dir / "oty1t_tracker_events.csv"),
+            "unmatched_detection_audit": str(output_dir / "oty1t_unmatched_detection_audit.csv"),
+            "failure_buckets": str(output_dir / "oty1t_tracker_failure_buckets.csv"),
             "comparison": str(output_dir / "oty1t_comparison_with_oty1_oty1a.csv"),
             "case_review": str(output_dir / "oty1t_case_0039_0045_tracker_review.md"),
+            "case_failure_trace": str(output_dir / "oty1t_case_0039_0045_failure_trace.md"),
             "summary": str(output_dir / "oty1t_summary.json"),
             "report": str(output_dir / "oty1t_report.md"),
+            "diagnosis_report": str(output_dir / "oty1t_tracker_diagnosis_report.md"),
             "timeline": str(timeline_svg),
             "case_visualization": str(case_svg),
+            "case_failure_trace_visualization": str(failure_trace_svg),
             "runtime_posthoc_boundary": str(output_dir / "oty1t_runtime_posthoc_boundary.md"),
         },
     }
+    summary["oty2_stable_input_recommendation"] = oty2_stable_input_recommendation(summary)
     write_json(output_dir / "oty1t_summary.json", summary)
     write_report(output_dir / "oty1t_report.md", summary, hard_blockers)
+    write_tracker_diagnosis_report(
+        output_dir / "oty1t_tracker_diagnosis_report.md",
+        summary,
+        failure_buckets,
+        event_distribution(events),
+        case_failure_trace,
+    )
     report_artifacts = write_report_samples(
         timestamp,
         summary,
@@ -1086,16 +1588,38 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         case_svg,
         args.max_sample_rows,
     )
+    diagnosis_artifacts = write_diagnosis_samples(
+        timestamp,
+        summary,
+        failure_buckets,
+        unmatched_audit,
+        case_failure_trace,
+        failure_trace_svg,
+        args.max_sample_rows,
+    )
+    cross_rows, cross_artifacts = write_cross_tracker_reports(args.output_root, timestamp, args.scene)
+    write_tracker_diagnosis_report(
+        REPO_ROOT / "reports" / "oty1t" / f"oty1t_tracker_diagnosis_summary_{timestamp}.md",
+        summary,
+        failure_buckets,
+        event_distribution(events),
+        case_failure_trace,
+        cross_rows,
+    )
+    write_variant_blockers_sample(args.output_root)
     summary["reports_artifacts"] = report_artifacts
+    summary["reports_diagnosis_artifacts"] = diagnosis_artifacts
+    summary["reports_cross_tracker_artifacts"] = cross_artifacts
     write_json(output_dir / "oty1t_summary.json", summary)
     write_json(REPO_ROOT / "reports" / "oty1t" / f"oty1t_tracker_audit_summary_{timestamp}.json", summary)
+    write_json(REPO_ROOT / "reports" / "oty1t" / f"oty1t_tracker_diagnosis_summary_{timestamp}.json", summary)
     return summary
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--scene", default="GM_RM019")
-    parser.add_argument("--tracker", default="bytetrack", choices=["bytetrack"])
+    parser.add_argument("--tracker", default="bytetrack", choices=["bytetrack", "botsort", "ocsort", "strongsort"])
     parser.add_argument("--oty0-detection-table", default="")
     parser.add_argument("--oty1-output-dir", default="")
     parser.add_argument("--oty1a-output-dir", default="")

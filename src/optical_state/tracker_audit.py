@@ -27,7 +27,7 @@ from .state_features import (
 )
 
 
-SUPPORTED_TRACKERS = {"bytetrack"}
+SUPPORTED_TRACKERS = {"bytetrack", "botsort", "ocsort", "strongsort"}
 
 
 @dataclass(frozen=True)
@@ -112,6 +112,42 @@ def bytetrack_dependency_facts() -> dict[str, Any]:
         from ultralytics.trackers.byte_tracker import BYTETracker  # type: ignore  # noqa: F401
 
         facts["bytetrack_available"] = True
+        facts["dependency_status"] = "available"
+    except Exception as exc:
+        facts["dependency_error"] = repr(exc)
+    return facts
+
+
+def botsort_dependency_facts() -> dict[str, Any]:
+    facts = {
+        "tracker_name": "botsort",
+        "ultralytics_available": False,
+        "botsort_available": False,
+        "lap_available": False,
+        "dependency_status": "missing",
+        "dependency_error": "",
+        "install_hint": "D:\\MINICONDA\\envs\\py311\\python.exe -m pip install \"lap>=0.5.12\" ultralytics",
+        "adapter_status": "detection_table_replay_adapter",
+    }
+    try:
+        import ultralytics  # type: ignore
+
+        facts["ultralytics_available"] = True
+        facts["ultralytics_version"] = getattr(ultralytics, "__version__", "")
+    except Exception as exc:
+        facts["dependency_error"] = repr(exc)
+        return facts
+    try:
+        import lap  # type: ignore  # noqa: F401
+
+        facts["lap_available"] = True
+    except Exception as exc:
+        facts["dependency_error"] = repr(exc)
+        return facts
+    try:
+        from ultralytics.trackers.bot_sort import BOTSORT  # type: ignore  # noqa: F401
+
+        facts["botsort_available"] = True
         facts["dependency_status"] = "available"
     except Exception as exc:
         facts["dependency_error"] = repr(exc)
@@ -381,6 +417,229 @@ def run_bytetrack_detection_table_replay(
                     "is_lost_track": False,
                     "is_reactivated_track": False,
                     "runtime_source_policy": "oty1t_runtime_oty0_yolo_detection_table_replay_bytetrack_no_gt_no_sar",
+                    "_frame_width": det.get("frame_width", ""),
+                    "_frame_height": det.get("frame_height", ""),
+                    "_optical_path": det.get("optical_path", ""),
+                }
+            )
+
+    for track_id_text, start in sorted(first_seen.items()):
+        end = last_seen.get(track_id_text, start)
+        events.append(
+            _event_row(
+                _scene_from_detections(detections),
+                config,
+                "track_end",
+                track_id_text,
+                "",
+                end,
+                start,
+                end,
+                1.0,
+                "tracker hypothesis reached end of replay audit",
+                False,
+            )
+        )
+    events.extend(_duplicate_overlap_events(assignments, config))
+    events.extend(_fragment_bridge_events(assignments, config))
+    return assignments, sorted(events, key=lambda row: (parse_int(row.get("optical_frame_num")) or 0, row.get("event_type", ""), row.get("tracker_track_id", ""))), facts
+
+
+def run_botsort_detection_table_replay(
+    detections: Sequence[Mapping[str, Any]],
+    frame_numbers: Sequence[int],
+    config: TrackerAuditConfig,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    """Run real Ultralytics BoT-SORT over OTY0 detection-table rows."""
+
+    facts = botsort_dependency_facts()
+    if not facts.get("botsort_available"):
+        return [], [], facts
+
+    from ultralytics.trackers.bot_sort import BOTSORT  # type: ignore
+
+    args = SimpleNamespace(
+        track_high_thresh=config.track_high_thresh,
+        track_low_thresh=config.track_low_thresh,
+        new_track_thresh=config.new_track_thresh,
+        track_buffer=config.track_buffer,
+        match_thresh=config.match_thresh,
+        fuse_score=config.fuse_score,
+        proximity_thresh=0.50,
+        appearance_thresh=0.25,
+        with_reid=False,
+        model="auto",
+        gmc_method="none",
+    )
+    tracker = BOTSORT(args=args, frame_rate=config.frame_rate)
+    grouped = group_detections_by_frame(detections)
+    frames = sorted(set(int(frame) for frame in frame_numbers) | set(grouped))
+    if not frames:
+        return [], [], facts
+
+    assignments: list[dict[str, Any]] = []
+    events: list[dict[str, Any]] = []
+    first_seen: dict[str, int] = {}
+    last_seen: dict[str, int] = {}
+    active_previous: set[str] = set()
+
+    for frame in frames:
+        frame_rows = grouped.get(frame, [])
+        adapter = _adapter_for_frame(frame_rows)
+        track_result = tracker.update(adapter, img=_blank_image(frame_rows))
+        assigned_indices: set[int] = set()
+        active_now: set[str] = set()
+        for result in track_result.tolist() if hasattr(track_result, "tolist") else list(track_result):
+            if len(result) < 8:
+                continue
+            x1, y1, x2, y2, track_id, score, cls, idx = result[:8]
+            det_idx = int(idx)
+            if det_idx < 0 or det_idx >= len(frame_rows):
+                continue
+            det = frame_rows[det_idx]
+            assigned_indices.add(det_idx)
+            track_id_text = f"bs_{int(track_id):04d}"
+            active_now.add(track_id_text)
+            was_seen = track_id_text in first_seen
+            prev_frame = last_seen.get(track_id_text)
+            is_reactivated = was_seen and prev_frame is not None and frame - prev_frame > 1
+            if not was_seen:
+                first_seen[track_id_text] = frame
+                events.append(
+                    _event_row(
+                        det.get("scene", ""),
+                        config,
+                        "track_start",
+                        track_id_text,
+                        "",
+                        frame,
+                        frame,
+                        frame,
+                        1.0,
+                        "tracker id first assigned in detection-table replay",
+                        False,
+                    )
+                )
+            if is_reactivated:
+                events.append(
+                    _event_row(
+                        det.get("scene", ""),
+                        config,
+                        "track_reactivated",
+                        track_id_text,
+                        "",
+                        frame,
+                        prev_frame,
+                        frame,
+                        1.0,
+                        "tracker id reappeared after a missing optical frame gap",
+                        True,
+                    )
+                )
+            confidence = parse_float(det.get("confidence")) or float(score)
+            is_low = confidence < config.track_high_thresh
+            if is_low:
+                events.append(
+                    _event_row(
+                        det.get("scene", ""),
+                        config,
+                        "low_score_recovery",
+                        track_id_text,
+                        "",
+                        frame,
+                        frame,
+                        frame,
+                        confidence,
+                        "detection below tracker high threshold remained associated",
+                        True,
+                    )
+                )
+            last_seen[track_id_text] = frame
+            bbox = BBox(float(x1), float(y1), float(x2), float(y2))
+            assignments.append(
+                {
+                    "scene": det.get("scene", ""),
+                    "optical_frame_num": frame,
+                    "det_id": det.get("det_id", ""),
+                    "tracker_name": config.tracker_name,
+                    "tracker_input_mode": config.tracker_input_mode,
+                    "tracker_track_id": track_id_text,
+                    "optical_identity_hypothesis_id": f"oty1t_{track_id_text}",
+                    "class_name": det.get("class_name", ""),
+                    "confidence": confidence,
+                    "bbox_x1": bbox.x1,
+                    "bbox_y1": bbox.y1,
+                    "bbox_x2": bbox.x2,
+                    "bbox_y2": bbox.y2,
+                    "bbox_center_x": bbox.cx,
+                    "bbox_center_y": bbox.cy,
+                    "bbox_w": bbox.width,
+                    "bbox_h": bbox.height,
+                    "track_state": "tracked",
+                    "association_confidence_proxy": float(score),
+                    "is_low_score_detection": is_low,
+                    "is_recovered_detection": is_low or is_reactivated,
+                    "is_unmatched_detection": False,
+                    "is_new_track": not was_seen,
+                    "is_lost_track": False,
+                    "is_reactivated_track": is_reactivated,
+                    "runtime_source_policy": "oty1t_runtime_oty0_yolo_detection_table_replay_botsort_no_gt_no_sar",
+                    "_frame_width": det.get("frame_width", ""),
+                    "_frame_height": det.get("frame_height", ""),
+                    "_optical_path": det.get("optical_path", ""),
+                }
+            )
+        lost_now = active_previous - active_now
+        for track_id_text in sorted(lost_now):
+            events.append(
+                _event_row(
+                    frame_rows[0].get("scene", "") if frame_rows else _scene_from_detections(detections),
+                    config,
+                    "track_lost",
+                    track_id_text,
+                    "",
+                    frame,
+                    last_seen.get(track_id_text, frame),
+                    frame,
+                    1.0,
+                    "track active in previous frame is not assigned in current frame",
+                    True,
+                )
+            )
+        active_previous = active_now
+        for idx, det in enumerate(frame_rows):
+            if idx in assigned_indices:
+                continue
+            bbox = _bbox_from_detection(det)
+            confidence = parse_float(det.get("confidence")) or 0.0
+            assignments.append(
+                {
+                    "scene": det.get("scene", ""),
+                    "optical_frame_num": frame,
+                    "det_id": det.get("det_id", ""),
+                    "tracker_name": config.tracker_name,
+                    "tracker_input_mode": config.tracker_input_mode,
+                    "tracker_track_id": "",
+                    "optical_identity_hypothesis_id": "",
+                    "class_name": det.get("class_name", ""),
+                    "confidence": confidence,
+                    "bbox_x1": bbox.x1,
+                    "bbox_y1": bbox.y1,
+                    "bbox_x2": bbox.x2,
+                    "bbox_y2": bbox.y2,
+                    "bbox_center_x": bbox.cx,
+                    "bbox_center_y": bbox.cy,
+                    "bbox_w": bbox.width,
+                    "bbox_h": bbox.height,
+                    "track_state": "unmatched_detection",
+                    "association_confidence_proxy": "",
+                    "is_low_score_detection": confidence < config.track_high_thresh,
+                    "is_recovered_detection": False,
+                    "is_unmatched_detection": True,
+                    "is_new_track": False,
+                    "is_lost_track": False,
+                    "is_reactivated_track": False,
+                    "runtime_source_policy": "oty1t_runtime_oty0_yolo_detection_table_replay_botsort_no_gt_no_sar",
                     "_frame_width": det.get("frame_width", ""),
                     "_frame_height": det.get("frame_height", ""),
                     "_optical_path": det.get("optical_path", ""),
