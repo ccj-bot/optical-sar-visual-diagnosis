@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="560" viewBox="0 0 1120 560">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<text x="24" y="34" font-size="18" font-family="Arial" font-weight="700" fill="#111827">OTY1t-P4 object-level hypothesis graph</text>
+<text x="24" y="58" font-size="13" font-family="Arial" fill="#374151">confirmed_identity=false; same_object_hypothesis_review_required; main_track_with_uncertainty_handoff</text>
+<rect x="42" y="94" width="320" height="70" rx="6" fill="#dbeafe" stroke="#94a3b8"/>
+<text x="56" y="118" font-size="13" font-family="Arial" font-weight="700" fill="#111827">object_hypothesis_id</text>
+<text x="56" y="140" font-size="12" font-family="Arial" fill="#374151">oty1t_obj_GM_RM019_0039_0045_bt_0098</text>
+<rect x="430" y="94" width="260" height="70" rx="6" fill="#dcfce7" stroke="#94a3b8"/>
+<text x="444" y="118" font-size="13" font-family="Arial" font-weight="700" fill="#111827">main tracker track</text>
+<text x="444" y="140" font-size="12" font-family="Arial" fill="#374151">bt_0098</text>
+<rect x="760" y="94" width="320" height="92" rx="6" fill="#ecfdf5" stroke="#94a3b8"/>
+<text x="774" y="118" font-size="13" font-family="Arial" font-weight="700" fill="#111827">primary dets</text>
+<text x="774" y="140" font-size="12" font-family="Arial" fill="#374151">GM_RM019_000149_001; GM_RM019_000150_001; GM_RM019_000151_001;</text>
+<text x="774" y="158" font-size="12" font-family="Arial" fill="#374151"> GM_RM019_000152_001; GM_RM019_000153_001; GM_RM019_000154_001</text>
+<text x="774" y="176" font-size="12" font-family="Arial" fill="#374151">; GM_RM019_000155_001; GM_RM019_000156_001; ...</text>
+<rect x="430" y="244" width="360" height="98" rx="6" fill="#fef3c7" stroke="#94a3b8"/>
+<text x="444" y="268" font-size="13" font-family="Arial" font-weight="700" fill="#111827">secondary observations</text>
+<text x="444" y="290" font-size="12" font-family="Arial" fill="#374151">GM_RM019_000162_002; GM_RM019_000163_002; GM_RM019_000164_002;</text>
+<text x="444" y="308" font-size="12" font-family="Arial" fill="#374151"> GM_RM019_000165_002; GM_RM019_000166_002; GM_RM019_000167_001</text>
+<text x="444" y="326" font-size="12" font-family="Arial" fill="#374151">; GM_RM019_000168_002; GM_RM019_000172_002</text>
+<rect x="42" y="244" width="320" height="98" rx="6" fill="#ffedd5" stroke="#94a3b8"/>
+<text x="56" y="268" font-size="13" font-family="Arial" font-weight="700" fill="#111827">frame 172 cluster</text>
+<text x="56" y="290" font-size="12" font-family="Arial" fill="#374151">GM_RM019_000172_oc_001: GM_RM019_000172_001 + GM_RM019_000172_</text>
+<text x="56" y="308" font-size="12" font-family="Arial" fill="#374151">002</text>
+<rect x="430" y="402" width="360" height="78" rx="6" fill="#fce7f3" stroke="#94a3b8"/>
+<text x="444" y="426" font-size="13" font-family="Arial" font-weight="700" fill="#111827">OTY1a hint</text>
+<text x="444" y="448" font-size="12" font-family="Arial" fill="#374151">ambiguous_competing_merge;partial_to_full_box_transition_candi</text>
+<text x="444" y="466" font-size="12" font-family="Arial" fill="#374151">date</text>
+<line x1="362" y1="128" x2="430" y2="128" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="690" y1="128" x2="760" y2="128" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="560" y1="164" x2="560" y2="244" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="362" y1="292" x2="430" y2="292" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="610" y1="342" x2="610" y2="402" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>
