@@ -25,13 +25,13 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from src.optical_state.fragment_merge import (  # noqa: E402
-    MERGE_POSITIVE_STATUSES,
+    REVIEW_CANDIDATE_STATUSES_INCLUDING_AMBIGUOUS,
     FragmentMergeLimits,
     build_component_profiles,
     build_fragment_merge_edges,
     component_review_rows,
-    count_positive_edges,
     edge_status_counts,
+    merge_review_count_summary,
     shape_transition_rows,
 )
 from src.optical_state.state_features import parse_float, parse_int  # noqa: E402
@@ -55,6 +55,9 @@ MERGE_EDGE_FIELDS = [
     "to_frame_start",
     "to_frame_end",
     "temporal_relation",
+    "temporal_offset_frames",
+    "forward_gap_frames",
+    "overlap_or_interleave_offset_frames",
     "frame_gap",
     "frame_overlap_count",
     "from_detection_count",
@@ -235,7 +238,7 @@ def sample_sorted_edges(rows: Sequence[Mapping[str, Any]], max_rows: int) -> lis
         status = str(row.get("merge_candidate_status", ""))
         score = parse_float(row.get("merge_candidate_score_not_selector")) or 0.0
         distance = parse_float(row.get("endpoint_center_distance_px")) or 1e12
-        return (0 if status in MERGE_POSITIVE_STATUSES else 1, -score, distance)
+        return (0 if status in REVIEW_CANDIDATE_STATUSES_INCLUDING_AMBIGUOUS else 1, -score, distance)
 
     selected: list[dict[str, Any]] = []
     seen: set[str] = set()
@@ -394,14 +397,19 @@ def render_merge_candidate_svg(
     cell_w = 188
     image_w = 166.0
     left = 24
-    top = 112
+    top = 154
     row_gap = 92
     width = max(980, left * 2 + cols * cell_w)
+    score = parse_float(edge.get("merge_candidate_score_not_selector")) or 0.0
+    endpoint_distance = parse_float(edge.get("endpoint_center_distance_px")) or 0.0
+    bridge_iou = parse_float(edge.get("bridge_iou_proxy")) or 0.0
     parts = [
         f'<rect x="0" y="0" width="{width}" height="100%" fill="#ffffff" />',
         f'<text x="24" y="34" font-size="22" fill="#111827">OTY1a merge review: {html_escape(from_id)} -> {html_escape(to_id)}</text>',
-        f'<text x="24" y="58" font-size="13" fill="#475569">status={html_escape(str(edge.get("merge_candidate_status", "")))} | score_not_selector={parse_float(edge.get("merge_candidate_score_not_selector")) or 0:.3f} | endpoint_distance={parse_float(edge.get("endpoint_center_distance_px")) or 0:.1f}px | bridge_iou_proxy={parse_float(edge.get("bridge_iou_proxy")) or 0:.3f}</text>',
-        '<text x="24" y="80" font-size="12" fill="#64748b">Optical YOLO bbox geometry only. No SAR frame, SAR GT, final box, fan/range band, selector, or confirmed identity.</text>',
+        f'<text x="24" y="58" font-size="13" fill="#475569">status={html_escape(str(edge.get("merge_candidate_status", "")))} | score_not_selector={score:.3f} | endpoint_distance={endpoint_distance:.1f}px | bridge_iou_proxy={bridge_iou:.3f}</text>',
+        f'<text x="24" y="80" font-size="12" fill="#475569">temporal_relation={html_escape(str(edge.get("temporal_relation", "")))} | temporal_offset_frames={html_escape(str(edge.get("temporal_offset_frames", "")))} | forward_gap_frames={html_escape(str(edge.get("forward_gap_frames", "")))} | overlap_count={html_escape(str(edge.get("frame_overlap_count", "")))}</text>',
+        '<text x="24" y="102" font-size="12" fill="#b45309">partial/full bbox transition candidate; review-only; not confirmed identity</text>',
+        '<text x="24" y="124" font-size="12" fill="#64748b">confirmed_identity=false | review_only=true | no SAR, no GT, no final boxes, no fan/range band, no selector.</text>',
     ]
     first_h = render_row_strip(parts, from_rows, "from", from_id, left, top, cell_w, image_w, "#2563eb")
     second_y = top + first_h + row_gap
@@ -425,10 +433,10 @@ def render_merge_timeline_svg(
     max_edges: int,
 ) -> None:
     component_by_id = {str(row.get("tracklet_candidate_id", "")): row for row in component_rows}
-    positive = [
+    review_candidates = [
         row
         for row in sample_sorted_edges(edges, max_edges)
-        if str(row.get("merge_candidate_status", "")) in MERGE_POSITIVE_STATUSES
+        if str(row.get("merge_candidate_status", "")) in REVIEW_CANDIDATE_STATUSES_INCLUDING_AMBIGUOUS
     ][:max_edges]
     frames = []
     for row in component_rows:
@@ -446,17 +454,17 @@ def render_merge_timeline_svg(
     right = 42
     top = 90
     row_h = 28
-    height = max(190, top + row_h * max(1, len(positive)) + 70)
+    height = max(190, top + row_h * max(1, len(review_candidates)) + 70)
     plot_w = width - left - right
     parts = [
         f'<rect x="0" y="0" width="{width}" height="{height}" fill="#ffffff" />',
         f'<text x="24" y="34" font-size="22" fill="#111827">OTY1a fragment merge candidate timeline: {html_escape(scene)}</text>',
-        '<text x="24" y="58" font-size="13" fill="#64748b">Each row is a review candidate edge between OTY1 optical tracklet components. Identity is not confirmed.</text>',
+        '<text x="24" y="58" font-size="13" fill="#64748b">Each row is a review candidate edge between OTY1 optical tracklet components. Ambiguous rows are not merged identity.</text>',
         f'<line x1="{left}" y1="{top - 22}" x2="{left + plot_w}" y2="{top - 22}" stroke="#cbd5e1" />',
         f'<text x="{left}" y="{top - 30}" font-size="12" fill="#475569">frame {min_frame}</text>',
         f'<text x="{left + plot_w - 74}" y="{top - 30}" font-size="12" fill="#475569">frame {max_frame}</text>',
     ]
-    for idx, edge in enumerate(positive):
+    for idx, edge in enumerate(review_candidates):
         y = top + idx * row_h
         from_id = str(edge.get("from_tracklet_candidate_id", ""))
         to_id = str(edge.get("to_tracklet_candidate_id", ""))
@@ -482,8 +490,8 @@ def render_merge_timeline_svg(
         parts.append(f'<line x1="{fx2:.2f}" y1="{y}" x2="{tx1:.2f}" y2="{y}" stroke="{color}" stroke-width="2" stroke-dasharray="4 4" />')
         parts.append(f'<circle cx="{fx2:.2f}" cy="{y}" r="4" fill="#2563eb" />')
         parts.append(f'<circle cx="{tx1:.2f}" cy="{y}" r="4" fill="#7c3aed" />')
-    if not positive:
-        parts.append('<text x="24" y="120" font-size="14" fill="#dc2626">No positive fragment merge candidates in this run.</text>')
+    if not review_candidates:
+        parts.append('<text x="24" y="120" font-size="14" fill="#dc2626">No fragment merge review candidates in this run.</text>')
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" font-family="Arial, Helvetica, sans-serif">\n'
@@ -515,7 +523,7 @@ def render_contact_sheet(path: Path, sample_svgs: Sequence[Path], summary: Mappi
 </head>
 <body>
   <h1>OTY1a Fragment Merge Contact Sheet</h1>
-  <p>Scene <code>{html_escape(str(summary.get("scene", "")))}</code>, positive merge review candidates <code>{html_escape(str(summary.get("fragment_merge_candidate_edges", "")))}</code>.</p>
+  <p>Scene <code>{html_escape(str(summary.get("scene", "")))}</code>, review candidates including ambiguous <code>{html_escape(str(summary.get("review_candidate_edges_including_ambiguous", "")))}</code>, nonambiguous review candidates <code>{html_escape(str(summary.get("nonambiguous_merge_review_candidates", "")))}</code>.</p>
   <p class="muted">Runtime source is OTY1 optical outputs only. No SAR alignment, SAR band, SAR GT, final box, selector, or confirmed identity is shown.</p>
   <p><a href="oty1a_merge_candidate_timeline.svg">Merge candidate timeline</a></p>
   <div class="grid">{links}</div>
@@ -558,10 +566,23 @@ def write_report(path: Path, summary: Mapping[str, Any], blockers: Sequence[str]
         "",
         f"- component review rows: `{summary['component_review_rows']}`",
         f"- merge candidate edge rows: `{summary['merge_candidate_edge_rows']}`",
-        f"- fragment merge candidate edges: `{summary['fragment_merge_candidate_edges']}`",
-        f"- ambiguous merge candidate edges: `{summary['ambiguous_merge_candidate_edges']}`",
+        f"- review candidates including ambiguous: `{summary['review_candidate_edges_including_ambiguous']}`",
+        f"- nonambiguous merge review candidates: `{summary['nonambiguous_merge_review_candidates']}`",
+        f"- ambiguous competing merge candidates: `{summary['ambiguous_competing_merge_candidates']}`",
+        f"- confirmed identity merges: `{summary['confirmed_identity_merges']}`",
+        f"- rejected merge edges: `{summary['rejected_merge_edges']}`",
+        f"- needs visual review edges: `{summary['needs_visual_review_edges']}`",
+        f"- shape transition review edges: `{summary['shape_transition_review_edges']}`",
+        f"- partial-to-full box transition edges: `{summary['partial_to_full_box_transition_edges']}`",
         f"- shape transition audit rows: `{summary['shape_transition_audit_rows']}`",
         f"- 0039/0045 status: `{summary.get('case_0039_0045_status', 'not_applicable')}`",
+        "",
+        "## Temporal Relation Field Definitions",
+        "",
+        "- `temporal_offset_frames`: `to_frame_start - from_frame_end`; retained for both forward and overlap/interleave cases.",
+        "- `forward_gap_frames`: positive gap only when `temporal_relation == forward_gap`; otherwise `0` for overlap/interleave.",
+        "- `overlap_or_interleave_offset_frames`: populated only for overlap/interleave; it may be zero or negative.",
+        "- Negative `overlap_or_interleave_offset_frames` does not mean a reverse-time error. It means the two OTY1 fragments overlap or interleave in optical frame time, usually because YOLO produced competing bbox shapes around the same target or nearby targets.",
         "",
         "## Merge Status Distribution",
         "",
@@ -595,9 +616,14 @@ def write_case_review(
         overlap = case_edge.get("frame_overlap_count", "")
         case_lines = [
             f"- merge candidate status: `{status}`",
+            "- confirmed_identity: `false`",
+            "- merge_action: `review_only`",
             f"- merge_candidate_score_not_selector: `{score:.6f}`" if score is not None else "- merge_candidate_score_not_selector: ``",
             f"- endpoint_center_distance_px: `{endpoint_distance:.3f}`" if endpoint_distance is not None else "- endpoint_center_distance_px: ``",
             f"- bridge_iou_proxy: `{bridge_iou:.6f}`" if bridge_iou is not None else "- bridge_iou_proxy: ``",
+            f"- temporal_offset_frames: `{case_edge.get('temporal_offset_frames', '')}`",
+            f"- forward_gap_frames: `{case_edge.get('forward_gap_frames', '')}`",
+            f"- overlap_or_interleave_offset_frames: `{case_edge.get('overlap_or_interleave_offset_frames', '')}`",
             f"- frame_overlap_count: `{overlap}`",
             f"- temporal_relation: `{case_edge.get('temporal_relation', '')}`",
             f"- shape_transition_proxy: `{case_edge.get('shape_transition_proxy', '')}`",
@@ -639,6 +665,18 @@ def write_case_review(
         "",
         "`oty1_tracklet_0039` and `oty1_tracklet_0045` should be treated as an optical runtime-geometry merge review candidate. The overlap around frames 171/172 and the cross-fragment detection edge are strong enough for review, but competing edges and neighbor/boundary ambiguity mean identity remains unconfirmed.",
         "",
+        "## Why Not Auto-Merge",
+        "",
+        "- The OTY1 one-to-one component policy selected competing edges around the same frames.",
+        "- Both fragments carry neighbor/boundary ambiguity, and the endpoint shape shift is a partial/full bbox transition risk.",
+        "- OTY1a has no runtime-safe identity source; it only has optical geometry and detector state.",
+        "",
+        "## Before OTY2 Consumes This Case",
+        "",
+        "- Keep `0039 -> 0045` as a continuity hint, not a merged identity.",
+        "- Preserve competing hypotheses for ambiguous candidates instead of collapsing them into one track.",
+        "- Use this case only for temporal alignment audit preparation; do not generate SAR band, SAR GT coverage, SAR evidence sampling, or annotation proposals from it.",
+        "",
         "## Visualization",
         "",
         f"- `{svg_path}`",
@@ -675,17 +713,42 @@ def write_cross_scene_reports(output_root: str | Path, timestamp: str, max_sampl
     report_dir = REPO_ROOT / "reports" / "oty1a"
     sample_dir = report_dir / "samples"
     summaries = latest_oty1a_summaries(output_root)
-    scenes = {str(summary.get("scene", "")): summary for summary in summaries}
+
+    def cross_scene_summary_payload(summary: Mapping[str, Any]) -> dict[str, Any]:
+        payload = dict(summary)
+        payload.pop("reports_cross_scene_summary_json", None)
+        payload.pop("reports_cross_scene_summary_md", None)
+        payload.pop("reports_cross_scene_count", None)
+        return payload
+
+    scenes = {
+        str(summary.get("scene", "")): cross_scene_summary_payload(summary)
+        for summary in summaries
+    }
+
+    def total_field(field: str, fallback_field: str = "") -> int:
+        return sum(int(summary.get(field) or (summary.get(fallback_field) if fallback_field else 0) or 0) for summary in summaries)
+
     aggregate = {
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "timestamp": timestamp,
         "scene_count": len(scenes),
         "scenes": scenes,
         "totals": {
-            "merge_candidate_edge_rows": sum(int(summary.get("merge_candidate_edge_rows") or 0) for summary in summaries),
-            "fragment_merge_candidate_edges": sum(int(summary.get("fragment_merge_candidate_edges") or 0) for summary in summaries),
-            "ambiguous_merge_candidate_edges": sum(int(summary.get("ambiguous_merge_candidate_edges") or 0) for summary in summaries),
-            "shape_transition_audit_rows": sum(int(summary.get("shape_transition_audit_rows") or 0) for summary in summaries),
+            "merge_candidate_edge_rows": total_field("merge_candidate_edge_rows"),
+            "review_candidate_edges_including_ambiguous": total_field(
+                "review_candidate_edges_including_ambiguous", "fragment_merge_candidate_edges"
+            ),
+            "nonambiguous_merge_review_candidates": total_field("nonambiguous_merge_review_candidates"),
+            "ambiguous_competing_merge_candidates": total_field(
+                "ambiguous_competing_merge_candidates", "ambiguous_merge_candidate_edges"
+            ),
+            "confirmed_identity_merges": total_field("confirmed_identity_merges"),
+            "rejected_merge_edges": total_field("rejected_merge_edges"),
+            "needs_visual_review_edges": total_field("needs_visual_review_edges"),
+            "shape_transition_review_edges": total_field("shape_transition_review_edges"),
+            "partial_to_full_box_transition_edges": total_field("partial_to_full_box_transition_edges"),
+            "shape_transition_audit_rows": total_field("shape_transition_audit_rows"),
         },
         "boundary": {
             "runtime_source": "OTY1 optical tracklet outputs only",
@@ -722,20 +785,28 @@ def write_cross_scene_reports(output_root: str | Path, timestamp: str, max_sampl
         "",
         f"- scenes: `{aggregate['scene_count']}`",
         f"- merge candidate edge rows: `{aggregate['totals']['merge_candidate_edge_rows']}`",
-        f"- positive fragment merge review candidates: `{aggregate['totals']['fragment_merge_candidate_edges']}`",
-        f"- ambiguous merge candidates: `{aggregate['totals']['ambiguous_merge_candidate_edges']}`",
+        f"- review candidates including ambiguous: `{aggregate['totals']['review_candidate_edges_including_ambiguous']}`",
+        f"- nonambiguous merge review candidates: `{aggregate['totals']['nonambiguous_merge_review_candidates']}`",
+        f"- ambiguous competing merge candidates: `{aggregate['totals']['ambiguous_competing_merge_candidates']}`",
+        f"- confirmed identity merges: `{aggregate['totals']['confirmed_identity_merges']}`",
+        f"- rejected merge edges: `{aggregate['totals']['rejected_merge_edges']}`",
+        f"- needs visual review edges: `{aggregate['totals']['needs_visual_review_edges']}`",
+        f"- shape transition review edges: `{aggregate['totals']['shape_transition_review_edges']}`",
+        f"- partial-to-full box transition edges: `{aggregate['totals']['partial_to_full_box_transition_edges']}`",
         f"- shape transition audit rows: `{aggregate['totals']['shape_transition_audit_rows']}`",
         "",
         "## Scene Rows",
         "",
-        "| scene | output_dir | positive merge candidates | ambiguous merge candidates | 0039/0045 status |",
-        "| --- | --- | ---: | ---: | --- |",
+        "| scene | output_dir | merge edge rows | review candidates incl. ambiguous | nonambiguous review candidates | ambiguous competing candidates | 0039/0045 status |",
+        "| --- | --- | ---: | ---: | ---: | ---: | --- |",
     ]
     for scene, summary in scenes.items():
         lines.append(
             f"| `{scene}` | `{summary.get('output_dir', '')}` | "
-            f"{summary.get('fragment_merge_candidate_edges', 0)} | "
-            f"{summary.get('ambiguous_merge_candidate_edges', 0)} | "
+            f"{summary.get('merge_candidate_edge_rows', 0)} | "
+            f"{summary.get('review_candidate_edges_including_ambiguous', summary.get('fragment_merge_candidate_edges', 0))} | "
+            f"{summary.get('nonambiguous_merge_review_candidates', 0)} | "
+            f"{summary.get('ambiguous_competing_merge_candidates', summary.get('ambiguous_merge_candidate_edges', 0))} | "
             f"`{summary.get('case_0039_0045_status', 'not_applicable')}` |"
         )
     lines.extend(
@@ -743,7 +814,7 @@ def write_cross_scene_reports(output_root: str | Path, timestamp: str, max_sampl
             "",
             "## Recommendation",
             "",
-            "GM_RM019 0039/0045 should be reviewed as an optical geometry fragment-merge candidate, not promoted to identity truth. If the visual/metric presentation is acceptable, the next mainline step is OTY2 high-FPS optical-to-SAR temporal alignment. If the review burden is too high, add OTY1b visualization/metric cleanup first.",
+            "OTY1a candidates are review candidates, not identity truth. Nonambiguous candidates may proceed to visual review or OTY2 alignment preparation. Ambiguous candidates must not be treated as merged tracks. OTY2 may start only as a high-FPS optical-to-SAR temporal alignment audit, not SAR band generation.",
         ]
     )
     (report_dir / f"oty1a_cross_scene_fragment_merge_summary_{timestamp}.md").write_text(
@@ -842,8 +913,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
 
     if not merge_edges and not blockers:
         blockers.append("No bounded component-pair rows were produced by OTY1a scan limits.")
-    if merge_edges and count_positive_edges(merge_edges) == 0:
-        blockers.append("No positive fragment merge review candidates were found; only reject/review-limit rows were produced.")
+    review_counts = merge_review_count_summary(merge_edges)
+    if merge_edges and review_counts["review_candidate_edges_including_ambiguous"] == 0:
+        blockers.append("No fragment merge review candidates were found; only reject/review-limit rows were produced.")
 
     write_csv(output_dir / "oty1a_fragment_merge_candidate_edges.csv", merge_edges, MERGE_EDGE_FIELDS)
     write_csv(output_dir / "oty1a_fragment_merge_component_review.csv", review_rows, COMPONENT_REVIEW_FIELDS)
@@ -869,7 +941,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
 
     sample_svgs: list[Path] = []
     for edge in sample_sorted_edges(merge_edges, args.max_visual_merge_edges):
-        if str(edge.get("merge_candidate_status", "")) not in MERGE_POSITIVE_STATUSES:
+        if str(edge.get("merge_candidate_status", "")) not in REVIEW_CANDIDATE_STATUSES_INCLUDING_AMBIGUOUS:
             continue
         sample_path = sample_viz_dir / f"{safe_name(str(edge.get('merge_edge_id', 'merge_edge')))}.svg"
         render_merge_candidate_svg(sample_path, edge, state_by_tracklet, args.max_endpoint_frames)
@@ -897,8 +969,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "component_review_rows": len(review_rows),
         "merge_candidate_edge_rows": len(merge_edges),
         "shape_transition_audit_rows": len(shape_rows),
-        "fragment_merge_candidate_edges": count_positive_edges(merge_edges),
-        "ambiguous_merge_candidate_edges": status_counts.get("ambiguous_competing_merge", 0),
+        **review_counts,
         "geometry_feasible_edges": edge_counts["geometry_feasible_edges"],
         "clean_unambiguous_edges": edge_counts["clean_unambiguous_edges"],
         "ambiguous_feasible_edges": edge_counts["ambiguous_feasible_edges"],

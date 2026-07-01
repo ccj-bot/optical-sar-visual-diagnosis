@@ -1,48 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="988" height="586" font-family="Arial, Helvetica, sans-serif">
-<rect x="0" y="0" width="988" height="586" fill="#ffffff" />
+<svg xmlns="http://www.w3.org/2000/svg" width="988" height="628" font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="988" height="628" fill="#ffffff" />
 <text x="24" y="34" font-size="22" fill="#111827">OTY1a merge review: oty1_tracklet_0039 -> oty1_tracklet_0045</text>
 <text x="24" y="58" font-size="13" fill="#475569">status=partial_to_full_box_transition_candidate | score_not_selector=0.681 | endpoint_distance=80.2px | bridge_iou_proxy=0.541</text>
-<text x="24" y="80" font-size="12" fill="#64748b">Optical YOLO bbox geometry only. No SAR frame, SAR GT, final box, fan/range band, selector, or confirmed identity.</text>
-<text x="24" y="94" font-size="14" fill="#111827">from oty1_tracklet_0039</text>
-<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000165.png" x="24" y="112" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
-<rect x="24.00" y="174.92" width="128.27" height="25.57" fill="none" stroke="#f97316" stroke-width="3" />
-<text x="24" y="253.50" font-size="10" fill="#111827">f=165 | GM_RM019_000165_002 | conf=0.26</text>
-<text x="24" y="269.50" font-size="10" fill="#f97316">neighbor ambiguity, edge contact</text>
-<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000166.png" x="212" y="112" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
-<rect x="212.00" y="175.08" width="128.56" height="22.99" fill="none" stroke="#f97316" stroke-width="3" />
-<text x="212" y="253.50" font-size="10" fill="#111827">f=166 | GM_RM019_000166_002 | conf=0.29</text>
-<text x="212" y="269.50" font-size="10" fill="#f97316">neighbor ambiguity, edge contact</text>
-<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000167.png" x="400" y="112" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
-<rect x="400.00" y="175.25" width="128.90" height="25.39" fill="none" stroke="#f97316" stroke-width="3" />
-<text x="400" y="253.50" font-size="10" fill="#111827">f=167 | GM_RM019_000167_001 | conf=0.31</text>
-<text x="400" y="269.50" font-size="10" fill="#f97316">edge contact</text>
-<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000168.png" x="588" y="112" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
-<rect x="588.21" y="175.06" width="139.73" height="30.14" fill="none" stroke="#f97316" stroke-width="3" />
-<text x="588" y="253.50" font-size="10" fill="#111827">f=168 | GM_RM019_000168_002 | conf=0.31</text>
-<text x="588" y="269.50" font-size="10" fill="#f97316">edge contact</text>
-<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000172.png" x="776" y="112" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
-<rect x="809.73" y="173.66" width="132.27" height="35.61" fill="none" stroke="#f97316" stroke-width="3" />
-<text x="776" y="253.50" font-size="10" fill="#111827">f=172 | GM_RM019_000172_002 | conf=0.25</text>
-<text x="776" y="269.50" font-size="10" fill="#f97316">neighbor ambiguity, edge contact</text>
-<text x="24" y="358" font-size="14" fill="#111827">to oty1_tracklet_0045</text>
-<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000171.png" x="24" y="376" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
-<rect x="79.67" y="437.30" width="109.98" height="61.61" fill="none" stroke="#f97316" stroke-width="3" />
-<text x="24" y="517.50" font-size="10" fill="#111827">f=171 | GM_RM019_000171_001 | conf=0.28</text>
-<text x="24" y="533.50" font-size="10" fill="#f97316">edge contact</text>
-<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000172.png" x="212" y="376" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
-<rect x="257.57" y="437.06" width="119.40" height="61.95" fill="none" stroke="#7c3aed" stroke-width="3" />
-<text x="212" y="517.50" font-size="10" fill="#111827">f=172 | GM_RM019_000172_001 | conf=0.51</text>
-<text x="212" y="533.50" font-size="10" fill="#7c3aed">neighbor ambiguity</text>
-<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000173.png" x="400" y="376" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
-<rect x="448.39" y="437.92" width="117.00" height="61.25" fill="none" stroke="#7c3aed" stroke-width="3" />
-<text x="400" y="517.50" font-size="10" fill="#111827">f=173 | GM_RM019_000173_001 | conf=0.69</text>
-<text x="400" y="533.50" font-size="10" fill="#7c3aed">ambiguous_tracklet_state_review</text>
-<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000174.png" x="588" y="376" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
-<rect x="645.85" y="439.65" width="107.92" height="59.58" fill="none" stroke="#f97316" stroke-width="3" />
-<text x="588" y="517.50" font-size="10" fill="#111827">f=174 | GM_RM019_000174_001 | conf=0.93</text>
-<text x="588" y="533.50" font-size="10" fill="#f97316">edge contact</text>
-<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000175.png" x="776" y="376" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
-<rect x="845.58" y="441.38" width="96.20" height="57.96" fill="none" stroke="#f97316" stroke-width="3" />
-<text x="776" y="517.50" font-size="10" fill="#111827">f=175 | GM_RM019_000175_001 | conf=0.95</text>
-<text x="776" y="533.50" font-size="10" fill="#f97316">edge contact</text>
+<text x="24" y="80" font-size="12" fill="#475569">temporal_relation=overlap_or_interleave | temporal_offset_frames=-1 | forward_gap_frames=0 | overlap_count=1</text>
+<text x="24" y="102" font-size="12" fill="#b45309">partial/full bbox transition candidate; review-only; not confirmed identity</text>
+<text x="24" y="124" font-size="12" fill="#64748b">confirmed_identity=false | review_only=true | no SAR, no GT, no final boxes, no fan/range band, no selector.</text>
+<text x="24" y="136" font-size="14" fill="#111827">from oty1_tracklet_0039</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000165.png" x="24" y="154" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="24.00" y="216.92" width="128.27" height="25.57" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="24" y="295.50" font-size="10" fill="#111827">f=165 | GM_RM019_000165_002 | conf=0.26</text>
+<text x="24" y="311.50" font-size="10" fill="#f97316">neighbor ambiguity, edge contact</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000166.png" x="212" y="154" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="212.00" y="217.08" width="128.56" height="22.99" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="212" y="295.50" font-size="10" fill="#111827">f=166 | GM_RM019_000166_002 | conf=0.29</text>
+<text x="212" y="311.50" font-size="10" fill="#f97316">neighbor ambiguity, edge contact</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000167.png" x="400" y="154" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="400.00" y="217.25" width="128.90" height="25.39" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="400" y="295.50" font-size="10" fill="#111827">f=167 | GM_RM019_000167_001 | conf=0.31</text>
+<text x="400" y="311.50" font-size="10" fill="#f97316">edge contact</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000168.png" x="588" y="154" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="588.21" y="217.06" width="139.73" height="30.14" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="588" y="295.50" font-size="10" fill="#111827">f=168 | GM_RM019_000168_002 | conf=0.31</text>
+<text x="588" y="311.50" font-size="10" fill="#f97316">edge contact</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000172.png" x="776" y="154" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="809.73" y="215.66" width="132.27" height="35.61" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="776" y="295.50" font-size="10" fill="#111827">f=172 | GM_RM019_000172_002 | conf=0.25</text>
+<text x="776" y="311.50" font-size="10" fill="#f97316">neighbor ambiguity, edge contact</text>
+<text x="24" y="400" font-size="14" fill="#111827">to oty1_tracklet_0045</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000171.png" x="24" y="418" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="79.67" y="479.30" width="109.98" height="61.61" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="24" y="559.50" font-size="10" fill="#111827">f=171 | GM_RM019_000171_001 | conf=0.28</text>
+<text x="24" y="575.50" font-size="10" fill="#f97316">edge contact</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000172.png" x="212" y="418" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="257.57" y="479.06" width="119.40" height="61.95" fill="none" stroke="#7c3aed" stroke-width="3" />
+<text x="212" y="559.50" font-size="10" fill="#111827">f=172 | GM_RM019_000172_001 | conf=0.51</text>
+<text x="212" y="575.50" font-size="10" fill="#7c3aed">neighbor ambiguity</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000173.png" x="400" y="418" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="448.39" y="479.92" width="117.00" height="61.25" fill="none" stroke="#7c3aed" stroke-width="3" />
+<text x="400" y="559.50" font-size="10" fill="#111827">f=173 | GM_RM019_000173_001 | conf=0.69</text>
+<text x="400" y="575.50" font-size="10" fill="#7c3aed">ambiguous_tracklet_state_review</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000174.png" x="588" y="418" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="645.85" y="481.65" width="107.92" height="59.58" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="588" y="559.50" font-size="10" fill="#111827">f=174 | GM_RM019_000174_001 | conf=0.93</text>
+<text x="588" y="575.50" font-size="10" fill="#f97316">edge contact</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000175.png" x="776" y="418" width="166.00" height="124.50" preserveAspectRatio="xMidYMid meet" />
+<rect x="845.58" y="483.38" width="96.20" height="57.96" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="776" y="559.50" font-size="10" fill="#111827">f=175 | GM_RM019_000175_001 | conf=0.95</text>
+<text x="776" y="575.50" font-size="10" fill="#f97316">edge contact</text>
 </svg>

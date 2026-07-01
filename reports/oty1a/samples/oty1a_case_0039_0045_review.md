@@ -11,9 +11,14 @@ This case reviews whether `oty1_tracklet_0039` and `oty1_tracklet_0045` should e
 ## OTY1a Merge Edge
 
 - merge candidate status: `partial_to_full_box_transition_candidate`
+- confirmed_identity: `false`
+- merge_action: `review_only`
 - merge_candidate_score_not_selector: `0.680777`
 - endpoint_center_distance_px: `80.151`
 - bridge_iou_proxy: `0.541249`
+- temporal_offset_frames: `-1`
+- forward_gap_frames: `0`
+- overlap_or_interleave_offset_frames: `-1`
 - frame_overlap_count: `1`
 - temporal_relation: `overlap_or_interleave`
 - shape_transition_proxy: `area_transition_review`
@@ -30,6 +35,18 @@ This case reviews whether `oty1_tracklet_0039` and `oty1_tracklet_0045` should e
 ## Interpretation
 
 `oty1_tracklet_0039` and `oty1_tracklet_0045` should be treated as an optical runtime-geometry merge review candidate. The overlap around frames 171/172 and the cross-fragment detection edge are strong enough for review, but competing edges and neighbor/boundary ambiguity mean identity remains unconfirmed.
+
+## Why Not Auto-Merge
+
+- The OTY1 one-to-one component policy selected competing edges around the same frames.
+- Both fragments carry neighbor/boundary ambiguity, and the endpoint shape shift is a partial/full bbox transition risk.
+- OTY1a has no runtime-safe identity source; it only has optical geometry and detector state.
+
+## Before OTY2 Consumes This Case
+
+- Keep `0039 -> 0045` as a continuity hint, not a merged identity.
+- Preserve competing hypotheses for ambiguous candidates instead of collapsing them into one track.
+- Use this case only for temporal alignment audit preparation; do not generate SAR band, SAR GT coverage, SAR evidence sampling, or annotation proposals from it.
 
 ## Visualization
 

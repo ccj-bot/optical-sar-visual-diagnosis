@@ -16,13 +16,31 @@ from typing import Any, Mapping, Sequence
 from .state_features import BBox, bbox_iou, center_distance, parse_float, parse_int
 
 
-MERGE_POSITIVE_STATUSES = {
+NONAMBIGUOUS_MERGE_REVIEW_STATUSES = {
     "fragment_merge_candidate",
     "overlap_shape_transition_candidate",
     "partial_to_full_box_transition_candidate",
-    "ambiguous_competing_merge",
     "needs_visual_review",
 }
+
+AMBIGUOUS_MERGE_STATUSES = {
+    "ambiguous_competing_merge",
+}
+
+REJECT_STATUSES = {
+    "reject_gap_too_large",
+    "reject_motion_inconsistent",
+    "reject_size_aspect_inconsistent",
+    "reject_class_mismatch",
+}
+
+REVIEW_CANDIDATE_STATUSES_INCLUDING_AMBIGUOUS = (
+    NONAMBIGUOUS_MERGE_REVIEW_STATUSES | AMBIGUOUS_MERGE_STATUSES
+)
+
+# Backward-compatible name for older callers. Prefer explicit count fields in
+# summaries so ambiguous review candidates are not misread as clean merges.
+MERGE_POSITIVE_STATUSES = REVIEW_CANDIDATE_STATUSES_INCLUDING_AMBIGUOUS
 
 
 @dataclass(frozen=True)
@@ -309,6 +327,26 @@ def _temporal_relation(left: Mapping[str, Any], right: Mapping[str, Any]) -> tup
     return "reverse_or_disjoint", right_start - left_end, len(overlap_frames)
 
 
+def temporal_offset_fields(temporal_relation: str, frame_gap: int) -> dict[str, Any]:
+    if temporal_relation == "forward_gap":
+        return {
+            "temporal_offset_frames": frame_gap,
+            "forward_gap_frames": frame_gap,
+            "overlap_or_interleave_offset_frames": "",
+        }
+    if temporal_relation == "overlap_or_interleave":
+        return {
+            "temporal_offset_frames": frame_gap,
+            "forward_gap_frames": 0,
+            "overlap_or_interleave_offset_frames": frame_gap,
+        }
+    return {
+        "temporal_offset_frames": frame_gap,
+        "forward_gap_frames": "",
+        "overlap_or_interleave_offset_frames": "",
+    }
+
+
 def _class_consistent(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
     left_class = str(left.get("last_k_class_name") or left.get("first_k_class_name") or "").strip()
     right_class = str(right.get("first_k_class_name") or right.get("last_k_class_name") or "").strip()
@@ -512,6 +550,7 @@ def build_fragment_merge_edges(
                     "to_frame_start": right.get("frame_start", ""),
                     "to_frame_end": right.get("frame_end", ""),
                     "temporal_relation": temporal_relation,
+                    **temporal_offset_fields(temporal_relation, frame_gap),
                     "frame_gap": frame_gap,
                     "frame_overlap_count": overlap_count,
                     "from_detection_count": left.get("detection_count", ""),
@@ -584,3 +623,27 @@ def edge_status_counts(edges: Sequence[Mapping[str, Any]]) -> dict[str, int]:
 
 def count_positive_edges(edges: Sequence[Mapping[str, Any]]) -> int:
     return sum(1 for edge in edges if str(edge.get("merge_candidate_status", "")) in MERGE_POSITIVE_STATUSES)
+
+
+def merge_review_count_summary(edges: Sequence[Mapping[str, Any]]) -> dict[str, int]:
+    statuses = [str(edge.get("merge_candidate_status", "")) for edge in edges]
+    return {
+        "review_candidate_edges_including_ambiguous": sum(
+            1 for status in statuses if status in REVIEW_CANDIDATE_STATUSES_INCLUDING_AMBIGUOUS
+        ),
+        "nonambiguous_merge_review_candidates": sum(
+            1 for status in statuses if status in NONAMBIGUOUS_MERGE_REVIEW_STATUSES
+        ),
+        "ambiguous_competing_merge_candidates": sum(
+            1 for status in statuses if status in AMBIGUOUS_MERGE_STATUSES
+        ),
+        "confirmed_identity_merges": 0,
+        "rejected_merge_edges": sum(1 for status in statuses if status in REJECT_STATUSES),
+        "needs_visual_review_edges": sum(1 for status in statuses if status == "needs_visual_review"),
+        "shape_transition_review_edges": sum(
+            1 for status in statuses if status == "overlap_shape_transition_candidate"
+        ),
+        "partial_to_full_box_transition_edges": sum(
+            1 for status in statuses if status == "partial_to_full_box_transition_candidate"
+        ),
+    }
