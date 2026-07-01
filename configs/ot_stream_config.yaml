@@ -1,0 +1,126 @@
+{
+  "version": "ot0_optical_temporal_state_audit",
+  "purpose": "isolated_runtime_safe_optical_temporal_state_transfer_audit",
+  "notes": [
+    "This file is JSON-compatible YAML and can be loaded with the Python standard library.",
+    "OT0 audits optical temporal state availability only. It does not generate SAR fan/range bands.",
+    "Candidate edge limits below are audit construction limits, not selector thresholds or localization gates."
+  ],
+  "global_geometry": {
+    "optical_canvas_fallback": {
+      "width": 800,
+      "height": 600
+    },
+    "sar_canvas": {
+      "width": 2308,
+      "height": 1334
+    }
+  },
+  "runtime_allowed_fields": [
+    "scene",
+    "optical_frame_num",
+    "frame_num",
+    "opt_x1",
+    "opt_y1",
+    "opt_x2",
+    "opt_y2",
+    "opt_cx",
+    "opt_cy",
+    "opt_w",
+    "opt_h",
+    "bbox_x1",
+    "bbox_y1",
+    "bbox_x2",
+    "bbox_y2",
+    "bbox_cx",
+    "bbox_cy",
+    "bbox_w",
+    "bbox_h",
+    "optical_path",
+    "confidence",
+    "class_name",
+    "det_id",
+    "track_id",
+    "object_id"
+  ],
+  "posthoc_only_fields": [
+    "sar_gt_box",
+    "final_box",
+    "manual_box",
+    "oracle_box",
+    "iou",
+    "center_error",
+    "review_status",
+    "shared_offset",
+    "a019",
+    "a021"
+  ],
+  "forbidden_runtime_field_prefixes": [
+    "gt_",
+    "final_",
+    "oracle_",
+    "manual_"
+  ],
+  "forbidden_runtime_field_names": [
+    "review_status",
+    "chosen_candidate",
+    "best_iou_to_reviewed",
+    "current_good_proxy",
+    "current_local_appearance_clean_proxy",
+    "shared_offset_replacement"
+  ],
+  "audit_candidate_edge_limits": {
+    "max_optical_frame_gap": 12,
+    "max_center_distance_px": 260.0,
+    "min_size_consistency": 0.25,
+    "contact_margin_px": 2.0,
+    "neighbor_distance_px": 120.0,
+    "max_edges_per_detection": 5
+  },
+  "input_source_candidates": {
+    "hermes_review_queue_runtime_optical_bbox": {
+      "scene": "all",
+      "source_path": "D:\\profile\\research\\workspace\\output\\hermes_annotation_consolidation_2026-05-20\\00_tables\\review_queue.csv",
+      "source_kind": "mixed_review_queue_with_runtime_optical_bbox_fields",
+      "allowed_use": "OT0 may use scene/frame/path and opt_x1/opt_y1/opt_x2/opt_y2 for bbox state and adjacent-frame candidate-edge audit",
+      "forbidden_use": "final fields, chosen candidate source, manual adjusted status, review status, same-target identity proof, selector, threshold, training, SAR band generation",
+      "lineage_notes": "442-row review queue across GM_RM011/017/019. It includes runtime-like optical bbox fields plus review/final columns; OT0 must ignore posthoc/review/final columns for runtime candidate-edge construction."
+    },
+    "hermes_final_gt_working_posthoc_only": {
+      "scene": "all",
+      "source_path": "D:\\profile\\research\\workspace\\output\\hermes_annotation_consolidation_2026-05-20\\00_tables\\final_gt_working.csv",
+      "source_kind": "final_gt_posthoc_only",
+      "allowed_use": "future OT2 posthoc coverage audit only",
+      "forbidden_use": "runtime tracklet construction, SAR band generation, selector, threshold, training",
+      "lineage_notes": "442-row final GT working table with final_* fields and review metadata."
+    },
+    "gmrm019_c1_4_runtime_like_inventory": {
+      "scene": "GM_RM019",
+      "source_path": "D:\\profile\\research\\workspace\\output\\c1_4_gmrm019_runtime_tracklet_reconstruction_audit_20260701_104305\\c1_4_runtime_tracklet_input_inventory.csv",
+      "source_kind": "partial_runtime_like_optical_bbox_inventory",
+      "allowed_use": "OT0 field audit, runtime-safe bbox state feature pilot, and partial candidate-edge construction only",
+      "forbidden_use": "same-target identity proof, selector, G2, threshold, training, SAR band generation, GT coverage tuning",
+      "lineage_notes": "C1.4 audit inventory has optical bbox geometry for 22 GM_RM019 target rows but is not a full optical stream detector and has no explicit same-target runtime track id."
+    }
+  },
+  "scenes": {
+    "GM_RM019": {
+      "optical_frames_dir": "D:\\profile\\research\\data\\GM_RM019\\GM_RM019_frames",
+      "sar_frames_dir": "D:\\profile\\research\\data\\GM_RM019\\GM_RM019_SARframes",
+      "sar_gray_frames_dir": "D:\\profile\\research\\data\\GM_RM019\\GM_RM019_SARframes_gray",
+      "depth_dir": "D:\\profile\\research\\data\\GM_RM019\\GM_RM019_depth"
+    },
+    "GM_RM011": {
+      "optical_frames_dir": "D:\\profile\\research\\data\\GM_RM011\\GM_RM011_frames",
+      "sar_frames_dir": "D:\\profile\\research\\data\\GM_RM011\\GM_RM011_SARframes",
+      "sar_gray_frames_dir": "D:\\profile\\research\\data\\GM_RM011\\GM_RM011_SARframes_gray",
+      "depth_dir": "D:\\profile\\research\\data\\GM_RM011\\GM_RM011_depth"
+    },
+    "GM_RM017": {
+      "optical_frames_dir": "D:\\profile\\research\\data\\GM_RM017\\GM_RM017_frames",
+      "sar_frames_dir": "D:\\profile\\research\\data\\GM_RM017\\GM_RM017_SARframes",
+      "sar_gray_frames_dir": "D:\\profile\\research\\data\\GM_RM017\\GM_RM017_SARframes_gray",
+      "depth_dir": "D:\\profile\\research\\data\\GM_RM017\\GM_RM017_depth"
+    }
+  }
+}
