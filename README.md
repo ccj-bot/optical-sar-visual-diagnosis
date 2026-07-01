@@ -34,3 +34,7 @@ Outputs are written under `outputs/`, which is intentionally ignored by Git.
 ## Legacy Context
 
 Legacy handoff notes are under `docs/archive/`. The legacy handoff zip remains outside Git and is only referenced from `docs/archive/README.md`.
+
+## Required Guidance
+
+Before each future development round, read `docs/guidance/README.md` and follow the guidance documents listed there. This guidance layer is the execution protocol; `docs/archive/` remains the historical record.
