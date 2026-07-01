@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="360" font-family="Arial, Helvetica, sans-serif">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="34" font-size="22" fill="#111827">GM_RM019 0039/0045 tracker assignment timeline</text>
+<text x="24" y="58" font-size="13" fill="#475569">Optical review-only: red ticks are unmatched detections, green ticks are tracked ByteTrack detections; no SAR/GT/final boxes.</text>
+<line x1="130.0" y1="70" x2="130.0" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="120.0" y="326" font-size="10" fill="#64748b">149</text>
+<line x1="638.5" y1="70" x2="638.5" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="628.5" y="326" font-size="10" fill="#64748b">162</text>
+<line x1="677.6" y1="70" x2="677.6" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="667.6" y="326" font-size="10" fill="#64748b">163</text>
+<line x1="716.8" y1="70" x2="716.8" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="706.8" y="326" font-size="10" fill="#64748b">164</text>
+<line x1="755.9" y1="70" x2="755.9" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="745.9" y="326" font-size="10" fill="#64748b">165</text>
+<line x1="795.0" y1="70" x2="795.0" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="785.0" y="326" font-size="10" fill="#64748b">166</text>
+<line x1="834.1" y1="70" x2="834.1" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="824.1" y="326" font-size="10" fill="#64748b">167</text>
+<line x1="873.2" y1="70" x2="873.2" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="863.2" y="326" font-size="10" fill="#64748b">168</text>
+<line x1="990.6" y1="70" x2="990.6" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="980.6" y="326" font-size="10" fill="#64748b">171</text>
+<line x1="1029.7" y1="70" x2="1029.7" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="1019.7" y="326" font-size="10" fill="#64748b">172</text>
+<line x1="1068.8" y1="70" x2="1068.8" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="1058.8" y="326" font-size="10" fill="#64748b">173</text>
+<line x1="1107.9" y1="70" x2="1107.9" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="1097.9" y="326" font-size="10" fill="#64748b">174</text>
+<line x1="1381.8" y1="70" x2="1381.8" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="1371.8" y="326" font-size="10" fill="#64748b">181</text>
+<line x1="1420.9" y1="70" x2="1420.9" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="1410.9" y="326" font-size="10" fill="#64748b">182</text>
+<line x1="1460.0" y1="70" x2="1460.0" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+<text x="1450.0" y="326" font-size="10" fill="#64748b">183</text>
+<text x="24" y="85" font-size="14" fill="#111827">OTY1 0038</text>
+<line x1="130" y1="80" x2="1460" y2="80" stroke="#cbd5e1"/>
+<line x1="130.0" y1="80" x2="716.8" y2="80" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+<circle cx="130.0" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000149_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="169.1" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000150_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="208.2" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000151_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="247.4" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000152_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="286.5" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000153_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="325.6" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000154_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="364.7" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000155_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="403.8" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000156_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="442.9" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000157_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="482.1" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000158_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="521.2" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000159_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="560.3" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000160_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="599.4" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000161_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="638.5" cy="80" r="6" fill="#22c55e" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000162_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="677.6" cy="80" r="6" fill="#ef4444" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000163_001 UNMATCHED tracker=none</title></circle>
+<circle cx="716.8" cy="80" r="6" fill="#ef4444" stroke="#8b5cf6" stroke-width="2"><title>GM_RM019_000164_003 UNMATCHED tracker=none</title></circle>
+<text x="24" y="143" font-size="14" fill="#111827">OTY1 0039</text>
+<line x1="130" y1="138" x2="1460" y2="138" stroke="#cbd5e1"/>
+<line x1="638.5" y1="138" x2="1029.7" y2="138" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+<circle cx="638.5" cy="138" r="6" fill="#ef4444" stroke="#f59e0b" stroke-width="2"><title>GM_RM019_000162_002 UNMATCHED tracker=none</title></circle>
+<circle cx="677.6" cy="138" r="6" fill="#ef4444" stroke="#f59e0b" stroke-width="2"><title>GM_RM019_000163_002 UNMATCHED tracker=none</title></circle>
+<circle cx="716.8" cy="138" r="6" fill="#ef4444" stroke="#f59e0b" stroke-width="2"><title>GM_RM019_000164_002 UNMATCHED tracker=none</title></circle>
+<circle cx="755.9" cy="138" r="6" fill="#ef4444" stroke="#f59e0b" stroke-width="2"><title>GM_RM019_000165_002 UNMATCHED tracker=none</title></circle>
+<circle cx="795.0" cy="138" r="6" fill="#ef4444" stroke="#f59e0b" stroke-width="2"><title>GM_RM019_000166_002 UNMATCHED tracker=none</title></circle>
+<circle cx="834.1" cy="138" r="6" fill="#ef4444" stroke="#f59e0b" stroke-width="2"><title>GM_RM019_000167_001 UNMATCHED tracker=none</title></circle>
+<circle cx="873.2" cy="138" r="6" fill="#ef4444" stroke="#f59e0b" stroke-width="2"><title>GM_RM019_000168_002 UNMATCHED tracker=none</title></circle>
+<circle cx="1029.7" cy="138" r="6" fill="#ef4444" stroke="#f59e0b" stroke-width="2"><title>GM_RM019_000172_002 UNMATCHED tracker=none</title></circle>
+<text x="1035.7" y="128" font-size="11" fill="#be185d">172_002</text>
+<text x="24" y="201" font-size="14" fill="#111827">OTY1 0045</text>
+<line x1="130" y1="196" x2="1460" y2="196" stroke="#cbd5e1"/>
+<line x1="990.6" y1="196" x2="1460.0" y2="196" stroke="#0ea5e9" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+<circle cx="990.6" cy="196" r="6" fill="#ef4444" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000171_001 UNMATCHED tracker=none</title></circle>
+<circle cx="1029.7" cy="196" r="6" fill="#22c55e" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000172_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="1068.8" cy="196" r="6" fill="#22c55e" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000173_001 TRACKED tracker=bt_0098</title></circle>
+<text x="1074.8" y="186" font-size="11" fill="#be185d">173_001</text>
+<circle cx="1107.9" cy="196" r="6" fill="#22c55e" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000174_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="1147.1" cy="196" r="6" fill="#22c55e" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000175_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="1186.2" cy="196" r="6" fill="#22c55e" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000176_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="1225.3" cy="196" r="6" fill="#22c55e" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000177_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="1264.4" cy="196" r="6" fill="#22c55e" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000178_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="1303.5" cy="196" r="6" fill="#22c55e" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000179_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="1342.6" cy="196" r="6" fill="#22c55e" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000180_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="1381.8" cy="196" r="6" fill="#22c55e" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000181_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="1420.9" cy="196" r="6" fill="#22c55e" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000182_001 TRACKED tracker=bt_0098</title></circle>
+<circle cx="1460.0" cy="196" r="6" fill="#ef4444" stroke="#0ea5e9" stroke-width="2"><title>GM_RM019_000183_001 UNMATCHED tracker=none</title></circle>
+<text x="24" y="259" font-size="14" fill="#111827">Tracker bt_0098</text>
+<line x1="130" y1="254" x2="1460" y2="254" stroke="#cbd5e1"/>
+<line x1="130.0" y1="254" x2="1420.9" y2="254" stroke="#22c55e" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+<rect x="125.0" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000149_001 TRACKED bt_0098</title></rect>
+<rect x="164.1" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000150_001 TRACKED bt_0098</title></rect>
+<rect x="203.2" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000151_001 TRACKED bt_0098</title></rect>
+<rect x="242.4" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000152_001 TRACKED bt_0098</title></rect>
+<rect x="281.5" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000153_001 TRACKED bt_0098</title></rect>
+<rect x="320.6" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000154_001 TRACKED bt_0098</title></rect>
+<rect x="359.7" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000155_001 TRACKED bt_0098</title></rect>
+<rect x="398.8" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000156_001 TRACKED bt_0098</title></rect>
+<rect x="437.9" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000157_001 TRACKED bt_0098</title></rect>
+<rect x="477.1" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000158_001 TRACKED bt_0098</title></rect>
+<rect x="516.2" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000159_001 TRACKED bt_0098</title></rect>
+<rect x="555.3" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000160_001 TRACKED bt_0098</title></rect>
+<rect x="594.4" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000161_001 TRACKED bt_0098</title></rect>
+<rect x="633.5" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000162_001 TRACKED bt_0098</title></rect>
+<rect x="1024.7" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000172_001 TRACKED bt_0098</title></rect>
+<rect x="1063.8" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000173_001 TRACKED bt_0098</title></rect>
+<rect x="1102.9" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000174_001 TRACKED bt_0098</title></rect>
+<rect x="1142.1" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000175_001 TRACKED bt_0098</title></rect>
+<rect x="1181.2" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000176_001 TRACKED bt_0098</title></rect>
+<rect x="1220.3" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000177_001 TRACKED bt_0098</title></rect>
+<rect x="1259.4" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000178_001 TRACKED bt_0098</title></rect>
+<rect x="1298.5" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000179_001 TRACKED bt_0098</title></rect>
+<rect x="1337.6" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000180_001 TRACKED bt_0098</title></rect>
+<rect x="1376.8" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000181_001 TRACKED bt_0098</title></rect>
+<rect x="1415.9" y="248" width="10" height="12" fill="#22c55e" stroke="#166534"><title>GM_RM019_000182_001 TRACKED bt_0098</title></rect>
+<text x="24" y="335" font-size="14" fill="#111827">Target unmatched ticks</text>
+<line x1="130" y1="330" x2="1460" y2="330" stroke="#fecaca"/>
+<line x1="638.5" y1="320" x2="638.5" y2="340" stroke="#ef4444" stroke-width="3"><title>GM_RM019_000162_002 unmatched</title></line>
+<line x1="677.6" y1="320" x2="677.6" y2="340" stroke="#ef4444" stroke-width="3"><title>GM_RM019_000163_002 unmatched</title></line>
+<line x1="716.8" y1="320" x2="716.8" y2="340" stroke="#ef4444" stroke-width="3"><title>GM_RM019_000164_002 unmatched</title></line>
+<line x1="755.9" y1="320" x2="755.9" y2="340" stroke="#ef4444" stroke-width="3"><title>GM_RM019_000165_002 unmatched</title></line>
+<line x1="795.0" y1="320" x2="795.0" y2="340" stroke="#ef4444" stroke-width="3"><title>GM_RM019_000166_002 unmatched</title></line>
+<line x1="834.1" y1="320" x2="834.1" y2="340" stroke="#ef4444" stroke-width="3"><title>GM_RM019_000167_001 unmatched</title></line>
+<line x1="873.2" y1="320" x2="873.2" y2="340" stroke="#ef4444" stroke-width="3"><title>GM_RM019_000168_002 unmatched</title></line>
+<line x1="990.6" y1="320" x2="990.6" y2="340" stroke="#ef4444" stroke-width="3"><title>GM_RM019_000171_001 unmatched</title></line>
+<line x1="1029.7" y1="320" x2="1029.7" y2="340" stroke="#ef4444" stroke-width="3"><title>GM_RM019_000172_002 unmatched</title></line>
+<line x1="1460.0" y1="320" x2="1460.0" y2="340" stroke="#ef4444" stroke-width="3"><title>GM_RM019_000183_001 unmatched</title></line>
+<line x1="1029.7" y1="70" x2="1029.7" y2="348" stroke="#be185d" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="1034.7" y="78" font-size="12" fill="#be185d">bridge 172_002</text>
+<line x1="1068.8" y1="70" x2="1068.8" y2="348" stroke="#be185d" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="1073.8" y="78" font-size="12" fill="#be185d">bridge 173_001</text>
+<text x="130" y="350" font-size="12" fill="#475569">OTY1a 0039->0045: partial_to_full_box_transition_candidate; bridge_iou_proxy=0.541; endpoint_center_distance_px=80.151; confirmed_identity=false.</text>
+</svg>
