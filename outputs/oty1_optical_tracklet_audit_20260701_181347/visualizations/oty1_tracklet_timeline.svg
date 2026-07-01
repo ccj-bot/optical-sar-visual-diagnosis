@@ -1,0 +1,253 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1250" height="392" font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="1250" height="392" fill="#ffffff" />
+<text x="24" y="34" font-size="22" fill="#111827">OTY1 optical tracklet timeline: GM_RM017</text>
+<text x="24" y="58" font-size="13" fill="#64748b">Optical YOLO detections only. Component identity is candidate-only geometry, not confirmed truth.</text>
+<line x1="210" y1="64" x2="1210" y2="64" stroke="#cbd5e1" />
+<text x="210" y="56" font-size="12" fill="#475569">frame 117</text>
+<text x="1140" y="56" font-size="12" fill="#475569">frame 367</text>
+<text x="24" y="86" font-size="11" fill="#111827">oty1_tracklet_0007</text>
+<text x="132" y="86" font-size="10" fill="#dc2626">ambiguous_crossing_risk</text>
+<line x1="386.00" y1="82" x2="598.00" y2="82" stroke="#dc2626" stroke-width="2" opacity="0.8" />
+<circle cx="386.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="390.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="394.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="398.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="402.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="406.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="410.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="414.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="418.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="422.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="426.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="430.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="434.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="438.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="442.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="446.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="450.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="454.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="458.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="462.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="466.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="470.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="474.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="478.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="482.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="486.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="490.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="494.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="498.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="502.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="506.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="510.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="514.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="518.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="522.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="526.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="530.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="534.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="538.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="542.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="546.00" cy="82" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="550.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="554.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="558.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="562.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="566.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="570.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="574.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="578.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="582.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="586.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="590.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="594.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="598.00" cy="82" r="5" fill="#f97316" opacity="0.9" />
+<text x="24" y="110" font-size="11" fill="#111827">oty1_tracklet_0005</text>
+<text x="132" y="110" font-size="10" fill="#dc2626">ambiguous_crossing_risk</text>
+<line x1="338.00" y1="106" x2="542.00" y2="106" stroke="#dc2626" stroke-width="2" opacity="0.8" />
+<circle cx="338.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="342.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="346.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="350.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="354.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="358.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="362.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="366.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="370.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="374.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="378.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="382.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="386.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="390.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="394.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="398.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="402.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="406.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="410.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="414.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="418.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="422.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="426.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="430.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="434.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="438.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="442.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="446.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="450.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="454.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="458.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="462.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="466.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="470.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="474.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="478.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="482.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="486.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="490.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="494.00" cy="106" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="498.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="502.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="506.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="510.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="514.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="518.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="522.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="526.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="530.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="534.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="538.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="542.00" cy="106" r="5" fill="#f97316" opacity="0.9" />
+<text x="24" y="134" font-size="11" fill="#111827">oty1_tracklet_0001</text>
+<text x="132" y="134" font-size="10" fill="#dc2626">ambiguous_crossing_risk</text>
+<line x1="210.00" y1="130" x2="398.00" y2="130" stroke="#dc2626" stroke-width="2" opacity="0.8" />
+<circle cx="210.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="214.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="218.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="222.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="226.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="230.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="234.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="238.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="242.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="246.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="250.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="254.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="258.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="262.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="266.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="270.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="274.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="278.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="282.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="286.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="290.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="294.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="298.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="302.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="306.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="310.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="314.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="318.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="322.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="326.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="330.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="334.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="338.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="342.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="346.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="350.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="354.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="358.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="362.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="366.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="370.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="374.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="378.00" cy="130" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="382.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="386.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="390.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="394.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="398.00" cy="130" r="5" fill="#f97316" opacity="0.9" />
+<text x="24" y="158" font-size="11" fill="#111827">oty1_tracklet_0004</text>
+<text x="132" y="158" font-size="10" fill="#dc2626">ambiguous_crossing_risk</text>
+<line x1="314.00" y1="154" x2="482.00" y2="154" stroke="#dc2626" stroke-width="2" opacity="0.8" />
+<circle cx="314.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="318.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="322.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="326.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="330.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="334.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="338.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="342.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="346.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="350.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="354.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="358.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="362.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="366.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="370.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="374.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="378.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="382.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="386.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="390.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="394.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="398.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="402.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="406.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="410.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="414.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="418.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="422.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="426.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="430.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="434.00" cy="154" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="438.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="442.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="446.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="450.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="454.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="458.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="462.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="466.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="470.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="474.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="478.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="482.00" cy="154" r="5" fill="#f97316" opacity="0.9" />
+<text x="24" y="182" font-size="11" fill="#111827">oty1_tracklet_0002</text>
+<text x="132" y="182" font-size="10" fill="#dc2626">ambiguous_crossing_risk</text>
+<line x1="222.00" y1="178" x2="262.00" y2="178" stroke="#dc2626" stroke-width="2" opacity="0.8" />
+<circle cx="222.00" cy="178" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="226.00" cy="178" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="230.00" cy="178" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="234.00" cy="178" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="242.00" cy="178" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="246.00" cy="178" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="250.00" cy="178" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="254.00" cy="178" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="258.00" cy="178" r="5" fill="#f97316" opacity="0.9" />
+<circle cx="262.00" cy="178" r="5" fill="#f97316" opacity="0.9" />
+<text x="24" y="206" font-size="11" fill="#111827">oty1_tracklet_0003</text>
+<text x="132" y="206" font-size="10" fill="#dc2626">ambiguous_crossing_risk</text>
+<line x1="238.00" y1="202" x2="254.00" y2="202" stroke="#dc2626" stroke-width="2" opacity="0.8" />
+<circle cx="238.00" cy="202" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="242.00" cy="202" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="250.00" cy="202" r="5" fill="#dc2626" opacity="0.9" />
+<circle cx="254.00" cy="202" r="5" fill="#f97316" opacity="0.9" />
+<text x="24" y="230" font-size="11" fill="#111827">oty1_tracklet_0006</text>
+<text x="132" y="230" font-size="10" fill="#64748b">fragmented_short_track</text>
+<line x1="350.00" y1="226" x2="350.00" y2="226" stroke="#64748b" stroke-width="2" opacity="0.8" />
+<circle cx="350.00" cy="226" r="5" fill="#f97316" opacity="0.9" />
+<text x="24" y="254" font-size="11" fill="#111827">oty1_tracklet_0008</text>
+<text x="132" y="254" font-size="10" fill="#64748b">fragmented_short_track</text>
+<line x1="422.00" y1="250" x2="422.00" y2="250" stroke="#64748b" stroke-width="2" opacity="0.8" />
+<circle cx="422.00" cy="250" r="5" fill="#f97316" opacity="0.9" />
+<text x="24" y="278" font-size="11" fill="#111827">oty1_tracklet_0009</text>
+<text x="132" y="278" font-size="10" fill="#64748b">fragmented_short_track</text>
+<line x1="1166.00" y1="274" x2="1166.00" y2="274" stroke="#64748b" stroke-width="2" opacity="0.8" />
+<circle cx="1166.00" cy="274" r="5" fill="#f97316" opacity="0.9" />
+<text x="24" y="302" font-size="11" fill="#111827">oty1_tracklet_0010</text>
+<text x="132" y="302" font-size="10" fill="#64748b">fragmented_short_track</text>
+<line x1="1210.00" y1="298" x2="1210.00" y2="298" stroke="#64748b" stroke-width="2" opacity="0.8" />
+<circle cx="1210.00" cy="298" r="5" fill="#f97316" opacity="0.9" />
+</svg>

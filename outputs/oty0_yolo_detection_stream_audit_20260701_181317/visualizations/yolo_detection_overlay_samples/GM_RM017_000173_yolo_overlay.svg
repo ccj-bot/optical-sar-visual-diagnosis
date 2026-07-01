@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="395" font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="680" height="395" fill="#ffffff" />
+<text x="16" y="28" font-size="18" fill="#111827">frame 173</text>
+<image href="file:///D:/profile/research/data/GM_RM017/GM_RM017_frames/000173.png" x="16" y="45" width="420.00" height="315.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="259.06" y="198.53" width="165.49" height="55.13" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="259.06" y="193.53" font-size="12" fill="#f97316">car 0.95</text>
+<text x="464.00" y="70.00" font-size="13" fill="#111827">car 0.95 | GM_RM017_000173_001</text>
+<rect x="129.53" y="197.19" width="118.28" height="51.39" fill="none" stroke="#0ea5e9" stroke-width="3" />
+<text x="129.53" y="192.19" font-size="12" fill="#0ea5e9">car 0.94</text>
+<text x="464.00" y="92.00" font-size="13" fill="#111827">car 0.94 | GM_RM017_000173_002</text>
+<rect x="54.16" y="211.35" width="88.84" height="34.48" fill="none" stroke="#22c55e" stroke-width="3" />
+<text x="54.16" y="206.35" font-size="12" fill="#22c55e">car 0.91</text>
+<text x="464.00" y="114.00" font-size="13" fill="#111827">car 0.91 | GM_RM017_000173_003</text>
+</svg>

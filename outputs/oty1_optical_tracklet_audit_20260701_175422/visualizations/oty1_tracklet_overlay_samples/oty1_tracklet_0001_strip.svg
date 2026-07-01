@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2116" height="359" font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="2116" height="359" fill="#ffffff" />
+<text x="18" y="30" font-size="20" fill="#111827">OTY1 oty1_tracklet_0001</text>
+<text x="18" y="55" font-size="13" fill="#475569">identity=ambiguous_crossing_risk | status=ambiguous_geometry_review | AMBIGUOUS | EDGE_CONTACT</text>
+<text x="18" y="75" font-size="12" fill="#64748b">Runtime OTY0 YOLO detections only; no SAR frame, SAR GT, final box, or fan/range band.</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000000.png" x="18" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="80.12" y="180.10" width="156.59" height="69.88" fill="none" stroke="#dc2626" stroke-width="3" />
+<text x="18" y="271.00" font-size="11" fill="#111827">GM_RM019_000000_001 | f=0 | conf=0.36</text>
+<text x="18" y="289.00" font-size="11" fill="#dc2626">ambiguous_tracklet_state_review</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000001.png" x="278" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="325.27" y="180.92" width="172.17" height="68.83" fill="none" stroke="#dc2626" stroke-width="3" />
+<text x="278" y="271.00" font-size="11" fill="#111827">GM_RM019_000001_001 | f=1 | conf=0.54</text>
+<text x="278" y="289.00" font-size="11" fill="#dc2626">ambiguous_tracklet_state_review</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000002.png" x="538" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="606.36" y="184.98" width="150.98" height="64.41" fill="none" stroke="#dc2626" stroke-width="3" />
+<text x="538" y="271.00" font-size="11" fill="#111827">GM_RM019_000002_001 | f=2 | conf=0.63</text>
+<text x="538" y="289.00" font-size="11" fill="#dc2626">ambiguous_tracklet_state_review</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000003.png" x="798" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="866.89" y="186.91" width="149.86" height="62.92" fill="none" stroke="#dc2626" stroke-width="3" />
+<text x="798" y="271.00" font-size="11" fill="#111827">GM_RM019_000003_001 | f=3 | conf=0.90</text>
+<text x="798" y="289.00" font-size="11" fill="#dc2626">ambiguous_tracklet_state_review</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000004.png" x="1058" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="1136.43" y="189.00" width="141.39" height="60.62" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="1058" y="271.00" font-size="11" fill="#111827">GM_RM019_000004_001 | f=4 | conf=0.95</text>
+<text x="1058" y="289.00" font-size="11" fill="#f97316">ambiguous_tracklet_state_review</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000005.png" x="1318" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="1409.77" y="192.40" width="128.03" height="57.32" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="1318" y="271.00" font-size="11" fill="#111827">GM_RM019_000005_001 | f=5 | conf=0.95</text>
+<text x="1318" y="289.00" font-size="11" fill="#f97316">ambiguous_tracklet_state_review</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000006.png" x="1578" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="1682.17" y="191.19" width="115.52" height="58.52" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="1578" y="271.00" font-size="11" fill="#111827">GM_RM019_000006_001 | f=6 | conf=0.95</text>
+<text x="1578" y="289.00" font-size="11" fill="#f97316">ambiguous_tracklet_state_review</text>
+<image href="file:///D:/profile/research/data/GM_RM019/GM_RM019_frames/000007.png" x="1838" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="1951.76" y="189.25" width="105.94" height="60.41" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="1838" y="271.00" font-size="11" fill="#111827">GM_RM019_000007_001 | f=7 | conf=0.94</text>
+<text x="1838" y="289.00" font-size="11" fill="#f97316">ambiguous_tracklet_state_review</text>
+</svg>

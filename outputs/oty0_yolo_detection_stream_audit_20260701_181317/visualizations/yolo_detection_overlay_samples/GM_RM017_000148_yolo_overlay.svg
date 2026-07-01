@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="395" font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="680" height="395" fill="#ffffff" />
+<text x="16" y="28" font-size="18" fill="#111827">frame 148</text>
+<image href="file:///D:/profile/research/data/GM_RM017/GM_RM017_frames/000148.png" x="16" y="45" width="420.00" height="315.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="16.15" y="212.83" width="75.53" height="46.19" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="16.15" y="207.83" font-size="12" fill="#f97316">car 0.89</text>
+<text x="464.00" y="70.00" font-size="13" fill="#111827">car 0.89 | GM_RM017_000148_001</text>
+<rect x="221.74" y="161.61" width="65.73" height="83.63" fill="none" stroke="#0ea5e9" stroke-width="3" />
+<text x="221.74" y="156.61" font-size="12" fill="#0ea5e9">truck 0.88</text>
+<text x="464.00" y="92.00" font-size="13" fill="#111827">truck 0.88 | GM_RM017_000148_002</text>
+</svg>

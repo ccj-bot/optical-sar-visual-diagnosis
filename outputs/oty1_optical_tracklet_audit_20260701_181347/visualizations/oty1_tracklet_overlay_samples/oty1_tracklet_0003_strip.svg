@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1076" height="359" font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="1076" height="359" fill="#ffffff" />
+<text x="18" y="30" font-size="20" fill="#111827">OTY1 oty1_tracklet_0003</text>
+<text x="18" y="55" font-size="13" fill="#475569">identity=ambiguous_crossing_risk | status=ambiguous_geometry_review | AMBIGUOUS | EDGE_CONTACT</text>
+<text x="18" y="75" font-size="12" fill="#64748b">Runtime OTY0 YOLO detections only; no SAR frame, SAR GT, final box, or fan/range band.</text>
+<image href="file:///D:/profile/research/data/GM_RM017/GM_RM017_frames/000124.png" x="18" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="114.74" y="177.45" width="64.90" height="47.98" fill="none" stroke="#dc2626" stroke-width="3" />
+<text x="18" y="271.00" font-size="11" fill="#111827">GM_RM017_000124_002 | f=124 | conf=0.59</text>
+<text x="18" y="289.00" font-size="11" fill="#dc2626">ambiguous_tracklet_state_review</text>
+<image href="file:///D:/profile/research/data/GM_RM017/GM_RM017_frames/000125.png" x="278" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="387.86" y="177.12" width="67.42" height="48.44" fill="none" stroke="#dc2626" stroke-width="3" />
+<text x="278" y="271.00" font-size="11" fill="#111827">GM_RM017_000125_002 | f=125 | conf=0.39</text>
+<text x="278" y="289.00" font-size="11" fill="#dc2626">ambiguous_tracklet_state_review</text>
+<image href="file:///D:/profile/research/data/GM_RM017/GM_RM017_frames/000127.png" x="538" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="676.14" y="176.66" width="73.28" height="50.55" fill="none" stroke="#dc2626" stroke-width="3" />
+<text x="538" y="271.00" font-size="11" fill="#111827">GM_RM017_000127_002 | f=127 | conf=0.38</text>
+<text x="538" y="289.00" font-size="11" fill="#dc2626">ambiguous_tracklet_state_review</text>
+<image href="file:///D:/profile/research/data/GM_RM017/GM_RM017_frames/000128.png" x="798" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="950.45" y="175.93" width="67.53" height="49.57" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="798" y="271.00" font-size="11" fill="#111827">GM_RM017_000128_002 | f=128 | conf=0.31</text>
+<text x="798" y="289.00" font-size="11" fill="#f97316">ambiguous_tracklet_state_review</text>
+</svg>

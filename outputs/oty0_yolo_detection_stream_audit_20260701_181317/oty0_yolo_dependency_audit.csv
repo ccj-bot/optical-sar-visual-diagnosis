@@ -1,0 +1,7 @@
+component,status,detail
+python,available,D:\MINICONDA\envs\py311\python.exe
+yolo_model_path,true,D:\profile\research\workspace\artifacts\detector_weights\yolo11l.pt
+ultralytics,available,8.4.21
+torch,available,2.10.0+cu128
+cuda,true,NVIDIA GeForce RTX 5070 Laptop GPU
+oty0_yolo_can_run,true,

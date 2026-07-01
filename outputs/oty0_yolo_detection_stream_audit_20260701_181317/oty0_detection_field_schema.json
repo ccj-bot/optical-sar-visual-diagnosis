@@ -1,0 +1,27 @@
+{
+  "schema_name": "oty0_yolo_detection_table",
+  "runtime_source": "YOLO detections from raw optical frames",
+  "forbidden_sources": [
+    "review_queue bbox columns",
+    "final_gt_working final boxes",
+    "SAR GT",
+    "manual/review/oracle labels"
+  ],
+  "fields": {
+    "scene": "scene id",
+    "optical_frame_num": "numeric frame id parsed from optical frame filename",
+    "optical_path": "source optical frame path",
+    "det_id": "detector-row id assigned by OTY0",
+    "class_id": "YOLO class id",
+    "class_name": "YOLO class name",
+    "confidence": "YOLO detector confidence, used only as optical detector output filter",
+    "bbox_x1": "left image coordinate",
+    "bbox_y1": "top image coordinate",
+    "bbox_x2": "right image coordinate",
+    "bbox_y2": "bottom image coordinate",
+    "bbox_cx": "bbox center x",
+    "bbox_cy": "bbox center y",
+    "bbox_w": "bbox width",
+    "bbox_h": "bbox height"
+  }
+}

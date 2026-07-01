@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="359" font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="900" height="359" fill="#ffffff" />
+<text x="18" y="30" font-size="20" fill="#111827">OTY1 oty1_tracklet_0010</text>
+<text x="18" y="55" font-size="13" fill="#475569">identity=fragmented_short_track | status=fragmented_short_track | SHORT | EDGE_CONTACT</text>
+<text x="18" y="75" font-size="12" fill="#64748b">Runtime OTY0 YOLO detections only; no SAR frame, SAR GT, final box, or fan/range band.</text>
+<image href="file:///D:/profile/research/data/GM_RM017/GM_RM017_frames/000367.png" x="18" y="86" width="220.00" height="165.00" preserveAspectRatio="xMidYMid meet" />
+<rect x="18.01" y="178.66" width="9.79" height="20.21" fill="none" stroke="#f97316" stroke-width="3" />
+<text x="18" y="271.00" font-size="11" fill="#111827">GM_RM017_000367_001 | f=367 | conf=0.48</text>
+<text x="18" y="289.00" font-size="11" fill="#f97316">fragmented_short_track_state</text>
+</svg>

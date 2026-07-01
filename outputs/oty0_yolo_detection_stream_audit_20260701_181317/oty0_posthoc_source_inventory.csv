@@ -1,0 +1,3 @@
+source_name,path,exists,row_count,scene_rows,use_policy,runtime_detection_source
+review_queue,D:\profile\research\workspace\output\hermes_annotation_consolidation_2026-05-20\00_tables\review_queue.csv,True,442,216,posthoc_audit_only_not_runtime_detection_source,False
+final_gt_working,D:\profile\research\workspace\output\hermes_annotation_consolidation_2026-05-20\00_tables\final_gt_working.csv,True,442,216,posthoc_gt_only_not_runtime_detection_source,False
