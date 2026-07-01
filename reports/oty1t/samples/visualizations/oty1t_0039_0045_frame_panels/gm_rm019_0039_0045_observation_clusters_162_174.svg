@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="540" viewBox="0 0 1120 540">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="32" font-size="18" font-family="Arial" font-weight="700" fill="#111827">OTY1t-P3 observation clusters 162-174</text>
+<text x="24" y="56" font-size="13" font-family="Arial" fill="#374151">confirmed_identity=false; optical review hypotheses only</text>
+<text x="24" y="78" font-size="13" font-family="Arial" fill="#374151">Frame 172: tracker chose 172_001 -> bt_0098; OTY1a bridge uses 172_002 -> 173_001</text>
+<rect x="24" y="94" width="92" height="22" rx="4" fill="#2563eb" opacity="0.16"/>
+<text x="34" y="109" font-size="12" font-family="Arial" fill="#111827">F162</text>
+<text x="130" y="109" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000162_oc_001 size=2</text>
+<text x="420" y="109" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000162_001;GM_RM019_000162_002</text>
+<text x="790" y="109" font-size="12" font-family="Arial" fill="#374151">ambiguous_multi_vehicle_cluster</text>
+<rect x="24" y="124" width="92" height="22" rx="4" fill="#2563eb" opacity="0.16"/>
+<text x="34" y="139" font-size="12" font-family="Arial" fill="#111827">F163</text>
+<text x="130" y="139" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000163_oc_001 size=2</text>
+<text x="420" y="139" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000163_001;GM_RM019_000163_002</text>
+<text x="790" y="139" font-size="12" font-family="Arial" fill="#374151">ambiguous_multi_vehicle_cluster</text>
+<rect x="24" y="154" width="92" height="22" rx="4" fill="#2563eb" opacity="0.16"/>
+<text x="34" y="169" font-size="12" font-family="Arial" fill="#111827">F164</text>
+<text x="130" y="169" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000164_oc_001 size=3</text>
+<text x="420" y="169" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000164_001;GM_RM019_000164_002;GM_RM019_000164_003</text>
+<text x="790" y="169" font-size="12" font-family="Arial" fill="#374151">partial_full_observation_cluster</text>
+<rect x="24" y="184" width="92" height="22" rx="4" fill="#2563eb" opacity="0.16"/>
+<text x="34" y="199" font-size="12" font-family="Arial" fill="#111827">F165</text>
+<text x="130" y="199" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000165_oc_001 size=2</text>
+<text x="420" y="199" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000165_001;GM_RM019_000165_002</text>
+<text x="790" y="199" font-size="12" font-family="Arial" fill="#374151">partial_full_observation_cluster</text>
+<rect x="24" y="214" width="92" height="22" rx="4" fill="#2563eb" opacity="0.16"/>
+<text x="34" y="229" font-size="12" font-family="Arial" fill="#111827">F166</text>
+<text x="130" y="229" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000166_oc_001 size=3</text>
+<text x="420" y="229" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000166_001;GM_RM019_000166_002;GM_RM019_000166_003</text>
+<text x="790" y="229" font-size="12" font-family="Arial" fill="#374151">partial_full_observation_cluster</text>
+<rect x="24" y="244" width="92" height="22" rx="4" fill="#2563eb" opacity="0.16"/>
+<text x="34" y="259" font-size="12" font-family="Arial" fill="#111827">F167</text>
+<text x="130" y="259" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000167_oc_001 size=3</text>
+<text x="420" y="259" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000167_001;GM_RM019_000167_002;GM_RM019_000167_003</text>
+<text x="790" y="259" font-size="12" font-family="Arial" fill="#374151">partial_full_observation_cluster</text>
+<rect x="24" y="274" width="92" height="22" rx="4" fill="#2563eb" opacity="0.16"/>
+<text x="34" y="289" font-size="12" font-family="Arial" fill="#111827">F168</text>
+<text x="130" y="289" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000168_oc_001 size=2</text>
+<text x="420" y="289" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000168_001;GM_RM019_000168_002</text>
+<text x="790" y="289" font-size="12" font-family="Arial" fill="#374151">partial_full_observation_cluster</text>
+<rect x="24" y="304" width="92" height="22" rx="4" fill="#6b7280" opacity="0.16"/>
+<text x="34" y="319" font-size="12" font-family="Arial" fill="#111827">F169</text>
+<text x="130" y="319" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000169_oc_001 size=1</text>
+<text x="420" y="319" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000169_001</text>
+<text x="790" y="319" font-size="12" font-family="Arial" fill="#374151">edge_truncation_cluster</text>
+<rect x="24" y="334" width="92" height="22" rx="4" fill="#6b7280" opacity="0.16"/>
+<text x="34" y="349" font-size="12" font-family="Arial" fill="#111827">F170</text>
+<text x="130" y="349" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000170_oc_001 size=1</text>
+<text x="420" y="349" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000170_001</text>
+<text x="790" y="349" font-size="12" font-family="Arial" fill="#374151">stable_single_box</text>
+<rect x="24" y="364" width="92" height="22" rx="4" fill="#6b7280" opacity="0.16"/>
+<text x="34" y="379" font-size="12" font-family="Arial" fill="#111827">F171</text>
+<text x="130" y="379" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000171_oc_001 size=1</text>
+<text x="420" y="379" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000171_001</text>
+<text x="790" y="379" font-size="12" font-family="Arial" fill="#374151">edge_truncation_cluster</text>
+<rect x="24" y="394" width="92" height="22" rx="4" fill="#f59e0b" opacity="0.16"/>
+<text x="34" y="409" font-size="12" font-family="Arial" fill="#111827">F172</text>
+<text x="130" y="409" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000172_oc_001 size=2</text>
+<text x="420" y="409" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000172_001;GM_RM019_000172_002</text>
+<text x="790" y="409" font-size="12" font-family="Arial" fill="#374151">partial_full_observation_cluster</text>
+<rect x="24" y="424" width="92" height="22" rx="4" fill="#10b981" opacity="0.16"/>
+<text x="34" y="439" font-size="12" font-family="Arial" fill="#111827">F173</text>
+<text x="130" y="439" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000173_oc_001 size=1</text>
+<text x="420" y="439" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000173_001</text>
+<text x="790" y="439" font-size="12" font-family="Arial" fill="#374151">stable_single_box</text>
+<rect x="24" y="454" width="92" height="22" rx="4" fill="#10b981" opacity="0.16"/>
+<text x="34" y="469" font-size="12" font-family="Arial" fill="#111827">F173</text>
+<text x="130" y="469" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000173_oc_002 size=1</text>
+<text x="420" y="469" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000173_002</text>
+<text x="790" y="469" font-size="12" font-family="Arial" fill="#374151">stable_single_box</text>
+<rect x="24" y="484" width="92" height="22" rx="4" fill="#6b7280" opacity="0.16"/>
+<text x="34" y="499" font-size="12" font-family="Arial" fill="#111827">F174</text>
+<text x="130" y="499" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000174_oc_001 size=1</text>
+<text x="420" y="499" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000174_001</text>
+<text x="790" y="499" font-size="12" font-family="Arial" fill="#374151">edge_truncation_cluster</text>
+<rect x="24" y="514" width="92" height="22" rx="4" fill="#6b7280" opacity="0.16"/>
+<text x="34" y="529" font-size="12" font-family="Arial" fill="#111827">F174</text>
+<text x="130" y="529" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000174_oc_002 size=1</text>
+<text x="420" y="529" font-size="12" font-family="Arial" fill="#111827">GM_RM019_000174_002</text>
+<text x="790" y="529" font-size="12" font-family="Arial" fill="#374151">stable_single_box</text>
+</svg>

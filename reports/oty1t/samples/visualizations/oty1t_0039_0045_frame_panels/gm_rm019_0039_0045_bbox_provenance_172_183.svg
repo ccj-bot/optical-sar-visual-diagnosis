@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="300" viewBox="0 0 920 300">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="30" font-size="18" font-family="Arial" font-weight="700" fill="#111827">BBox provenance 172-183</text>
+<text x="24" y="54" font-size="13" font-family="Arial" fill="#374151">confirmed_identity=false; mapping_verified is separate from tracker-state scale changes</text>
+<text x="30" y="92" font-size="12" font-family="Arial" fill="#111827">000172_001</text>
+<rect x="160" y="79" width="10.14" height="10" fill="#94a3b8"/>
+<text x="430" y="92" font-size="12" font-family="Arial" fill="#374151">center_delta=0.507px</text>
+<rect x="585" y="79" width="50.61" height="10" fill="#2563eb"/>
+<text x="815" y="92" font-size="12" font-family="Arial" fill="#374151">tracker_state_bbox_scale_change</text>
+<text x="30" y="128" font-size="12" font-family="Arial" fill="#111827">000173_001</text>
+<rect x="160" y="115" width="76.17" height="10" fill="#94a3b8"/>
+<text x="430" y="128" font-size="12" font-family="Arial" fill="#374151">center_delta=3.809px</text>
+<rect x="585" y="115" width="42.35" height="10" fill="#2563eb"/>
+<text x="815" y="128" font-size="12" font-family="Arial" fill="#374151">tracker_state_bbox_scale_change</text>
+<text x="30" y="164" font-size="12" font-family="Arial" fill="#111827">000174_001</text>
+<rect x="160" y="151" width="33.04" height="10" fill="#94a3b8"/>
+<text x="430" y="164" font-size="12" font-family="Arial" fill="#374151">center_delta=1.652px</text>
+<rect x="585" y="151" width="31.79" height="10" fill="#2563eb"/>
+<text x="815" y="164" font-size="12" font-family="Arial" fill="#374151">tracker_state_bbox_scale_change</text>
+<text x="30" y="200" font-size="12" font-family="Arial" fill="#111827">000181_001</text>
+<rect x="160" y="187" width="30.35" height="10" fill="#94a3b8"/>
+<text x="430" y="200" font-size="12" font-family="Arial" fill="#374151">center_delta=1.518px</text>
+<rect x="585" y="187" width="86.07" height="10" fill="#2563eb"/>
+<text x="815" y="200" font-size="12" font-family="Arial" fill="#374151">tracker_state_bbox_scale_change</text>
+<text x="30" y="236" font-size="12" font-family="Arial" fill="#111827">000182_001</text>
+<rect x="160" y="223" width="24.17" height="10" fill="#94a3b8"/>
+<text x="430" y="236" font-size="12" font-family="Arial" fill="#374151">center_delta=1.209px</text>
+<rect x="585" y="223" width="160.32" height="10" fill="#2563eb"/>
+<text x="815" y="236" font-size="12" font-family="Arial" fill="#374151">tracker_state_bbox_scale_change</text>
+</svg>

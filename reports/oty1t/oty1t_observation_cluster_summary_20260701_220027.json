@@ -1,0 +1,82 @@
+{
+  "scene": "GM_RM019",
+  "case_id": "0039_0045",
+  "frames_analyzed": "149-183",
+  "frame_start": 149,
+  "frame_end": 183,
+  "observation_cluster_count": 38,
+  "multi_det_cluster_count": 8,
+  "partial_full_cluster_count": 6,
+  "ambiguous_multi_vehicle_cluster_count": 2,
+  "detector_artifact_cluster_count": 0,
+  "frame_172_chosen_det_id": "GM_RM019_000172_001",
+  "frame_172_rejected_det_ids": "GM_RM019_000172_002",
+  "frame_173_tracked_det_id": "GM_RM019_000173_001",
+  "bridge_source_det_id": "GM_RM019_000172_002",
+  "bridge_pair_raw_iou": 0.534101,
+  "bridge_pair_center_distance_px": 71.596,
+  "pair_172_001_173_001_raw_iou": 0.957077,
+  "pair_172_001_173_001_center_distance_px": 8.188,
+  "pair_172_002_173_001_raw_iou": 0.534101,
+  "pair_172_002_173_001_center_distance_px": 71.596,
+  "tracker_chose_bridge_source_det": false,
+  "tracker_chose_alternative_det": true,
+  "bbox_provenance_issue_count": 25,
+  "idx_mapping_suspicious_count": 0,
+  "recommended_next_step": "tracklet_stitching_review_or_observation_cluster_handoff",
+  "posthoc_sources_used_for_runtime_tracking": false,
+  "sar_alignment_entered": false,
+  "sar_band_entered": false,
+  "sar_gt_coverage_entered": false,
+  "annotation_proposal_entered": false,
+  "identity_truth_claimed": false,
+  "output_dir": "outputs\\oty1t_observation_cluster_audit_20260701_220027",
+  "runtime_source_policy": "oty1t_p3_runtime_safe_oty0_oty1_oty1a_oty1t_optical_only_no_gt_no_sar",
+  "generated_at": "2026-07-01T22:01:30",
+  "timestamp": "20260701_220027",
+  "input_oty0_detection_table": "outputs\\oty0_yolo_detection_stream_audit_20260701_170751\\oty0_yolo_detection_table.csv",
+  "input_oty1_output_dir": "outputs\\oty1_optical_tracklet_audit_20260701_175422",
+  "input_oty1a_output_dir": "outputs\\oty1a_fragment_merge_audit_20260701_190559",
+  "input_oty1t_output_dir": "outputs\\oty1t_tracker_audit_bytetrack_20260701_205928",
+  "audit_config": {
+    "same_class_iou_threshold": 0.25,
+    "same_class_center_distance_px": 120.0,
+    "containment_threshold": 0.5,
+    "contact_margin_px": 2.0,
+    "frame_start": 149,
+    "frame_end": 183
+  },
+  "hypothesis_support": {
+    "Hypothesis A": {
+      "support_level": "moderate",
+      "recommended_use": "optional_continuity_hint_with_visual_review"
+    },
+    "Hypothesis B": {
+      "support_level": "moderate",
+      "recommended_use": "optional_uncertainty_hint_only"
+    },
+    "Hypothesis C": {
+      "support_level": "strong",
+      "recommended_use": "candidate_for_tracklet_stitching_review"
+    }
+  },
+  "artifacts": {
+    "observation_clusters": "outputs\\oty1t_observation_cluster_audit_20260701_220027\\oty1t_same_frame_observation_clusters.csv",
+    "association_choice_audit": "outputs\\oty1t_observation_cluster_audit_20260701_220027\\oty1t_association_choice_audit.csv",
+    "bbox_provenance_audit": "outputs\\oty1t_observation_cluster_audit_20260701_220027\\oty1t_tracker_bbox_provenance_audit.csv",
+    "local_window_explanations_md": "outputs\\oty1t_observation_cluster_audit_20260701_220027\\oty1t_0039_0045_local_window_explanations.md",
+    "local_window_explanations_json": "outputs\\oty1t_observation_cluster_audit_20260701_220027\\oty1t_0039_0045_local_window_explanations.json",
+    "observation_clusters_svg": "outputs\\oty1t_observation_cluster_audit_20260701_220027\\visualizations\\gm_rm019_0039_0045_observation_clusters_162_174.svg",
+    "association_choice_svg": "outputs\\oty1t_observation_cluster_audit_20260701_220027\\visualizations\\gm_rm019_0039_0045_association_choice_172.svg",
+    "bbox_provenance_svg": "outputs\\oty1t_observation_cluster_audit_20260701_220027\\visualizations\\gm_rm019_0039_0045_bbox_provenance_172_183.svg",
+    "summary_md": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\oty1t_observation_cluster_summary_20260701_220027.md",
+    "summary_json": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\oty1t_observation_cluster_summary_20260701_220027.json",
+    "cluster_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\oty1t_same_frame_observation_clusters_sample.csv",
+    "association_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\oty1t_association_choice_audit_sample.csv",
+    "provenance_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\oty1t_tracker_bbox_provenance_audit_sample.csv",
+    "explanation_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\oty1t_0039_0045_local_window_explanations.md",
+    "gm_rm019_0039_0045_observation_clusters_162_174.svg": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\visualizations\\oty1t_0039_0045_frame_panels\\gm_rm019_0039_0045_observation_clusters_162_174.svg",
+    "gm_rm019_0039_0045_association_choice_172.svg": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\visualizations\\oty1t_0039_0045_frame_panels\\gm_rm019_0039_0045_association_choice_172.svg",
+    "gm_rm019_0039_0045_bbox_provenance_172_183.svg": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\visualizations\\oty1t_0039_0045_frame_panels\\gm_rm019_0039_0045_bbox_provenance_172_183.svg"
+  }
+}

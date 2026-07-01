@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="30" font-size="18" font-family="Arial" font-weight="700" fill="#111827">Association choice at frame 172</text>
+<text x="24" y="54" font-size="13" font-family="Arial" fill="#374151">confirmed_identity=false; tracker association hypothesis only</text>
+<text x="24" y="76" font-size="13" font-family="Arial" fill="#374151">tracker chose 172_001 -> bt_0098; OTY1a bridge uses 172_002 -> 173_001</text>
+<rect x="40" y="94" width="336.0" height="252.0" fill="#f9fafb" stroke="#d1d5db"/>
+<rect x="500" y="94" width="336.0" height="252.0" fill="#f9fafb" stroke="#d1d5db"/>
+<text x="40" y="84" font-size="13" font-family="Arial" fill="#111827">frame 172</text>
+<text x="500" y="84" font-size="13" font-family="Arial" fill="#111827">frame 173</text>
+<rect x="132.24" y="217.60" width="241.68" height="125.39" fill="none" stroke="#10b981" stroke-width="3"/>
+<text x="132.24" y="213.60" font-size="12" font-family="Arial" fill="#10b981">172_001 chosen bt_0098</text>
+<rect x="108.27" y="218.80" width="267.73" height="72.07" fill="none" stroke="#ef4444" stroke-width="3"/>
+<text x="108.27" y="214.80" font-size="12" font-family="Arial" fill="#ef4444">172_002 rejected/unmatched</text>
+<rect x="597.95" y="219.34" width="236.81" height="123.98" fill="none" stroke="#2563eb" stroke-width="3"/>
+<text x="597.95" y="215.34" font-size="12" font-family="Arial" fill="#2563eb">173_001 tracked bt_0098</text>
+<rect x="183.34" y="217.76" width="139.74" height="125.41" fill="none" stroke="#111827" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="183.34" y="357.16" font-size="12" font-family="Arial" fill="#111827">tracker state bbox for 172_001</text>
+<line x1="242.13" y1="254.83" x2="716.36" y2="281.33" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="40" y="382" font-size="12" font-family="Arial" fill="#374151">Green/blue boxes are tracker-side chosen/tracked detections; red is rejected neighbor. Dashed black is tracker state bbox.</text>
+</svg>
