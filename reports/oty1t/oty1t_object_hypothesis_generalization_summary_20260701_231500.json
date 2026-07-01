@@ -1,0 +1,79 @@
+{
+  "generated_at": "2026-07-01T23:06:41",
+  "tracker_name": "bytetrack",
+  "scenes_attempted": "GM_RM017;GM_RM019",
+  "scenes_completed": "GM_RM017;GM_RM019",
+  "scenes_blocked": "",
+  "object_hypothesis_count_total": 27,
+  "object_frame_state_rows_total": 980,
+  "stable_object_hypothesis_count": 4,
+  "main_track_with_secondary_observations_count": 7,
+  "ambiguous_object_hypothesis_count": 7,
+  "short_or_noise_track_hypothesis_count": 9,
+  "orphan_observation_count": 50,
+  "strong_same_object_hypothesis_count": 5,
+  "moderate_same_object_hypothesis_count": 11,
+  "weak_same_object_hypothesis_count": 11,
+  "review_required_count": 23,
+  "recommended_main_track_only_count": 4,
+  "recommended_main_track_with_uncertainty_count": 7,
+  "recommended_tracklet_stitching_review_count": 0,
+  "idx_mapping_suspicious_count_total": 0,
+  "posthoc_sources_used_for_runtime_tracking": false,
+  "sar_alignment_entered": false,
+  "sar_band_entered": false,
+  "sar_gt_coverage_entered": false,
+  "annotation_proposal_entered": false,
+  "identity_truth_claimed": false,
+  "output_dir": "outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500",
+  "per_scene": [
+    {
+      "scene": "GM_RM017",
+      "input_status": "completed",
+      "object_hypothesis_count": 6,
+      "object_frame_state_rows": 308,
+      "orphan_observation_count": 8,
+      "ambiguous_object_hypothesis_count": 1,
+      "top_blockers": "",
+      "oty2_input_readiness": "ready_with_uncertainty"
+    },
+    {
+      "scene": "GM_RM019",
+      "input_status": "completed",
+      "object_hypothesis_count": 21,
+      "object_frame_state_rows": 672,
+      "orphan_observation_count": 42,
+      "ambiguous_object_hypothesis_count": 6,
+      "top_blockers": "",
+      "oty2_input_readiness": "ready_with_uncertainty"
+    }
+  ],
+  "timestamp": "20260701_231500",
+  "input_paths_by_scene": {
+    "GM_RM017": {
+      "oty0_detection_table": "outputs\\oty0_yolo_detection_stream_audit_20260701_181317\\oty0_yolo_detection_table.csv",
+      "oty1_output_dir": "outputs\\oty1_optical_tracklet_audit_20260701_181347",
+      "oty1a_output_dir": "outputs\\oty1a_fragment_merge_audit_20260701_190431",
+      "oty1t_output_dir": "outputs\\oty1t_tracker_audit_bytetrack_20260701_205803"
+    },
+    "GM_RM019": {
+      "oty0_detection_table": "outputs\\oty0_yolo_detection_stream_audit_20260701_170751\\oty0_yolo_detection_table.csv",
+      "oty1_output_dir": "outputs\\oty1_optical_tracklet_audit_20260701_175422",
+      "oty1a_output_dir": "outputs\\oty1a_fragment_merge_audit_20260701_190559",
+      "oty1t_output_dir": "outputs\\oty1t_tracker_audit_bytetrack_20260701_205928"
+    }
+  },
+  "artifacts": {
+    "object_hypotheses_generalized": "outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_hypotheses_generalized.csv",
+    "object_frame_state_timeseries_generalized": "outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_frame_state_timeseries_generalized.csv",
+    "object_orphan_observations": "outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_orphan_observations.csv",
+    "object_ambiguity_report": "outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_ambiguity_report.md",
+    "object_generalization_overview_svg": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\visualizations\\oty1t_object_generalization_overview.svg",
+    "summary_md": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\oty1t_object_hypothesis_generalization_summary_20260701_231500.md",
+    "summary_json": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\oty1t_object_hypothesis_generalization_summary_20260701_231500.json",
+    "object_hypotheses_generalized_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\oty1t_object_hypotheses_generalized_sample.csv",
+    "object_frame_state_timeseries_generalized_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\oty1t_object_frame_state_timeseries_generalized_sample.csv",
+    "object_orphan_observations_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\oty1t_object_orphan_observations_sample.csv",
+    "object_ambiguity_report_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty1t\\samples\\oty1t_object_ambiguity_report.md"
+  }
+}
