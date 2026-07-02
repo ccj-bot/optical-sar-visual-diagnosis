@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-07-02T13:04:17",
+  "latest_stage": "OTY2-P0",
+  "next_recommended_stage": "OTY2-P1_temporal_metadata_anchor_audit",
+  "scenes_completed": "GM_RM017;GM_RM019",
+  "scenes_blocked": "GM_RM011",
+  "alignment_mode_current": "frame_ratio_hypothesis",
+  "object_hypotheses_input_count": 27,
+  "object_frame_state_input_rows": 980,
+  "alignment_frame_map_rows": 681,
+  "alignment_window_candidate_rows": 18,
+  "gm_rm011_input_status": "blocked_missing_p4g",
+  "sar_band_entered": false,
+  "sar_gt_used": false,
+  "sar_image_content_used": false,
+  "sar_evidence_used": false,
+  "selector_or_training_entered": false,
+  "annotation_proposal_entered": false,
+  "new_algorithm_stage_introduced": false,
+  "recap_doc": "docs/oty0_to_oty2_mechanism_recap.md"
+}
