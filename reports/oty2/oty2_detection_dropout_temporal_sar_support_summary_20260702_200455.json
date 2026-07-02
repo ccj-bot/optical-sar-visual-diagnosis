@@ -1,0 +1,44 @@
+{
+  "timestamp": "20260702_200455",
+  "sample_count": 12,
+  "temporal_continuation_status_counts": {
+    "temporal_continuation_with_current_secondary_support": 6,
+    "temporal_continuation_with_detection_dropout": 2,
+    "one_sided_temporal_continuation_hypothesis": 2,
+    "temporal_continuation_hypothesis_supported": 2
+  },
+  "temporal_continuation_supported_count": 12,
+  "clean_recovered_by_temporal_continuation_count": 8,
+  "secondary_supported_truncated_same_vehicle_count": 8,
+  "sar_posthoc_supported_dropout_count": 12,
+  "yolo_upgrade_candidate_count": 12,
+  "manual_review_required_count": 12,
+  "exclude_from_clean_shape_statistics_count": 12,
+  "sar_posthoc_support_status_counts": {
+    "sar_posthoc_supported_detection_dropout": 12
+  },
+  "local_visualization_count": 12,
+  "remote_sample_visualization_count": 3,
+  "boundary_flags": {
+    "optical_frames_read": true,
+    "existing_oty_outputs_read": true,
+    "sar_gt_used": true,
+    "sar_image_content_used": true,
+    "sar_posthoc_only": true,
+    "sar_gt_or_image_used_for_runtime_prior_construction": false,
+    "automatic_annotation_proposal_generated": false,
+    "training_or_threshold_tuning_entered": false,
+    "propagated_box_written_as_final_annotation": false,
+    "selector_or_ranking_used": false,
+    "identity_truth_claimed": false,
+    "model_weights_committed_or_downloaded": false
+  },
+  "sources": {
+    "no_oty_iou_match_triage_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_no_oty_iou_match_triage_20260702_194129.csv",
+    "gt_sample_accounting_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_sample_accounting_audit_20260702_192810.csv",
+    "final_gt_csv": "D:\\profile\\research\\workspace\\output\\hermes_annotation_consolidation_2026-05-20\\00_tables\\final_gt_working.csv",
+    "object_frame_state_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_frame_state_timeseries_generalized.csv",
+    "local_visual_output": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_detection_dropout_temporal_sar_support_20260702_200455",
+    "repo_sample_visual_output": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\detection_dropout_temporal_sar_support\\detection_dropout_temporal_sar_support_20260702_200455"
+  }
+}
