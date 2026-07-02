@@ -1,0 +1,106 @@
+{
+  "timestamp": "20260702_222218",
+  "sample_ledger": {
+    "ledger_valid": true,
+    "final_gt_count": 442,
+    "accounting_row_count": 442,
+    "paired_count_rebuilt": 215,
+    "category_counts": {
+      "blocked_missing_gm011_object_stream": 195,
+      "paired_optical_object_sar_gt": 215,
+      "sar_only_gt": 20,
+      "no_oty_iou_match": 12
+    },
+    "scene_counts": {
+      "GM_RM011": 201,
+      "GM_RM017": 216,
+      "GM_RM019": 25
+    },
+    "expected_category_counts": {
+      "paired_optical_object_sar_gt": 215,
+      "blocked_missing_gm011_object_stream": 195,
+      "sar_only_gt": 20,
+      "missing_review_optical_bbox": 0,
+      "no_oty_iou_match": 12,
+      "other_unclassified_blocker": 0
+    }
+  },
+  "source_timestamps": {
+    "stratified_validation": "20260702_204915",
+    "gt_correspondence_mechanism": "20260702_190435"
+  },
+  "row_counts": {
+    "factor_taxonomy": 9,
+    "joint_factor_probe": 7,
+    "object_level_factor_evidence_ledger": 9,
+    "sar_temporal_observation_probe": 11,
+    "manual_review_candidate_list": 21,
+    "paired_scatter_records_recomputed": 215
+  },
+  "key_metrics": {
+    "paired_peak_to_background_median": "3.2415",
+    "paired_box_to_background_median": "1.1336",
+    "azimuth_original_coverage": "0.9535",
+    "tight_shell_coverage": "0.986",
+    "base_shell_coverage": "1",
+    "range_shape_height_radius_pearson": "-0.8418",
+    "object_trajectory_reliability_counts": {
+      "review_only_temporal_signal": 4,
+      "center_direction_signal_only": 2,
+      "clean_object_temporal_signal": 1,
+      "insufficient_temporal_pairs": 2
+    }
+  },
+  "question_answers": {
+    "1_strong_posthoc_support": "F_time, broad F_az, F_shell compression, F_range_shape for height/bottom_y/area, and F_sar_image local peak evidence. Paired peak/background median=3.2415; temporal window pass=0.9953.",
+    "2_state_conditioned": "F_az and F_range_shape are state/scene conditioned; GM_RM019, edge, duplicate/handoff, review-only, and dropout rows need wider uncertainty or separate routing.",
+    "3_physical_but_insufficient": "Mainlobe/sidelobe, IRW/PSLR/ISLR/ENL-like metrics, SAR scattering centroid drift, and scene-level bias have SAR imaging explanations but need non-GT region extraction and more balanced objects.",
+    "4_joint_validation": "Use F_az+F_shell+F_sar_image, F_range_shape+F_traj, F_traj+SAR temporal peak drift, and dropout+optical continuation+SAR support as joint probes.",
+    "5_dominated_or_sparse": "Results are dominated by GM_RM017 and repeated frame-level rows: 199/215 paired frames are GM_RM017, while object hypotheses total only 9.",
+    "6_gmrm019_review": "GM_RM019 needs optical-side continuity/identity review for sparse objects, weak azimuth coverage, partial/edge/duplicate states, and six dropout/no-match cases.",
+    "7_gmrm011_recovery": "GM_RM011 needs OTY optical object stream recovery for 195 blocked rows; it is not unannotated and cannot be mixed into clean paired correspondence yet.",
+    "8_future_runtime_safe": "F_time, F_az, F_shell, F_state, and optical trajectory features can become runtime-safe candidates; F_range_shape needs an independent runtime-safe range hypothesis first.",
+    "9_posthoc_only": "SAR GT coverage, GT-crop SAR image statistics, manual review anchors, SAR-only morphology, dropout SAR support, and shape-radius correlations remain posthoc observations.",
+    "10_matlab_reference": "The MATLAB toolbox inspires range-azimuth grids, focusing, local peak, mainlobe/sidelobe, IRW/PSLR/ISLR/ENL, and motion-compensation vocabulary, but it is similar_imaging_reference_only because its raw data, parameters, axes, frame rate, and preprocessing are not the current OTY2 pipeline."
+  },
+  "boundary_flags": {
+    "posthoc_sar_gt_used": true,
+    "posthoc_sar_image_content_used": true,
+    "gt_or_sar_image_used_for_runtime_prior_construction": false,
+    "runtime_prior_construction_used_gt": false,
+    "annotation_proposal_entered": false,
+    "training_or_threshold_tuning_entered": false,
+    "candidate_box_scoring_output": false,
+    "selector_or_ranking_used": false,
+    "identity_truth_claimed": false,
+    "model_weights_committed": false,
+    "detection_dropout_rows_mixed_into_clean_paired": false,
+    "gm011_missing_object_stream_rows_mixed_into_correspondence": false,
+    "sar_only_rows_mixed_into_optical_sar_correspondence": false
+  },
+  "outputs": {
+    "plan_doc": "D:\\profile\\research\\optical-sar-visual-diagnosis\\docs\\oty2_object_sar_physical_mechanism_modeling_plan.md",
+    "physical_factor_evidence_taxonomy_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_physical_factor_evidence_taxonomy_20260702_222218.csv",
+    "joint_factor_probe_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_joint_factor_probe_20260702_222218.csv",
+    "object_level_factor_evidence_ledger_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_level_factor_evidence_ledger_20260702_222218.csv",
+    "sar_temporal_observation_probe_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_sar_temporal_observation_probe_20260702_222218.csv",
+    "manual_review_candidate_list_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_manual_review_candidate_list_20260702_222218.csv",
+    "physical_factor_modeling_report_md": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_physical_factor_modeling_report_20260702_222218.md",
+    "physical_factor_modeling_summary_json": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_physical_factor_modeling_summary_20260702_222218.json",
+    "workspace_log": "D:\\profile\\research\\workspace\\logs\\oty2_physical_factor_evidence_ledger_20260702_222218.log"
+  },
+  "sources": {
+    "stratified_summary_json": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_mechanism_stratified_validation_summary_20260702_204915.json",
+    "stratified_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_mechanism_stratified_validation_20260702_204915.csv",
+    "azimuth_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_azimuth_margin_ablation_20260702_204915.csv",
+    "shell_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_vehicle_shell_ablation_20260702_204915.csv",
+    "shape_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_optical_shape_range_stratified_probe_20260702_204915.csv",
+    "temporal_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_temporal_trajectory_mechanism_probe_20260702_204915.csv",
+    "sar_only_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_sar_only_morphology_reference_20260702_204915.csv",
+    "correspondence_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_correspondence_mechanism_audit_20260702_190435.csv",
+    "correspondence_summary_json": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_correspondence_mechanism_summary_20260702_190435.json",
+    "dropout_temporal_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_detection_dropout_temporal_support_audit_20260702_200455.csv",
+    "dropout_sar_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_detection_dropout_sar_posthoc_support_audit_20260702_200455.csv",
+    "accounting_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_sample_accounting_audit_20260702_192810.csv"
+  }
+}
