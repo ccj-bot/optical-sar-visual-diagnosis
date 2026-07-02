@@ -1,0 +1,272 @@
+{
+  "timestamp": "20260702_192810",
+  "total_gt_annotations": 442,
+  "scene_counts": {
+    "GM_RM011": 201,
+    "GM_RM017": 216,
+    "GM_RM019": 25
+  },
+  "category_counts": {
+    "paired_optical_object_sar_gt": 215,
+    "blocked_missing_gm011_object_stream": 195,
+    "sar_only_gt": 20,
+    "missing_review_optical_bbox": 0,
+    "no_oty_iou_match": 12,
+    "other_unclassified_blocker": 0
+  },
+  "scene_category_counts": {
+    "GM_RM011": {
+      "paired_optical_object_sar_gt": 0,
+      "blocked_missing_gm011_object_stream": 195,
+      "sar_only_gt": 6,
+      "missing_review_optical_bbox": 0,
+      "no_oty_iou_match": 0,
+      "other_unclassified_blocker": 0
+    },
+    "GM_RM017": {
+      "paired_optical_object_sar_gt": 199,
+      "blocked_missing_gm011_object_stream": 0,
+      "sar_only_gt": 11,
+      "missing_review_optical_bbox": 0,
+      "no_oty_iou_match": 6,
+      "other_unclassified_blocker": 0
+    },
+    "GM_RM019": {
+      "paired_optical_object_sar_gt": 16,
+      "blocked_missing_gm011_object_stream": 0,
+      "sar_only_gt": 3,
+      "missing_review_optical_bbox": 0,
+      "no_oty_iou_match": 6,
+      "other_unclassified_blocker": 0
+    }
+  },
+  "paired_optical_object_sar_gt": 215,
+  "sar_only_gt": 20,
+  "blocked_missing_gm011_object_stream": 195,
+  "missing_review_optical_bbox": 0,
+  "no_oty_iou_match": 12,
+  "other_unclassified_blocker": 0,
+  "usable_for_optical_sar_correspondence": 215,
+  "usable_for_sar_only_morphology": 442,
+  "usable_after_gm011_object_stream_built": 195,
+  "needs_matching_triage": 12,
+  "paired_subset_meaning": "215 is the current optical-object-to-SAR-GT posthoc correspondence subset, not the full GT inventory.",
+  "gm011_blocker_meaning": "GM_RM011 rows have SAR GT annotations; they are blocked only because the current OTY object stream is absent for that scene.",
+  "sar_only_meaning": "SAR-only GT rows are excluded from optical-SAR correspondence but retained for SAR-only morphology and scattering statistics.",
+  "pair_iou_min": 0.05,
+  "no_iou_match_examples": [
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "97",
+      "sar_frame": "310",
+      "target_identity": "gm_rm017_00016",
+      "optical_frame": "149",
+      "best_oty_iou": "0.018733",
+      "best_oty_object_hypothesis_id": "oty1t_obj_GM_RM017_bytetrack_bt_0008",
+      "oty_frame_candidate_count": "4"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "263",
+      "sar_frame": "381",
+      "target_identity": "gm_rm017_00107",
+      "optical_frame": "183",
+      "best_oty_iou": "0",
+      "best_oty_object_hypothesis_id": "",
+      "oty_frame_candidate_count": "4"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "266",
+      "sar_frame": "382",
+      "target_identity": "gm17supp_000183_000382_det3",
+      "optical_frame": "183",
+      "best_oty_iou": "0",
+      "best_oty_object_hypothesis_id": "",
+      "oty_frame_candidate_count": "4"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "275",
+      "sar_frame": "385",
+      "target_identity": "gm_rm017_00113",
+      "optical_frame": "185",
+      "best_oty_iou": "0",
+      "best_oty_object_hypothesis_id": "",
+      "oty_frame_candidate_count": "4"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "278",
+      "sar_frame": "386",
+      "target_identity": "gm17supp_000185_000386_det3",
+      "optical_frame": "185",
+      "best_oty_iou": "0",
+      "best_oty_object_hypothesis_id": "",
+      "oty_frame_candidate_count": "4"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "308",
+      "sar_frame": "446",
+      "target_identity": "gm_rm017_00157",
+      "optical_frame": "214",
+      "best_oty_iou": "0",
+      "best_oty_object_hypothesis_id": "",
+      "oty_frame_candidate_count": "1"
+    },
+    {
+      "scene": "GM_RM019",
+      "sar_gt_id": "313",
+      "sar_frame": "8",
+      "target_identity": "gm_rm019_00006",
+      "optical_frame": "4",
+      "best_oty_iou": "0",
+      "best_oty_object_hypothesis_id": "",
+      "oty_frame_candidate_count": "3"
+    },
+    {
+      "scene": "GM_RM019",
+      "sar_gt_id": "321",
+      "sar_frame": "88",
+      "target_identity": "gm_rm019_00057",
+      "optical_frame": "42",
+      "best_oty_iou": "0",
+      "best_oty_object_hypothesis_id": "",
+      "oty_frame_candidate_count": "6"
+    },
+    {
+      "scene": "GM_RM019",
+      "sar_gt_id": "322",
+      "sar_frame": "202",
+      "target_identity": "gm_rm019_00129",
+      "optical_frame": "97",
+      "best_oty_iou": "0",
+      "best_oty_object_hypothesis_id": "",
+      "oty_frame_candidate_count": "3"
+    },
+    {
+      "scene": "GM_RM019",
+      "sar_gt_id": "329",
+      "sar_frame": "306",
+      "target_identity": "gm_rm019_00189",
+      "optical_frame": "147",
+      "best_oty_iou": "0",
+      "best_oty_object_hypothesis_id": "",
+      "oty_frame_candidate_count": "1"
+    },
+    {
+      "scene": "GM_RM019",
+      "sar_gt_id": "332",
+      "sar_frame": "350",
+      "target_identity": "gm_rm019_00216",
+      "optical_frame": "168",
+      "best_oty_iou": "0.023328",
+      "best_oty_object_hypothesis_id": "oty1t_obj_GM_RM019_bytetrack_bt_0111",
+      "oty_frame_candidate_count": "2"
+    },
+    {
+      "scene": "GM_RM019",
+      "sar_gt_id": "333",
+      "sar_frame": "354",
+      "target_identity": "gm_rm019_00220",
+      "optical_frame": "170",
+      "best_oty_iou": "0",
+      "best_oty_object_hypothesis_id": "",
+      "oty_frame_candidate_count": "1"
+    }
+  ],
+  "sar_only_examples": [
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "96",
+      "sar_frame": "302",
+      "target_identity": "saronly_gm_rm017_000145_000302_01"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "281",
+      "sar_frame": "387",
+      "target_identity": "saronly_gm_rm017_000186_000387_01"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "284",
+      "sar_frame": "388",
+      "target_identity": "saronly_gm_rm017_000186_000388_02"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "287",
+      "sar_frame": "389",
+      "target_identity": "saronly_gm_rm017_000187_000389_01"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "290",
+      "sar_frame": "390",
+      "target_identity": "saronly_gm_rm017_000187_000390_02"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "293",
+      "sar_frame": "391",
+      "target_identity": "saronly_gm_rm017_000188_000391_01"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "296",
+      "sar_frame": "392",
+      "target_identity": "saronly_gm_rm017_000188_000392_02"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "299",
+      "sar_frame": "393",
+      "target_identity": "saronly_gm_rm017_000189_000393_01"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "302",
+      "sar_frame": "394",
+      "target_identity": "saronly_gm_rm017_000189_000394_01"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "304",
+      "sar_frame": "429",
+      "target_identity": "saronly_gm_rm017_000206_000429_01"
+    },
+    {
+      "scene": "GM_RM017",
+      "sar_gt_id": "306",
+      "sar_frame": "438",
+      "target_identity": "saronly_gm_rm017_000210_000438_01"
+    },
+    {
+      "scene": "GM_RM019",
+      "sar_gt_id": "310",
+      "sar_frame": "0",
+      "target_identity": "saronly_gm_rm019_000000_000000_01"
+    }
+  ],
+  "missing_review_optical_bbox_examples": [],
+  "boundary_flags": {
+    "gt_table_read": true,
+    "review_queue_read": true,
+    "existing_oty_outputs_read": true,
+    "sar_image_content_read": false,
+    "automatic_annotation_proposal_generated": false,
+    "training_or_threshold_tuning_entered": false,
+    "gt_written_to_runtime_prior_construction": false,
+    "candidate_box_scoring_output": false,
+    "selector_or_ranking_used": false,
+    "identity_truth_claimed": false
+  },
+  "sources": {
+    "final_gt_csv": "D:\\profile\\research\\workspace\\output\\hermes_annotation_consolidation_2026-05-20\\00_tables\\final_gt_working.csv",
+    "review_queue_csv": "D:\\profile\\research\\workspace\\output\\hermes_annotation_consolidation_2026-05-20\\00_tables\\review_queue.csv",
+    "object_frame_state_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_frame_state_timeseries_generalized.csv",
+    "previous_gt_mechanism_summary": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_correspondence_mechanism_summary_20260702_190435.json"
+  }
+}
