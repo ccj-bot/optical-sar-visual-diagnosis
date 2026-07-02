@@ -1,0 +1,216 @@
+{
+  "timestamp": "20260702_180326",
+  "total_rows": 28,
+  "vehicle_like_count": 27,
+  "eligibility_counts": {
+    "blocked_no_object_flow": 1,
+    "weak_vehicle_layer": 6,
+    "main_research_vehicle": 2,
+    "review_only_vehicle": 4,
+    "blocked_vehicle_or_noise": 10,
+    "far_small_vehicle_layer": 5
+  },
+  "eligibility_counts_by_scene": {
+    "GM_RM011": {
+      "blocked_no_object_flow": 1
+    },
+    "GM_RM017": {
+      "weak_vehicle_layer": 3,
+      "main_research_vehicle": 2,
+      "review_only_vehicle": 1
+    },
+    "GM_RM019": {
+      "blocked_vehicle_or_noise": 10,
+      "weak_vehicle_layer": 3,
+      "far_small_vehicle_layer": 5,
+      "review_only_vehicle": 3
+    }
+  },
+  "resolvability_tier_counts": {
+    "no_object_flow": 1,
+    "high_resolvable_vehicle": 9,
+    "medium_resolvable_vehicle": 3,
+    "blocked_noise_or_short_track": 10,
+    "low_resolvable_far_vehicle": 4,
+    "unresolved_tiny_vehicle": 1
+  },
+  "resolvability_tier_counts_by_scene": {
+    "GM_RM011": {
+      "no_object_flow": 1
+    },
+    "GM_RM017": {
+      "high_resolvable_vehicle": 5,
+      "medium_resolvable_vehicle": 1
+    },
+    "GM_RM019": {
+      "blocked_noise_or_short_track": 10,
+      "high_resolvable_vehicle": 4,
+      "low_resolvable_far_vehicle": 4,
+      "medium_resolvable_vehicle": 2,
+      "unresolved_tiny_vehicle": 1
+    }
+  },
+  "spatial_prior_status_counts": {
+    "blocked_missing_object_level_flow": 1,
+    "loose_spatial_prior_generated": 7,
+    "normal_spatial_prior_generated": 4,
+    "review_only_spatial_context_generated": 7,
+    "blocked_no_spatial_prior": 9
+  },
+  "class_counts": {
+    "": 1,
+    "car": 25,
+    "truck": 2
+  },
+  "class_group_counts": {
+    "no_object_flow": 1,
+    "vehicle_like:car": 25,
+    "vehicle_like:truck": 2
+  },
+  "scene_summary": [
+    {
+      "scene": "GM_RM011",
+      "total_rows": 1,
+      "main_research_vehicle": 0,
+      "weak_vehicle_layer": 0,
+      "far_small_vehicle_layer": 0,
+      "review_only_vehicle": 0,
+      "blocked": 1,
+      "high_resolvable_vehicle": 0,
+      "medium_resolvable_vehicle": 0,
+      "low_resolvable_far_vehicle": 0,
+      "unresolved_tiny_vehicle": 0
+    },
+    {
+      "scene": "GM_RM017",
+      "total_rows": 6,
+      "main_research_vehicle": 2,
+      "weak_vehicle_layer": 3,
+      "far_small_vehicle_layer": 0,
+      "review_only_vehicle": 1,
+      "blocked": 0,
+      "high_resolvable_vehicle": 5,
+      "medium_resolvable_vehicle": 1,
+      "low_resolvable_far_vehicle": 0,
+      "unresolved_tiny_vehicle": 0
+    },
+    {
+      "scene": "GM_RM019",
+      "total_rows": 21,
+      "main_research_vehicle": 0,
+      "weak_vehicle_layer": 3,
+      "far_small_vehicle_layer": 5,
+      "review_only_vehicle": 3,
+      "blocked": 10,
+      "high_resolvable_vehicle": 4,
+      "medium_resolvable_vehicle": 2,
+      "low_resolvable_far_vehicle": 4,
+      "unresolved_tiny_vehicle": 1
+    }
+  ],
+  "sample_rows": [
+    {
+      "sample_role": "第十一场景说明",
+      "scene": "GM_RM011",
+      "object_hypothesis_id": "",
+      "class_name": "",
+      "resolvability_tier": "no_object_flow",
+      "vehicle_research_eligibility": "blocked_no_object_flow",
+      "spatial_prior_status": "blocked_missing_object_level_flow",
+      "local_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_vehicle_research_eligibility_visual_diagnosis_20260702_180326\\object_pages\\oty2_vehicle_eligibility_gm_rm011_sceneonly_20260702_180326.png",
+      "repo_sample_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\vehicle_research_eligibility_visualizations\\vehicle_eligibility_20260702_180326\\oty2_vehicle_eligibility_gmrm011_no_object_flow_gm_rm011_sceneonly_20260702_180326.png"
+    },
+    {
+      "sample_role": "宽松空间先验车辆",
+      "scene": "GM_RM017",
+      "object_hypothesis_id": "oty1t_obj_GM_RM017_bytetrack_bt_0010",
+      "class_name": "car",
+      "resolvability_tier": "high_resolvable_vehicle",
+      "vehicle_research_eligibility": "weak_vehicle_layer",
+      "spatial_prior_status": "loose_spatial_prior_generated",
+      "local_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_vehicle_research_eligibility_visual_diagnosis_20260702_180326\\object_pages\\oty2_vehicle_eligibility_gm_rm017_bt0010_20260702_180326.png",
+      "repo_sample_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\vehicle_research_eligibility_visualizations\\vehicle_eligibility_20260702_180326\\oty2_vehicle_eligibility_relaxed_spatial_vehicle_gm_rm017_bt0010_20260702_180326.png"
+    },
+    {
+      "sample_role": "清晰主研究车辆",
+      "scene": "GM_RM017",
+      "object_hypothesis_id": "oty1t_obj_GM_RM017_bytetrack_bt_0001",
+      "class_name": "truck",
+      "resolvability_tier": "high_resolvable_vehicle",
+      "vehicle_research_eligibility": "main_research_vehicle",
+      "spatial_prior_status": "normal_spatial_prior_generated",
+      "local_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_vehicle_research_eligibility_visual_diagnosis_20260702_180326\\object_pages\\oty2_vehicle_eligibility_gm_rm017_bt0001_20260702_180326.png",
+      "repo_sample_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\vehicle_research_eligibility_visualizations\\vehicle_eligibility_20260702_180326\\oty2_vehicle_eligibility_clear_main_vehicle_gm_rm017_bt0001_20260702_180326.png"
+    },
+    {
+      "sample_role": "阻断目标",
+      "scene": "GM_RM019",
+      "object_hypothesis_id": "oty1t_obj_GM_RM019_bytetrack_bt_0009",
+      "class_name": "car",
+      "resolvability_tier": "blocked_noise_or_short_track",
+      "vehicle_research_eligibility": "blocked_vehicle_or_noise",
+      "spatial_prior_status": "blocked_no_spatial_prior",
+      "local_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_vehicle_research_eligibility_visual_diagnosis_20260702_180326\\object_pages\\oty2_vehicle_eligibility_gm_rm019_bt0009_20260702_180326.png",
+      "repo_sample_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\vehicle_research_eligibility_visualizations\\vehicle_eligibility_20260702_180326\\oty2_vehicle_eligibility_blocked_target_gm_rm019_bt0009_20260702_180326.png"
+    },
+    {
+      "sample_role": "远小车辆",
+      "scene": "GM_RM019",
+      "object_hypothesis_id": "oty1t_obj_GM_RM019_bytetrack_bt_0042",
+      "class_name": "car",
+      "resolvability_tier": "low_resolvable_far_vehicle",
+      "vehicle_research_eligibility": "far_small_vehicle_layer",
+      "spatial_prior_status": "loose_spatial_prior_generated",
+      "local_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_vehicle_research_eligibility_visual_diagnosis_20260702_180326\\object_pages\\oty2_vehicle_eligibility_gm_rm019_bt0042_20260702_180326.png",
+      "repo_sample_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\vehicle_research_eligibility_visualizations\\vehicle_eligibility_20260702_180326\\oty2_vehicle_eligibility_far_small_vehicle_gm_rm019_bt0042_20260702_180326.png"
+    },
+    {
+      "sample_role": "仅审阅车辆",
+      "scene": "GM_RM019",
+      "object_hypothesis_id": "oty1t_obj_GM_RM019_bytetrack_bt_0001",
+      "class_name": "car",
+      "resolvability_tier": "high_resolvable_vehicle",
+      "vehicle_research_eligibility": "review_only_vehicle",
+      "spatial_prior_status": "review_only_spatial_context_generated",
+      "local_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_vehicle_research_eligibility_visual_diagnosis_20260702_180326\\object_pages\\oty2_vehicle_eligibility_gm_rm019_bt0001_20260702_180326.png",
+      "repo_sample_visualization_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\vehicle_research_eligibility_visualizations\\vehicle_eligibility_20260702_180326\\oty2_vehicle_eligibility_review_only_vehicle_gm_rm019_bt0001_20260702_180326.png"
+    }
+  ],
+  "local_visualization_output_dir": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_vehicle_research_eligibility_visual_diagnosis_20260702_180326",
+  "local_object_page_count": 28,
+  "audit_defaults_not_training_thresholds": {
+    "min_track_frames_for_main_research": 8,
+    "short_track_block_frames": 5,
+    "unresolved_tiny_area_ratio": 0.0005,
+    "far_small_area_ratio": 0.003,
+    "medium_area_ratio": 0.02,
+    "unresolved_tiny_min_dimension_px": 10.0,
+    "far_small_width_px": 40.0,
+    "far_small_height_px": 30.0,
+    "medium_min_dimension_px": 55.0,
+    "low_confidence_median": 0.45
+  },
+  "boundary_flags": {
+    "sar_image_content_used": false,
+    "sar_gt_used": false,
+    "sar_spatial_search_region_generated": false,
+    "sar_candidate_boxes_generated": false,
+    "candidate_box_scoring_used": false,
+    "annotation_proposal_generated": false,
+    "training_or_threshold_tuning_entered": false,
+    "identity_truth_claimed": false,
+    "detection_box_level_merge_reintroduced": false,
+    "stronger_yolo_claimed_validated_improvement": false,
+    "model_weights_committed_or_generated": false
+  },
+  "sources": {
+    "spatial_priors_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_runtime_spatial_priors_20260702_144929.csv",
+    "temporal_windows_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_sar_temporal_windows_20260702_135912.csv",
+    "temporal_quality_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_sar_temporal_window_quality_audit_20260702_142454.csv",
+    "object_frame_state_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_frame_state_timeseries_generalized.csv",
+    "object_hypotheses_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_hypotheses_generalized.csv",
+    "manifest_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\manifests\\oty0_yolo_manifest.csv",
+    "yolo_class_counter": "{\"GM_RM019:car\": 654, \"GM_RM019:bus\": 12, \"GM_RM019:truck\": 2, \"GM_RM017:truck\": 58, \"GM_RM017:bus\": 4, \"GM_RM017:car\": 153}",
+    "temporal_quality_rows_loaded": "28"
+  }
+}
