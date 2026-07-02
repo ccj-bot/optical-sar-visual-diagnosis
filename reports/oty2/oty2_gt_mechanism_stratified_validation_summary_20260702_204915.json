@@ -1,0 +1,456 @@
+{
+  "timestamp": "20260702_204915",
+  "sample_ledger": {
+    "ledger_valid": true,
+    "final_gt_count": 442,
+    "accounting_row_count": 442,
+    "paired_count_rebuilt": 215,
+    "category_counts": {
+      "blocked_missing_gm011_object_stream": 195,
+      "paired_optical_object_sar_gt": 215,
+      "sar_only_gt": 20,
+      "no_oty_iou_match": 12
+    },
+    "scene_counts": {
+      "GM_RM011": 201,
+      "GM_RM017": 216,
+      "GM_RM019": 25
+    },
+    "expected_category_counts": {
+      "paired_optical_object_sar_gt": 215,
+      "blocked_missing_gm011_object_stream": 195,
+      "sar_only_gt": 20,
+      "missing_review_optical_bbox": 0,
+      "no_oty_iou_match": 12,
+      "other_unclassified_blocker": 0
+    }
+  },
+  "pairing_meta": {
+    "skipped_counts": {
+      "missing_object_frame:GM_RM011": 195,
+      "missing_review_optical_bbox_or_saronly": 20,
+      "no_iou_match_ge_0.05:GM_RM017": 6,
+      "no_iou_match_ge_0.05:GM_RM019": 6
+    },
+    "pair_iou_min": 0.05
+  },
+  "frame_level": {
+    "section": "frame_level",
+    "level": "all",
+    "group_key": "paired_clean_frames",
+    "scene": "",
+    "object_hypothesis_id": "",
+    "n_frames": 215,
+    "n_objects": 9,
+    "paired_frame_count": 215,
+    "temporal_window_pass_rate": "0.9953",
+    "azimuth_original_pass_rate": "0.9579",
+    "tight_shell_pass_rate": "0.986",
+    "base_shell_pass_rate": "1",
+    "relaxed_shell_pass_rate": "1",
+    "median_original_azimuth_width_deg": "80.013",
+    "median_abs_azimuth_error_deg": "17.47",
+    "median_sar_radius_px": "402.16",
+    "median_gt_long_axis_px": "161",
+    "median_gt_short_axis_px": "74.5",
+    "median_optical_area_ratio": "0.043824",
+    "median_optical_height": "95.004",
+    "median_optical_bottom_y_norm": "0.6461",
+    "area_radius_pearson": "-0.7384",
+    "height_radius_pearson": "-0.8418",
+    "bottom_y_radius_pearson": "-0.7722",
+    "aspect_radius_pearson": "0.1061",
+    "status_counts": "complete=103;edge=58;ambiguous_or_review_only=37;duplicate_or_handoff=17",
+    "notes": "frame-level rows are posthoc paired samples; grouped rows prevent treating 215 frames as 215 independent objects"
+  },
+  "object_level": {
+    "n_objects": 9,
+    "n_paired_frames": 215,
+    "trajectory_reliability_counts": {
+      "review_only_temporal_signal": 4,
+      "center_direction_signal_only": 2,
+      "clean_object_temporal_signal": 1,
+      "insufficient_temporal_pairs": 2
+    }
+  },
+  "scene_counts_paired": {
+    "GM_RM017": 199,
+    "GM_RM019": 16
+  },
+  "status_context_counts": {
+    "ambiguous_or_review_only": 37,
+    "duplicate_or_handoff": 17,
+    "edge": 58,
+    "complete": 103
+  },
+  "vehicle_research_eligibility_counts": {
+    "review_only_vehicle": 64,
+    "weak_vehicle_layer": 150,
+    "blocked_vehicle_or_noise": 1
+  },
+  "azimuth_key_results": {
+    "original_interval": {
+      "strategy": "original_interval",
+      "margin_deg": "",
+      "subgroup_type": "all",
+      "subgroup": "all",
+      "n_frames": 215,
+      "n_objects": 9,
+      "coverage_pass": 205,
+      "coverage_fail": 10,
+      "coverage_rate": "0.9535",
+      "median_sector_width_deg": "80.013",
+      "median_width_compression_rate_vs_original": "",
+      "median_signed_error_deg": "-3.41",
+      "median_abs_error_deg": "17.47",
+      "mean_signed_error_deg": "-1.778",
+      "failure_context_counts": "complete=8;edge=2",
+      "failure_scene_counts": "GM_RM019=8;GM_RM017=2",
+      "failure_object_count": 5,
+      "systematic_offset_note": "no_large_median_signed_bias",
+      "posthoc_only_note": "coverage-vs-margin audit only; no runtime margin threshold selected"
+    },
+    "smallest_fixed_margin_ge_90_pass": {
+      "strategy": "centered_fixed_margin",
+      "margin_deg": 35,
+      "subgroup_type": "all",
+      "subgroup": "all",
+      "n_frames": 215,
+      "n_objects": 9,
+      "coverage_pass": 196,
+      "coverage_fail": 19,
+      "coverage_rate": "0.9116",
+      "median_sector_width_deg": "70",
+      "median_width_compression_rate_vs_original": "0.1251",
+      "median_signed_error_deg": "-3.41",
+      "median_abs_error_deg": "17.47",
+      "mean_signed_error_deg": "-1.778",
+      "failure_context_counts": "complete=10;edge=9",
+      "failure_scene_counts": "GM_RM019=10;GM_RM017=9",
+      "failure_object_count": 6,
+      "systematic_offset_note": "no_large_median_signed_bias",
+      "posthoc_only_note": "coverage-vs-margin audit only; no runtime margin threshold selected"
+    },
+    "smallest_fixed_margin_ge_95_pass": {
+      "strategy": "centered_fixed_margin",
+      "margin_deg": 40,
+      "subgroup_type": "all",
+      "subgroup": "all",
+      "n_frames": 215,
+      "n_objects": 9,
+      "coverage_pass": 208,
+      "coverage_fail": 7,
+      "coverage_rate": "0.9674",
+      "median_sector_width_deg": "80",
+      "median_width_compression_rate_vs_original": "0.0002",
+      "median_signed_error_deg": "-3.41",
+      "median_abs_error_deg": "17.47",
+      "mean_signed_error_deg": "-1.778",
+      "failure_context_counts": "complete=6;edge=1",
+      "failure_scene_counts": "GM_RM019=6;GM_RM017=1",
+      "failure_object_count": 4,
+      "systematic_offset_note": "no_large_median_signed_bias",
+      "posthoc_only_note": "coverage-vs-margin audit only; no runtime margin threshold selected"
+    }
+  },
+  "vehicle_shell_key_results": {
+    "tight_vehicle_shell": {
+      "shell_profile": "tight_vehicle_shell",
+      "subgroup_type": "all",
+      "subgroup": "all",
+      "profile_definition": "{\"aspect_max\": 3.1, \"aspect_min\": 1.45, \"long_axis_max_px\": 190.0, \"long_axis_min_px\": 105.0, \"short_axis_max_px\": 95.0, \"short_axis_min_px\": 45.0}",
+      "n_frames": 215,
+      "n_objects": 9,
+      "coverage_pass": 212,
+      "coverage_fail": 3,
+      "coverage_rate": "0.986",
+      "median_shell_angular_width_deg_at_gt_radius": "26.582",
+      "median_original_azimuth_width_deg": "80.013",
+      "median_intersection_width_deg": "26.57",
+      "median_intersection_compression_rate_vs_original_azimuth": "0.6703",
+      "failure_status_counts": "complete=3",
+      "failure_scene_counts": "GM_RM017=3",
+      "objects_relaxed_needed_vs_tight_count": 2,
+      "objects_relaxed_needed_vs_tight_examples": "GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0010;GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0012",
+      "objects_relaxed_only_vs_base_count": 0,
+      "objects_relaxed_only_vs_base_examples": "",
+      "objects_tight_sufficient_count": 7,
+      "objects_tight_sufficient_examples": "GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0008;GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0014;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0001;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0009;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0005;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0080;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0098",
+      "posthoc_only_note": "vehicle shell profile is an audit profile; no runtime size threshold is selected"
+    },
+    "base_vehicle_shell": {
+      "shell_profile": "base_vehicle_shell",
+      "subgroup_type": "all",
+      "subgroup": "all",
+      "profile_definition": "{\"aspect_max\": 3.35, \"aspect_min\": 1.25, \"long_axis_max_px\": 220.0, \"long_axis_min_px\": 80.0, \"short_axis_max_px\": 115.0, \"short_axis_min_px\": 35.0}",
+      "n_frames": 215,
+      "n_objects": 9,
+      "coverage_pass": 215,
+      "coverage_fail": 0,
+      "coverage_rate": "1",
+      "median_shell_angular_width_deg_at_gt_radius": "30.595",
+      "median_original_azimuth_width_deg": "80.013",
+      "median_intersection_width_deg": "30.582",
+      "median_intersection_compression_rate_vs_original_azimuth": "0.6222",
+      "failure_status_counts": "",
+      "failure_scene_counts": "",
+      "objects_relaxed_needed_vs_tight_count": 2,
+      "objects_relaxed_needed_vs_tight_examples": "GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0010;GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0012",
+      "objects_relaxed_only_vs_base_count": 0,
+      "objects_relaxed_only_vs_base_examples": "",
+      "objects_tight_sufficient_count": 7,
+      "objects_tight_sufficient_examples": "GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0008;GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0014;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0001;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0009;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0005;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0080;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0098",
+      "posthoc_only_note": "vehicle shell profile is an audit profile; no runtime size threshold is selected"
+    },
+    "relaxed_vehicle_shell": {
+      "shell_profile": "relaxed_vehicle_shell",
+      "subgroup_type": "all",
+      "subgroup": "all",
+      "profile_definition": "{\"aspect_max\": 4.8, \"aspect_min\": 0.85, \"long_axis_max_px\": 270.0, \"long_axis_min_px\": 55.0, \"short_axis_max_px\": 160.0, \"short_axis_min_px\": 25.0}",
+      "n_frames": 215,
+      "n_objects": 9,
+      "coverage_pass": 215,
+      "coverage_fail": 0,
+      "coverage_rate": "1",
+      "median_shell_angular_width_deg_at_gt_radius": "37.112",
+      "median_original_azimuth_width_deg": "80.013",
+      "median_intersection_width_deg": "37.097",
+      "median_intersection_compression_rate_vs_original_azimuth": "0.544",
+      "failure_status_counts": "",
+      "failure_scene_counts": "",
+      "objects_relaxed_needed_vs_tight_count": 2,
+      "objects_relaxed_needed_vs_tight_examples": "GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0010;GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0012",
+      "objects_relaxed_only_vs_base_count": 0,
+      "objects_relaxed_only_vs_base_examples": "",
+      "objects_tight_sufficient_count": 7,
+      "objects_tight_sufficient_examples": "GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0008;GM_RM017|oty1t_obj_GM_RM017_bytetrack_bt_0014;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0001;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0009;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0005;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0080;GM_RM019|oty1t_obj_GM_RM019_bytetrack_bt_0098",
+      "posthoc_only_note": "vehicle shell profile is an audit profile; no runtime size threshold is selected"
+    }
+  },
+  "shape_probe_summary": {
+    "all_feature_relations": {
+      "bbox_area_ratio": {
+        "pearson": "-0.7384",
+        "stability": "moderate_posthoc_relation"
+      },
+      "bbox_height": {
+        "pearson": "-0.8418",
+        "stability": "strong_posthoc_relation"
+      },
+      "bbox_bottom_y_norm": {
+        "pearson": "-0.7722",
+        "stability": "strong_posthoc_relation"
+      },
+      "bbox_aspect_ratio": {
+        "pearson": "0.1061",
+        "stability": "unstable_or_not_supported"
+      }
+    },
+    "scene_feature_relations": {
+      "GM_RM017|bbox_area_ratio": {
+        "pearson": "-0.8703",
+        "stability": "strong_posthoc_relation"
+      },
+      "GM_RM017|bbox_height": {
+        "pearson": "-0.8354",
+        "stability": "strong_posthoc_relation"
+      },
+      "GM_RM017|bbox_bottom_y_norm": {
+        "pearson": "-0.6592",
+        "stability": "moderate_posthoc_relation"
+      },
+      "GM_RM017|bbox_aspect_ratio": {
+        "pearson": "-0.3707",
+        "stability": "weak_posthoc_relation"
+      },
+      "GM_RM019|bbox_area_ratio": {
+        "pearson": "-0.8477",
+        "stability": "strong_posthoc_relation"
+      },
+      "GM_RM019|bbox_height": {
+        "pearson": "-0.6594",
+        "stability": "moderate_posthoc_relation"
+      },
+      "GM_RM019|bbox_bottom_y_norm": {
+        "pearson": "-0.4582",
+        "stability": "weak_posthoc_relation"
+      },
+      "GM_RM019|bbox_aspect_ratio": {
+        "pearson": "-0.6662",
+        "stability": "moderate_posthoc_relation"
+      }
+    },
+    "context_feature_relations": {
+      "ambiguous_or_review_only|bbox_area_ratio": {
+        "pearson": "-0.9542",
+        "stability": "strong_posthoc_relation"
+      },
+      "ambiguous_or_review_only|bbox_height": {
+        "pearson": "-0.9599",
+        "stability": "strong_posthoc_relation"
+      },
+      "ambiguous_or_review_only|bbox_bottom_y_norm": {
+        "pearson": "-0.9377",
+        "stability": "strong_posthoc_relation"
+      },
+      "ambiguous_or_review_only|bbox_aspect_ratio": {
+        "pearson": "-0.0077",
+        "stability": "unstable_or_not_supported"
+      },
+      "complete|bbox_area_ratio": {
+        "pearson": "-0.7746",
+        "stability": "strong_posthoc_relation"
+      },
+      "complete|bbox_height": {
+        "pearson": "-0.9365",
+        "stability": "strong_posthoc_relation"
+      },
+      "complete|bbox_bottom_y_norm": {
+        "pearson": "-0.9059",
+        "stability": "strong_posthoc_relation"
+      },
+      "complete|bbox_aspect_ratio": {
+        "pearson": "0.7259",
+        "stability": "moderate_posthoc_relation"
+      },
+      "duplicate_or_handoff|bbox_area_ratio": {
+        "pearson": "-0.9465",
+        "stability": "strong_posthoc_relation"
+      },
+      "duplicate_or_handoff|bbox_height": {
+        "pearson": "-0.9394",
+        "stability": "strong_posthoc_relation"
+      },
+      "duplicate_or_handoff|bbox_bottom_y_norm": {
+        "pearson": "-0.6056",
+        "stability": "moderate_posthoc_relation"
+      },
+      "duplicate_or_handoff|bbox_aspect_ratio": {
+        "pearson": "-0.6977",
+        "stability": "moderate_posthoc_relation"
+      },
+      "edge|bbox_area_ratio": {
+        "pearson": "-0.8915",
+        "stability": "strong_posthoc_relation"
+      },
+      "edge|bbox_height": {
+        "pearson": "-0.8268",
+        "stability": "strong_posthoc_relation"
+      },
+      "edge|bbox_bottom_y_norm": {
+        "pearson": "-0.6525",
+        "stability": "moderate_posthoc_relation"
+      },
+      "edge|bbox_aspect_ratio": {
+        "pearson": "0.0337",
+        "stability": "unstable_or_not_supported"
+      }
+    },
+    "strong_or_moderate_count": 63
+  },
+  "temporal_summary": {
+    "object_count": 9,
+    "trajectory_reliability_counts": {
+      "review_only_temporal_signal": 4,
+      "center_direction_signal_only": 2,
+      "clean_object_temporal_signal": 1,
+      "insufficient_temporal_pairs": 2
+    },
+    "area_vs_radius_trend_counts": {
+      "opposite_sign_consistent": 6,
+      "same_sign_conflict": 2,
+      "insufficient_temporal_pairs": 1
+    },
+    "reliable_signal_scene_counts": {
+      "GM_RM017": 3,
+      "GM_RM019": 2
+    }
+  },
+  "sar_only_summary": {
+    "sample_count": 20,
+    "scene_counts": {
+      "GM_RM017": 11,
+      "GM_RM019": 3,
+      "GM_RM011": 6
+    },
+    "long_axis_median_px": 166.184,
+    "short_axis_median_px": 76.246,
+    "aspect_median": 2.1915500000000003,
+    "box_to_background_median": 0.9580474999999999,
+    "peak_to_background_median": 2.1972525000000003,
+    "scatter_support_counts": {
+      "weak_or_no_box_mean_support_but_kept_as_sar_only_reference": 8,
+      "local_scatter_peak_supported": 12
+    }
+  },
+  "local_visualization_output_dir": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_gt_mechanism_stratified_validation_20260702_204915",
+  "local_visualization_count": 215,
+  "sar_only_visualization_count": 20,
+  "remote_sample_visualization_count": 8,
+  "mechanism_judgement": {
+    "strongly_supported_posthoc_mechanism": [
+      "Sample-pool routing is reproducible: 442 total GT, 215 clean paired frames, 195 GM_RM011 object-stream blockers, 20 SAR-only, and 12 dropout/no-match rows remain separated.",
+      "SAR GT local peak morphology is supported posthoc in paired/SAR-only reference pools, but only as SAR-side morphology evidence."
+    ],
+    "weak_but_promising_mechanism": [
+      "Azimuth center mapping remains useful, but coverage depends on wide margins; failures are scene/status dependent rather than a simple global signed-bias problem.",
+      "Vehicle footprint shells provide meaningful angular compression when intersected with azimuth sectors; tight shell is not universally safe.",
+      "Optical bbox height, area, and bottom-y have strong overall posthoc radius relation, but transferability depends on scene/status strata."
+    ],
+    "unstable_mechanism": [
+      "Object-level temporal trajectory is helpful mainly for review/context explanation; repeated frames and state contamination prevent clean runtime claims.",
+      "GM_RM019, review-only, edge, and duplicate/handoff strata are sparse or state-mixed enough that they need separate review before any runtime hypothesis."
+    ],
+    "not_supported_mechanism": [
+      "BBox aspect ratio is not supported as a stable standalone SAR radius mechanism in this audit.",
+      "Detection-dropout propagation is not a clean paired morphology sample and remains excluded from main statistics."
+    ],
+    "candidate_for_future_runtime_validation": [
+      "Runtime-safe azimuth mapping plus a vehicle footprint shell may be worth designing as a future candidate, but must be rebuilt without SAR GT/image inputs.",
+      "Optical height/bottom-y/area trends can become hypotheses for future runtime validation only after an independent runtime-safe range cue is defined."
+    ],
+    "posthoc_observation_only": [
+      "GT coverage does not imply automatic annotation.",
+      "SAR image evidence does not become a runtime prior-construction input.",
+      "Posthoc support does not establish identity truth."
+    ]
+  },
+  "boundary_flags": {
+    "posthoc_sar_gt_used": true,
+    "posthoc_sar_image_content_used": true,
+    "gt_or_sar_image_used_for_runtime_prior_construction": false,
+    "runtime_prior_construction_used_gt": false,
+    "annotation_proposal_entered": false,
+    "training_or_threshold_tuning_entered": false,
+    "candidate_box_scoring_output": false,
+    "selector_or_ranking_used": false,
+    "identity_truth_claimed": false,
+    "model_weights_committed": false,
+    "detection_dropout_rows_mixed_into_clean_paired": false,
+    "gm011_missing_object_stream_rows_mixed_into_correspondence": false
+  },
+  "outputs": {
+    "stratified_validation_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_mechanism_stratified_validation_20260702_204915.csv",
+    "azimuth_margin_ablation_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_azimuth_margin_ablation_20260702_204915.csv",
+    "vehicle_shell_ablation_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_vehicle_shell_ablation_20260702_204915.csv",
+    "optical_shape_range_stratified_probe_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_optical_shape_range_stratified_probe_20260702_204915.csv",
+    "temporal_trajectory_mechanism_probe_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_temporal_trajectory_mechanism_probe_20260702_204915.csv",
+    "sar_only_morphology_reference_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_sar_only_morphology_reference_20260702_204915.csv",
+    "report_md": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_mechanism_stratified_validation_report_20260702_204915.md",
+    "summary_json": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_mechanism_stratified_validation_summary_20260702_204915.json",
+    "visual_summary_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_mechanism_stratified_validation_visual_summary_20260702_204915.csv",
+    "local_full_visual_output": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_gt_mechanism_stratified_validation_20260702_204915",
+    "repo_sample_dir": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\gt_mechanism_stratified_validation\\gt_mechanism_stratified_validation_20260702_204915"
+  },
+  "sources": {
+    "accounting_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_sample_accounting_audit_20260702_192810.csv",
+    "dropout_temporal_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_detection_dropout_temporal_support_audit_20260702_200455.csv",
+    "final_gt_csv": "D:\\profile\\research\\workspace\\output\\hermes_annotation_consolidation_2026-05-20\\00_tables\\final_gt_working.csv",
+    "review_queue_csv": "D:\\profile\\research\\workspace\\output\\hermes_annotation_consolidation_2026-05-20\\00_tables\\review_queue.csv",
+    "spatial_priors_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_runtime_spatial_priors_20260702_144929.csv",
+    "temporal_windows_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_sar_temporal_windows_20260702_135912.csv",
+    "vehicle_eligibility_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_vehicle_research_eligibility_audit_20260702_180326.csv",
+    "object_frame_state_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_frame_state_timeseries_generalized.csv",
+    "object_hypotheses_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_hypotheses_generalized.csv"
+  }
+}
