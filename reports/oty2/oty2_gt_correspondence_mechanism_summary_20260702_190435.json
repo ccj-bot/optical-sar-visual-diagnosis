@@ -1,0 +1,107 @@
+{
+  "timestamp": "20260702_190435",
+  "gt_correspondence_samples": 215,
+  "pairing_meta": {
+    "skipped_counts": {
+      "missing_object_frame:GM_RM011": 195,
+      "missing_review_optical_bbox_or_saronly": 20,
+      "no_iou_match_ge_0.05:GM_RM017": 6,
+      "no_iou_match_ge_0.05:GM_RM019": 6
+    },
+    "pair_iou_min": 0.05
+  },
+  "scene_counts": {
+    "GM_RM017": 199,
+    "GM_RM019": 16
+  },
+  "vehicle_research_eligibility_counts": {
+    "review_only_vehicle": 64,
+    "weak_vehicle_layer": 150,
+    "blocked_vehicle_or_noise": 1
+  },
+  "temporal_window_coverage": {
+    "total": 215,
+    "pass": 214,
+    "fail": 1,
+    "pass_rate": 0.9953488372093023
+  },
+  "azimuth_prior_coverage": {
+    "total": 215,
+    "pass": 205,
+    "fail": 9,
+    "pass_rate": 0.9534883720930233
+  },
+  "vehicle_size_shell_coverage": {
+    "total": 215,
+    "pass": 215,
+    "fail": 0,
+    "pass_rate": 1.0
+  },
+  "base_vehicle_size_shell_coverage": {
+    "total": 215,
+    "pass": 215,
+    "fail": 0,
+    "pass_rate": 1.0
+  },
+  "shape_range_shell_coverage": {
+    "total": 215,
+    "pass": 169,
+    "fail": 46,
+    "pass_rate": 0.786046511627907
+  },
+  "azimuth_width_median_deg": 80.013,
+  "azimuth_error_median_deg": -3.4095,
+  "size_shell_ratio_median": 0.46130000000000004,
+  "sar_gt_long_axis_median_px": 161.0,
+  "sar_gt_short_axis_median_px": 74.5,
+  "sar_gt_aspect_median": 2.1628,
+  "optical_area_vs_sar_radius_pearson": -0.7384331151126269,
+  "optical_height_vs_sar_radius_pearson": -0.8417789316036687,
+  "optical_bottom_y_vs_sar_radius_pearson": -0.7722411362128231,
+  "temporal_trend_status_counts": {
+    "opposite_sign_area_radius_trend_posthoc": 205,
+    "weak_or_flat_temporal_trend": 3,
+    "insufficient_temporal_pairs": 1,
+    "same_sign_area_radius_trend_posthoc": 6
+  },
+  "scatter_box_to_background_median": 1.133634,
+  "scatter_peak_to_background_median": 3.241493,
+  "shape_shells_posthoc_only": {
+    "small_optical_area_posthoc_bin": {
+      "area_q1": 0.029689022556944437,
+      "area_q2": 0.051959944751736806,
+      "radius_min": 452.02660000000003,
+      "radius_max": 576.1668,
+      "n": 72.0
+    },
+    "medium_optical_area_posthoc_bin": {
+      "area_q1": 0.029689022556944437,
+      "area_q2": 0.051959944751736806,
+      "radius_min": 366.393,
+      "radius_max": 455.063,
+      "n": 71.0
+    },
+    "large_optical_area_posthoc_bin": {
+      "area_q1": 0.029689022556944437,
+      "area_q2": 0.051959944751736806,
+      "radius_min": 152.41750000000002,
+      "radius_max": 402.48319999999995,
+      "n": 72.0
+    }
+  },
+  "local_visualization_output_dir": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_gt_correspondence_mechanism_audit_20260702_190435",
+  "local_visualization_count": 215,
+  "remote_sample_visualization_count": 6,
+  "boundary_flags": {
+    "sar_gt_used": true,
+    "sar_image_content_used": true,
+    "posthoc_mechanism_discovery_only": true,
+    "gt_or_sar_used_for_runtime_prior_construction": false,
+    "automatic_annotation_proposal_generated": false,
+    "training_or_threshold_tuning_entered": false,
+    "candidate_box_scoring_output": false,
+    "selector_or_ranking_used": false,
+    "identity_truth_claimed": false,
+    "model_weights_committed_or_downloaded": false
+  }
+}
