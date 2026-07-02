@@ -1,14 +1,11 @@
-"""Generate explanatory visual diagnostics for OTY2 runtime spatial priors.
+"""Generate object-level visual diagnosis pages for OTY2 spatial priors.
 
-This diagnostic reads already generated OTY2 temporal-window and runtime
-spatial-prior audit tables. It explains why the current priors are weak or
-blocked, and emits local full SVG diagnostics plus a small committed sample set.
-
-It does not read SAR image content, implement SAR spatial search, generate SAR
-search regions, generate candidate boxes, score candidates, use SAR GT, use
-final/manual/oracle/review fields as runtime construction inputs, train/tune
-thresholds, generate annotation proposals, claim identity truth, or reintroduce
-detection-box-level merging.
+The pages embed real optical frames and draw the runtime-safe object boxes from
+the OTY1t object stream. The SAR side is shown only as a timeline and an
+abstract prior canvas. This script does not read SAR image content, use SAR GT,
+generate SAR search regions, generate candidate boxes, score/select candidates,
+train/tune thresholds, generate annotation proposals, claim identity truth, or
+reintroduce detection-box-level merging.
 """
 
 from __future__ import annotations
@@ -19,18 +16,24 @@ import json
 import math
 import re
 import shutil
-import textwrap
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
-from xml.sax.saxutils import escape
+
+from PIL import Image, ImageDraw, ImageFont
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 REPORT_DIR = REPO_ROOT / "reports" / "oty2"
-SAMPLE_DIR = REPORT_DIR / "samples"
-DEFAULT_OUTPUT_PARENT = REPO_ROOT / "outputs"
+SAMPLE_VIS_DIR = REPORT_DIR / "samples" / "visualizations"
+OUTPUT_PARENT = REPO_ROOT / "outputs"
+DEFAULT_P4G_OUTPUT_DIR = REPO_ROOT / "outputs" / "oty1t_object_hypothesis_generalization_audit_20260701_231500"
+
+OPTICAL_FPS = 24
+SAR_FPS = 50
+FPS_RATIO = SAR_FPS / OPTICAL_FPS
+ESTIMATED_SAR_SCENE_FRAMES = math.ceil(368 * FPS_RATIO)
 
 BOUNDARY_FLAGS = {
     "sar_image_content_used": False,
@@ -51,35 +54,46 @@ BOUNDARY_FLAGS = {
 SUMMARY_FIELDS = [
     "scene",
     "object_hypothesis_id",
-    "result_class",
-    "spatial_prior_status",
-    "temporal_window_status",
+    "sample_role",
+    "status_cn",
+    "status_code",
+    "optical_start_frame",
+    "optical_mid_frame",
+    "optical_end_frame",
     "sar_start_frame",
     "sar_end_frame",
     "sar_window_frame_count",
-    "azimuth_available",
+    "has_real_optical_frames",
+    "primary_boxes_drawn",
+    "secondary_boxes_drawn",
+    "edge_partial_state",
+    "duplicate_handoff_state",
+    "ambiguity_status",
+    "azimuth_prior_available",
+    "azimuth_interval_deg",
     "azimuth_width_deg",
     "range_prior_mode",
-    "time_info_strength",
-    "azimuth_info_strength",
-    "range_info_strength",
-    "state_uncertainty_level",
-    "geometry_completeness_level",
-    "weakness_source_group",
-    "rule_effect_summary",
-    "normal_downstream_input",
-    "review_only_context",
-    "blocked",
-    "degradation_reason",
-    "notes",
+    "range_status_cn",
+    "weakness_cn",
+    "missing_fields_cn",
+    "local_page_path",
+    "repo_sample_path",
 ]
 
-SAMPLE_OBJECT_KEYS = {
-    "normal_stable": ("GM_RM017", "oty1t_obj_GM_RM017_bytetrack_bt_0002"),
-    "relaxed_uncertain": ("GM_RM019", "oty1t_obj_GM_RM019_bytetrack_bt_0042"),
-    "review_only": ("GM_RM019", "oty1t_obj_GM_RM019_bytetrack_bt_0053"),
-    "blocked": ("GM_RM019", "oty1t_obj_GM_RM019_bytetrack_bt_0009"),
-    "scene_only_blocked": ("GM_RM011", ""),
+SAMPLE_SELECTION = {
+    "稳定正常空间先验": ("GM_RM017", "oty1t_obj_GM_RM017_bytetrack_bt_0002"),
+    "宽松空间先验": ("GM_RM019", "oty1t_obj_GM_RM019_bytetrack_bt_0042"),
+    "仅审阅空间上下文": ("GM_RM019", "oty1t_obj_GM_RM019_bytetrack_bt_0053"),
+    "阻断对象": ("GM_RM019", "oty1t_obj_GM_RM019_bytetrack_bt_0009"),
+    "第十一场景说明": ("GM_RM011", ""),
+}
+
+SAMPLE_ROLE_SLUG = {
+    "稳定正常空间先验": "normal_stable",
+    "宽松空间先验": "relaxed_uncertain",
+    "仅审阅空间上下文": "review_only",
+    "阻断对象": "blocked_object",
+    "第十一场景说明": "gmrm011_no_object_flow",
 }
 
 
@@ -133,713 +147,624 @@ def safe_float(value: Any, default: float | None = None) -> float | None:
         return default
 
 
-def parse_azimuth_interval(text: str) -> tuple[float | None, float | None, float | None, float | None]:
-    center_match = re.search(r"center_deg=([-+]?\d+(?:\.\d+)?)", text or "")
-    interval_match = re.search(r"interval_deg=\[([-+]?\d+(?:\.\d+)?),([-+]?\d+(?:\.\d+)?)\]", text or "")
-    margin_match = re.search(r"margin_deg=([-+]?\d+(?:\.\d+)?)", text or "")
-    center = safe_float(center_match.group(1)) if center_match else None
-    start = safe_float(interval_match.group(1)) if interval_match else None
-    end = safe_float(interval_match.group(2)) if interval_match else None
-    margin = safe_float(margin_match.group(1)) if margin_match else None
-    width = None if start is None or end is None else max(0.0, end - start)
-    return center, start, end, width if width is not None else margin
+def choose_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    candidates = [
+        Path("C:/Windows/Fonts/msyhbd.ttc" if bold else "C:/Windows/Fonts/msyh.ttc"),
+        Path("C:/Windows/Fonts/NotoSansSC-VF.ttf"),
+        Path("C:/Windows/Fonts/simhei.ttf"),
+        Path("C:/Windows/Fonts/simsun.ttc"),
+        Path("C:/Windows/Fonts/arialbd.ttf" if bold else "C:/Windows/Fonts/arial.ttf"),
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            try:
+                return ImageFont.truetype(str(candidate), size)
+            except OSError:
+                continue
+    return ImageFont.load_default()
 
 
-def classify_result(row: Mapping[str, Any]) -> str:
-    status = str(row.get("spatial_prior_status", ""))
-    if status == "normal_spatial_prior_generated":
-        return "normal_stable_or_primary"
-    if status == "loose_spatial_prior_generated":
-        return "relaxed_normal_downstream"
-    if status == "review_only_spatial_context_generated":
-        return "review_only_context"
-    if status == "blocked_missing_object_level_flow":
-        return "blocked_scene_missing_object_flow"
-    if status.startswith("blocked"):
-        return "blocked_not_ready_object"
-    return "unknown"
+FONTS = {
+    "title": choose_font(38, True),
+    "h1": choose_font(28, True),
+    "h2": choose_font(22, True),
+    "body": choose_font(19),
+    "small": choose_font(16),
+    "tiny": choose_font(13),
+}
 
 
-def derive_strengths(row: Mapping[str, Any], azimuth_width: float | None) -> dict[str, str]:
-    blocked = is_true(row.get("blocked"))
-    review_only = is_true(row.get("review_only_context"))
-    temporal_status = str(row.get("temporal_window_status", ""))
-    azimuth_available = is_true(row.get("azimuth_prior_available"))
-    range_mode = str(row.get("range_prior_mode", ""))
-    secondary = is_true(row.get("uses_secondary_observations"))
-    edge = is_true(row.get("edge_or_partial_state"))
-    duplicate = is_true(row.get("duplicate_or_handoff_state"))
-    ambiguous = str(row.get("ambiguity_status", ""))
-
-    if blocked:
-        time_strength = "none_or_blocked"
-    elif "primary" in temporal_status:
-        time_strength = "strong"
-    elif "uncertainty" in temporal_status:
-        time_strength = "medium_expanded"
-    elif "low_confidence" in temporal_status:
-        time_strength = "review_only"
-    else:
-        time_strength = "available"
-
-    if not azimuth_available:
-        azimuth_strength = "none"
-    elif azimuth_width is not None and azimuth_width <= 35 and not review_only:
-        azimuth_strength = "medium_compact"
-    elif azimuth_width is not None and azimuth_width <= 65 and not review_only:
-        azimuth_strength = "weak_but_bounded"
-    else:
-        azimuth_strength = "weak_broad"
-
-    if blocked:
-        range_strength = "none_or_blocked"
-    elif "broad_unknown" in range_mode:
-        range_strength = "weak_broad_unknown"
-    else:
-        range_strength = "available"
-
-    if blocked:
-        state_level = "blocked_or_not_ready"
-    elif review_only or "ambiguous" in ambiguous:
-        state_level = "high_review_uncertainty"
-    elif secondary or edge or duplicate:
-        state_level = "medium_uncertainty_expanded"
-    else:
-        state_level = "low_stable_primary"
-
-    if blocked:
-        geometry_level = "missing_or_not_applicable"
-    elif azimuth_available and "broad_unknown" in range_mode:
-        geometry_level = "partial_azimuth_only_range_missing"
-    elif azimuth_available:
-        geometry_level = "partial_azimuth_available"
-    else:
-        geometry_level = "insufficient_geometry"
-
-    return {
-        "time_info_strength": time_strength,
-        "azimuth_info_strength": azimuth_strength,
-        "range_info_strength": range_strength,
-        "state_uncertainty_level": state_level,
-        "geometry_completeness_level": geometry_level,
-    }
+def text_size(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont) -> tuple[int, int]:
+    box = draw.textbbox((0, 0), text, font=font)
+    return box[2] - box[0], box[3] - box[1]
 
 
-def derive_weakness_group(row: Mapping[str, Any], strengths: Mapping[str, str]) -> str:
-    if str(row.get("spatial_prior_status", "")) == "blocked_missing_object_level_flow":
-        return "missing_optical_object_flow"
-    if is_true(row.get("blocked")):
-        return "object_not_ready_or_short_noise"
-    if strengths["range_info_strength"] == "weak_broad_unknown":
-        if is_true(row.get("review_only_context")):
-            return "range_missing_plus_review_uncertainty"
-        if strengths["state_uncertainty_level"] == "medium_uncertainty_expanded":
-            return "range_missing_plus_state_expansion"
-        return "range_missing_info"
-    return "bounded_prior"
-
-
-def derive_rule_effect(row: Mapping[str, Any]) -> str:
-    pieces: list[str] = []
-    if is_true(row.get("blocked")):
-        if str(row.get("spatial_prior_status", "")) == "blocked_missing_object_level_flow":
-            return "scene timing metadata kept; target-level prior blocked by missing optical object flow"
-        return "short/noise or object gate blocked normal spatial prior"
-    if is_true(row.get("review_only_context")):
-        pieces.append("ambiguity/review state routes object to review-only context")
-    elif str(row.get("spatial_prior_status", "")) == "loose_spatial_prior_generated":
-        pieces.append("uncertainty states keep object in normal downstream input but expand prior")
-    else:
-        pieces.append("primary runtime-safe object state permits normal prior")
-    if is_true(row.get("uses_secondary_observations")):
-        pieces.append("secondary observations expand envelope")
-    if is_true(row.get("edge_or_partial_state")):
-        pieces.append("edge/partial state expands margin")
-    if is_true(row.get("duplicate_or_handoff_state")):
-        pieces.append("duplicate/handoff state preserves uncertainty")
-    if "broad_unknown" in str(row.get("range_prior_mode", "")):
-        pieces.append("range remains broad unknown until runtime-safe range geometry exists")
-    return "; ".join(pieces)
-
-
-def enrich_rows(prior_rows: Sequence[Mapping[str, str]], quality_rows: Sequence[Mapping[str, str]]) -> list[dict[str, Any]]:
-    quality_by_key = {(row.get("scene", ""), row.get("object_hypothesis_id", "")): row for row in quality_rows}
-    enriched: list[dict[str, Any]] = []
-    for row in prior_rows:
-        out = dict(row)
-        quality = quality_by_key.get((row.get("scene", ""), row.get("object_hypothesis_id", "")), {})
-        _, az_start, az_end, az_width_or_margin = parse_azimuth_interval(str(row.get("azimuth_center_or_interval", "")))
-        az_width = None
-        if az_start is not None and az_end is not None:
-            az_width = max(0.0, az_end - az_start)
-        elif az_width_or_margin is not None:
-            az_width = az_width_or_margin
-
-        sar_start = safe_int(row.get("sar_start_frame"))
-        sar_end = safe_int(row.get("sar_end_frame"))
-        sar_width = safe_int(quality.get("sar_window_frame_count"))
-        if sar_width is None and sar_start is not None and sar_end is not None:
-            sar_width = sar_end - sar_start + 1
-
-        result_class = classify_result(row)
-        strengths = derive_strengths(row, az_width)
-        weakness_group = derive_weakness_group(row, strengths)
-        out.update(
-            {
-                "result_class": result_class,
-                "sar_window_frame_count": "" if sar_width is None else sar_width,
-                "azimuth_available": str(is_true(row.get("azimuth_prior_available"))).lower(),
-                "azimuth_width_deg": "" if az_width is None else f"{az_width:.3f}",
-                "weakness_source_group": weakness_group,
-                "rule_effect_summary": derive_rule_effect(row),
-                **strengths,
-            }
-        )
-        enriched.append(out)
-    return enriched
-
-
-def short_id(row: Mapping[str, Any]) -> str:
-    object_id = str(row.get("object_hypothesis_id", "") or "")
-    if not object_id:
-        return str(row.get("scene", "scene_only"))
-    match = re.search(r"bt_\d+", object_id)
-    return f"{row.get('scene', '')}_{match.group(0)}" if match else object_id[-36:]
-
-
-def wrap_text(text: Any, width: int = 74) -> list[str]:
-    raw = str(text if text is not None else "").replace("_", "_")
+def wrap_text(draw: ImageDraw.ImageDraw, text: Any, font: ImageFont.ImageFont, max_width: int) -> list[str]:
+    raw = str(text if text is not None else "")
     if not raw:
         return [""]
     lines: list[str] = []
-    for chunk in raw.split(";"):
-        chunk = chunk.strip()
-        if not chunk:
+    for paragraph in raw.split("\n"):
+        paragraph = paragraph.strip()
+        if not paragraph:
+            lines.append("")
             continue
-        wrapped = textwrap.wrap(chunk, width=width, break_long_words=False, break_on_hyphens=False)
-        lines.extend(wrapped or [chunk])
+        current = ""
+        for char in paragraph:
+            candidate = current + char
+            if text_size(draw, candidate, font)[0] <= max_width or not current:
+                current = candidate
+            else:
+                lines.append(current)
+                current = char
+        if current:
+            lines.append(current)
     return lines or [raw]
 
 
-def svg_text(x: int, y: int, text: Any, size: int = 14, fill: str = "#172033", weight: str = "400") -> str:
-    return (
-        f'<text x="{x}" y="{y}" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" '
-        f'font-size="{size}" fill="{fill}" font-weight="{weight}">{escape(str(text))}</text>'
-    )
-
-
-def svg_wrapped_text(x: int, y: int, text: Any, width: int = 74, size: int = 13, fill: str = "#334155") -> tuple[str, int]:
-    parts = []
+def draw_wrapped(
+    draw: ImageDraw.ImageDraw,
+    xy: tuple[int, int],
+    text: Any,
+    font: ImageFont.ImageFont,
+    fill: str,
+    max_width: int,
+    line_gap: int = 6,
+    max_lines: int | None = None,
+) -> int:
+    x, y = xy
+    lines = wrap_text(draw, text, font, max_width)
+    if max_lines is not None and len(lines) > max_lines:
+        lines = lines[: max_lines - 1] + [lines[max_lines - 1] + "..."]
     cursor = y
-    for line in wrap_text(text, width=width):
-        parts.append(svg_text(x, cursor, line, size=size, fill=fill))
-        cursor += size + 6
-    return "\n".join(parts), cursor
+    for line in lines:
+        draw.text((x, cursor), line, font=font, fill=fill)
+        cursor += text_size(draw, line or " ", font)[1] + line_gap
+    return cursor
 
 
-def svg_card(x: int, y: int, w: int, h: int, title: str, body: Sequence[str], color: str = "#e2e8f0") -> str:
-    parts = [
-        f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="7" fill="#ffffff" stroke="{color}" stroke-width="1.2"/>',
-        svg_text(x + 16, y + 28, title, size=15, fill="#0f172a", weight="700"),
-    ]
+def draw_card(
+    draw: ImageDraw.ImageDraw,
+    xywh: tuple[int, int, int, int],
+    title: str,
+    body: Sequence[Any],
+    border: str = "#cbd5e1",
+    fill: str = "#ffffff",
+) -> None:
+    x, y, w, h = xywh
+    draw.rounded_rectangle((x, y, x + w, y + h), radius=12, fill=fill, outline=border, width=2)
+    draw.text((x + 18, y + 16), title, font=FONTS["h2"], fill="#0f172a")
     cursor = y + 54
-    for line in body:
-        wrapped, cursor = svg_wrapped_text(x + 16, cursor, line, width=max(32, int(w / 8.0)), size=12, fill="#334155")
-        parts.append(wrapped)
+    for item in body:
+        cursor = draw_wrapped(draw, (x + 18, cursor), item, FONTS["small"], "#334155", w - 36, max_lines=4)
         cursor += 4
-        if cursor > y + h - 10:
+        if cursor > y + h - 18:
             break
-    return "\n".join(parts)
 
 
-def svg_arrow(x1: int, y1: int, x2: int, y2: int, color: str = "#64748b") -> str:
-    return (
-        f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{color}" stroke-width="2" marker-end="url(#arrow)"/>'
-    )
+def draw_tag(draw: ImageDraw.ImageDraw, xy: tuple[int, int], text: str, fill: str) -> int:
+    x, y = xy
+    pad_x = 14
+    pad_y = 7
+    w, h = text_size(draw, text, FONTS["small"])
+    draw.rounded_rectangle((x, y, x + w + pad_x * 2, y + h + pad_y * 2), radius=14, fill=fill)
+    draw.text((x + pad_x, y + pad_y - 1), text, font=FONTS["small"], fill="#ffffff")
+    return x + w + pad_x * 2 + 10
 
 
-def svg_doc(width: int, height: int, body: str) -> str:
-    return "\n".join(
-        [
-            f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
-            "<defs>",
-            '<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">',
-            '<path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>',
-            "</marker>",
-            "</defs>",
-            '<rect width="100%" height="100%" fill="#f8fafc"/>',
-            body,
-            "</svg>",
-        ]
-    )
-
-
-def color_for_class(result_class: str) -> str:
+def parse_azimuth(text: str) -> dict[str, float | str]:
+    center_match = re.search(r"center_deg=([-+]?\d+(?:\.\d+)?)", text or "")
+    interval_match = re.search(r"interval_deg=\[([-+]?\d+(?:\.\d+)?),([-+]?\d+(?:\.\d+)?)\]", text or "")
+    margin_match = re.search(r"margin_deg=([-+]?\d+(?:\.\d+)?)", text or "")
+    start = safe_float(interval_match.group(1)) if interval_match else None
+    end = safe_float(interval_match.group(2)) if interval_match else None
+    center = safe_float(center_match.group(1)) if center_match else None
+    margin = safe_float(margin_match.group(1)) if margin_match else None
+    width = None if start is None or end is None else max(0.0, end - start)
     return {
-        "normal_stable_or_primary": "#2563eb",
-        "relaxed_normal_downstream": "#0891b2",
-        "review_only_context": "#a16207",
-        "blocked_not_ready_object": "#dc2626",
-        "blocked_scene_missing_object_flow": "#7c3aed",
-    }.get(result_class, "#64748b")
+        "center": "" if center is None else center,
+        "start": "" if start is None else start,
+        "end": "" if end is None else end,
+        "width": "" if width is None else width,
+        "margin": "" if margin is None else margin,
+    }
 
 
-def render_overview_svg(enriched: Sequence[Mapping[str, Any]], summary: Mapping[str, Any]) -> str:
-    scenes = sorted({str(row.get("scene", "")) for row in enriched})
-    class_order = [
-        ("normal_stable_or_primary", "normal primary", "#2563eb"),
-        ("relaxed_normal_downstream", "relaxed normal", "#0891b2"),
-        ("review_only_context", "review-only", "#a16207"),
-        ("blocked_not_ready_object", "blocked object", "#dc2626"),
-        ("blocked_scene_missing_object_flow", "blocked scene", "#7c3aed"),
-    ]
-    by_scene: dict[str, Counter[str]] = defaultdict(Counter)
-    for row in enriched:
-        by_scene[str(row.get("scene", ""))][str(row.get("result_class", ""))] += 1
-
-    parts = [
-        svg_text(34, 44, "OTY2 runtime spatial prior visual diagnosis overview", 24, "#0f172a", "800"),
-        svg_text(34, 72, "Counts separate normal, relaxed, review-only, and blocked rows. This is a mechanism audit, not SAR search.", 13, "#475569"),
-    ]
-    x0 = 60
-    y0 = 120
-    bar_w = 660
-    bar_h = 28
-    max_total = max((sum(by_scene[scene].values()) for scene in scenes), default=1)
-    for index, scene in enumerate(scenes):
-        y = y0 + index * 58
-        parts.append(svg_text(34, y + 19, scene, 14, "#0f172a", "700"))
-        x = x0 + 110
-        total = sum(by_scene[scene].values()) or 1
-        for key, _, color in class_order:
-            value = by_scene[scene][key]
-            width = int((value / max_total) * bar_w)
-            if width:
-                parts.append(f'<rect x="{x}" y="{y}" width="{width}" height="{bar_h}" fill="{color}"/>')
-                if width >= 28:
-                    parts.append(svg_text(x + 8, y + 19, value, 12, "#ffffff", "700"))
-            x += width
-        parts.append(f'<rect x="{x0 + 110}" y="{y}" width="{bar_w}" height="{bar_h}" fill="none" stroke="#cbd5e1"/>')
-        parts.append(svg_text(x0 + 785, y + 19, f"total {total}", 12, "#475569"))
-
-    legend_x = 60
-    legend_y = 320
-    for i, (_, label, color) in enumerate(class_order):
-        x = legend_x + i * 170
-        parts.append(f'<rect x="{x}" y="{legend_y}" width="14" height="14" fill="{color}"/>')
-        parts.append(svg_text(x + 22, legend_y + 12, label, 12, "#334155"))
-
-    status_counts = Counter(str(row.get("range_prior_mode", "")) for row in enriched)
-    parts.append(svg_text(34, 385, "Range-direction diagnosis", 18, "#0f172a", "800"))
-    parts.append(
-        svg_card(
-            40,
-            405,
-            430,
-            130,
-            "Core weakness",
-            [
-                f"Non-blocked rows with broad_unknown range: {status_counts.get('broad_unknown_range_prior', 0) + status_counts.get('broad_unknown_range_prior_review_only', 0)}.",
-                "Range is intentionally not invented because no runtime-safe per-object range/depth geometry is present.",
-                "Time windows constrain when to inspect SAR; they do not provide where-to-search geometry.",
-            ],
-            "#bae6fd",
-        )
-    )
-    parts.append(
-        svg_card(
-            500,
-            405,
-            390,
-            130,
-            "Boundary",
-            [
-                "No SAR image content, SAR GT, candidate scoring, selector/ranking, or annotation proposal is used.",
-                "Azimuth is weak configured geometry and is not final position.",
-            ],
-            "#fecaca",
-        )
-    )
-
-    width_values = [safe_int(row.get("sar_window_frame_count")) for row in enriched]
-    width_values = [v for v in width_values if v is not None]
-    bins = [0, 50, 100, 150, 200, 10_000]
-    labels = ["<=50", "51-100", "101-150", "151-200", ">200"]
-    bin_counts = [0] * (len(bins) - 1)
-    for value in width_values:
-        for idx in range(len(bins) - 1):
-            if bins[idx] < value <= bins[idx + 1]:
-                bin_counts[idx] += 1
-                break
-    parts.append(svg_text(34, 575, "SAR temporal-window width distribution", 18, "#0f172a", "800"))
-    chart_x = 70
-    chart_y = 620
-    chart_h = 150
-    max_count = max(bin_counts or [1])
-    for i, count in enumerate(bin_counts):
-        x = chart_x + i * 120
-        h = 0 if max_count == 0 else int(count / max_count * 120)
-        parts.append(f'<rect x="{x}" y="{chart_y + 120 - h}" width="70" height="{h}" fill="#2563eb"/>')
-        parts.append(svg_text(x + 8, chart_y + 140, labels[i], 12, "#334155"))
-        parts.append(svg_text(x + 25, chart_y + 112 - h, count, 12, "#0f172a", "700"))
-    parts.append(svg_text(680, 642, f"total rows: {summary.get('row_count', len(enriched))}", 14, "#334155"))
-    parts.append(svg_text(680, 668, f"normal downstream: {summary.get('normal_spatial_priors', '')}", 14, "#334155"))
-    parts.append(svg_text(680, 694, f"review-only: {summary.get('review_only_spatial_contexts', '')}", 14, "#334155"))
-    parts.append(svg_text(680, 720, f"blocked: {summary.get('blocked', '')}", 14, "#334155"))
-    return svg_doc(940, 820, "\n".join(parts))
-
-
-def strength_value(level: str, component: str) -> int:
-    if level in {"strong", "medium_compact", "low_stable_primary"}:
-        return 3
-    if level in {"medium_expanded", "weak_but_bounded", "partial_azimuth_only_range_missing", "partial_azimuth_available"}:
-        return 2
-    if level in {"review_only", "weak_broad", "weak_broad_unknown", "high_review_uncertainty"}:
-        return 1
-    if component == "state" and level == "medium_uncertainty_expanded":
-        return 2
-    return 0
-
-
-def render_weakness_svg(enriched: Sequence[Mapping[str, Any]]) -> str:
-    groups = [
-        "normal_stable_or_primary",
-        "relaxed_normal_downstream",
-        "review_only_context",
-        "blocked_not_ready_object",
-        "blocked_scene_missing_object_flow",
-    ]
-    components = [
-        ("time_info_strength", "Time"),
-        ("azimuth_info_strength", "Azimuth"),
-        ("range_info_strength", "Range"),
-        ("state_uncertainty_level", "State"),
-        ("geometry_completeness_level", "Geometry"),
-    ]
-    by_group: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
-    for row in enriched:
-        by_group[str(row.get("result_class", ""))].append(row)
-
-    parts = [
-        svg_text(34, 44, "Where the current spatial prior is weak", 24, "#0f172a", "800"),
-        svg_text(34, 72, "Diagnostic levels only: they explain available information, not performance scores or thresholds.", 13, "#475569"),
-    ]
-    start_x = 220
-    start_y = 130
-    cell_w = 118
-    cell_h = 46
-    for ci, (_, label) in enumerate(components):
-        parts.append(svg_text(start_x + ci * cell_w + 18, start_y - 18, label, 13, "#0f172a", "700"))
-    color_by_level = {3: "#16a34a", 2: "#0891b2", 1: "#f59e0b", 0: "#dc2626"}
-    text_by_level = {3: "strong", 2: "medium", 1: "weak", 0: "none"}
-    for gi, group in enumerate(groups):
-        rows = by_group[group]
-        y = start_y + gi * 70
-        parts.append(svg_text(34, y + 29, f"{group} ({len(rows)})", 13, "#0f172a", "700"))
-        for ci, (field, label) in enumerate(components):
-            values = [strength_value(str(row.get(field, "")), label.lower()) for row in rows]
-            value = int(round(sum(values) / len(values))) if values else 0
-            x = start_x + ci * cell_w
-            parts.append(
-                f'<rect x="{x}" y="{y}" width="{cell_w - 10}" height="{cell_h}" rx="6" fill="{color_by_level[value]}" opacity="0.9"/>'
+def parse_secondary_boxes(text: str) -> list[dict[str, Any]]:
+    boxes: list[dict[str, Any]] = []
+    for part in str(text or "").split(";"):
+        part = part.strip()
+        if not part or ":" not in part:
+            continue
+        det_id, coords = part.split(":", 1)
+        values = [safe_float(value) for value in coords.split(",")]
+        if len(values) >= 4 and all(value is not None for value in values[:4]):
+            boxes.append(
+                {
+                    "det_id": det_id,
+                    "bbox": (float(values[0]), float(values[1]), float(values[2]), float(values[3])),
+                }
             )
-            parts.append(svg_text(x + 18, y + 29, text_by_level[value], 13, "#ffffff", "700"))
-    parts.append(
-        svg_card(
-            36,
-            520,
-            850,
-            150,
-            "Interpretation",
-            [
-                "Time is useful for eligible objects because 24:50 software-sync windows exist, but time is not spatial location.",
-                "Azimuth is present for normal and review-only rows, yet remains weak because it is legacy configured optical-x mapping plus bbox envelope.",
-                "Range is the dominant weakness: every non-blocked row keeps broad_unknown_range_prior because runtime-safe per-object range geometry is absent.",
-                "State uncertainty is intentionally preserved through relaxed/review-only branches instead of being collapsed into identity truth.",
-            ],
-            "#cbd5e1",
-        )
-    )
-    return svg_doc(930, 720, "\n".join(parts))
+    return boxes
 
 
-def render_rule_influence_svg(enriched: Sequence[Mapping[str, Any]]) -> str:
-    stable = sum(1 for row in enriched if row.get("result_class") == "normal_stable_or_primary")
-    relaxed = sum(1 for row in enriched if row.get("result_class") == "relaxed_normal_downstream")
-    review = sum(1 for row in enriched if row.get("result_class") == "review_only_context")
-    blocked_obj = sum(1 for row in enriched if row.get("result_class") == "blocked_not_ready_object")
-    blocked_scene = sum(1 for row in enriched if row.get("result_class") == "blocked_scene_missing_object_flow")
-    parts = [
-        svg_text(34, 44, "Rule influence: how objects are routed", 24, "#0f172a", "800"),
-        svg_text(34, 72, "This diagram shows construction rules, not scoring or selection.", 13, "#475569"),
+def primary_box(row: Mapping[str, Any]) -> tuple[float, float, float, float] | None:
+    values = [
+        safe_float(row.get("primary_bbox_x1")),
+        safe_float(row.get("primary_bbox_y1")),
+        safe_float(row.get("primary_bbox_x2")),
+        safe_float(row.get("primary_bbox_y2")),
     ]
-    nodes = [
-        (60, 150, 180, 88, "Object flow", ["Target-level optical object hypothesis or scene-only metadata"]),
-        (320, 70, 200, 88, f"Stable/primary ({stable})", ["normal spatial prior", "smaller state margin"]),
-        (320, 190, 200, 96, f"Secondary/edge/handoff ({relaxed})", ["normal downstream input", "expanded azimuth; broad range"]),
-        (320, 330, 200, 96, f"Ambiguous/review ({review})", ["review-only context", "not mixed with normal priors"]),
-        (320, 470, 200, 96, f"Short/noise or missing ({blocked_obj + blocked_scene})", ["blocked", "time/context retained where available"]),
-        (620, 70, 230, 88, "Normal prior", ["weak azimuth + broad unknown range"]),
-        (620, 190, 230, 96, "Relaxed prior", ["same downstream lane", "uncertainty remains explicit"]),
-        (620, 330, 230, 96, "Review-only context", ["diagnostic context", "not normal input"]),
-        (620, 470, 230, 96, "Blocked", ["no runtime spatial prior"]),
-    ]
-    for x, y, w, h, title, body in nodes:
-        parts.append(svg_card(x, y, w, h, title, body, "#cbd5e1"))
-    for y1, y2 in [(190, 114), (190, 238), (190, 378), (190, 518)]:
-        parts.append(svg_arrow(240, y1, 318, y2))
-    for y in [114, 238, 378, 518]:
-        parts.append(svg_arrow(522, y, 618, y))
-    parts.append(
-        svg_card(
-            60,
-            620,
-            790,
-            90,
-            "Why not block every uncertain object?",
-            [
-                "Secondary, edge, partial, duplicate, and handoff states often still carry useful runtime context. They expand or downgrade the prior instead of becoming truth claims.",
-                "Only strong ambiguity/review rows move to review-only; short/noise and missing object flow remain blocked.",
-            ],
-            "#bae6fd",
-        )
-    )
-    return svg_doc(900, 760, "\n".join(parts))
+    if all(value is not None for value in values):
+        x1, y1, x2, y2 = [float(value) for value in values]
+        if x2 > x1 and y2 > y1:
+            return x1, y1, x2, y2
+    return None
 
 
-def render_object_svg(row: Mapping[str, Any], summary: Mapping[str, Any]) -> str:
-    result = str(row.get("result_class", "unknown"))
-    color = color_for_class(result)
-    scene = str(row.get("scene", ""))
-    object_id = str(row.get("object_hypothesis_id", "") or "scene-level only")
-    title = f"{scene} / {object_id}"
-    parts = [
-        svg_text(34, 44, "OTY2 object-level runtime spatial prior explanation", 22, "#0f172a", "800"),
-        svg_text(34, 72, title, 13, "#475569"),
-        f'<rect x="34" y="90" width="850" height="10" rx="5" fill="{color}"/>',
-    ]
-    cards = [
-        (
-            40,
-            125,
-            250,
-            160,
-            "1. Optical object flow",
-            [
-                f"Primary observations: {row.get('uses_primary_observations', '')}",
-                f"Secondary observations: {row.get('uses_secondary_observations', '')}",
-                f"State uncertainty: {row.get('state_uncertainty_level', '')}",
-                f"Ambiguity: {row.get('ambiguity_status', '')}",
-            ],
-        ),
-        (
-            330,
-            125,
-            250,
-            160,
-            "2. SAR time window",
-            [
-                f"Status: {row.get('temporal_window_status', '')}",
-                f"SAR frames: {row.get('sar_start_frame', '')} to {row.get('sar_end_frame', '')}",
-                f"Frame count: {row.get('sar_window_frame_count', '')}",
-                "Uses 50/24 time scale from software-sync contract.",
-            ],
-        ),
-        (
-            620,
-            125,
-            250,
-            160,
-            "3. Rule routing",
-            [
-                f"Result: {result}",
-                f"Normal downstream: {row.get('normal_downstream_input', '')}",
-                f"Review-only: {row.get('review_only_context', '')}",
-                f"Blocked: {row.get('blocked', '')}",
-            ],
-        ),
-        (
-            40,
-            340,
-            250,
-            190,
-            "4. Azimuth prior",
-            [
-                f"Available: {row.get('azimuth_available', '')}",
-                f"Strength: {row.get('azimuth_info_strength', '')}",
-                f"Width deg: {row.get('azimuth_width_deg', '')}",
-                str(row.get("azimuth_margin_reason", "")),
-            ],
-        ),
-        (
-            330,
-            340,
-            250,
-            190,
-            "5. Range prior",
-            [
-                f"Mode: {row.get('range_prior_mode', '')}",
-                f"Strength: {row.get('range_info_strength', '')}",
-                "Range is not inferred from SAR content and remains broad unknown when no safe runtime range geometry exists.",
-            ],
-        ),
-        (
-            620,
-            340,
-            250,
-            190,
-            "6. Final prior meaning",
-            [
-                str(row.get("rule_effect_summary", "")),
-                "This is not final location, not candidate scoring, and not an annotation proposal.",
-            ],
-        ),
-    ]
-    for x, y, w, h, heading, body in cards:
-        parts.append(svg_card(x, y, w, h, heading, body, "#cbd5e1"))
-    for x1, y1, x2, y2 in [(290, 205, 328, 205), (580, 205, 618, 205), (165, 286, 165, 338), (455, 286, 455, 338), (745, 286, 745, 338)]:
-        parts.append(svg_arrow(x1, y1, x2, y2))
-
-    weakness_items = [
-        ("Time", row.get("time_info_strength", "")),
-        ("Azimuth", row.get("azimuth_info_strength", "")),
-        ("Range", row.get("range_info_strength", "")),
-        ("State", row.get("state_uncertainty_level", "")),
-        ("Geometry", row.get("geometry_completeness_level", "")),
-    ]
-    parts.append(svg_text(40, 585, "Weakness decomposition", 17, "#0f172a", "800"))
-    for index, (label, level) in enumerate(weakness_items):
-        x = 50 + index * 170
-        value = strength_value(str(level), label.lower())
-        fill = {3: "#16a34a", 2: "#0891b2", 1: "#f59e0b", 0: "#dc2626"}[value]
-        parts.append(f'<rect x="{x}" y="610" width="135" height="44" rx="6" fill="{fill}"/>')
-        parts.append(svg_text(x + 12, 628, label, 12, "#ffffff", "700"))
-        parts.append(svg_text(x + 12, 646, str(level), 10, "#ffffff"))
-    notes = str(row.get("notes", ""))
-    degradation = str(row.get("degradation_reason", ""))
-    wrapped_notes, next_y = svg_wrapped_text(50, 705, f"Weakness group: {row.get('weakness_source_group', '')}", 86, 13)
-    parts.append(wrapped_notes)
-    wrapped_degradation, next_y = svg_wrapped_text(50, next_y + 4, f"Degradation: {degradation}", 86, 13)
-    parts.append(wrapped_degradation)
-    wrapped_notes, _ = svg_wrapped_text(50, next_y + 40, f"Notes: {notes}", 86, 13)
-    parts.append(wrapped_notes)
-    parts.append(svg_text(50, 850, f"Boundary flags all false in source summary: {all(value is False for value in BOUNDARY_FLAGS.values())}", 12, "#475569"))
-    return svg_doc(930, 890, "\n".join(parts))
+def status_cn(row: Mapping[str, Any]) -> str:
+    status = str(row.get("spatial_prior_status", ""))
+    if status == "normal_spatial_prior_generated":
+        return "正常"
+    if status == "loose_spatial_prior_generated":
+        return "宽松"
+    if status == "review_only_spatial_context_generated":
+        return "仅审阅"
+    if status == "blocked_missing_object_level_flow":
+        return "阻断：缺目标流"
+    if status.startswith("blocked"):
+        return "阻断"
+    return "未知"
 
 
-def create_visuals(
-    enriched: Sequence[Mapping[str, Any]],
-    source_summary: Mapping[str, Any],
-    output_dir: Path,
-    repo_sample_dir: Path,
-    timestamp: str,
-) -> dict[str, str]:
-    output_dir.mkdir(parents=True, exist_ok=True)
-    objects_dir = output_dir / "objects"
-    samples_dir = output_dir / "samples"
-    objects_dir.mkdir(parents=True, exist_ok=True)
-    samples_dir.mkdir(parents=True, exist_ok=True)
-    repo_sample_dir.mkdir(parents=True, exist_ok=True)
-
-    overview_svg = output_dir / "overview_distribution.svg"
-    weakness_svg = output_dir / "weakness_decomposition.svg"
-    rule_svg = output_dir / "rule_influence.svg"
-    overview_svg.write_text(render_overview_svg(enriched, source_summary), encoding="utf-8")
-    weakness_svg.write_text(render_weakness_svg(enriched), encoding="utf-8")
-    rule_svg.write_text(render_rule_influence_svg(enriched), encoding="utf-8")
-
-    object_svg_paths: dict[tuple[str, str], Path] = {}
-    for row in enriched:
-        filename = f"{short_id(row)}.svg".replace(":", "_").replace("/", "_").replace("\\", "_")
-        path = objects_dir / filename
-        path.write_text(render_object_svg(row, source_summary), encoding="utf-8")
-        object_svg_paths[(str(row.get("scene", "")), str(row.get("object_hypothesis_id", "")))] = path
-
-    sample_map: dict[str, Path] = {
-        "overview": overview_svg,
-        "weakness_decomposition": weakness_svg,
-        "rule_influence": rule_svg,
-    }
-    by_key = {(str(row.get("scene", "")), str(row.get("object_hypothesis_id", ""))): row for row in enriched}
-    fallback_by_class: dict[str, Mapping[str, Any]] = {}
-    for row in enriched:
-        fallback_by_class.setdefault(str(row.get("result_class", "")), row)
-    for label, key in SAMPLE_OBJECT_KEYS.items():
-        row = by_key.get(key)
-        if row is None:
-            if label == "normal_stable":
-                row = fallback_by_class.get("normal_stable_or_primary")
-            elif label == "relaxed_uncertain":
-                row = fallback_by_class.get("relaxed_normal_downstream")
-            elif label == "review_only":
-                row = fallback_by_class.get("review_only_context")
-            elif label == "blocked":
-                row = fallback_by_class.get("blocked_not_ready_object")
-            elif label == "scene_only_blocked":
-                row = fallback_by_class.get("blocked_scene_missing_object_flow")
-        if row is not None:
-            path = object_svg_paths[(str(row.get("scene", "")), str(row.get("object_hypothesis_id", "")))]
-            sample_map[label] = path
-
-    repo_paths: dict[str, str] = {}
-    for label, source_path in sample_map.items():
-        sample_name = f"oty2_spatial_prior_visual_{label}_{timestamp}.svg"
-        local_target = samples_dir / sample_name
-        repo_target = repo_sample_dir / sample_name
-        shutil.copyfile(source_path, local_target)
-        shutil.copyfile(source_path, repo_target)
-        repo_paths[label] = str(repo_target)
-
+def status_color(status: str) -> str:
     return {
-        "overview": str(overview_svg),
-        "weakness_decomposition": str(weakness_svg),
-        "rule_influence": str(rule_svg),
-        "objects_dir": str(objects_dir),
-        "local_samples_dir": str(samples_dir),
-        "repo_sample_paths": repo_paths,
-    }
+        "正常": "#2563eb",
+        "宽松": "#0891b2",
+        "仅审阅": "#a16207",
+        "阻断": "#dc2626",
+        "阻断：缺目标流": "#7c3aed",
+    }.get(status, "#64748b")
 
 
-def summarize(enriched: Sequence[Mapping[str, Any]], source_summary: Mapping[str, Any]) -> dict[str, Any]:
-    counts_by_class = Counter(str(row.get("result_class", "")) for row in enriched)
-    counts_by_scene: dict[str, dict[str, int]] = {}
-    for row in enriched:
+def short_object_id(object_id: str) -> str:
+    if not object_id:
+        return "scene_only"
+    match = re.search(r"bt_\d+", object_id)
+    return match.group(0) if match else object_id[-20:]
+
+
+def filename_token(scene: str, object_id: str) -> str:
+    return f"{scene.lower()}_{short_object_id(object_id).replace('_', '')}"
+
+
+def load_frame_paths(manifest_csv: Path) -> dict[tuple[str, int], Path]:
+    paths: dict[tuple[str, int], Path] = {}
+    for inventory in sorted((REPO_ROOT / "outputs").glob("oty0_yolo_detection_stream_audit_*/oty0_optical_frame_inventory.csv")):
+        for row in read_csv(inventory):
+            frame = safe_int(row.get("optical_frame_num"))
+            path = Path(str(row.get("optical_path", "")))
+            if row.get("scene") and frame is not None and path.exists():
+                paths[(str(row["scene"]), frame)] = path
+    if manifest_csv.exists():
+        for row in read_csv(manifest_csv):
+            scene = str(row.get("scene", ""))
+            frame_dir = Path(str(row.get("optical_frames_dir", "")))
+            if not scene or not frame_dir.exists():
+                continue
+            start = safe_int(row.get("frame_range_start"), 0) or 0
+            end = safe_int(row.get("frame_range_end"), 367) or 367
+            for frame in (start, (start + end) // 2, end):
+                for suffix in (".png", ".jpg", ".jpeg"):
+                    candidate = frame_dir / f"{frame:06d}{suffix}"
+                    if candidate.exists():
+                        paths.setdefault((scene, frame), candidate)
+                        break
+    return paths
+
+
+def load_manifest_frame_dirs(manifest_csv: Path) -> dict[str, Path]:
+    dirs: dict[str, Path] = {}
+    if not manifest_csv.exists():
+        return dirs
+    for row in read_csv(manifest_csv):
         scene = str(row.get("scene", ""))
-        counts_by_scene.setdefault(scene, Counter())
-        counts_by_scene[scene][str(row.get("result_class", ""))] += 1
-    window_widths = [safe_int(row.get("sar_window_frame_count")) for row in enriched]
-    window_widths = [value for value in window_widths if value is not None]
-    az_widths = [safe_float(row.get("azimuth_width_deg")) for row in enriched]
-    az_widths = [value for value in az_widths if value is not None]
-    weakness_counts = Counter(str(row.get("weakness_source_group", "")) for row in enriched)
-    boundary = dict(BOUNDARY_FLAGS)
+        frame_dir = Path(str(row.get("optical_frames_dir", "")))
+        if scene and frame_dir.exists():
+            dirs[scene] = frame_dir
+    return dirs
+
+
+def resolve_frame_path(
+    scene: str,
+    frame: int,
+    frame_paths: Mapping[tuple[str, int], Path],
+    manifest_dirs: Mapping[str, Path],
+) -> Path | None:
+    direct = frame_paths.get((scene, frame))
+    if direct and direct.exists():
+        return direct
+    frame_dir = manifest_dirs.get(scene)
+    if frame_dir:
+        for suffix in (".png", ".jpg", ".jpeg"):
+            candidate = frame_dir / f"{frame:06d}{suffix}"
+            if candidate.exists():
+                return candidate
+    return None
+
+
+def merge_rows_by_key(rows: Sequence[Mapping[str, str]]) -> dict[tuple[str, str], dict[str, str]]:
+    return {(str(row.get("scene", "")), str(row.get("object_hypothesis_id", ""))): dict(row) for row in rows}
+
+
+def choose_frame_rows(object_rows: Sequence[Mapping[str, str]]) -> list[Mapping[str, str]]:
+    rows = [row for row in object_rows if safe_int(row.get("optical_frame_num")) is not None]
+    rows = sorted(rows, key=lambda row: safe_int(row.get("optical_frame_num"), 0) or 0)
+    if not rows:
+        return []
+    indices = [0, len(rows) // 2, len(rows) - 1]
+    selected: list[Mapping[str, str]] = []
+    for idx in indices:
+        row = rows[idx]
+        if row not in selected:
+            selected.append(row)
+    return selected
+
+
+def scene_only_frame_rows(scene: str, frame_paths: Mapping[tuple[str, int], Path], manifest_dirs: Mapping[str, Path]) -> list[dict[str, str]]:
+    candidates = [0, 183, 367]
+    rows: list[dict[str, str]] = []
+    for frame in candidates:
+        if resolve_frame_path(scene, frame, frame_paths, manifest_dirs):
+            rows.append({"scene": scene, "optical_frame_num": str(frame)})
+    return rows
+
+
+def scale_and_draw_boxes(
+    source: Image.Image,
+    panel_size: tuple[int, int],
+    frame_row: Mapping[str, Any],
+) -> tuple[Image.Image, int, int]:
+    panel_w, panel_h = panel_size
+    image = source.convert("RGB")
+    scale = min(panel_w / image.width, panel_h / image.height)
+    new_size = (max(1, int(image.width * scale)), max(1, int(image.height * scale)))
+    resized = image.resize(new_size, Image.Resampling.LANCZOS)
+    panel = Image.new("RGB", (panel_w, panel_h), "#111827")
+    offset_x = (panel_w - new_size[0]) // 2
+    offset_y = (panel_h - new_size[1]) // 2
+    panel.paste(resized, (offset_x, offset_y))
+    draw = ImageDraw.Draw(panel)
+
+    def project(box: tuple[float, float, float, float]) -> tuple[int, int, int, int]:
+        x1, y1, x2, y2 = box
+        return (
+            int(offset_x + x1 * scale),
+            int(offset_y + y1 * scale),
+            int(offset_x + x2 * scale),
+            int(offset_y + y2 * scale),
+        )
+
+    primary_count = 0
+    secondary_count = 0
+    pbox = primary_box(frame_row)
+    if pbox:
+        draw.rectangle(project(pbox), outline="#22c55e", width=5)
+        draw.text((project(pbox)[0] + 6, max(6, project(pbox)[1] + 6)), "主观测", font=FONTS["small"], fill="#22c55e")
+        primary_count = 1
+
+    for sec in parse_secondary_boxes(str(frame_row.get("secondary_bbox_summary", ""))):
+        x1, y1, x2, y2 = project(sec["bbox"])
+        dash_len = 14
+        for x in range(x1, x2, dash_len * 2):
+            draw.line((x, y1, min(x + dash_len, x2), y1), fill="#f59e0b", width=4)
+            draw.line((x, y2, min(x + dash_len, x2), y2), fill="#f59e0b", width=4)
+        for y in range(y1, y2, dash_len * 2):
+            draw.line((x1, y, x1, min(y + dash_len, y2)), fill="#f59e0b", width=4)
+            draw.line((x2, y, x2, min(y + dash_len, y2)), fill="#f59e0b", width=4)
+        draw.text((x1 + 6, max(6, y1 + 24)), "辅助", font=FONTS["small"], fill="#f59e0b")
+        secondary_count += 1
+    return panel, primary_count, secondary_count
+
+
+def draw_timeline(
+    draw: ImageDraw.ImageDraw,
+    xywh: tuple[int, int, int, int],
+    row: Mapping[str, Any],
+) -> None:
+    x, y, w, h = xywh
+    draw.rounded_rectangle((x, y, x + w, y + h), radius=12, fill="#ffffff", outline="#cbd5e1", width=2)
+    draw.text((x + 18, y + 16), "雷达时间轴（示意，不读取 SAR 图像）", font=FONTS["h2"], fill="#0f172a")
+    draw_wrapped(
+        draw,
+        (x + 18, y + 52),
+        f"软件同步换算：光学 {OPTICAL_FPS} fps -> 雷达 {SAR_FPS} fps，使用 50/24 = {FPS_RATIO:.6f}，不是逐帧真实时间戳。",
+        FONTS["small"],
+        "#334155",
+        w - 36,
+        max_lines=2,
+    )
+    bar_x = x + 45
+    bar_y = y + 120
+    bar_w = w - 90
+    draw.line((bar_x, bar_y, bar_x + bar_w, bar_y), fill="#94a3b8", width=10)
+    sar_start = safe_int(row.get("sar_start_frame"))
+    sar_end = safe_int(row.get("sar_end_frame"))
+    if sar_start is not None and sar_end is not None:
+        sx = bar_x + int(max(0, min(1, sar_start / ESTIMATED_SAR_SCENE_FRAMES)) * bar_w)
+        ex = bar_x + int(max(0, min(1, sar_end / ESTIMATED_SAR_SCENE_FRAMES)) * bar_w)
+        draw.line((sx, bar_y, ex, bar_y), fill="#2563eb", width=16)
+        draw.text((sx, bar_y + 24), f"SAR {sar_start}", font=FONTS["tiny"], fill="#334155")
+        draw.text((max(sx + 80, ex - 70), bar_y + 24), f"SAR {sar_end}", font=FONTS["tiny"], fill="#334155")
+        draw.text((x + 18, y + 170), f"窗口宽度：{sar_end - sar_start + 1} 帧；作用是限定何时查看雷达，不给空间位置。", font=FONTS["small"], fill="#0f172a")
+    else:
+        draw.text((x + 18, y + 145), "该对象未生成目标级雷达时间窗；只保留阻断原因。", font=FONTS["small"], fill="#dc2626")
+    draw.text((bar_x, bar_y - 34), "0", font=FONTS["tiny"], fill="#475569")
+    draw.text((bar_x + bar_w - 60, bar_y - 34), f"约 {ESTIMATED_SAR_SCENE_FRAMES}", font=FONTS["tiny"], fill="#475569")
+
+
+def draw_spatial_canvas(
+    draw: ImageDraw.ImageDraw,
+    xywh: tuple[int, int, int, int],
+    row: Mapping[str, Any],
+) -> None:
+    x, y, w, h = xywh
+    draw.rounded_rectangle((x, y, x + w, y + h), radius=12, fill="#ffffff", outline="#cbd5e1", width=2)
+    draw.text((x + 18, y + 16), "空间先验示意画布（不是搜索区域）", font=FONTS["h2"], fill="#0f172a")
+    canvas = (x + 70, y + 92, x + w - 55, y + h - 78)
+    cx1, cy1, cx2, cy2 = canvas
+    draw.rectangle(canvas, outline="#94a3b8", width=2)
+    draw.text((cx1, cy2 + 16), "方位向 azimuth（弱约束）", font=FONTS["small"], fill="#334155")
+    draw.text((cx1 - 48, cy1 - 8), "距离向", font=FONTS["small"], fill="#334155")
+    draw.text((cx1 - 48, cy1 + 20), "range", font=FONTS["small"], fill="#334155")
+    draw.line((cx1, cy1, cx2, cy1), fill="#e2e8f0", width=1)
+    draw.line((cx1, (cy1 + cy2) // 2, cx2, (cy1 + cy2) // 2), fill="#e2e8f0", width=1)
+    draw.line((cx1, cy2, cx2, cy2), fill="#e2e8f0", width=1)
+
+    az = parse_azimuth(str(row.get("azimuth_center_or_interval", "")))
+    az_available = is_true(row.get("azimuth_prior_available"))
+    if az_available and az["start"] != "" and az["end"] != "":
+        amin, amax = -55.0, 40.0
+        start = float(az["start"])
+        end = float(az["end"])
+        ix1 = cx1 + int(max(0.0, min(1.0, (start - amin) / (amax - amin))) * (cx2 - cx1))
+        ix2 = cx1 + int(max(0.0, min(1.0, (end - amin) / (amax - amin))) * (cx2 - cx1))
+        if ix2 <= ix1:
+            ix2 = ix1 + 4
+        draw.rectangle((ix1, cy1, ix2, cy2), fill="#93c5fd", outline="#2563eb", width=3)
+        draw.text((ix1 + 8, cy1 + 14), f"方位弱先验 {start:.1f}° 到 {end:.1f}°", font=FONTS["small"], fill="#0f172a")
+        if "expanded" in str(row.get("spatial_prior_mode", "")) or "expansion" in str(row.get("azimuth_margin_reason", "")):
+            draw.text((ix1 + 8, cy1 + 42), "已因不确定状态扩大", font=FONTS["small"], fill="#0f172a")
+    else:
+        draw.text((cx1 + 20, cy1 + 22), "无可用方位先验", font=FONTS["small"], fill="#dc2626")
+
+    range_mode = str(row.get("range_prior_mode", ""))
+    if "broad_unknown" in range_mode:
+        draw.rectangle((cx1 + 8, cy1 + 8, cx2 - 8, cy2 - 8), outline="#f59e0b", width=4)
+        draw_wrapped(
+            draw,
+            (cx1 + 18, cy2 - 72),
+            "距离向：broad_unknown_range_prior。当前没有运行时安全的目标级距离/深度字段，因此不能画真实距离位置。",
+            FONTS["small"],
+            "#92400e",
+            cx2 - cx1 - 36,
+            max_lines=3,
+        )
+    elif "not_generated" in range_mode or "blocked" in range_mode:
+        draw_wrapped(
+            draw,
+            (cx1 + 18, cy2 - 72),
+            "距离向：未生成。对象被阻断或缺目标流。",
+            FONTS["small"],
+            "#dc2626",
+            cx2 - cx1 - 36,
+            max_lines=3,
+        )
+    else:
+        draw.text((cx1 + 18, cy2 - 54), f"距离向：{range_mode}", font=FONTS["small"], fill="#334155")
+    draw.text((x + 18, y + h - 40), "已知：时间窗、弱方位；未知/保守：距离向、真实 SAR 证据。", font=FONTS["small"], fill="#334155")
+
+
+def state_lines(row: Mapping[str, Any], frame_rows: Sequence[Mapping[str, Any]]) -> list[str]:
+    states = set()
+    for frame_row in frame_rows:
+        for field in (
+            "state_visibility_status",
+            "state_uncertainty_status",
+            "partial_full_transition_state",
+            "boundary_truncation_state",
+            "multi_observation_state",
+        ):
+            value = str(frame_row.get(field, "")).strip()
+            if value and value.lower() not in {"none", "false"}:
+                states.add(value)
+    if is_true(row.get("edge_or_partial_state")):
+        states.add("edge/partial=true")
+    if is_true(row.get("duplicate_or_handoff_state")):
+        states.add("duplicate/handoff=true")
+    ambiguity = str(row.get("ambiguity_status", "")).strip()
+    if ambiguity:
+        states.add(f"ambiguity={ambiguity}")
+    if not states:
+        states.add("稳定主观测，无显著辅助/边缘/交接状态")
+    return sorted(states)
+
+
+def impact_text(row: Mapping[str, Any], temporal_row: Mapping[str, Any]) -> tuple[str, str, str]:
+    padding = str(temporal_row.get("padding_reason", "") or temporal_row.get("state_margin_status", "") or "")
+    if not padding:
+        padding = "未生成目标级时间窗或无 padding 字段。"
+    az_margin = str(row.get("azimuth_margin_reason", "") or "无方位余量字段。")
+    range_reason = str(row.get("range_margin_reason", "") or row.get("degradation_reason", "") or "")
+    if not range_reason:
+        range_reason = "缺少运行时安全的目标级距离/深度几何。"
+    return padding, az_margin, range_reason
+
+
+def missing_fields_text(row: Mapping[str, Any]) -> str:
+    if str(row.get("spatial_prior_status", "")) == "blocked_missing_object_level_flow":
+        return "缺光学目标流：无法形成对象级光学帧-目标框-雷达时间窗映射。"
+    if is_true(row.get("blocked")):
+        return "对象被 short/noise 或 not-ready 阻断：无正常下游空间先验。"
+    if "broad_unknown" in str(row.get("range_prior_mode", "")):
+        return "缺运行时安全 per-object range/depth 字段；缺可直接使用的距离向几何收敛信息。"
+    return "未发现本轮必须补齐的核心字段。"
+
+
+def render_object_page(
+    row: Mapping[str, Any],
+    frame_rows: Sequence[Mapping[str, str]],
+    temporal_row: Mapping[str, Any],
+    frame_paths: Mapping[tuple[str, int], Path],
+    manifest_dirs: Mapping[str, Path],
+    out_path: Path,
+) -> dict[str, Any]:
+    scene = str(row.get("scene", ""))
+    object_id = str(row.get("object_hypothesis_id", ""))
+    status = status_cn(row)
+    color = status_color(status)
+    page = Image.new("RGB", (1800, 2100), "#f8fafc")
+    draw = ImageDraw.Draw(page)
+
+    draw.text((60, 42), "OTY2 对象级弱空间先验诊断", font=FONTS["title"], fill="#0f172a")
+    tag_x = draw_tag(draw, (60, 102), status, color)
+    draw_tag(draw, (tag_x, 102), "真实光学帧 + 目标框", "#0f766e")
+    draw.text((60, 150), f"场景：{scene}", font=FONTS["h1"], fill="#0f172a")
+    draw_wrapped(draw, (60, 188), f"目标编号：{object_id or '场景级说明，无目标流'}", FONTS["body"], "#334155", 1180, max_lines=2)
+    draw.text((60, 222), "绿色实线=主观测框；橙色虚线=辅助观测框；右侧雷达部分仅为时间轴和先验示意。", font=FONTS["small"], fill="#475569")
+
+    optical_frames = [safe_int(frame_row.get("optical_frame_num")) for frame_row in frame_rows]
+    optical_frames = [frame for frame in optical_frames if frame is not None]
+    panel_x = 60
+    panel_y = 280
+    panel_w = 520
+    panel_h = 390
+    primary_total = 0
+    secondary_total = 0
+    existing_frames = 0
+    labels = ["起始帧", "中间帧", "结束帧"]
+    for idx in range(3):
+        x = panel_x + idx * 580
+        y = panel_y
+        frame_row = frame_rows[idx] if idx < len(frame_rows) else {}
+        frame = safe_int(frame_row.get("optical_frame_num"))
+        frame_path = resolve_frame_path(scene, frame, frame_paths, manifest_dirs) if frame is not None else None
+        draw.text((x, y - 36), f"{labels[idx]}：{'' if frame is None else frame}", font=FONTS["h2"], fill="#0f172a")
+        if frame_path and frame_path.exists():
+            with Image.open(frame_path) as source:
+                panel, pcount, scount = scale_and_draw_boxes(source, (panel_w, panel_h), frame_row)
+            page.paste(panel, (x, y))
+            primary_total += pcount
+            secondary_total += scount
+            existing_frames += 1
+            draw.text((x, y + panel_h + 10), f"光学帧：{frame_path.name}", font=FONTS["tiny"], fill="#475569")
+        else:
+            draw.rounded_rectangle((x, y, x + panel_w, y + panel_h), radius=12, fill="#e2e8f0", outline="#94a3b8", width=2)
+            draw_wrapped(draw, (x + 22, y + 150), "没有找到可用光学帧；该页只能保留表格字段诊断。", FONTS["body"], "#475569", panel_w - 44, max_lines=3)
+
+    optical_start = min(optical_frames) if optical_frames else safe_int(temporal_row.get("optical_start_frame"))
+    optical_end = max(optical_frames) if optical_frames else safe_int(temporal_row.get("optical_end_frame"))
+    optical_mid = optical_frames[len(optical_frames) // 2] if optical_frames else None
+    sar_start = safe_int(row.get("sar_start_frame"))
+    sar_end = safe_int(row.get("sar_end_frame"))
+    sar_count = safe_int(row.get("sar_window_frame_count"))
+    if sar_count is None and sar_start is not None and sar_end is not None:
+        sar_count = sar_end - sar_start + 1
+
+    draw_card(
+        draw,
+        (60, 735, 790, 270),
+        "对象与时间窗",
+        [
+            f"光学起止帧：{optical_start if optical_start is not None else '无'} -> {optical_end if optical_end is not None else '无'}；中间帧：{optical_mid if optical_mid is not None else '无'}。",
+            f"雷达起止帧：{sar_start if sar_start is not None else '未生成'} -> {sar_end if sar_end is not None else '未生成'}；窗口宽度：{sar_count if sar_count is not None else '无'}。",
+            f"状态：{status}；spatial_prior_status={row.get('spatial_prior_status', '')}。",
+        ],
+        border=color,
+    )
+    draw_timeline(draw, (910, 735, 820, 270), row)
+
+    draw_spatial_canvas(draw, (60, 1040, 790, 450), row)
+
+    state = state_lines(row, frame_rows)
+    padding, az_margin, range_reason = impact_text(row, temporal_row)
+    draw_card(
+        draw,
+        (910, 1040, 820, 450),
+        "状态如何影响时间窗和空间先验",
+        [
+            "状态标签：" + "；".join(state[:5]),
+            "时间窗余量：" + padding,
+            "方位余量：" + az_margin,
+            "距离向：" + range_reason,
+        ],
+        border="#bae6fd",
+    )
+
+    az = parse_azimuth(str(row.get("azimuth_center_or_interval", "")))
+    az_text = "无"
+    if az["start"] != "" and az["end"] != "":
+        az_text = f"{float(az['start']):.2f}° 到 {float(az['end']):.2f}°，宽 {float(az['width']):.2f}°"
+    draw_card(
+        draw,
+        (60, 1535, 790, 350),
+        "当前弱在哪里",
+        [
+            f"方位向：{'可用弱先验' if is_true(row.get('azimuth_prior_available')) else '不可用'}；区间 {az_text}。",
+            f"距离向：{row.get('range_prior_mode', '') or '未生成'}。核心原因：{missing_fields_text(row)}",
+            "时间窗只告诉后续何时看雷达，不直接给在哪里找。",
+            "这张图不是最终定位，不是 SAR 候选框，不是自动标注建议。",
+        ],
+        border="#fde68a",
+    )
+    draw_card(
+        draw,
+        (910, 1535, 820, 350),
+        "字段不足时的替代说明",
+        [
+            missing_fields_text(row),
+            "不能画真实 SAR 空间位置：本轮不读取 SAR 图像，也没有运行时安全距离向收敛字段。",
+            "暂时代替图：真实光学帧 + 框、SAR 时间轴、方位弱先验示意、距离向 broad_unknown 说明。",
+        ],
+        border="#fecaca",
+    )
+
+    draw.text((60, 1950), "边界确认：未读取 SAR 图像，未用 SAR GT，未生成搜索区域/候选框，未评分，未自动标注。", font=FONTS["body"], fill="#0f172a")
+    draw.text((60, 1988), f"生成依据：OTY2 已有时间窗与运行时空间先验；光学帧来自本地 optical_frames_dir。", font=FONTS["small"], fill="#475569")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    page.save(out_path, format="PNG", optimize=True)
+
     return {
-        "row_count": len(enriched),
-        "result_class_counts": dict(counts_by_class),
-        "per_scene_result_counts": {scene: dict(counter) for scene, counter in counts_by_scene.items()},
-        "weakness_source_counts": dict(weakness_counts),
-        "sar_window_frame_count_min": min(window_widths) if window_widths else None,
-        "sar_window_frame_count_max": max(window_widths) if window_widths else None,
-        "sar_window_frame_count_mean": round(sum(window_widths) / len(window_widths), 3) if window_widths else None,
-        "azimuth_width_deg_min": round(min(az_widths), 3) if az_widths else None,
-        "azimuth_width_deg_max": round(max(az_widths), 3) if az_widths else None,
-        "azimuth_width_deg_mean": round(sum(az_widths) / len(az_widths), 3) if az_widths else None,
-        "source_runtime_spatial_prior_timestamp": source_summary.get("timestamp", ""),
-        "source_normal_spatial_priors": source_summary.get("normal_spatial_priors", ""),
-        "source_review_only_spatial_contexts": source_summary.get("review_only_spatial_contexts", ""),
-        "source_blocked": source_summary.get("blocked", ""),
-        **boundary,
+        "optical_start_frame": "" if optical_start is None else optical_start,
+        "optical_mid_frame": "" if optical_mid is None else optical_mid,
+        "optical_end_frame": "" if optical_end is None else optical_end,
+        "sar_start_frame": "" if sar_start is None else sar_start,
+        "sar_end_frame": "" if sar_end is None else sar_end,
+        "sar_window_frame_count": "" if sar_count is None else sar_count,
+        "has_real_optical_frames": existing_frames == min(3, len(frame_rows)) and existing_frames > 0,
+        "primary_boxes_drawn": primary_total,
+        "secondary_boxes_drawn": secondary_total,
+        "azimuth_interval_deg": az_text,
+        "azimuth_width_deg": "" if az["width"] == "" else f"{float(az['width']):.3f}",
+        "range_status_cn": "宽未知" if "broad_unknown" in str(row.get("range_prior_mode", "")) else "未生成或其他",
+        "weakness_cn": weakness_cn(row),
+        "missing_fields_cn": missing_fields_text(row),
+        "local_page_path": str(out_path),
     }
 
 
-def markdown_table(rows: Sequence[Sequence[Any]], headers: Sequence[str]) -> str:
-    lines = [
-        "| " + " | ".join(headers) + " |",
-        "| " + " | ".join("---" for _ in headers) + " |",
-    ]
-    for row in rows:
-        lines.append("| " + " | ".join(str(value) for value in row) + " |")
-    return "\n".join(lines)
+def weakness_cn(row: Mapping[str, Any]) -> str:
+    if str(row.get("spatial_prior_status", "")) == "blocked_missing_object_level_flow":
+        return "目标流缺失导致无法对象级映射"
+    if is_true(row.get("blocked")):
+        return "对象 not-ready / short-noise 被阻断"
+    if "broad_unknown" in str(row.get("range_prior_mode", "")):
+        if is_true(row.get("review_only_context")):
+            return "距离向宽未知 + 对象含混，仅审阅"
+        if str(row.get("spatial_prior_status", "")) == "loose_spatial_prior_generated":
+            return "距离向宽未知 + 状态不确定导致宽松先验"
+        return "距离向宽未知是主要短板"
+    return "弱点不突出"
 
 
 def render_report(
@@ -848,175 +773,252 @@ def render_report(
     artifacts: Mapping[str, Any],
     source_paths: Mapping[str, str],
 ) -> str:
-    per_scene = summary["per_scene_result_counts"]
-    scene_rows = []
-    for scene in sorted(per_scene):
-        counts = per_scene[scene]
-        scene_rows.append(
-            [
-                f"`{scene}`",
-                counts.get("normal_stable_or_primary", 0),
-                counts.get("relaxed_normal_downstream", 0),
-                counts.get("review_only_context", 0),
-                counts.get("blocked_not_ready_object", 0) + counts.get("blocked_scene_missing_object_flow", 0),
-            ]
+    scene_lines = []
+    for scene, counts in sorted(summary["per_scene_status_counts"].items()):
+        scene_lines.append(
+            f"| `{scene}` | {counts.get('正常', 0)} | {counts.get('宽松', 0)} | {counts.get('仅审阅', 0)} | {counts.get('阻断', 0) + counts.get('阻断：缺目标流', 0)} |"
         )
-    weakness_rows = [[f"`{key}`", value] for key, value in sorted(summary["weakness_source_counts"].items())]
-    boundary_rows = [[f"`{key}`", f"`{str(value).lower()}`"] for key, value in BOUNDARY_FLAGS.items()]
-
-    return f"""# OTY2 运行时空间先验可视化诊断报告
+    sample_lines = []
+    for sample in summary["sample_pages"]:
+        sample_lines.append(
+            f"| {sample['sample_role']} | `{sample['scene']}` | `{sample['object_hypothesis_id'] or 'scene-only'}` | {sample['status_cn']} | `{sample['repo_sample_path']}` |"
+        )
+    boundary_lines = "\n".join(f"- {key}: `{str(value).lower()}`" for key, value in BOUNDARY_FLAGS.items())
+    return f"""# OTY2 对象级弱空间先验可视化诊断报告
 
 生成时间：`{timestamp}`
 
-本报告解释当前 OTY2 运行时空间先验为什么仍然偏弱。它只读取已经生成的目标级时间窗、时间窗质量审阅和运行时空间先验审计结果；不读取雷达图像，不使用雷达真值，不做空间搜索，不生成搜索区域或候选框，不评分，不选择，不训练，不给自动标注建议。
+本轮修正了上一版偏流程图的问题：现在每个样例页都以**真实光学帧 + 主/辅目标框 + 雷达时间轴 + 空间先验示意**为核心。图内文字以中文解释为主，英文只保留必要字段名。
 
-## 一句话结论
+## 这轮图画了什么
 
-当前弱空间先验的最核心短板在**距离向**：所有非 blocked 的 normal / relaxed / review-only 行都只能给出 `broad_unknown_range_prior`。方位向已经有弱约束，但它来自运行时安全的配置几何和光学 bbox envelope；时间窗已经能回答“什么时候看”，但不能回答“在哪里找”。
+- 本地全量对象页：`{summary['local_page_count']}` 张。
+- 远端精选样例页：`{len(summary['sample_pages'])}` 张，放在 `reports/oty2/samples/visualizations/`。
+- 每个对象页至少展示起始/中间/结束三个光学帧位置；能找到本地光学帧时直接嵌入真实帧并画主观测框。
+- 有辅助观测的帧使用橙色虚线框标出，并在说明区写出它如何扩大时间窗和方位余量。
+- SAR 侧没有读取真实 SAR 图，只画时间轴、帧窗口和“方位弱约束 + 距离向宽未知”的示意画布。
 
-## 总体分布
+## 当前弱空间先验主要弱在哪里
 
-{markdown_table(scene_rows, ["scene", "normal primary", "relaxed normal", "review-only", "blocked"])}
+最主要的弱点仍然是**距离向**。当前可进入 normal / relaxed / review-only 的对象都有时间窗，也大多有方位弱先验；但距离向仍是 `broad_unknown_range_prior`，因为当前 OTY2 输入里没有运行时安全的 per-object range/depth 几何字段。
 
-- normal downstream 总数：`{summary.get("source_normal_spatial_priors")}`，其中稳定/主观测 normal 为 `4`，带不确定性扩展的 relaxed normal 为 `7`。
-- review-only 空间上下文：`{summary.get("source_review_only_spatial_contexts")}`。
-- blocked：`{summary.get("source_blocked")}`，其中 `GM_RM011` 是“有时间元数据、无目标流”的场景级 blocked。
-- SAR 时间窗宽度范围：`{summary.get("sar_window_frame_count_min")}` 到 `{summary.get("sar_window_frame_count_max")}` 帧，均值约 `{summary.get("sar_window_frame_count_mean")}` 帧。
-- 方位角宽度范围：`{summary.get("azimuth_width_deg_min")}` 到 `{summary.get("azimuth_width_deg_max")}` 度，均值约 `{summary.get("azimuth_width_deg_mean")}` 度。
+- 方位向：有弱约束，来自光学 bbox / bbox envelope 与配置几何映射；edge、partial、secondary、handoff 会扩大它。
+- 距离向：最弱，当前没有可审计的目标级距离收敛信息，所以不能画真实距离位置。
+- 目标状态：决定正常、宽松、仅审阅或阻断。它不是评分器，也不是身份真值。
+- 时间窗：只限制“何时看雷达”，不直接提供“在哪里找”。
+- 场景几何：当前主要起作用的是光学 x 到方位角的弱映射；距离向几何还没真正进入运行时安全输入。
 
-## 当前“弱”具体弱在哪里
+## 每个输入部件的作用
 
-{markdown_table(weakness_rows, ["weakness source", "count"])}
+- 主观测：提供对象级连续框，是正常空间先验的核心输入。
+- 辅助观测：不证明身份真值；用于暴露 partial / duplicate / handoff / 多观测不确定性，并扩大时间窗或方位余量。
+- edge / partial / duplicate / handoff：不直接阻断，优先扩大或放松先验。
+- ambiguous / review-only：不混入正常下游输入，只作为审阅上下文。
+- short / noise / not-ready：阻断正常空间先验。
+- 时间窗：由 24 fps 光学帧与 50 fps 雷达帧的软件同步换算得到，保留抖动和状态余量。
+- 场景几何：当前只支持弱方位解释；不足以生成真实 SAR 空间位置。
 
-1. **距离向弱**：这是最主要的弱。当前输入没有运行时安全的 per-object range/depth 几何，所以所有可用行都保留 `broad_unknown_range_prior`。这是信息缺失导致的弱，同时也是边界保守性：不为了让图好看而编造距离向。
-2. **方位向弱但可用**：方位向来自 `configs/scene_config.yaml` 的配置几何和光学 bbox envelope。它能给“弱方位范围”，但不是最终位置，也不是雷达证据。bbox envelope 宽、edge/partial/secondary/handoff 状态会让方位范围更宽。
-3. **时间窗有用但不是空间信息**：24 fps 到 50 fps 的软件同步时间窗只限定“雷达帧什么时候相关”，不直接产生距离向或二维空间区域。
-4. **状态不确定性弱**：secondary、edge、partial、duplicate、handoff 不直接 blocked，而是扩大余量或降级到 relaxed；ambiguous/review-required 进入 review-only；short/noise 或 not-ready 才 blocked。
-5. **场景/对象困难导致的弱**：`GM_RM019` 同时包含较多 review-only 和 blocked 对象，弱主要来自对象状态复杂和 not-ready 目标；`GM_RM011` 的弱是目标流缺失，不是时间元数据缺失。
+## 场景统计
 
-## 各组成部分的作用
+| scene | 正常 | 宽松 | 仅审阅 | 阻断 |
+| --- | ---: | ---: | ---: | ---: |
+{chr(10).join(scene_lines)}
 
-- **光学目标流**：提供目标级 object_hypothesis_id、主/辅观测、起止帧、状态标签和不确定性来源。它使 OTY2 不再回退到单帧检测框级合并。
-- **主观测**：决定一个对象能否形成正常运行时输入。稳定主连续目标使用较小余量。
-- **辅助观测**：不是身份真值；它提示 partial、duplicate、handoff 或跨片段不确定性，因此扩大方位和时间余量。
-- **edge / partial / duplicate / handoff / ambiguity**：edge/partial/duplicate/handoff 倾向于扩大或放松先验；ambiguity/review-required 倾向于 review-only；short/noise 则 blocked。
-- **时间窗**：从光学帧段和 24:50 软件同步契约得到 SAR 帧范围。它限制“何时看雷达”，但不产生“在哪里找”的空间位置。
-- **场景几何**：当前真正起作用的是光学 x 到方位角的弱配置映射；距离向几何尚未形成运行时安全的目标级字段。
-- **规则层**：把对象分成 normal、relaxed、review-only、blocked。它的作用是保留不确定性来源，而不是把弱证据硬说成真值。
-- **最终空间先验**：表达运行时安全的空间约束描述；不是最终位置，不是 SAR 搜索结果，不是候选框，不是标注建议。
+## 远端代表样例
 
-## 联合逻辑
+| 样例 | scene | object | 状态 | 文件 |
+| --- | --- | --- | --- | --- |
+{chr(10).join(sample_lines)}
 
-一个对象的路径是：
+## 哪些对象可以继续往下走
 
-`光学目标流 -> 目标状态/主辅观测 -> 24:50 软件同步时间窗 -> 方位弱映射 -> 距离向可用性检查 -> normal / relaxed / review-only / blocked`
+- 可以继续作为下游正常输入：`正常` 和 `宽松` 对象。宽松对象必须携带不确定性说明，不能被当成精确位置。
+- 只能审阅：`仅审阅` 对象。它们可作为人工诊断上下文，不进入 normal downstream。
+- 被阻断：`阻断` 或 `阻断：缺目标流`。`GM_RM011` 只有时间元数据可用，缺光学目标流，不能生成对象级映射。
 
-- 直接传递的信息：`scene`、`object_hypothesis_id`、目标起止帧、主辅观测标记、状态类别、时间窗起止帧。
-- 扩余量时起作用的信息：secondary、edge、partial、duplicate、handoff、ambiguity、软件同步抖动和时间换算取整余量。
-- 分流时起作用的信息：稳定主连续目标进入 normal；有不确定性但仍可用的目标进入 relaxed；强 ambiguity/review-required 进入 review-only；short/noise、not-ready、缺目标流进入 blocked。
-- 较窄先验来自稳定主观测且状态不复杂的对象；宽松先验来自仍可用但带 secondary/edge/handoff 的对象；review-only 来自强含混对象；blocked 来自 short/noise 或缺目标级输入。
+## 字段不足与替代图
 
-## 可视化怎么读
+缺字段：
 
-- `overview_distribution.svg`：看每个场景 normal / relaxed / review-only / blocked 的数量，以及时间窗宽度分布。
-- `weakness_decomposition.svg`：看时间、方位、距离、状态、几何五个维度的强弱分解。绿色/蓝色只表示诊断可用性，不是性能分数。
-- `rule_influence.svg`：看规则如何把对象从目标流分到 normal、relaxed、review-only 或 blocked。
-- 对象级样例图：展示单个对象从光学目标流到时间窗、再到空间先验类别的链条。
+- 运行时安全的目标级距离/深度字段。
+- 能把光学对象转换为 SAR 距离向约束的可审计几何。
+- 对 `GM_RM011`，缺目标级光学对象流。
 
-## 下一步最值得补强什么
+因此不能画：
 
-优先补强**运行时安全的距离向几何**，例如可审计的场景级 range convention、目标级弱深度/尺度先验、或者不依赖 SAR 图像和真值的粗距离分层。其次再收紧方位向：把 bbox envelope、edge/partial 方向和多分量先验拆开，而不是继续把所有不确定性压成一个很宽的单区间。
+- 真实 SAR 空间位置。
+- SAR 搜索区域。
+- SAR 候选框或自动标注。
 
-本轮不建议直接进入 SAR 图像搜索。当前报告先把弱在哪里、为什么弱、哪些弱是设计保守性讲清楚，便于下一阶段决定补哪类运行时字段。
+暂时替代：
 
-## 输出文件
+- 真实光学帧 + 主/辅框。
+- 雷达时间轴 + 当前目标 SAR 帧窗口。
+- 方位弱先验示意。
+- 距离向 `broad_unknown_range_prior` 的显式说明。
 
-- 本地全量输出目录：`{artifacts.get("local_output_dir")}`
-- 本地全量对象级图目录：`{artifacts.get("object_visual_dir")}`
-- 远端总览报告：`{artifacts.get("repo_report")}`
-- 远端总览统计表：`{artifacts.get("repo_summary_csv")}`
-- 远端精选 SVG 样例目录：`{artifacts.get("repo_samples_dir")}`
+## 下一步建议
+
+优先补强运行时安全的距离向信息：例如场景级 range convention、目标级弱深度/尺度先验、或不依赖 SAR 图像/真值的粗距离分层。第二优先级是把当前单一方位包络拆成多分量或方向性先验，尤其针对 edge / partial / duplicate / handoff 对象。
 
 ## 输入来源
 
-- runtime spatial priors: `{source_paths.get("runtime_spatial_priors")}`
-- runtime spatial prior summary: `{source_paths.get("runtime_spatial_prior_summary")}`
-- temporal window quality audit: `{source_paths.get("temporal_quality_audit")}`
+- runtime spatial priors: `{source_paths['runtime_spatial_priors']}`
+- temporal windows: `{source_paths['temporal_windows']}`
+- temporal quality audit: `{source_paths['temporal_quality_audit']}`
+- object state stream: `{source_paths['object_frame_states']}`
+- optical frames: `{source_paths['optical_manifest']}`
+
+## 输出
+
+- 本地全量目录：`{artifacts['local_output_dir']}`
+- 本地对象页目录：`{artifacts['local_pages_dir']}`
+- 本地中文报告：`{artifacts['local_report']}`
+- 远端报告：`{artifacts['repo_report']}`
+- 远端汇总表：`{artifacts['repo_summary_csv']}`
+- 远端样例目录：`{artifacts['repo_sample_dir']}`
 
 ## Boundary Flags
 
-{markdown_table(boundary_rows, ["flag", "value"])}
+{boundary_lines}
 """
 
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
     timestamp = args.timestamp or datetime.now().strftime("%Y%m%d_%H%M%S")
     prior_csv = Path(args.runtime_spatial_priors) if args.runtime_spatial_priors else latest_path("oty2_object_runtime_spatial_priors_*.csv")
-    source_summary_json = (
-        Path(args.runtime_spatial_prior_summary)
-        if args.runtime_spatial_prior_summary
-        else latest_path("oty2_runtime_spatial_prior_summary_*.json")
-    )
+    temporal_csv = Path(args.temporal_windows) if args.temporal_windows else latest_path("oty2_object_sar_temporal_windows_*.csv")
     quality_csv = Path(args.temporal_quality_audit) if args.temporal_quality_audit else latest_path("oty2_object_sar_temporal_window_quality_audit_*.csv")
-    source_summary = json.loads(source_summary_json.read_text(encoding="utf-8"))
-    prior_rows = read_csv(prior_csv)
-    quality_rows = read_csv(quality_csv)
-    enriched = enrich_rows(prior_rows, quality_rows)
+    object_states_csv = Path(args.object_frame_states) if args.object_frame_states else DEFAULT_P4G_OUTPUT_DIR / "oty1t_object_frame_state_timeseries_generalized.csv"
+    manifest_csv = Path(args.optical_manifest)
 
-    local_output_dir = DEFAULT_OUTPUT_PARENT / f"oty2_runtime_spatial_prior_visual_diagnosis_{timestamp}"
-    local_visuals = create_visuals(enriched, source_summary, local_output_dir, SAMPLE_DIR, timestamp)
+    priors = read_csv(prior_csv)
+    temporal_rows = merge_rows_by_key(read_csv(temporal_csv))
+    quality_rows = merge_rows_by_key(read_csv(quality_csv))
+    object_states = read_csv(object_states_csv)
+    by_object: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
+    for state in object_states:
+        by_object[(str(state.get("scene", "")), str(state.get("object_hypothesis_id", "")))].append(state)
+    for rows in by_object.values():
+        rows.sort(key=lambda row: safe_int(row.get("optical_frame_num"), 0) or 0)
 
-    visual_summary_csv = local_output_dir / "visual_diagnosis_summary.csv"
-    visual_summary_json = local_output_dir / "visual_diagnosis_summary.json"
-    local_report_md = local_output_dir / "visual_diagnosis_report.md"
-    repo_report_md = REPORT_DIR / f"oty2_runtime_spatial_prior_visual_diagnosis_report_{timestamp}.md"
+    frame_paths = load_frame_paths(manifest_csv)
+    manifest_dirs = load_manifest_frame_dirs(manifest_csv)
+
+    local_output_dir = OUTPUT_PARENT / f"oty2_runtime_spatial_prior_visual_diagnosis_{timestamp}"
+    local_pages_dir = local_output_dir / "object_pages"
+    local_output_dir.mkdir(parents=True, exist_ok=True)
+    local_pages_dir.mkdir(parents=True, exist_ok=True)
+    SAMPLE_VIS_DIR.mkdir(parents=True, exist_ok=True)
+
+    sample_lookup = {value: key for key, value in SAMPLE_SELECTION.items()}
+    summary_rows: list[dict[str, Any]] = []
+    sample_pages: list[dict[str, Any]] = []
+    per_scene_status: dict[str, Counter[str]] = defaultdict(Counter)
+
+    for row in priors:
+        scene = str(row.get("scene", ""))
+        object_id = str(row.get("object_hypothesis_id", ""))
+        key = (scene, object_id)
+        selected_rows = choose_frame_rows(by_object.get(key, []))
+        if not selected_rows and scene and not object_id:
+            selected_rows = scene_only_frame_rows(scene, frame_paths, manifest_dirs)
+
+        status = status_cn(row)
+        per_scene_status[scene][status] += 1
+        page_name = f"oty2_object_diag_{filename_token(scene, object_id)}_{timestamp}.png"
+        local_page = local_pages_dir / page_name
+        merged_temporal = dict(temporal_rows.get(key, {}))
+        merged_temporal.update(quality_rows.get(key, {}))
+        page_info = render_object_page(row, selected_rows, merged_temporal, frame_paths, manifest_dirs, local_page)
+
+        sample_role = sample_lookup.get(key, "")
+        repo_sample_path = ""
+        if sample_role:
+            repo_name = f"oty2_object_diag_{SAMPLE_ROLE_SLUG[sample_role]}_{filename_token(scene, object_id)}_{timestamp}.png"
+            repo_sample = SAMPLE_VIS_DIR / repo_name
+            shutil.copyfile(local_page, repo_sample)
+            repo_sample_path = str(repo_sample)
+            sample_pages.append(
+                {
+                    "sample_role": sample_role,
+                    "scene": scene,
+                    "object_hypothesis_id": object_id,
+                    "status_cn": status,
+                    "repo_sample_path": repo_sample_path,
+                }
+            )
+
+        summary_rows.append(
+            {
+                "scene": scene,
+                "object_hypothesis_id": object_id,
+                "sample_role": sample_role,
+                "status_cn": status,
+                "status_code": row.get("spatial_prior_status", ""),
+                "edge_partial_state": row.get("edge_or_partial_state", ""),
+                "duplicate_handoff_state": row.get("duplicate_or_handoff_state", ""),
+                "ambiguity_status": row.get("ambiguity_status", ""),
+                "azimuth_prior_available": row.get("azimuth_prior_available", ""),
+                "range_prior_mode": row.get("range_prior_mode", ""),
+                "repo_sample_path": repo_sample_path,
+                **page_info,
+            }
+        )
+
+    local_summary_csv = local_output_dir / "object_visual_diagnosis_summary.csv"
+    local_summary_json = local_output_dir / "object_visual_diagnosis_summary.json"
+    local_report = local_output_dir / "object_visual_diagnosis_report.md"
+    repo_report = REPORT_DIR / f"oty2_runtime_spatial_prior_visual_diagnosis_report_{timestamp}.md"
     repo_summary_csv = REPORT_DIR / f"oty2_runtime_spatial_prior_visual_summary_{timestamp}.csv"
 
-    summary = summarize(enriched, source_summary)
     artifacts = {
         "local_output_dir": str(local_output_dir),
-        "object_visual_dir": local_visuals["objects_dir"],
-        "local_overview_svg": local_visuals["overview"],
-        "local_weakness_decomposition_svg": local_visuals["weakness_decomposition"],
-        "local_rule_influence_svg": local_visuals["rule_influence"],
-        "local_visual_summary_csv": str(visual_summary_csv),
-        "local_visual_summary_json": str(visual_summary_json),
-        "local_report": str(local_report_md),
-        "repo_report": str(repo_report_md),
+        "local_pages_dir": str(local_pages_dir),
+        "local_summary_csv": str(local_summary_csv),
+        "local_summary_json": str(local_summary_json),
+        "local_report": str(local_report),
+        "repo_report": str(repo_report),
         "repo_summary_csv": str(repo_summary_csv),
-        "repo_samples_dir": str(SAMPLE_DIR),
-        "repo_sample_paths": local_visuals["repo_sample_paths"],
+        "repo_sample_dir": str(SAMPLE_VIS_DIR),
     }
     source_paths = {
         "runtime_spatial_priors": str(prior_csv),
-        "runtime_spatial_prior_summary": str(source_summary_json),
+        "temporal_windows": str(temporal_csv),
         "temporal_quality_audit": str(quality_csv),
+        "object_frame_states": str(object_states_csv),
+        "optical_manifest": str(manifest_csv),
     }
-    summary.update(
-        {
-            "generated_at": datetime.now().isoformat(timespec="seconds"),
-            "timestamp": timestamp,
-            "stage": "OTY2-runtime-spatial-prior-visual-diagnosis-v1",
-            "source_paths": source_paths,
-            "artifacts": artifacts,
-            **BOUNDARY_FLAGS,
-        }
-    )
+    summary = {
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "timestamp": timestamp,
+        "stage": "OTY2-object-level-real-optical-visual-diagnosis-v2",
+        "local_page_count": len(summary_rows),
+        "sample_page_count": len(sample_pages),
+        "per_scene_status_counts": {scene: dict(counter) for scene, counter in per_scene_status.items()},
+        "sample_pages": sample_pages,
+        "source_paths": source_paths,
+        "artifacts": artifacts,
+        "real_optical_frames_used": True,
+        **BOUNDARY_FLAGS,
+    }
 
-    write_csv(visual_summary_csv, enriched, SUMMARY_FIELDS)
-    write_csv(repo_summary_csv, enriched, SUMMARY_FIELDS)
-    write_json(visual_summary_json, summary)
+    write_csv(local_summary_csv, summary_rows, SUMMARY_FIELDS)
+    write_csv(repo_summary_csv, summary_rows, SUMMARY_FIELDS)
+    write_json(local_summary_json, summary)
     report_text = render_report(timestamp, summary, artifacts, source_paths)
-    local_report_md.write_text(report_text, encoding="utf-8")
-    repo_report_md.write_text(report_text, encoding="utf-8")
+    local_report.write_text(report_text, encoding="utf-8")
+    repo_report.write_text(report_text, encoding="utf-8")
     return {"summary": summary, "artifacts": artifacts}
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runtime-spatial-priors", default="")
-    parser.add_argument("--runtime-spatial-prior-summary", default="")
+    parser.add_argument("--temporal-windows", default="")
     parser.add_argument("--temporal-quality-audit", default="")
+    parser.add_argument("--object-frame-states", default="")
+    parser.add_argument("--optical-manifest", default="manifests/oty0_yolo_manifest.csv")
     parser.add_argument("--timestamp", default="")
     return parser
 
