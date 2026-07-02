@@ -1,0 +1,114 @@
+{
+  "row_count": 28,
+  "normal_spatial_priors": 11,
+  "review_only_spatial_contexts": 7,
+  "blocked": 10,
+  "spatial_prior_status_counts": {
+    "blocked_missing_object_level_flow": 1,
+    "loose_spatial_prior_generated": 7,
+    "normal_spatial_prior_generated": 4,
+    "review_only_spatial_context_generated": 7,
+    "blocked_no_spatial_prior": 9
+  },
+  "spatial_prior_mode_counts": {
+    "blocked_no_object_level_spatial_prior": 1,
+    "expanded_azimuth_interval_with_broad_unknown_range": 7,
+    "azimuth_interval_with_broad_unknown_range": 4,
+    "review_only_azimuth_context_with_broad_unknown_range": 7,
+    "blocked_no_spatial_prior": 9
+  },
+  "geometry_confidence_status_counts": {
+    "blocked_missing_object_level_flow": 1,
+    "weak_azimuth_only_expanded_geometry": 8,
+    "weak_azimuth_only_primary_geometry": 3,
+    "review_only_weak_azimuth_context_range_unknown": 7,
+    "blocked_no_runtime_spatial_prior": 9
+  },
+  "range_prior_mode_counts": {
+    "not_generated_no_object_flow": 1,
+    "broad_unknown_range_prior": 11,
+    "broad_unknown_range_prior_review_only": 7,
+    "not_generated_for_blocked_object": 9
+  },
+  "azimuth_prior_available_counts": {
+    "false": 10,
+    "true": 18
+  },
+  "per_scene": {
+    "GM_RM011": {
+      "rows": 1,
+      "normal_spatial_priors": 0,
+      "review_only_spatial_contexts": 0,
+      "blocked": 1,
+      "azimuth_available": 0,
+      "range_broad_unknown": 0,
+      "geometry_insufficient": 0,
+      "degradation_reasons": {
+        "temporal_metadata_available_but_object_flow_missing": 1
+      }
+    },
+    "GM_RM017": {
+      "rows": 6,
+      "normal_spatial_priors": 5,
+      "review_only_spatial_contexts": 1,
+      "blocked": 0,
+      "azimuth_available": 6,
+      "range_broad_unknown": 6,
+      "geometry_insufficient": 0,
+      "degradation_reasons": {
+        "range_prior_degraded_to_broad_unknown": 6
+      }
+    },
+    "GM_RM019": {
+      "rows": 21,
+      "normal_spatial_priors": 6,
+      "review_only_spatial_contexts": 6,
+      "blocked": 9,
+      "azimuth_available": 12,
+      "range_broad_unknown": 12,
+      "geometry_insufficient": 0,
+      "degradation_reasons": {
+        "object_not_ready_for_spatial_prior": 9,
+        "range_prior_degraded_to_broad_unknown": 12
+      }
+    }
+  },
+  "generated_at": "2026-07-02T14:50:10",
+  "timestamp": "20260702_144929",
+  "stage": "OTY2-runtime-spatial-prior-audit-v1",
+  "azimuth_mapping": {
+    "source": "configs/scene_config.yaml global_geometry.fan",
+    "azimuth_k": 0.0875154,
+    "azimuth_b": -40.413555,
+    "theta_offset_deg": 0.0,
+    "interpretation": "weak_configured_geometry_metadata_not_final_location"
+  },
+  "range_prior_policy": "broad_unknown_range_prior_until_runtime_safe_per_object_range_geometry_exists",
+  "source_paths": {
+    "temporal_window_quality_audit": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_sar_temporal_window_quality_audit_20260702_142454.csv",
+    "object_sar_temporal_windows": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_sar_temporal_windows_20260702_135912.csv",
+    "object_hypotheses": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_hypotheses_generalized.csv",
+    "object_frame_states": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_frame_state_timeseries_generalized.csv",
+    "scene_config": "D:\\profile\\research\\optical-sar-visual-diagnosis\\configs\\scene_config.yaml"
+  },
+  "sar_image_content_used": false,
+  "sar_spatial_search_implemented": false,
+  "sar_search_region_generated": false,
+  "sar_candidate_boxes_generated": false,
+  "candidate_box_scoring_used": false,
+  "sar_gt_used": false,
+  "final_manual_oracle_review_runtime_fields_used": false,
+  "selector_or_ranking_used": false,
+  "annotation_proposal_entered": false,
+  "training_or_threshold_tuning_entered": false,
+  "identity_truth_claimed": false,
+  "detection_box_level_merge_reintroduced": false,
+  "spatial_prior_claimed_as_final_location": false,
+  "artifacts": {
+    "runtime_spatial_prior_contract": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_runtime_spatial_prior_contract_20260702_144929.md",
+    "object_runtime_spatial_priors": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_runtime_spatial_priors_20260702_144929.csv",
+    "runtime_spatial_prior_summary": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_runtime_spatial_prior_summary_20260702_144929.json",
+    "runtime_spatial_prior_report": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_runtime_spatial_prior_report_20260702_144929.md",
+    "object_runtime_spatial_priors_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\oty2_object_runtime_spatial_priors_sample.csv"
+  }
+}
