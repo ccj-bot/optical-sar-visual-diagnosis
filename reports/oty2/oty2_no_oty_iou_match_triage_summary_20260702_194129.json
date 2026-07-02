@@ -1,0 +1,40 @@
+{
+  "timestamp": "20260702_194129",
+  "triage_rows": 12,
+  "reason_counts": {
+    "primary_secondary_observation_mismatch": 7,
+    "possible_optical_frame_offset_or_track_gap": 4,
+    "secondary_observation_support_but_primary_gate_failed": 1
+  },
+  "recommendation_counts": {
+    "需要人工审阅；可作为 secondary-supported weak correspondence 候选，不应直接进 primary-only paired 子集。": 7,
+    "需要人工审阅相邻帧；先不要进入当前机制样本，除非确认帧号或对象流断裂。": 4,
+    "需要人工审阅；可考虑进入 weak correspondence，但必须显式标记 secondary-only 支持。": 1
+  },
+  "weak_correspondence_candidates": 8,
+  "manual_review_required": 12,
+  "excluded_from_current_mechanism_sample": 4,
+  "local_visualization_count": 12,
+  "remote_sample_visualization_count": 3,
+  "gm011_missing_object_stream_rows": 195,
+  "gm011_sar_only_rows": 6,
+  "boundary_flags": {
+    "gt_accounting_read": true,
+    "review_queue_or_gt_source_reused_from_accounting": true,
+    "existing_oty_outputs_read": true,
+    "optical_frame_content_read_for_visual_triage": true,
+    "sar_image_content_read": false,
+    "sar_gt_used_for_runtime_prior_construction": false,
+    "automatic_annotation_proposal_generated": false,
+    "training_or_threshold_tuning_entered": false,
+    "selector_or_ranking_used": false,
+    "identity_truth_claimed": false
+  },
+  "sources": {
+    "gt_sample_accounting_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_sample_accounting_audit_20260702_192810.csv",
+    "object_frame_state_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_frame_state_timeseries_generalized.csv",
+    "object_hypotheses_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500\\oty1t_object_hypotheses_generalized.csv",
+    "local_full_visual_output": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_no_oty_iou_match_triage_20260702_194129",
+    "repo_sample_visual_output": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\no_oty_iou_match_triage\\no_oty_iou_match_triage_20260702_194129"
+  }
+}
