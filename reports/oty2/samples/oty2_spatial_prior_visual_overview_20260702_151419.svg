@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="820" viewBox="0 0 940 820">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+</marker>
+</defs>
+<rect width="100%" height="100%" fill="#f8fafc"/>
+<text x="34" y="44" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="24" fill="#0f172a" font-weight="800">OTY2 runtime spatial prior visual diagnosis overview</text>
+<text x="34" y="72" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#475569" font-weight="400">Counts separate normal, relaxed, review-only, and blocked rows. This is a mechanism audit, not SAR search.</text>
+<text x="34" y="139" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="700">GM_RM011</text>
+<rect x="170" y="120" width="31" height="28" fill="#7c3aed"/>
+<text x="178" y="139" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="700">1</text>
+<rect x="170" y="120" width="660" height="28" fill="none" stroke="#cbd5e1"/>
+<text x="845" y="139" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#475569" font-weight="400">total 1</text>
+<text x="34" y="197" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="700">GM_RM017</text>
+<rect x="170" y="178" width="62" height="28" fill="#2563eb"/>
+<text x="178" y="197" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="700">2</text>
+<rect x="232" y="178" width="94" height="28" fill="#0891b2"/>
+<text x="240" y="197" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="700">3</text>
+<rect x="326" y="178" width="31" height="28" fill="#a16207"/>
+<text x="334" y="197" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="700">1</text>
+<rect x="170" y="178" width="660" height="28" fill="none" stroke="#cbd5e1"/>
+<text x="845" y="197" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#475569" font-weight="400">total 6</text>
+<text x="34" y="255" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#0f172a" font-weight="700">GM_RM019</text>
+<rect x="170" y="236" width="62" height="28" fill="#2563eb"/>
+<text x="178" y="255" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="700">2</text>
+<rect x="232" y="236" width="125" height="28" fill="#0891b2"/>
+<text x="240" y="255" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="700">4</text>
+<rect x="357" y="236" width="188" height="28" fill="#a16207"/>
+<text x="365" y="255" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="700">6</text>
+<rect x="545" y="236" width="282" height="28" fill="#dc2626"/>
+<text x="553" y="255" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="700">9</text>
+<rect x="170" y="236" width="660" height="28" fill="none" stroke="#cbd5e1"/>
+<text x="845" y="255" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#475569" font-weight="400">total 21</text>
+<rect x="60" y="320" width="14" height="14" fill="#2563eb"/>
+<text x="82" y="332" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">normal primary</text>
+<rect x="230" y="320" width="14" height="14" fill="#0891b2"/>
+<text x="252" y="332" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">relaxed normal</text>
+<rect x="400" y="320" width="14" height="14" fill="#a16207"/>
+<text x="422" y="332" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">review-only</text>
+<rect x="570" y="320" width="14" height="14" fill="#dc2626"/>
+<text x="592" y="332" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">blocked object</text>
+<rect x="740" y="320" width="14" height="14" fill="#7c3aed"/>
+<text x="762" y="332" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">blocked scene</text>
+<text x="34" y="385" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#0f172a" font-weight="800">Range-direction diagnosis</text>
+<rect x="40" y="405" width="430" height="130" rx="7" fill="#ffffff" stroke="#bae6fd" stroke-width="1.2"/>
+<text x="56" y="433" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#0f172a" font-weight="700">Core weakness</text>
+<text x="56" y="459" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">Non-blocked rows with broad_unknown range: 18.</text>
+<text x="56" y="481" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">Range is intentionally not invented because no</text>
+<text x="56" y="499" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">runtime-safe per-object range/depth geometry is</text>
+<text x="56" y="517" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">present.</text>
+<rect x="500" y="405" width="390" height="130" rx="7" fill="#ffffff" stroke="#fecaca" stroke-width="1.2"/>
+<text x="516" y="433" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#0f172a" font-weight="700">Boundary</text>
+<text x="516" y="459" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">No SAR image content, SAR GT, candidate scoring,</text>
+<text x="516" y="477" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">selector/ranking, or annotation proposal is</text>
+<text x="516" y="495" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">used.</text>
+<text x="516" y="517" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">Azimuth is weak configured geometry and is not</text>
+<text x="516" y="535" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">final position.</text>
+<text x="34" y="575" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#0f172a" font-weight="800">SAR temporal-window width distribution</text>
+<rect x="70" y="650" width="70" height="90" fill="#2563eb"/>
+<text x="78" y="760" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">&lt;=50</text>
+<text x="95" y="642" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#0f172a" font-weight="700">6</text>
+<rect x="190" y="695" width="70" height="45" fill="#2563eb"/>
+<text x="198" y="760" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">51-100</text>
+<text x="215" y="687" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#0f172a" font-weight="700">3</text>
+<rect x="310" y="620" width="70" height="120" fill="#2563eb"/>
+<text x="318" y="760" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">101-150</text>
+<text x="335" y="612" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#0f172a" font-weight="700">8</text>
+<rect x="430" y="725" width="70" height="15" fill="#2563eb"/>
+<text x="438" y="760" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">151-200</text>
+<text x="455" y="717" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#0f172a" font-weight="700">1</text>
+<rect x="550" y="740" width="70" height="0" fill="#2563eb"/>
+<text x="558" y="760" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#334155" font-weight="400">&gt;200</text>
+<text x="575" y="732" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="12" fill="#0f172a" font-weight="700">0</text>
+<text x="680" y="642" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#334155" font-weight="400">total rows: 28</text>
+<text x="680" y="668" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#334155" font-weight="400">normal downstream: 11</text>
+<text x="680" y="694" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#334155" font-weight="400">review-only: 7</text>
+<text x="680" y="720" font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#334155" font-weight="400">blocked: 10</text>
+</svg>
