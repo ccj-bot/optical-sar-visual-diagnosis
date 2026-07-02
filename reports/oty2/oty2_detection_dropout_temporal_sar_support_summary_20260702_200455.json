@@ -8,7 +8,7 @@
     "temporal_continuation_hypothesis_supported": 2
   },
   "temporal_continuation_supported_count": 12,
-  "clean_recovered_by_temporal_continuation_count": 8,
+  "existence_recovered_by_temporal_continuation_count": 8,
   "secondary_supported_truncated_same_vehicle_count": 8,
   "sar_posthoc_supported_dropout_count": 12,
   "yolo_upgrade_candidate_count": 12,
@@ -22,16 +22,16 @@
   "boundary_flags": {
     "optical_frames_read": true,
     "existing_oty_outputs_read": true,
-    "sar_gt_used": true,
-    "sar_image_content_used": true,
-    "sar_posthoc_only": true,
-    "sar_gt_or_image_used_for_runtime_prior_construction": false,
-    "automatic_annotation_proposal_generated": false,
+    "posthoc_sar_gt_used": true,
+    "posthoc_sar_image_content_used": true,
+    "gt_or_sar_image_used_for_runtime_prior_construction": false,
+    "runtime_prior_construction_used_gt": false,
+    "annotation_proposal_entered": false,
     "training_or_threshold_tuning_entered": false,
     "propagated_box_written_as_final_annotation": false,
     "selector_or_ranking_used": false,
     "identity_truth_claimed": false,
-    "model_weights_committed_or_downloaded": false
+    "model_weights_committed": false
   },
   "sources": {
     "no_oty_iou_match_triage_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_no_oty_iou_match_triage_20260702_194129.csv",

@@ -73,7 +73,7 @@ TEMPORAL_FIELDS = [
     "propagated_bbox_review_containment",
     "propagation_diagnostic_status",
     "sample_use_categories",
-    "clean_recovered_by_temporal_continuation",
+    "existence_recovered_by_temporal_continuation",
     "temporal_continuation_with_detection_dropout",
     "secondary_supported_truncated_same_vehicle",
     "sar_posthoc_supported_dropout_case",
@@ -113,16 +113,16 @@ SAR_FIELDS = [
 BOUNDARY_FLAGS = {
     "optical_frames_read": True,
     "existing_oty_outputs_read": True,
-    "sar_gt_used": True,
-    "sar_image_content_used": True,
-    "sar_posthoc_only": True,
-    "sar_gt_or_image_used_for_runtime_prior_construction": False,
-    "automatic_annotation_proposal_generated": False,
+    "posthoc_sar_gt_used": True,
+    "posthoc_sar_image_content_used": True,
+    "gt_or_sar_image_used_for_runtime_prior_construction": False,
+    "runtime_prior_construction_used_gt": False,
+    "annotation_proposal_entered": False,
     "training_or_threshold_tuning_entered": False,
     "propagated_box_written_as_final_annotation": False,
     "selector_or_ranking_used": False,
     "identity_truth_claimed": False,
-    "model_weights_committed_or_downloaded": False,
+    "model_weights_committed": False,
 }
 
 
@@ -460,15 +460,15 @@ def temporal_audit_case(
     if prop_status != "temporal_propagation_can_recover_review_target":
         blockers.append("propagation_needs_manual_review")
 
-    # Clean recovery here means existence continuity can be recovered cleanly;
+    # Existence recovery here means temporal continuity explains target presence;
     # it still remains excluded from full optical-shape statistics.
-    clean_recovered = confidence in {"high", "medium_high"} and prop_status == "temporal_propagation_can_recover_review_target"
+    existence_recovered = confidence in {"high", "medium_high"} and prop_status == "temporal_propagation_can_recover_review_target"
     secondary_truncated = bool(current_secondary) and not bool(current_primary)
     yolo_candidate = not bool(current_primary) or secondary_truncated
 
     categories = []
-    if clean_recovered:
-        categories.append("clean_recovered_by_temporal_continuation")
+    if existence_recovered:
+        categories.append("existence_recovered_by_temporal_continuation")
     if status != "no_temporal_continuation_support":
         categories.append("temporal_continuation_with_detection_dropout")
     if secondary_truncated:
@@ -506,7 +506,7 @@ def temporal_audit_case(
         "propagated_bbox_review_containment": fmt(prop_containment, 6),
         "propagation_diagnostic_status": prop_status,
         "sample_use_categories": ";".join(categories),
-        "clean_recovered_by_temporal_continuation": bool_text(clean_recovered),
+        "existence_recovered_by_temporal_continuation": bool_text(existence_recovered),
         "temporal_continuation_with_detection_dropout": bool_text(status != "no_temporal_continuation_support"),
         "secondary_supported_truncated_same_vehicle": bool_text(secondary_truncated),
         "sar_posthoc_supported_dropout_case": "",
@@ -843,7 +843,7 @@ def render_report(
             "## 解释",
             "",
             "- 当前帧 YOLO/OTY 主观测缺失不等于目标不存在。多数样本在当前帧有辅助观测，或在前后帧有空间连续的车辆观测。",
-            "- `clean_recovered_by_temporal_continuation` 只表示目标存在性和时序延续可被较干净地解释；它不等于 clean paired，不等于完整光学框形态样本。",
+            "- `existence_recovered_by_temporal_continuation` 表示时序延续恢复目标存在性；它不等于 clean paired，不等于完整光学框形态样本，不是自动标注。",
             "- `temporal_propagation_can_recover_review_target` 只表示传播诊断能解释 review 框，不是自动标注建议，也不是最终框。",
             "- 有 SAR 后验支持的样本可以用于研究 detection dropout / 重度截断 / SAR 目标存在机制，但不能直接进入完整车辆光学框形态主统计。",
             "- 所有 12 条仍保留 `manual_review_required` 和 `exclude_from_clean_shape_statistics`，避免污染完整车辆形态统计。",
@@ -1000,7 +1000,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "sample_count": len(temporal_rows),
         "temporal_continuation_status_counts": dict(Counter(str(row.get("temporal_continuation_status", "")) for row in temporal_rows)),
         "temporal_continuation_supported_count": sum(1 for row in temporal_rows if row.get("temporal_continuation_with_detection_dropout") == "true"),
-        "clean_recovered_by_temporal_continuation_count": sum(1 for row in temporal_rows if row.get("clean_recovered_by_temporal_continuation") == "true"),
+        "existence_recovered_by_temporal_continuation_count": sum(1 for row in temporal_rows if row.get("existence_recovered_by_temporal_continuation") == "true"),
         "secondary_supported_truncated_same_vehicle_count": sum(1 for row in temporal_rows if row.get("secondary_supported_truncated_same_vehicle") == "true"),
         "sar_posthoc_supported_dropout_count": sum(1 for row in temporal_rows if row.get("sar_posthoc_supported_dropout_case") == "true"),
         "yolo_upgrade_candidate_count": sum(1 for row in temporal_rows if row.get("yolo_upgrade_candidate") == "true"),
