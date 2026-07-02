@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="500" viewBox="0 0 1220 500">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="34" y="40" font-size="19" font-family="Arial" font-weight="700" fill="#111827">OTY2-P0 object temporal alignment overview</text>
+<text x="34" y="66" font-size="13" font-family="Arial" fill="#374151">Flow only: no SAR images, no SAR GT, no SAR band, no selector, no training, no annotation proposal.</text>
+<rect x="40" y="130" width="230" height="86" rx="6" fill="#dbeafe" stroke="#94a3b8"/>
+<text x="56" y="162" font-size="14" font-family="Arial" font-weight="700" fill="#111827">Object hypotheses</text>
+<text x="56" y="188" font-size="12" font-family="Arial" fill="#374151">27 object_hypothesis_id rows</text>
+<rect x="340" y="130" width="230" height="86" rx="6" fill="#dcfce7" stroke="#94a3b8"/>
+<text x="356" y="162" font-size="14" font-family="Arial" font-weight="700" fill="#111827">Readiness gating</text>
+<text x="356" y="188" font-size="12" font-family="Arial" fill="#374151">27 gate decisions</text>
+<rect x="640" y="130" width="230" height="86" rx="6" fill="#fef3c7" stroke="#94a3b8"/>
+<text x="656" y="162" font-size="14" font-family="Arial" font-weight="700" fill="#111827">Object frame states</text>
+<text x="656" y="188" font-size="12" font-family="Arial" fill="#374151">980 optical state rows</text>
+<rect x="940" y="130" width="230" height="86" rx="6" fill="#fce7f3" stroke="#94a3b8"/>
+<text x="956" y="162" font-size="14" font-family="Arial" font-weight="700" fill="#111827">SAR frame windows</text>
+<text x="956" y="188" font-size="12" font-family="Arial" fill="#374151">18 temporal candidates only</text>
+<line x1="270" y1="173" x2="340" y2="173" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="570" y1="173" x2="640" y2="173" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="870" y1="173" x2="940" y2="173" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="40" y="260" font-size="14" font-family="Arial" font-weight="700" fill="#111827">Scene readiness</text>
+<text x="40" y="278" font-size="12" font-family="Arial" fill="#374151">GM_RM017: input=ready_with_uncertainty, readiness=ready_with_uncertainty, windows=6</text>
+<text x="40" y="302" font-size="12" font-family="Arial" fill="#374151">GM_RM019: input=ready_with_uncertainty, readiness=ready_with_uncertainty, windows=12</text>
+<text x="40" y="326" font-size="12" font-family="Arial" fill="#374151">GM_RM011: input=blocked_missing_p4g, readiness=blocked_missing_inputs, windows=0</text>
+<text x="640" y="260" font-size="14" font-family="Arial" font-weight="700" fill="#111827">Boundary flags</text>
+<text x="640" y="282" font-size="12" font-family="Arial" fill="#374151">posthoc_sources_used_for_runtime_tracking=false</text>
+<text x="640" y="304" font-size="12" font-family="Arial" fill="#374151">sar_image_content_used=false</text>
+<text x="640" y="326" font-size="12" font-family="Arial" fill="#374151">sar_gt_coverage_entered=false</text>
+<text x="640" y="348" font-size="12" font-family="Arial" fill="#374151">sar_band_entered=false</text>
+<text x="640" y="370" font-size="12" font-family="Arial" fill="#374151">annotation_proposal_entered=false</text>
+<text x="640" y="392" font-size="12" font-family="Arial" fill="#374151">identity_truth_claimed=false</text>
+</svg>

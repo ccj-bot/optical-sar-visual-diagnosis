@@ -1,0 +1,109 @@
+{
+  "generated_at": "2026-07-02T12:46:31",
+  "timestamp": "20260702_124551",
+  "tracker_name": "bytetrack",
+  "scenes_attempted": "GM_RM017;GM_RM019",
+  "scenes_completed": "GM_RM017;GM_RM019",
+  "scenes_blocked": "",
+  "object_hypotheses_input_count": 27,
+  "object_frame_state_input_rows": 980,
+  "object_readiness_gating_rows": 27,
+  "alignment_frame_map_rows": 681,
+  "alignment_window_candidate_rows": 18,
+  "alignment_mode_counts": {
+    "frame_ratio_hypothesis": 681
+  },
+  "use_as_primary_alignment_track_count": 4,
+  "use_with_uncertainty_expansion_count": 7,
+  "low_confidence_window_only_count": 7,
+  "exclude_from_oty2_count": 9,
+  "blocked_pending_visual_review_count": 0,
+  "gm_rm011_input_status": "blocked_missing_p4g",
+  "posthoc_sources_used_for_runtime_tracking": false,
+  "sar_image_content_used": false,
+  "sar_gt_coverage_entered": false,
+  "sar_band_entered": false,
+  "annotation_proposal_entered": false,
+  "identity_truth_claimed": false,
+  "output_dir": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_object_temporal_alignment_audit_20260702_124551",
+  "per_scene": [
+    {
+      "scene": "GM_RM017",
+      "input_status": "ready_with_uncertainty",
+      "object_hypotheses_input_count": 6,
+      "object_frame_state_rows": 308,
+      "alignment_frame_map_rows": 308,
+      "alignment_window_candidate_rows": 6,
+      "alignment_readiness": "ready_with_uncertainty",
+      "top_blockers": "missing_exact_timestamp_metadata;using_frame_ratio_hypothesis_audit_only"
+    },
+    {
+      "scene": "GM_RM019",
+      "input_status": "ready_with_uncertainty",
+      "object_hypotheses_input_count": 21,
+      "object_frame_state_rows": 672,
+      "alignment_frame_map_rows": 373,
+      "alignment_window_candidate_rows": 12,
+      "alignment_readiness": "ready_with_uncertainty",
+      "top_blockers": "missing_exact_timestamp_metadata;using_frame_ratio_hypothesis_audit_only"
+    },
+    {
+      "scene": "GM_RM011",
+      "input_status": "blocked_missing_p4g",
+      "object_hypotheses_input_count": 0,
+      "object_frame_state_rows": 0,
+      "alignment_frame_map_rows": 0,
+      "alignment_window_candidate_rows": 0,
+      "alignment_readiness": "blocked_missing_inputs",
+      "top_blockers": "missing_oty0;missing_oty1;missing_oty1a;missing_oty1t;missing_p4g_object_hypotheses;missing_p4g_object_frame_states"
+    }
+  ],
+  "p4g_output_dir": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500",
+  "stage_paths_by_scene": {
+    "GM_RM017": {
+      "oty0_available": true,
+      "oty1_available": true,
+      "oty1a_available": true,
+      "oty1t_available": true,
+      "oty0_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty0_yolo_detection_stream_audit_20260701_181317\\oty0_yolo_detection_table.csv",
+      "oty1_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1_optical_tracklet_audit_20260701_181347",
+      "oty1a_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1a_fragment_merge_audit_20260701_190431",
+      "oty1t_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_tracker_audit_bytetrack_20260701_205803"
+    },
+    "GM_RM019": {
+      "oty0_available": true,
+      "oty1_available": true,
+      "oty1a_available": true,
+      "oty1t_available": true,
+      "oty0_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty0_yolo_detection_stream_audit_20260701_170751\\oty0_yolo_detection_table.csv",
+      "oty1_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1_optical_tracklet_audit_20260701_175422",
+      "oty1a_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1a_fragment_merge_audit_20260701_190559",
+      "oty1t_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_tracker_audit_bytetrack_20260701_205928"
+    },
+    "GM_RM011": {
+      "oty0_available": false,
+      "oty1_available": false,
+      "oty1a_available": false,
+      "oty1t_available": false,
+      "oty0_path": "",
+      "oty1_path": "",
+      "oty1a_path": "",
+      "oty1t_path": ""
+    }
+  },
+  "artifacts": {
+    "scene_input_status": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_object_temporal_alignment_audit_20260702_124551\\oty2_scene_input_status.csv",
+    "object_readiness_gating": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_object_temporal_alignment_audit_20260702_124551\\oty2_object_readiness_gating.csv",
+    "object_alignment_frame_map": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_object_temporal_alignment_audit_20260702_124551\\oty2_object_alignment_frame_map.csv",
+    "object_alignment_window_candidates": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_object_temporal_alignment_audit_20260702_124551\\oty2_object_alignment_window_candidates.csv",
+    "object_alignment_uncertainty_report": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_object_temporal_alignment_audit_20260702_124551\\oty2_object_alignment_uncertainty_report.md",
+    "object_temporal_alignment_overview_svg": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\visualizations\\oty2_object_temporal_alignment_overview.svg",
+    "summary_md": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_temporal_alignment_summary_20260702_124551.md",
+    "summary_json": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_temporal_alignment_summary_20260702_124551.json",
+    "scene_input_status_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\oty2_scene_input_status_sample.csv",
+    "object_readiness_gating_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\oty2_object_readiness_gating_sample.csv",
+    "object_alignment_frame_map_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\oty2_object_alignment_frame_map_sample.csv",
+    "object_alignment_window_candidates_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\oty2_object_alignment_window_candidates_sample.csv",
+    "object_alignment_uncertainty_report_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\oty2_object_alignment_uncertainty_report.md"
+  }
+}
