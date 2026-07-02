@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-07-02T14:00:28",
+  "timestamp": "20260702_135912",
+  "stage": "OTY2-P1-software-sync-temporal-window-audit",
+  "optical_fps": "24",
+  "sar_fps": "50",
+  "fps_ratio": "2.083333",
+  "sync_mode": "software_sync_zero_offset_assumption",
+  "offset_seconds": "0",
+  "software_sync_jitter_ms": "20",
+  "software_sync_is_hardware_exact": false,
+  "uses_per_frame_real_timestamps": false,
+  "p0_output_dir": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty2_object_temporal_alignment_audit_20260702_124551",
+  "p1_summary": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_temporal_alignment_anchor_summary_20260702_132945.json",
+  "object_rows_seen": 27,
+  "sar_temporal_windows_generated": 18,
+  "not_ready_object_rows": 9,
+  "readiness_status_counts": {
+    "low_confidence_sar_temporal_window": 7,
+    "not_ready_for_sar_temporal_window": 9,
+    "ready_primary_sar_temporal_window": 4,
+    "ready_uncertainty_expanded_sar_temporal_window": 7
+  },
+  "object_state_category_counts": {
+    "ambiguous_review_required": 7,
+    "secondary_edge_handoff_uncertainty": 7,
+    "short_noise_not_ready": 9,
+    "stable_primary_continuity": 4
+  },
+  "padding_defaults": {
+    "base_rounding_padding_sar_frames": 1,
+    "software_sync_jitter_padding_sar_frames": 1,
+    "stable_primary_padding_sar_frames": 1,
+    "secondary_or_edge_padding_sar_frames": 2,
+    "ambiguous_padding_sar_frames": 3,
+    "padding_source": "audit_defaults_not_training_thresholds"
+  },
+  "sar_image_content_used": false,
+  "sar_spatial_search_entered": false,
+  "sar_search_region_generated": false,
+  "sar_gt_used": false,
+  "selector_or_ranking_used": false,
+  "annotation_proposal_entered": false,
+  "training_or_threshold_tuning_entered": false,
+  "identity_truth_claimed": false,
+  "per_scene": [
+    {
+      "scene": "GM_RM011",
+      "temporal_metadata_status": "timestamp_offset_scale_hypothesis",
+      "sync_mode": "software_sync_zero_offset_assumption",
+      "offset_status": "software_sync_zero_offset_assumed",
+      "target_level_input_status": "blocked_missing_p4g_object_stream",
+      "object_rows_seen": 0,
+      "sar_temporal_windows_generated": 0,
+      "not_ready_object_rows": 0,
+      "blockers": "missing_oty0;missing_oty1;missing_oty1a;missing_oty1t;missing_p4g_object_hypotheses;missing_p4g_object_frame_states"
+    },
+    {
+      "scene": "GM_RM017",
+      "temporal_metadata_status": "timestamp_offset_scale_hypothesis",
+      "sync_mode": "software_sync_zero_offset_assumption",
+      "offset_status": "software_sync_zero_offset_assumed",
+      "target_level_input_status": "available",
+      "object_rows_seen": 6,
+      "sar_temporal_windows_generated": 6,
+      "not_ready_object_rows": 0,
+      "blockers": ""
+    },
+    {
+      "scene": "GM_RM019",
+      "temporal_metadata_status": "timestamp_offset_scale_hypothesis",
+      "sync_mode": "software_sync_zero_offset_assumption",
+      "offset_status": "software_sync_zero_offset_assumed",
+      "target_level_input_status": "available",
+      "object_rows_seen": 21,
+      "sar_temporal_windows_generated": 12,
+      "not_ready_object_rows": 9,
+      "blockers": ""
+    }
+  ],
+  "artifacts": {
+    "software_sync_temporal_contract": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_software_sync_temporal_contract_20260702_135912.md",
+    "object_sar_temporal_windows": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_sar_temporal_windows_20260702_135912.csv",
+    "object_sar_temporal_window_summary": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_sar_temporal_window_summary_20260702_135912.json",
+    "object_sar_temporal_windows_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\oty2_object_sar_temporal_windows_sample.csv"
+  }
+}

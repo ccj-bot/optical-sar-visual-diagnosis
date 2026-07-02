@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T13:42:24",
+  "generated_at": "2026-07-02T13:59:00",
   "timestamp": "20260702_132945",
   "stage": "OTY2-P1",
   "scenes_audited": "GM_RM011;GM_RM017;GM_RM019",
@@ -7,7 +7,12 @@
   "known_sar_fps": "50",
   "known_fps_scale_ratio": "2.083333",
   "known_fps_is_per_frame_timestamp_truth": false,
-  "frame0_alignment_assumed": false,
+  "sync_mode": "software_sync_zero_offset_assumption",
+  "offset_seconds": "0",
+  "software_sync_jitter_ms": "20",
+  "hardware_exact_sync_claimed": false,
+  "frame0_alignment_assumed": true,
+  "frame0_alignment_assumption": "software_sync_same_start_not_hardware_exact",
   "inventory_row_count": 941,
   "anchor_candidate_count": 7,
   "allowed_anchor_candidate_count": 0,
@@ -15,10 +20,10 @@
     "timestamp_offset_scale_hypothesis": 3
   },
   "alignment_confidence_status_counts": {
-    "known_fps_ratio_missing_start_offset": 3
+    "software_sync_zero_offset_with_jitter_margin": 3
   },
   "offset_status_counts": {
-    "unknown": 3
+    "software_sync_zero_offset_assumed": 3
   },
   "scenes_upgraded_beyond_frame_ratio_hypothesis": "GM_RM011;GM_RM017;GM_RM019",
   "any_scene_upgraded_beyond_frame_ratio_hypothesis": true,
@@ -67,19 +72,22 @@
       "known_fps_scale_ratio": "2.083333",
       "has_known_fps_scale": "true",
       "has_scene_timing_record": "false",
-      "offset_status": "unknown",
-      "frame0_alignment_assumption": "unverified_not_assumed",
+      "offset_status": "software_sync_zero_offset_assumed",
+      "frame0_alignment_assumption": "software_sync_same_start_not_hardware_exact",
       "manual_anchor_candidate_count": 1,
       "allowed_manual_anchor_count": 0,
       "has_allowed_manual_anchor": "false",
       "best_available_alignment_mode": "timestamp_offset_scale_hypothesis",
       "can_upgrade_from_frame_ratio_hypothesis": "true",
       "upgrade_target_mode": "timestamp_offset_scale_hypothesis",
-      "decision_confidence": "low",
-      "alignment_confidence_status": "known_fps_ratio_missing_start_offset",
-      "required_missing_metadata": "real_optical_per_frame_timestamps;real_sar_per_frame_timestamps;common_or_convertible_timebase;scene_start_end_timing_record;optical_sar_start_offset_or_frame0_anchor;allowed_manual_optical_sar_anchor",
-      "blockers": "missing_p4g_object_level_inputs;missing_start_offset_or_manual_anchor;frame0_alignment_unverified_not_assumed",
-      "allowed_next_action": "collect_start_offset_scene_timing_record_or_manual_anchor_before_oty2_p2_or_oty3"
+      "decision_confidence": "medium",
+      "alignment_confidence_status": "software_sync_zero_offset_with_jitter_margin",
+      "sync_mode": "software_sync_zero_offset_assumption",
+      "offset_seconds": "0",
+      "software_sync_jitter_ms": "20",
+      "required_missing_metadata": "real_optical_per_frame_timestamps;real_sar_per_frame_timestamps;common_or_convertible_timebase;scene_start_end_timing_record;hardware_exact_synchronization;allowed_manual_optical_sar_anchor",
+      "blockers": "missing_p4g_object_level_inputs;non_hardware_sync_jitter_margin_required",
+      "allowed_next_action": "generate_sar_temporal_windows_with_software_sync_jitter_margin"
     },
     {
       "scene": "GM_RM017",
@@ -91,19 +99,22 @@
       "known_fps_scale_ratio": "2.083333",
       "has_known_fps_scale": "true",
       "has_scene_timing_record": "false",
-      "offset_status": "unknown",
-      "frame0_alignment_assumption": "unverified_not_assumed",
+      "offset_status": "software_sync_zero_offset_assumed",
+      "frame0_alignment_assumption": "software_sync_same_start_not_hardware_exact",
       "manual_anchor_candidate_count": 1,
       "allowed_manual_anchor_count": 0,
       "has_allowed_manual_anchor": "false",
       "best_available_alignment_mode": "timestamp_offset_scale_hypothesis",
       "can_upgrade_from_frame_ratio_hypothesis": "true",
       "upgrade_target_mode": "timestamp_offset_scale_hypothesis",
-      "decision_confidence": "low",
-      "alignment_confidence_status": "known_fps_ratio_missing_start_offset",
-      "required_missing_metadata": "real_optical_per_frame_timestamps;real_sar_per_frame_timestamps;common_or_convertible_timebase;scene_start_end_timing_record;optical_sar_start_offset_or_frame0_anchor;allowed_manual_optical_sar_anchor",
-      "blockers": "missing_start_offset_or_manual_anchor;frame0_alignment_unverified_not_assumed",
-      "allowed_next_action": "collect_start_offset_scene_timing_record_or_manual_anchor_before_oty2_p2_or_oty3"
+      "decision_confidence": "medium",
+      "alignment_confidence_status": "software_sync_zero_offset_with_jitter_margin",
+      "sync_mode": "software_sync_zero_offset_assumption",
+      "offset_seconds": "0",
+      "software_sync_jitter_ms": "20",
+      "required_missing_metadata": "real_optical_per_frame_timestamps;real_sar_per_frame_timestamps;common_or_convertible_timebase;scene_start_end_timing_record;hardware_exact_synchronization;allowed_manual_optical_sar_anchor",
+      "blockers": "non_hardware_sync_jitter_margin_required",
+      "allowed_next_action": "generate_sar_temporal_windows_with_software_sync_jitter_margin"
     },
     {
       "scene": "GM_RM019",
@@ -115,19 +126,22 @@
       "known_fps_scale_ratio": "2.083333",
       "has_known_fps_scale": "true",
       "has_scene_timing_record": "false",
-      "offset_status": "unknown",
-      "frame0_alignment_assumption": "unverified_not_assumed",
+      "offset_status": "software_sync_zero_offset_assumed",
+      "frame0_alignment_assumption": "software_sync_same_start_not_hardware_exact",
       "manual_anchor_candidate_count": 5,
       "allowed_manual_anchor_count": 0,
       "has_allowed_manual_anchor": "false",
       "best_available_alignment_mode": "timestamp_offset_scale_hypothesis",
       "can_upgrade_from_frame_ratio_hypothesis": "true",
       "upgrade_target_mode": "timestamp_offset_scale_hypothesis",
-      "decision_confidence": "low",
-      "alignment_confidence_status": "known_fps_ratio_missing_start_offset",
-      "required_missing_metadata": "real_optical_per_frame_timestamps;real_sar_per_frame_timestamps;common_or_convertible_timebase;scene_start_end_timing_record;optical_sar_start_offset_or_frame0_anchor;allowed_manual_optical_sar_anchor",
-      "blockers": "missing_start_offset_or_manual_anchor;frame0_alignment_unverified_not_assumed",
-      "allowed_next_action": "collect_start_offset_scene_timing_record_or_manual_anchor_before_oty2_p2_or_oty3"
+      "decision_confidence": "medium",
+      "alignment_confidence_status": "software_sync_zero_offset_with_jitter_margin",
+      "sync_mode": "software_sync_zero_offset_assumption",
+      "offset_seconds": "0",
+      "software_sync_jitter_ms": "20",
+      "required_missing_metadata": "real_optical_per_frame_timestamps;real_sar_per_frame_timestamps;common_or_convertible_timebase;scene_start_end_timing_record;hardware_exact_synchronization;allowed_manual_optical_sar_anchor",
+      "blockers": "non_hardware_sync_jitter_margin_required",
+      "allowed_next_action": "generate_sar_temporal_windows_with_software_sync_jitter_margin"
     }
   ],
   "artifacts": {

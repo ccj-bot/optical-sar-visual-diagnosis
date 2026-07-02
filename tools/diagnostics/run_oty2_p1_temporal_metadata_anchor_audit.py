@@ -76,6 +76,9 @@ DECISION_FIELDS = [
     "known_optical_fps",
     "known_sar_fps",
     "known_fps_scale_ratio",
+    "sync_mode",
+    "offset_seconds",
+    "software_sync_jitter_ms",
     "has_known_fps_scale",
     "has_scene_timing_record",
     "offset_status",
@@ -531,18 +534,31 @@ def inspect_frame_directory(scene: str, source_kind: str, path_text: str | Path)
     )
 
 
-def known_fps_scale_inventory_row(scene: str, optical_fps: float | None, sar_fps: float | None) -> dict[str, Any]:
+def known_fps_scale_inventory_row(
+    scene: str,
+    optical_fps: float | None,
+    sar_fps: float | None,
+    *,
+    sync_mode: str,
+    offset_seconds: float,
+    software_sync_jitter_ms: float,
+) -> dict[str, Any]:
     has_known_scale = bool(optical_fps and sar_fps and optical_fps > 0 and sar_fps > 0)
     fps_value = ""
-    notes = "known_acquisition_fps_is_scale_metadata_not_per_frame_timestamp_truth"
+    notes = (
+        "known_acquisition_fps_is_scale_metadata_not_per_frame_timestamp_truth;"
+        f"sync_mode={sync_mode};offset_seconds={offset_seconds:g};"
+        f"software_sync_jitter_ms={software_sync_jitter_ms:g};"
+        "software_sync_not_hardware_exact_sync"
+    )
     blockers = [
-        "missing_start_offset_or_frame0_anchor",
-        "missing_scene_start_end_timing_record",
         "not_timestamp_exact",
+        "not_hardware_synchronization",
+        "millisecond_sync_jitter_margin_required",
     ]
     if has_known_scale:
         fps_value = f"optical_fps={optical_fps:g};sar_fps={sar_fps:g};sar_per_optical_scale={sar_fps / optical_fps:.6f}"
-        strength = "known_fps_scale_without_start_offset"
+        strength = "known_fps_scale_with_software_sync_zero_offset"
     else:
         blockers.append("missing_known_optical_or_sar_fps")
         strength = "missing"
@@ -551,7 +567,7 @@ def known_fps_scale_inventory_row(scene: str, optical_fps: float | None, sar_fps
         source_kind="known_acquisition_fps_scale",
         source_path="user_declared_oty2_p1_parameters",
         source_exists=has_known_scale,
-        source_status="known_scale_metadata_no_offset_anchor" if has_known_scale else "known_scale_metadata_missing",
+        source_status="known_scale_metadata_with_software_sync_zero_offset" if has_known_scale else "known_scale_metadata_missing",
         has_per_frame_timestamp=False,
         timestamp_parse_status="not_per_frame_timestamp_truth",
         has_fps=has_known_scale,
@@ -1035,6 +1051,9 @@ def decide_alignment_modes(
     *,
     optical_fps: float | None,
     sar_fps: float | None,
+    sync_mode: str,
+    offset_seconds: float,
+    software_sync_jitter_ms: float,
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     by_scene = defaultdict(list)
@@ -1058,8 +1077,16 @@ def decide_alignment_modes(
             known_fps_scale_ratio = f"{sar_fps / optical_fps:.6f}"
         allowed_anchors = [row for row in anchors_by_scene.get(scene, []) if boolish(row.get("allowed_for_oty2_p1"))]
         anchor_candidates = anchors_by_scene.get(scene, [])
-        offset_status = "known" if has_scene_timing_record or allowed_anchors else "unknown"
-        frame0_alignment_assumption = "unverified_not_assumed"
+        has_software_sync_zero_offset = bool(sync_mode and abs(offset_seconds) < 1e-12)
+        if has_software_sync_zero_offset:
+            offset_status = "software_sync_zero_offset_assumed"
+            frame0_alignment_assumption = "software_sync_same_start_not_hardware_exact"
+        elif has_scene_timing_record or allowed_anchors:
+            offset_status = "known_from_scene_timing_or_manual_anchor"
+            frame0_alignment_assumption = "declared_by_timing_or_anchor"
+        else:
+            offset_status = "unknown"
+            frame0_alignment_assumption = "unverified_not_assumed"
         alignment_confidence_status = ""
         frame_ratio = ""
         if optical_count and sar_count:
@@ -1079,6 +1106,8 @@ def decide_alignment_modes(
             missing.append("scene_start_end_timing_record")
         if offset_status == "unknown":
             missing.append("optical_sar_start_offset_or_frame0_anchor")
+        elif has_software_sync_zero_offset:
+            missing.append("hardware_exact_synchronization")
         if not allowed_anchors:
             missing.append("allowed_manual_optical_sar_anchor")
         if not optical_count:
@@ -1099,7 +1128,12 @@ def decide_alignment_modes(
             mode = "timestamp_offset_scale_hypothesis"
             can_upgrade = True
             upgrade = "timestamp_offset_scale_hypothesis"
-            if offset_status == "unknown":
+            if has_software_sync_zero_offset:
+                confidence = "medium"
+                alignment_confidence_status = "software_sync_zero_offset_with_jitter_margin"
+                blockers.extend(["non_hardware_sync_jitter_margin_required"])
+                allowed_next_action = "generate_sar_temporal_windows_with_software_sync_jitter_margin"
+            elif offset_status == "unknown":
                 confidence = "low"
                 alignment_confidence_status = "known_fps_ratio_missing_start_offset"
                 blockers.extend(
@@ -1163,6 +1197,9 @@ def decide_alignment_modes(
                 "upgrade_target_mode": upgrade,
                 "decision_confidence": confidence,
                 "alignment_confidence_status": alignment_confidence_status,
+                "sync_mode": sync_mode,
+                "offset_seconds": f"{offset_seconds:g}",
+                "software_sync_jitter_ms": f"{software_sync_jitter_ms:g}",
                 "required_missing_metadata": join_values(missing),
                 "blockers": join_values(blockers),
                 "allowed_next_action": allowed_next_action,
@@ -1228,11 +1265,12 @@ def render_decision_report(summary: Mapping[str, Any], decision_rows: Sequence[M
                 f"1. Optical real timestamps: `{answer_has('real_optical_per_frame_timestamps', missing)}`",
                 f"2. SAR real timestamps: `{answer_has('real_sar_per_frame_timestamps', missing)}`",
                 f"3. Known FPS scale: `optical_fps={row.get('known_optical_fps', '')}`, `sar_fps={row.get('known_sar_fps', '')}`, scale=`{row.get('known_fps_scale_ratio', '')}`",
-                f"4. Scene start/end timing record: `{row.get('has_scene_timing_record', '')}`",
-                f"5. Manual optical/SAR anchor present: `{row.get('has_allowed_manual_anchor', '')}` allowed, `{row.get('manual_anchor_candidate_count', '')}` candidate rows inspected",
-                f"6. Start offset status: `{row.get('offset_status', '')}`; frame 0 alignment: `{row.get('frame0_alignment_assumption', '')}`",
-                f"7. Upgrade beyond frame_ratio_hypothesis: `{row.get('can_upgrade_from_frame_ratio_hypothesis', '')}` -> `{row.get('upgrade_target_mode', '')}`",
-                f"8. Exact remaining blocker: `{blockers or missing}`",
+                f"4. Software sync contract: `{row.get('sync_mode', '')}`, offset_seconds=`{row.get('offset_seconds', '')}`, jitter_ms=`{row.get('software_sync_jitter_ms', '')}`",
+                f"5. Scene start/end timing record: `{row.get('has_scene_timing_record', '')}`",
+                f"6. Manual optical/SAR anchor present: `{row.get('has_allowed_manual_anchor', '')}` allowed, `{row.get('manual_anchor_candidate_count', '')}` candidate rows inspected",
+                f"7. Start offset status: `{row.get('offset_status', '')}`; frame 0 alignment: `{row.get('frame0_alignment_assumption', '')}`",
+                f"8. Upgrade beyond frame_ratio_hypothesis: `{row.get('can_upgrade_from_frame_ratio_hypothesis', '')}` -> `{row.get('upgrade_target_mode', '')}`",
+                f"9. Remaining caveat/blocker: `{blockers or missing}`",
                 "",
                 f"Decision: `{mode}` with confidence `{row.get('decision_confidence', '')}` / `{row.get('alignment_confidence_status', '')}`.",
                 "",
@@ -1243,14 +1281,14 @@ def render_decision_report(summary: Mapping[str, Any], decision_rows: Sequence[M
         [
             "## Per-Scene Decision Table",
             "",
-            "| scene | optical frames | SAR frames | frame count ratio | known fps scale | offset status | manual anchor | decision | confidence status | can upgrade | blocker |",
-            "| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |",
+            "| scene | optical frames | SAR frames | frame count ratio | known fps scale | sync mode | offset status | manual anchor | decision | confidence status | can upgrade | caveat/blocker |",
+            "| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- | --- |",
         ]
     )
     for row in decision_rows:
         lines.append(
             f"| `{row.get('scene', '')}` | {row.get('optical_frame_count', '')} | {row.get('sar_frame_count', '')} | "
-            f"{row.get('frame_count_ratio', '')} | {row.get('known_fps_scale_ratio', '')} | `{row.get('offset_status', '')}` | "
+            f"{row.get('frame_count_ratio', '')} | {row.get('known_fps_scale_ratio', '')} | `{row.get('sync_mode', '')}` | `{row.get('offset_status', '')}` | "
             f"`{row.get('has_allowed_manual_anchor', '')}` | `{row.get('best_available_alignment_mode', '')}` | "
             f"`{row.get('alignment_confidence_status', '')}` | `{row.get('can_upgrade_from_frame_ratio_hypothesis', '')}` | "
             f"`{row.get('blockers', '')}` |"
@@ -1262,8 +1300,9 @@ def render_decision_report(summary: Mapping[str, Any], decision_rows: Sequence[M
             "## Interpretation",
             "",
             "- Numeric frame filenames and frame counts define inventory/order only; they do not prove acquisition FPS or synchronization.",
-            "- The known acquisition FPS values are scale metadata only: optical_fps=24 and sar_fps=50. They are not per-frame timestamp truth and do not imply optical frame 0 aligns to SAR frame 0.",
-            "- `timestamp_offset_scale_hypothesis` requires the known FPS scale plus an unresolved offset audit; with no start/end timing record or manual anchor, `offset_status=unknown`.",
+            "- The known acquisition FPS values are scale metadata only: optical_fps=24 and sar_fps=50. They are not per-frame timestamp truth.",
+            "- The acquisition contract uses a software-synchronized zero-offset start assumption, not hardware-grade exact synchronization.",
+            "- `timestamp_offset_scale_hypothesis` uses sar_frame = optical_frame * 50 / 24, not sar_frame = optical_frame * 2, and keeps a millisecond-level jitter margin for future window generation.",
             "- Filesystem modification time is recorded as weak filesystem metadata only and never upgrades the alignment mode.",
             "- Visual-diagnosis sample pairs are treated as candidate context, not temporal anchors, unless a source explicitly declares an optical/SAR timing or frame correspondence anchor and avoids GT/selector/posthoc authority.",
             "- OTY2-P1 leaves object_hypothesis_id, readiness gates, primary/secondary observation logic, and identity status unchanged.",
@@ -1327,7 +1366,12 @@ def build_summary(
         "known_sar_fps": first_decision.get("known_sar_fps", ""),
         "known_fps_scale_ratio": first_decision.get("known_fps_scale_ratio", ""),
         "known_fps_is_per_frame_timestamp_truth": False,
-        "frame0_alignment_assumed": False,
+        "sync_mode": first_decision.get("sync_mode", ""),
+        "offset_seconds": first_decision.get("offset_seconds", ""),
+        "software_sync_jitter_ms": first_decision.get("software_sync_jitter_ms", ""),
+        "hardware_exact_sync_claimed": False,
+        "frame0_alignment_assumed": first_decision.get("offset_status", "") == "software_sync_zero_offset_assumed",
+        "frame0_alignment_assumption": first_decision.get("frame0_alignment_assumption", ""),
         "inventory_row_count": len(inventory_rows),
         "anchor_candidate_count": len(anchor_rows),
         "allowed_anchor_candidate_count": sum(1 for row in anchor_rows if boolish(row.get("allowed_for_oty2_p1"))),
@@ -1359,6 +1403,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     stage_status = collect_stage_status(scenes, output_root)
     optical_fps = safe_float(args.optical_fps)
     sar_fps = safe_float(args.sar_fps)
+    software_sync_jitter_ms = safe_float(args.software_sync_jitter_ms, default=20.0) or 20.0
+    offset_seconds = safe_float(args.offset_seconds, default=0.0) or 0.0
+    sync_mode = str(args.sync_mode or "software_sync_zero_offset_assumption").strip()
 
     inventory_rows: list[dict[str, Any]] = []
     anchor_rows: list[dict[str, Any]] = []
@@ -1374,7 +1421,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         inventory_rows.append(inspect_declared_object(scene, "oty_yolo_scene_fields", yolo_config_path, yolo_scene_item))
         alignment_payload = yolo_config.get("alignment", {}) if isinstance(yolo_config.get("alignment", {}), Mapping) else {}
         inventory_rows.append(inspect_declared_object(scene, "oty_yolo_alignment_fields", yolo_config_path, alignment_payload))
-        inventory_rows.append(known_fps_scale_inventory_row(scene, optical_fps, sar_fps))
+        inventory_rows.append(
+            known_fps_scale_inventory_row(
+                scene,
+                optical_fps,
+                sar_fps,
+                sync_mode=sync_mode,
+                offset_seconds=offset_seconds,
+                software_sync_jitter_ms=software_sync_jitter_ms,
+            )
+        )
 
         for key, source_kind in (
             ("optical_frames_dir", "optical_frame_inventory"),
@@ -1424,6 +1480,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         stage_status,
         optical_fps=optical_fps,
         sar_fps=sar_fps,
+        sync_mode=sync_mode,
+        offset_seconds=offset_seconds,
+        software_sync_jitter_ms=software_sync_jitter_ms,
     )
 
     report_dir.mkdir(parents=True, exist_ok=True)
@@ -1493,6 +1552,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--timestamp", default="")
     parser.add_argument("--optical-fps", default="24")
     parser.add_argument("--sar-fps", default="50")
+    parser.add_argument("--sync-mode", default="software_sync_zero_offset_assumption")
+    parser.add_argument("--offset-seconds", default="0")
+    parser.add_argument("--software-sync-jitter-ms", default="20")
     parser.add_argument("--max-sample-rows", type=int, default=80)
     parser.add_argument("--max-text-scan-bytes", type=int, default=5_000_000)
     return parser
