@@ -1,15 +1,16 @@
 # OTY2 对象级弱空间先验可视化诊断报告
 
-生成时间：`20260702_165148`
+生成时间：`20260702_173036`
 
 本轮修正了上一版偏流程图的问题：现在每个样例页都以**真实光学帧 + 主/辅目标框 + 雷达时间轴 + 空间先验示意**为核心。图内文字以中文解释为主，英文只保留必要字段名。
 
 ## 这轮图画了什么
 
 - 本地全量对象页：`28` 张。
-- 远端精选样例页：`5` 张，放在 `reports/oty2/samples/visualizations/`。
+- 远端精选样例页：`5` 张，放在 `D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\object_diagnostics_20260702_173036`。
 - 每个对象页至少展示起始/中间/结束三个光学帧位置；能找到本地光学帧时直接嵌入真实帧并画主观测框。
-- 有辅助观测的帧使用橙色虚线框标出，并在说明区写出它如何扩大时间窗和方位余量。
+- 有辅助观测的帧使用橙色虚线框标出，并在说明区写出它如何参与 bbox envelope、扩大时间窗和扩大方位余量。
+- 每张图都直接写明：该对象为什么最终是 normal / relaxed / review-only / blocked。
 - SAR 侧没有读取真实 SAR 图，只画时间轴、帧窗口和“方位弱约束 + 距离向宽未知”的示意画布。
 
 ## 当前弱空间先验主要弱在哪里
@@ -44,11 +45,11 @@
 
 | 样例 | scene | object | 状态 | 文件 |
 | --- | --- | --- | --- | --- |
-| 第十一场景说明 | `GM_RM011` | `scene-only` | 阻断：缺目标流 | `D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\oty2_object_diag_gmrm011_no_object_flow_gm_rm011_sceneonly_20260702_165148.png` |
-| 稳定正常空间先验 | `GM_RM017` | `oty1t_obj_GM_RM017_bytetrack_bt_0002` | 正常 | `D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\oty2_object_diag_normal_stable_gm_rm017_bt0002_20260702_165148.png` |
-| 阻断对象 | `GM_RM019` | `oty1t_obj_GM_RM019_bytetrack_bt_0009` | 阻断 | `D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\oty2_object_diag_blocked_object_gm_rm019_bt0009_20260702_165148.png` |
-| 宽松空间先验 | `GM_RM019` | `oty1t_obj_GM_RM019_bytetrack_bt_0042` | 宽松 | `D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\oty2_object_diag_relaxed_uncertain_gm_rm019_bt0042_20260702_165148.png` |
-| 仅审阅空间上下文 | `GM_RM019` | `oty1t_obj_GM_RM019_bytetrack_bt_0053` | 仅审阅 | `D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\oty2_object_diag_review_only_gm_rm019_bt0053_20260702_165148.png` |
+| 第十一场景说明 | `GM_RM011` | `scene-only` | 阻断：缺目标流 | `D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\object_diagnostics_20260702_173036\oty2_object_diag_gmrm011_no_object_flow_gm_rm011_sceneonly_20260702_173036.png` |
+| 稳定正常空间先验 | `GM_RM017` | `oty1t_obj_GM_RM017_bytetrack_bt_0002` | 正常 | `D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\object_diagnostics_20260702_173036\oty2_object_diag_normal_stable_gm_rm017_bt0002_20260702_173036.png` |
+| 阻断对象 | `GM_RM019` | `oty1t_obj_GM_RM019_bytetrack_bt_0009` | 阻断 | `D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\object_diagnostics_20260702_173036\oty2_object_diag_blocked_object_gm_rm019_bt0009_20260702_173036.png` |
+| 宽松空间先验 | `GM_RM019` | `oty1t_obj_GM_RM019_bytetrack_bt_0042` | 宽松 | `D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\object_diagnostics_20260702_173036\oty2_object_diag_relaxed_uncertain_gm_rm019_bt0042_20260702_173036.png` |
+| 仅审阅空间上下文 | `GM_RM019` | `oty1t_obj_GM_RM019_bytetrack_bt_0053` | 仅审阅 | `D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\object_diagnostics_20260702_173036\oty2_object_diag_review_only_gm_rm019_bt0053_20260702_173036.png` |
 
 ## 哪些对象可以继续往下走
 
@@ -91,12 +92,12 @@
 
 ## 输出
 
-- 本地全量目录：`D:\profile\research\optical-sar-visual-diagnosis\outputs\oty2_runtime_spatial_prior_visual_diagnosis_20260702_165148`
-- 本地对象页目录：`D:\profile\research\optical-sar-visual-diagnosis\outputs\oty2_runtime_spatial_prior_visual_diagnosis_20260702_165148\object_pages`
-- 本地中文报告：`D:\profile\research\optical-sar-visual-diagnosis\outputs\oty2_runtime_spatial_prior_visual_diagnosis_20260702_165148\object_visual_diagnosis_report.md`
-- 远端报告：`D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\oty2_runtime_spatial_prior_visual_diagnosis_report_20260702_165148.md`
-- 远端汇总表：`D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\oty2_runtime_spatial_prior_visual_summary_20260702_165148.csv`
-- 远端样例目录：`D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations`
+- 本地全量目录：`D:\profile\research\optical-sar-visual-diagnosis\outputs\oty2_runtime_spatial_prior_visual_diagnosis_20260702_173036`
+- 本地对象页目录：`D:\profile\research\optical-sar-visual-diagnosis\outputs\oty2_runtime_spatial_prior_visual_diagnosis_20260702_173036\object_pages`
+- 本地中文报告：`D:\profile\research\optical-sar-visual-diagnosis\outputs\oty2_runtime_spatial_prior_visual_diagnosis_20260702_173036\object_visual_diagnosis_report.md`
+- 远端报告：`D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\oty2_runtime_spatial_prior_visual_diagnosis_report_20260702_173036.md`
+- 远端汇总表：`D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\oty2_runtime_spatial_prior_visual_summary_20260702_173036.csv`
+- 远端样例目录：`D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\samples\visualizations\object_diagnostics_20260702_173036`
 
 ## Boundary Flags
 

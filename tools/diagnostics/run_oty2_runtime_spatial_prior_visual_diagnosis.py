@@ -327,6 +327,41 @@ def status_color(status: str) -> str:
     }.get(status, "#64748b")
 
 
+def status_reason_cn(row: Mapping[str, Any]) -> str:
+    status = str(row.get("spatial_prior_status", ""))
+    if status == "normal_spatial_prior_generated":
+        return "最终分流为 normal：主观测可用，未触发强含混或阻断；可作为正常下游输入，但距离向仍是宽未知。"
+    if status == "loose_spatial_prior_generated":
+        return "最终分流为 relaxed：对象仍可进入正常下游，但 secondary / edge / partial / duplicate / handoff 等不确定性要求扩大时间窗和方位余量。"
+    if status == "review_only_spatial_context_generated":
+        return "最终分流为 review-only：含混或需审阅信号较强，只保留空间上下文，不混入 normal downstream。"
+    if status == "blocked_missing_object_level_flow":
+        return "最终分流为 blocked：场景时间元数据可用，但缺光学目标流，无法形成对象级光学帧-雷达时间窗映射。"
+    if status.startswith("blocked"):
+        return "最终分流为 blocked：对象被 short/noise 或 not-ready 规则阻断，不生成正常空间先验。"
+    return "最终分流原因：当前状态字段无法识别。"
+
+
+def state_flag_cn(row: Mapping[str, Any]) -> list[str]:
+    edge_partial = "是" if is_true(row.get("edge_or_partial_state")) else "否"
+    duplicate_handoff = "是" if is_true(row.get("duplicate_or_handoff_state")) else "否"
+    secondary = "是" if is_true(row.get("uses_secondary_observations")) else "否"
+    primary = "是" if is_true(row.get("uses_primary_observations")) else "否"
+    ambiguity_raw = str(row.get("ambiguity_status", "") or "无")
+    ambiguity = {
+        "not_ambiguous": "否",
+        "ambiguous_or_review_required": "是，含混/需审阅",
+        "not_applicable_no_object_flow": "无目标流",
+    }.get(ambiguity_raw, ambiguity_raw)
+    return [
+        f"主观测 primary：{primary}",
+        f"辅助观测 secondary：{secondary}",
+        f"edge / partial：{edge_partial}",
+        f"duplicate / handoff：{duplicate_handoff}",
+        f"ambiguous：{ambiguity}",
+    ]
+
+
 def short_object_id(object_id: str) -> str:
     if not object_id:
         return "scene_only"
@@ -566,6 +601,16 @@ def draw_spatial_canvas(
 
 
 def state_lines(row: Mapping[str, Any], frame_rows: Sequence[Mapping[str, Any]]) -> list[str]:
+    value_cn = {
+        "visible_main_observation": "主观测可见",
+        "low_uncertainty": "低不确定性",
+        "moderate_uncertainty": "中等不确定性",
+        "high_uncertainty": "高不确定性",
+        "mixed_partial_full_observations": "partial/full 混合",
+        "boundary_truncation_present": "边界截断/edge 存在",
+        "multiple_observations": "同帧多观测",
+        "single_observation": "单观测",
+    }
     states = set()
     for frame_row in frame_rows:
         for field in (
@@ -577,28 +622,56 @@ def state_lines(row: Mapping[str, Any], frame_rows: Sequence[Mapping[str, Any]])
         ):
             value = str(frame_row.get(field, "")).strip()
             if value and value.lower() not in {"none", "false"}:
-                states.add(value)
+                states.add(value_cn.get(value, value))
     if is_true(row.get("edge_or_partial_state")):
-        states.add("edge/partial=true")
+        states.add("edge / partial：是")
     if is_true(row.get("duplicate_or_handoff_state")):
-        states.add("duplicate/handoff=true")
+        states.add("duplicate / handoff：是")
     ambiguity = str(row.get("ambiguity_status", "")).strip()
     if ambiguity:
-        states.add(f"ambiguity={ambiguity}")
+        states.add(f"ambiguous：{ambiguity}")
     if not states:
         states.add("稳定主观测，无显著辅助/边缘/交接状态")
     return sorted(states)
 
 
 def impact_text(row: Mapping[str, Any], temporal_row: Mapping[str, Any]) -> tuple[str, str, str]:
-    padding = str(temporal_row.get("padding_reason", "") or temporal_row.get("state_margin_status", "") or "")
-    if not padding:
-        padding = "未生成目标级时间窗或无 padding 字段。"
-    az_margin = str(row.get("azimuth_margin_reason", "") or "无方位余量字段。")
-    range_reason = str(row.get("range_margin_reason", "") or row.get("degradation_reason", "") or "")
-    if not range_reason:
-        range_reason = "缺少运行时安全的目标级距离/深度几何。"
-    return padding, az_margin, range_reason
+    status = str(row.get("spatial_prior_status", ""))
+    if status == "blocked_missing_object_level_flow":
+        return (
+            "未生成对象级时间窗：只有 24:50 软件同步元数据，缺光学目标流。",
+            "未生成方位先验：没有对象级主/辅观测框。",
+            "未生成距离向：没有对象级输入。",
+        )
+    if status.startswith("blocked"):
+        return (
+            "对象被 not-ready / short-noise 阻断，不进入目标级时间窗主结果。",
+            "未生成方位先验：对象先被阻断。",
+            "未生成距离向：对象先被阻断。",
+        )
+    if status == "normal_spatial_prior_generated":
+        return (
+            "稳定主观测使用基础取整余量 + 软件同步抖动余量 + 较小状态余量。",
+            "方位来自主观测框包络；稳定对象使用较小方位余量。",
+            "距离向没有运行时安全 per-object range/depth 字段，所以保持 broad_unknown_range_prior。",
+        )
+    if status == "loose_spatial_prior_generated":
+        return (
+            "secondary / edge / partial / duplicate / handoff 使时间窗比稳定对象更宽。",
+            "方位来自主/辅观测框联合包络；因不确定状态扩大方位余量。",
+            "距离向缺可审计的目标级 range/depth，且状态不确定，因此保持宽未知。",
+        )
+    if status == "review_only_spatial_context_generated":
+        return (
+            "ambiguous / review-required 触发低置信审阅窗口，不能混入 normal downstream。",
+            "方位只作为审阅上下文；用更大 review-only 方位余量。",
+            "距离向缺运行时安全字段，只能作为 review-only broad_unknown_range_prior。",
+        )
+    return (
+        "时间窗余量来源无法从当前字段安全解释。",
+        "方位余量来源无法从当前字段安全解释。",
+        "距离向缺少运行时安全解释字段。",
+    )
 
 
 def missing_fields_text(row: Mapping[str, Any]) -> str:
@@ -674,11 +747,11 @@ def render_object_page(
     draw_card(
         draw,
         (60, 735, 790, 270),
-        "对象与时间窗",
+        "对象、时间窗与最终分流",
         [
             f"光学起止帧：{optical_start if optical_start is not None else '无'} -> {optical_end if optical_end is not None else '无'}；中间帧：{optical_mid if optical_mid is not None else '无'}。",
             f"雷达起止帧：{sar_start if sar_start is not None else '未生成'} -> {sar_end if sar_end is not None else '未生成'}；窗口宽度：{sar_count if sar_count is not None else '无'}。",
-            f"状态：{status}；spatial_prior_status={row.get('spatial_prior_status', '')}。",
+            f"状态：{status}；{status_reason_cn(row)}",
         ],
         border=color,
     )
@@ -693,10 +766,11 @@ def render_object_page(
         (910, 1040, 820, 450),
         "状态如何影响时间窗和空间先验",
         [
-            "状态标签：" + "；".join(state[:5]),
-            "时间窗余量：" + padding,
-            "方位余量：" + az_margin,
-            "距离向：" + range_reason,
+            "运行时状态标签：" + "；".join(state_flag_cn(row)),
+            "帧内状态：" + "；".join(state[:5]),
+            "时间窗余量如何来：" + padding,
+            "方位向余量如何来：" + az_margin,
+            "距离向为什么不收敛：" + range_reason,
         ],
         border="#bae6fd",
     )
@@ -711,6 +785,7 @@ def render_object_page(
         "当前弱在哪里",
         [
             f"方位向：{'可用弱先验' if is_true(row.get('azimuth_prior_available')) else '不可用'}；区间 {az_text}。",
+            "方位向从哪里来：光学主观测框/辅助观测框形成 bbox envelope，再通过配置的 optical-x -> azimuth 弱映射得到；不来自 SAR 图像。",
             f"距离向：{row.get('range_prior_mode', '') or '未生成'}。核心原因：{missing_fields_text(row)}",
             "时间窗只告诉后续何时看雷达，不直接给在哪里找。",
             "这张图不是最终定位，不是 SAR 候选框，不是自动标注建议。",
@@ -720,7 +795,7 @@ def render_object_page(
     draw_card(
         draw,
         (910, 1535, 820, 350),
-        "字段不足时的替代说明",
+        "为什么不能画真实 SAR 空间位置",
         [
             missing_fields_text(row),
             "不能画真实 SAR 空间位置：本轮不读取 SAR 图像，也没有运行时安全距离向收敛字段。",
@@ -793,9 +868,10 @@ def render_report(
 ## 这轮图画了什么
 
 - 本地全量对象页：`{summary['local_page_count']}` 张。
-- 远端精选样例页：`{len(summary['sample_pages'])}` 张，放在 `reports/oty2/samples/visualizations/`。
+- 远端精选样例页：`{len(summary['sample_pages'])}` 张，放在 `{artifacts['repo_sample_dir']}`。
 - 每个对象页至少展示起始/中间/结束三个光学帧位置；能找到本地光学帧时直接嵌入真实帧并画主观测框。
-- 有辅助观测的帧使用橙色虚线框标出，并在说明区写出它如何扩大时间窗和方位余量。
+- 有辅助观测的帧使用橙色虚线框标出，并在说明区写出它如何参与 bbox envelope、扩大时间窗和扩大方位余量。
+- 每张图都直接写明：该对象为什么最终是 normal / relaxed / review-only / blocked。
 - SAR 侧没有读取真实 SAR 图，只画时间轴、帧窗口和“方位弱约束 + 距离向宽未知”的示意画布。
 
 ## 当前弱空间先验主要弱在哪里
@@ -907,9 +983,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
 
     local_output_dir = OUTPUT_PARENT / f"oty2_runtime_spatial_prior_visual_diagnosis_{timestamp}"
     local_pages_dir = local_output_dir / "object_pages"
+    repo_sample_dir = SAMPLE_VIS_DIR / f"object_diagnostics_{timestamp}"
     local_output_dir.mkdir(parents=True, exist_ok=True)
     local_pages_dir.mkdir(parents=True, exist_ok=True)
-    SAMPLE_VIS_DIR.mkdir(parents=True, exist_ok=True)
+    repo_sample_dir.mkdir(parents=True, exist_ok=True)
 
     sample_lookup = {value: key for key, value in SAMPLE_SELECTION.items()}
     summary_rows: list[dict[str, Any]] = []
@@ -936,7 +1013,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         repo_sample_path = ""
         if sample_role:
             repo_name = f"oty2_object_diag_{SAMPLE_ROLE_SLUG[sample_role]}_{filename_token(scene, object_id)}_{timestamp}.png"
-            repo_sample = SAMPLE_VIS_DIR / repo_name
+            repo_sample = repo_sample_dir / repo_name
             shutil.copyfile(local_page, repo_sample)
             repo_sample_path = str(repo_sample)
             sample_pages.append(
@@ -980,7 +1057,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "local_report": str(local_report),
         "repo_report": str(repo_report),
         "repo_summary_csv": str(repo_summary_csv),
-        "repo_sample_dir": str(SAMPLE_VIS_DIR),
+        "repo_sample_dir": str(repo_sample_dir),
     }
     source_paths = {
         "runtime_spatial_priors": str(prior_csv),
@@ -992,7 +1069,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     summary = {
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "timestamp": timestamp,
-        "stage": "OTY2-object-level-real-optical-visual-diagnosis-v2",
+        "stage": "OTY2-object-level-real-optical-visual-diagnosis-v3",
         "local_page_count": len(summary_rows),
         "sample_page_count": len(sample_pages),
         "per_scene_status_counts": {scene: dict(counter) for scene, counter in per_scene_status.items()},
