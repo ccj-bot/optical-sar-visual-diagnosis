@@ -1,0 +1,143 @@
+{
+  "generated_at": "2026-07-02T13:42:24",
+  "timestamp": "20260702_132945",
+  "stage": "OTY2-P1",
+  "scenes_audited": "GM_RM011;GM_RM017;GM_RM019",
+  "known_optical_fps": "24",
+  "known_sar_fps": "50",
+  "known_fps_scale_ratio": "2.083333",
+  "known_fps_is_per_frame_timestamp_truth": false,
+  "frame0_alignment_assumed": false,
+  "inventory_row_count": 941,
+  "anchor_candidate_count": 7,
+  "allowed_anchor_candidate_count": 0,
+  "alignment_mode_counts": {
+    "timestamp_offset_scale_hypothesis": 3
+  },
+  "alignment_confidence_status_counts": {
+    "known_fps_ratio_missing_start_offset": 3
+  },
+  "offset_status_counts": {
+    "unknown": 3
+  },
+  "scenes_upgraded_beyond_frame_ratio_hypothesis": "GM_RM011;GM_RM017;GM_RM019",
+  "any_scene_upgraded_beyond_frame_ratio_hypothesis": true,
+  "sar_image_content_used": false,
+  "sar_gt_used": false,
+  "sar_band_entered": false,
+  "selector_used": false,
+  "annotation_proposal_entered": false,
+  "identity_truth_claimed": false,
+  "stage_status_by_scene": {
+    "GM_RM011": {
+      "p4g_available": false,
+      "p4g_object_count": 0,
+      "p4g_frame_rows": 0,
+      "oty2_p0_available": true,
+      "oty2_p0_input_status": "blocked_missing_p4g",
+      "oty2_p0_blockers": "missing_oty0;missing_oty1;missing_oty1a;missing_oty1t;missing_p4g_object_hypotheses;missing_p4g_object_frame_states"
+    },
+    "GM_RM017": {
+      "p4g_available": true,
+      "p4g_object_count": 6,
+      "p4g_frame_rows": 308,
+      "oty2_p0_available": true,
+      "p4g_output_dir": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500",
+      "oty2_p0_input_status": "ready_with_uncertainty",
+      "oty2_p0_blockers": "missing_exact_timestamp_metadata;using_frame_ratio_hypothesis_audit_only"
+    },
+    "GM_RM019": {
+      "p4g_available": true,
+      "p4g_object_count": 21,
+      "p4g_frame_rows": 672,
+      "oty2_p0_available": true,
+      "p4g_output_dir": "D:\\profile\\research\\optical-sar-visual-diagnosis\\outputs\\oty1t_object_hypothesis_generalization_audit_20260701_231500",
+      "oty2_p0_input_status": "ready_with_uncertainty",
+      "oty2_p0_blockers": "missing_exact_timestamp_metadata;using_frame_ratio_hypothesis_audit_only"
+    }
+  },
+  "per_scene_decisions": [
+    {
+      "scene": "GM_RM011",
+      "optical_frame_count": 368,
+      "sar_frame_count": 766,
+      "frame_count_ratio": "2.081522",
+      "known_optical_fps": "24",
+      "known_sar_fps": "50",
+      "known_fps_scale_ratio": "2.083333",
+      "has_known_fps_scale": "true",
+      "has_scene_timing_record": "false",
+      "offset_status": "unknown",
+      "frame0_alignment_assumption": "unverified_not_assumed",
+      "manual_anchor_candidate_count": 1,
+      "allowed_manual_anchor_count": 0,
+      "has_allowed_manual_anchor": "false",
+      "best_available_alignment_mode": "timestamp_offset_scale_hypothesis",
+      "can_upgrade_from_frame_ratio_hypothesis": "true",
+      "upgrade_target_mode": "timestamp_offset_scale_hypothesis",
+      "decision_confidence": "low",
+      "alignment_confidence_status": "known_fps_ratio_missing_start_offset",
+      "required_missing_metadata": "real_optical_per_frame_timestamps;real_sar_per_frame_timestamps;common_or_convertible_timebase;scene_start_end_timing_record;optical_sar_start_offset_or_frame0_anchor;allowed_manual_optical_sar_anchor",
+      "blockers": "missing_p4g_object_level_inputs;missing_start_offset_or_manual_anchor;frame0_alignment_unverified_not_assumed",
+      "allowed_next_action": "collect_start_offset_scene_timing_record_or_manual_anchor_before_oty2_p2_or_oty3"
+    },
+    {
+      "scene": "GM_RM017",
+      "optical_frame_count": 368,
+      "sar_frame_count": 766,
+      "frame_count_ratio": "2.081522",
+      "known_optical_fps": "24",
+      "known_sar_fps": "50",
+      "known_fps_scale_ratio": "2.083333",
+      "has_known_fps_scale": "true",
+      "has_scene_timing_record": "false",
+      "offset_status": "unknown",
+      "frame0_alignment_assumption": "unverified_not_assumed",
+      "manual_anchor_candidate_count": 1,
+      "allowed_manual_anchor_count": 0,
+      "has_allowed_manual_anchor": "false",
+      "best_available_alignment_mode": "timestamp_offset_scale_hypothesis",
+      "can_upgrade_from_frame_ratio_hypothesis": "true",
+      "upgrade_target_mode": "timestamp_offset_scale_hypothesis",
+      "decision_confidence": "low",
+      "alignment_confidence_status": "known_fps_ratio_missing_start_offset",
+      "required_missing_metadata": "real_optical_per_frame_timestamps;real_sar_per_frame_timestamps;common_or_convertible_timebase;scene_start_end_timing_record;optical_sar_start_offset_or_frame0_anchor;allowed_manual_optical_sar_anchor",
+      "blockers": "missing_start_offset_or_manual_anchor;frame0_alignment_unverified_not_assumed",
+      "allowed_next_action": "collect_start_offset_scene_timing_record_or_manual_anchor_before_oty2_p2_or_oty3"
+    },
+    {
+      "scene": "GM_RM019",
+      "optical_frame_count": 368,
+      "sar_frame_count": 766,
+      "frame_count_ratio": "2.081522",
+      "known_optical_fps": "24",
+      "known_sar_fps": "50",
+      "known_fps_scale_ratio": "2.083333",
+      "has_known_fps_scale": "true",
+      "has_scene_timing_record": "false",
+      "offset_status": "unknown",
+      "frame0_alignment_assumption": "unverified_not_assumed",
+      "manual_anchor_candidate_count": 5,
+      "allowed_manual_anchor_count": 0,
+      "has_allowed_manual_anchor": "false",
+      "best_available_alignment_mode": "timestamp_offset_scale_hypothesis",
+      "can_upgrade_from_frame_ratio_hypothesis": "true",
+      "upgrade_target_mode": "timestamp_offset_scale_hypothesis",
+      "decision_confidence": "low",
+      "alignment_confidence_status": "known_fps_ratio_missing_start_offset",
+      "required_missing_metadata": "real_optical_per_frame_timestamps;real_sar_per_frame_timestamps;common_or_convertible_timebase;scene_start_end_timing_record;optical_sar_start_offset_or_frame0_anchor;allowed_manual_optical_sar_anchor",
+      "blockers": "missing_start_offset_or_manual_anchor;frame0_alignment_unverified_not_assumed",
+      "allowed_next_action": "collect_start_offset_scene_timing_record_or_manual_anchor_before_oty2_p2_or_oty3"
+    }
+  ],
+  "artifacts": {
+    "temporal_metadata_inventory": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_temporal_metadata_inventory_20260702_132945.csv",
+    "scene_alignment_anchor_candidates": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_scene_alignment_anchor_candidates_20260702_132945.csv",
+    "alignment_mode_decision_report": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_alignment_mode_decision_report_20260702_132945.md",
+    "temporal_alignment_anchor_summary": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_temporal_alignment_anchor_summary_20260702_132945.json",
+    "alignment_mode_decision_summary": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_alignment_mode_decision_summary_20260702_132945.csv",
+    "temporal_metadata_inventory_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\oty2_temporal_metadata_inventory_sample.csv",
+    "scene_alignment_anchor_candidates_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\oty2_scene_alignment_anchor_candidates_sample.csv",
+    "alignment_mode_decision_summary_sample": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\samples\\oty2_alignment_mode_decision_summary_sample.csv"
+  }
+}
