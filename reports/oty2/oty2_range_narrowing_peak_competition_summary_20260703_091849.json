@@ -1,0 +1,97 @@
+{
+  "timestamp": "20260703_091849",
+  "sample_ledger": {
+    "ledger_valid": true,
+    "category_counts": {
+      "paired_optical_object_sar_gt": 215,
+      "blocked_missing_gm011_object_stream": 195,
+      "sar_only_gt": 20,
+      "no_oty_iou_match": 12
+    },
+    "note": "The audit preserves the 442 ledger. Paired rows are range-band validation rows; dropout rows are separate diagnostics."
+  },
+  "row_counts": {
+    "range_band_mode_comparison": 5,
+    "support_region_peak_competition_audit": 986,
+    "state_conditioned_range_band_probe": 19,
+    "object_smoothed_range_band_probe": 37,
+    "range_narrowing_tube_continuity_probe": 37
+  },
+  "range_model_context": {
+    "selected_shape_feature": "bbox_height_px",
+    "complete_shape_feature_correlations": {
+      "bbox_height_px": -0.9365225911229462,
+      "bbox_bottom_y": -0.9058944055659832,
+      "bbox_area_px": -0.7745650525421327
+    },
+    "scene_residual_by_scene": {
+      "GM_RM017": {
+        "median_residual": 3.655499999999961,
+        "abs_residual_q90": 76.28180000000005
+      },
+      "GM_RM019": {
+        "median_residual": -233.9405,
+        "abs_residual_q90": 251.58749999999998
+      }
+    }
+  },
+  "key_metrics": {
+    "broad_gt_coverage_paired_posthoc": "0.9628",
+    "broad_median_area_px": "551070",
+    "broad_serious_peak_competition_rate": "1",
+    "state_conditioned_gt_coverage_paired_posthoc": "0.9116",
+    "state_conditioned_area_ratio_vs_broad_median": "0.1587",
+    "object_smoothed_gt_coverage_paired_posthoc": "0.9626",
+    "object_smoothed_area_ratio_vs_broad_median": "0.1118",
+    "scene_residual_gt_coverage_paired_posthoc": "0.9628",
+    "scene_residual_area_ratio_vs_broad_median": "0.114"
+  },
+  "question_answers": {
+    "1_broad_fan_problem": "The broad fan support preserves posthoc coverage, but it covers a large radial sector. Baseline median support area is 551070 px and serious peak competition rate is 1; therefore the observed top peak can be a competing clutter or sidelobe peak rather than a unique target localization.",
+    "2_range_narrowing_area_vs_coverage": "State-conditioned narrowing has paired GT coverage 0.9116 with median area ratio 0.1587 versus broad fan. Object-smoothed narrowing has paired GT coverage 0.9626 with median area ratio 0.1118.",
+    "3_most_interpretable_mode": "State-conditioned range band is the most physically interpretable next form because it separates complete, edge/truncated, duplicate, far-small, and dropout uncertainty. Complete-shape quantile is useful only for complete/stable rows, while scene residual remains posthoc diagnostic only.",
+    "4_peak_competition": "Peak competition is nontrivial: broad fan serious competition rate is 1, with median top1/top2 ratio 1.004. This should be treated as SAR observation uncertainty, not a selector score.",
+    "5_temporal_continuity": "Broad fan short-window persistence rate is 0.8722; state-conditioned short-window persistence rate is 0.7709. Tube continuity for state-conditioned rows is 0.125.",
+    "6_state_differences": "Complete rows can use narrower range bands. Edge/truncated rows need wider bands because optical box height/bottom are partial. Duplicate/handoff rows need review-conditioned widening. Dropout/no-match rows stay outside clean morphology and should use temporal continuation plus SAR support only.",
+    "7_posthoc_observations": "The selected shape feature `bbox_height_px`, all shape-radius quantile bands, object-smoothed radius trends, and scene residual bands are posthoc observations. They must not be written back into runtime prior construction without a separate runtime-safe derivation.",
+    "8_next_priority": "Next priority should be runtime-safe range hypothesis design from optical-only geometry/state, then SAR temporal peak tracking. GM_RM019 review should proceed to confirm optical object continuity and complete frames; GM_RM011 object-stream recovery remains the scale-expansion blocker."
+  },
+  "boundary_flags": {
+    "posthoc_sar_gt_used": true,
+    "posthoc_sar_image_content_used": true,
+    "posthoc_shape_radius_relation_used_for_hypothesis_audit": true,
+    "gt_or_sar_image_used_for_runtime_prior_construction": false,
+    "runtime_prior_construction_used_gt": false,
+    "sar_gt_residual_written_to_runtime_prior": false,
+    "support_region_uses_gt_crop": false,
+    "annotation_proposal_entered": false,
+    "candidate_box_scoring_output": false,
+    "selector_or_ranking_used": false,
+    "training_or_threshold_tuning_entered": false,
+    "identity_truth_claimed": false,
+    "model_weights_committed": false,
+    "matlab_zip_or_any_zip_committed": false,
+    "detection_dropout_rows_mixed_into_clean_paired": false,
+    "gm011_missing_object_stream_rows_mixed_into_correspondence": false,
+    "sar_only_rows_mixed_into_optical_sar_correspondence": false
+  },
+  "outputs": {
+    "plan_doc": "D:\\profile\\research\\optical-sar-visual-diagnosis\\docs\\oty2_support_region_range_narrowing_and_peak_competition_plan.md",
+    "range_band_mode_comparison_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_range_band_mode_comparison_20260703_091849.csv",
+    "support_region_peak_competition_audit_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_support_region_peak_competition_audit_20260703_091849.csv",
+    "state_conditioned_range_band_probe_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_state_conditioned_range_band_probe_20260703_091849.csv",
+    "object_smoothed_range_band_probe_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_object_smoothed_range_band_probe_20260703_091849.csv",
+    "range_narrowing_tube_continuity_probe_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_range_narrowing_tube_continuity_probe_20260703_091849.csv",
+    "range_narrowing_peak_competition_report_md": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_range_narrowing_peak_competition_report_20260703_091849.md",
+    "range_narrowing_peak_competition_summary_json": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_range_narrowing_peak_competition_summary_20260703_091849.json",
+    "workspace_log": "D:\\profile\\research\\workspace\\logs\\oty2_range_narrowing_peak_competition_audit_20260703_091849.log"
+  },
+  "sources": {
+    "frame_support_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_optical_frame_to_sar_frame_support_probe_20260702_233406.csv",
+    "window_support_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_optical_frame_to_sar_window_support_probe_20260702_233406.csv",
+    "tracklet_tube_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_optical_tracklet_to_sar_tube_probe_20260702_233406.csv",
+    "support_summary_json": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_support_region_sar_observation_summary_20260702_233406.json",
+    "correspondence_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_correspondence_mechanism_audit_20260702_190435.csv",
+    "manual_review_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_manual_review_candidate_list_20260702_222218.csv"
+  }
+}
