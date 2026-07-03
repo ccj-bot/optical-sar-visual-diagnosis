@@ -1,0 +1,84 @@
+{
+  "timestamp": "20260703_174930",
+  "panel_count": 13,
+  "old_atlas_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\oty2_gt_support_energy_overlay_atlas_20260703_163000.html",
+  "old_resize_specific_risk_count": 5,
+  "old_resize_specific_risk_cases": [
+    "PAIR_GM_RM017_o153_s319_oty1t_obj_GM_RM017_bytetrack_bt_0008",
+    "PAIR_GM_RM019_o13_s27_oty1t_obj_GM_RM019_bytetrack_bt_0005",
+    "PAIR_GM_RM019_o15_s31_oty1t_obj_GM_RM019_bytetrack_bt_0005",
+    "PAIR_GM_RM019_o13_s27_oty1t_obj_GM_RM019_bytetrack_bt_0005",
+    "PAIR_GM_RM017_o149_s310_oty1t_obj_GM_RM017_bytetrack_bt_0008"
+  ],
+  "qa_counts": {
+    "pass": 11,
+    "warning": 2
+  },
+  "pass_cases": [
+    "PAIR_GM_RM017_o184_s383_oty1t_obj_GM_RM017_bytetrack_bt_0014",
+    "PAIR_GM_RM017_o153_s319_oty1t_obj_GM_RM017_bytetrack_bt_0008",
+    "PAIR_GM_RM019_o13_s27_oty1t_obj_GM_RM019_bytetrack_bt_0005",
+    "PAIR_GM_RM017_o165_s343_oty1t_obj_GM_RM017_bytetrack_bt_0010",
+    "PAIR_GM_RM017_o165_s343_oty1t_obj_GM_RM017_bytetrack_bt_0010",
+    "PAIR_GM_RM019_o15_s31_oty1t_obj_GM_RM019_bytetrack_bt_0005",
+    "PAIR_GM_RM019_o13_s27_oty1t_obj_GM_RM019_bytetrack_bt_0005",
+    "PAIR_GM_RM017_o149_s310_oty1t_obj_GM_RM017_bytetrack_bt_0008",
+    "PAIR_GM_RM017_o165_s343_oty1t_obj_GM_RM017_bytetrack_bt_0010",
+    "PAIR_GM_RM017_o165_s343_oty1t_obj_GM_RM017_bytetrack_bt_0010",
+    "PAIR_GM_RM017_o165_s343_oty1t_obj_GM_RM017_bytetrack_bt_0010"
+  ],
+  "warning_cases": [
+    "GTREF_GM_RM017_s302_96",
+    "GTREF_GM_RM011_s0_336"
+  ],
+  "fail_cases": [],
+  "support_unjudgeable_cases": [
+    "GTREF_GM_RM017_s302_96",
+    "GTREF_GM_RM011_s0_336"
+  ],
+  "previous_overlay_atlas_should_not_be_used_without_qa": true,
+  "old_morphology_notes_retained": [
+    "GT-box SAR body structure observations",
+    "near/facing-side high energy and far-side weak return notes",
+    "discontinuous body-edge morphology notes",
+    "temporal hotspot migration notes"
+  ],
+  "old_support_coverage_judgments_paused": true,
+  "next_manual_review": "Use the fixed Chinese atlas PNG panels plus geometry debug CSV before judging support coverage.",
+  "boundary_flags": {
+    "posthoc_sar_gt_used": true,
+    "posthoc_sar_image_content_used": true,
+    "visualization_coordinate_qa_entered": true,
+    "chinese_review_atlas_generated": true,
+    "gt_or_sar_image_used_for_runtime_prior_construction": false,
+    "runtime_prior_construction_used_gt": false,
+    "annotation_proposal_entered": false,
+    "final_candidate_box_output": false,
+    "selector_or_ranking_used": false,
+    "training_or_threshold_tuning_entered": false,
+    "best_weight_selected": false,
+    "identity_truth_claimed": false,
+    "complete_object_80_85_hypothesis_written_as_runtime_rule": false,
+    "detection_dropout_rows_mixed_into_clean_paired": false,
+    "gm011_missing_object_stream_rows_mixed_into_correspondence": false,
+    "sar_only_rows_mixed_into_optical_sar_correspondence": false,
+    "matlab_zip_or_any_zip_committed": false
+  },
+  "inputs": {
+    "gt_accounting_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_sample_accounting_audit_20260702_192810.csv",
+    "correspondence_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_correspondence_mechanism_audit_20260702_190435.csv",
+    "support_peak_competition_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_support_region_peak_competition_audit_20260703_091849.csv",
+    "visual_review_cards_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_visual_review_candidate_cards_20260703_151500.csv",
+    "old_atlas_html": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\oty2_gt_support_energy_overlay_atlas_20260703_163000.html"
+  },
+  "outputs": {
+    "plan_doc": "D:\\profile\\research\\optical-sar-visual-diagnosis\\docs\\oty2_support_overlay_visualization_qa_and_chinese_review_atlas_plan.md",
+    "coordinate_qa_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_overlay_coordinate_qa_20260703_174930.csv",
+    "geometry_debug_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_overlay_case_geometry_debug_20260703_174930.csv",
+    "chinese_review_card_index_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_chinese_review_card_index_20260703_174930.csv",
+    "qa_report_md": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_support_overlay_visualization_qa_report_20260703_174930.md",
+    "qa_summary_json": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_support_overlay_visualization_qa_summary_20260703_174930.json",
+    "chinese_atlas_html": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\oty2_gt_support_energy_overlay_atlas_cn_20260703_174930.html",
+    "workspace_log": "D:\\profile\\research\\workspace\\logs\\oty2_support_overlay_visualization_qa_and_chinese_review_atlas_20260703_174930.log"
+  }
+}
