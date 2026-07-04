@@ -159,10 +159,11 @@ Lane D: optical-SAR temporal compatibility
 Every new OTY2-related session must first read:
 
 1. `docs/OTY2_SESSION_START_HERE.md`
-2. `docs/oty2_phase_reset_open_questions_and_mechanism_lanes.md`
-3. `docs/oty2_gt_support_failure_concept_correction_archive.md`
-4. `docs/oty2_physical_structure_first_not_weighted_fusion_archive.md`
-5. `docs/oty2_gt_local_energy_field_atlas_correction_archive.md`
+2. `docs/OTY2_OPTICAL_STREAM_GENERALIZATION_PROTOCOL.md`
+3. `docs/oty2_phase_reset_open_questions_and_mechanism_lanes.md`
+4. `docs/oty2_gt_support_failure_concept_correction_archive.md`
+5. `docs/oty2_physical_structure_first_not_weighted_fusion_archive.md`
+6. `docs/oty2_gt_local_energy_field_atlas_correction_archive.md`
 
 Then read the task-specific latest report/summary from `reports/oty2`.
 
@@ -173,6 +174,9 @@ Then read the task-specific latest report/summary from `reports/oty2`.
 - Do not call small green component boxes shell.
 - Do not do weighted fusion as mainline.
 - Do not keep GM_RM011 permanently blocked.
+- Do not treat GM_RM011 as a scene-specific patch target.
+- Do not proceed from recovered object stream to pairing/support audit before cross-scene optical-stream generalization is checked.
+- Do not treat PASS_WITH_UNCERTAINTY as mechanism success.
 - Do not assume support is fixed.
 - Do not avoid support-without-GT cases.
 - Do not treat atlas as success unless it actually shows GT-local energy-field structure that humans can inspect.

@@ -10,19 +10,20 @@ The conversation-derived notes below come from GPT-user research discussion. The
 
 1. `docs/guidance/project_principles.md`
 2. `docs/guidance/development_protocol.md`
-3. `docs/guidance/no_go_rules.md`
-4. `docs/guidance/research_intent_not_to_lose.md`
-5. `docs/guidance/conversation_derived_research_notes.md`
-6. `docs/guidance/root_cause_hypothesis_tree.md`
-7. `docs/guidance/range_prior_rethink_notes.md`
-8. `docs/guidance/temporal_usage_rethink_notes.md`
-9. `docs/guidance/candidate_quality_rethink_notes.md`
-10. `docs/guidance/gmrm011_caution_notes.md`
-11. `docs/guidance/visual_diagnosis_requirements_from_discussion.md`
-12. `docs/guidance/old_pipeline_file_lineage.md`
-13. `docs/guidance/algorithm_spec_full.md`
-14. `docs/guidance/failure_case_selection_plan.md`
-15. `docs/guidance/inheritance_gap_audit.md`
+3. `docs/OTY2_OPTICAL_STREAM_GENERALIZATION_PROTOCOL.md`
+4. `docs/guidance/no_go_rules.md`
+5. `docs/guidance/research_intent_not_to_lose.md`
+6. `docs/guidance/conversation_derived_research_notes.md`
+7. `docs/guidance/root_cause_hypothesis_tree.md`
+8. `docs/guidance/range_prior_rethink_notes.md`
+9. `docs/guidance/temporal_usage_rethink_notes.md`
+10. `docs/guidance/candidate_quality_rethink_notes.md`
+11. `docs/guidance/gmrm011_caution_notes.md`
+12. `docs/guidance/visual_diagnosis_requirements_from_discussion.md`
+13. `docs/guidance/old_pipeline_file_lineage.md`
+14. `docs/guidance/algorithm_spec_full.md`
+15. `docs/guidance/failure_case_selection_plan.md`
+16. `docs/guidance/inheritance_gap_audit.md`
 
 ## Boundary
 
