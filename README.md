@@ -38,3 +38,5 @@ Legacy handoff notes are under `docs/archive/`. The legacy handoff zip remains o
 ## Required Guidance
 
 Before each future development round, read `docs/guidance/README.md` and follow the guidance documents listed there. This guidance layer is the execution protocol; `docs/archive/` remains the historical record.
+
+For any OTY2-related session, start with `docs/OTY2_SESSION_START_HERE.md` before reading task-specific prompts or reports.

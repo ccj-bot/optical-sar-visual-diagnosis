@@ -1,0 +1,178 @@
+# OTY2 Session Start Here: Required Mechanism Context
+
+This document must be read at the beginning of every new OTY2-related Codex session before writing scripts, running diagnostics, generating atlas outputs, or proposing next steps.
+
+每个新的 OTY2 / optical-SAR mechanism 相关 Codex session，必须先读本文件，再读具体任务 prompt。不得直接沿用旧 support-wide / component-box / weighted-fusion 思路。
+
+## 1. Current Non-Negotiable Boundaries
+
+- 当前仍是 OTY2 posthoc mechanism diagnosis，不是 OTY3。
+- 不做 final annotation。
+- 不做 revised GT。
+- 不做 final candidate box。
+- 不做 selector/ranking。
+- 不训练、不调阈值。
+- 不声明 identity truth。
+- SAR GT / SAR image observation / GT-local energy field 只能作为 posthoc mechanism reference，不能写回 runtime prediction logic。
+- support 不是 final box。
+- weighted fusion 不是当前主线。
+
+## 2. Fixed Sample-Pool Semantics
+
+- `442` = all SAR GT / SAR-side target reference pool.
+- `215` = current clean paired optical-object-stream / SAR-GT posthoc frame-level pool.
+- `195` = GM_RM011 blocked_missing_object_stream, not unlabeled, not unusable.
+- `20` = SAR-only GT reference, usable for SAR morphology only.
+- `12` = dropout / no OTY IoU match / temporal continuation special pool.
+
+GM_RM011 不能继续被简单丢弃。它不能直接混入 `215` clean paired support validation，但它可以也应该用于 SAR morphology reference 和 object-stream recovery / pairing failure diagnosis。
+
+## 3. What Was Corrected In Previous Sessions
+
+- support-wide atlas 曾经错误地在 support 内找小组件。
+- physical shell grammar atlas 曾经错误地把 GT 外 support-internal peaks/components 画成 vehicle parts。
+- baby-car 小绿框问题：小组件不能叫车。
+- top-k peak 是 scattering atom，不是 vehicle。
+- 如果 GT-anchored vehicle-scale morphology 不在 support 内，正确诊断是 support construction failure / support miss vehicle structure，不是在错误 support 内继续找车。
+- `de5e6d7` 的 GT-local atlas 修正了方向：GT crop 主坐标，不画 support boundary，不把 support-internal component 画成 shell，但后续仍需检查可读性和物理表达深度。
+
+## 4. SAR-Only Must Close Both Positive And Negative Logic
+
+SAR-only / SAR morphology lane 不能只回答“为什么 GT 内是车”，还必须回答“为什么其他强散射不是车”。
+
+Positive mechanism cues include:
+
+- vehicle scale;
+- near-side / dominant-side ridge;
+- endpoint / corner hotspot;
+- weak opposite-side return;
+- discontinuous but self-consistent boundary;
+- long-axis / short-axis structure;
+- temporal non-jump / gradual drift.
+
+Negative mechanism cues include:
+
+- isolated peak;
+- tiny component / baby car;
+- guardrail / building edge / road edge;
+- flowerbed / background blob;
+- pedestrian / e-bike / small object point-like response;
+- fixed background hotspot;
+- texture-like clutter without vehicle-scale shell closure.
+
+Vehicle explanation without non-vehicle rejection is not a closed mechanism.
+
+只解释为什么这是车，不解释为什么别的不是车，机制是不闭环的。
+
+## 5. Physical Mechanism First, Not Weighted Fusion Or Heuristic Stacking
+
+赋权叠加不是主线。启发式堆叠不是主线。
+
+Shallow fusion:
+
+```text
+time_score + azimuth_score + support_score + energy_score + shell_score + temporal_score
+```
+
+Mechanism fusion:
+
+- optical object stream supplies hypothesis and temporal continuity;
+- optical state explains truncation / occlusion / edge contact;
+- geometry supplies azimuth/range feasible field;
+- SAR morphology explains vehicle vs non-vehicle structure;
+- SAR temporal continuity checks non-jump drift;
+- support statistics feed back to mechanism correction.
+
+多信息融合是必要的，但不是简单加权；它应该是约束传播、失败回流和机制修正。
+
+## 6. GM_RM011 Is A Recovery And Failure-Diagnosis Lane
+
+GM_RM011 不是不能用。它有 SAR GT，也有对应 optical sequence / optical frames。当前问题是缺当前 OTY optical object stream，因此不能直接进入 `215` clean paired pool。
+
+GM_RM011 应作为：
+
+- SAR morphology reference;
+- optical object stream recovery;
+- pairing failure diagnosis;
+- optical temporal pipeline stress test.
+
+需要诊断：
+
+- optical frame 是否存在；
+- optical object 是否可见；
+- YOLO / detection 是否存在；
+- ByteTrack / object stream 是否断；
+- optical-SAR time mapping 是否错；
+- azimuth / range mapping 是否错；
+- state compensation 是否缺失；
+- 如果对应不上，说明 optical temporal stream / mapping / object association 流程有问题，而不是 GM_RM011 没价值。
+
+## 7. Support Is Not Fixed; Support Statistics Must Feed Back
+
+support 当前不是固定方法，也不是 final box。support 是 optical-derived hypothesis field。
+
+如果 support 统计有问题，就说明机制有问题，必须回流修正，而不是继续在错误 support 内找结构。
+
+Feedback cases:
+
+- support miss GT vehicle shell -> check time mapping / range shell / azimuth mapping / optical state / near-field / temporal compensation.
+- support too broad -> check azimuth margin / range looseness / state over-compensation.
+- support contains neighbor -> check multi-object scene / identity ambiguity / optical tracklet / SAR temporal separation.
+- support contains no GT but vehicle-like energy -> check neighbor GT / missing annotation candidate / false vehicle-like clutter.
+- support contains no GT and no vehicle-like structure -> check optical false hypothesis / time mismatch / support false positive.
+- support covers only part of vehicle -> check truncation / partial optical object / range compression.
+
+Support audit must include support-without-GT cases, not only `215` paired rows.
+
+## 8. Required Mechanism Lanes
+
+Lane A: SAR vehicle / non-vehicle morphology closure
+
+- Input: `442` SAR GT + context, including GM_RM011 / SAR-only / dropout special as SAR morphology reference.
+- Goal: explain why vehicle is vehicle and why non-vehicle is not vehicle.
+- Output: vehicle-vs-nonvehicle physical morphology grammar.
+- No selector.
+
+Lane B: GM_RM011 optical object stream recovery and pairing failure diagnosis
+
+- Input: GM11 SAR GT, optical frames, detection / object stream pipeline artifacts if available.
+- Goal: recover or diagnose missing object stream and pairing failure.
+- Output: recoverable paired candidates / failure taxonomy.
+- Do not force into clean `215`.
+
+Lane C: dynamic support hypothesis audit
+
+- Input: all optical object hypotheses with support, not only paired GT rows.
+- Goal: classify support with/without GT, neighbor GT, background structure, vehicle-like but unpaired structure, empty support.
+- Output: support failure taxonomy and mechanism feedback.
+- No final box.
+
+Lane D: optical-SAR temporal compatibility
+
+- Input: SAR morphology that is physically interpretable + optical tracklet.
+- Goal: check whether ridge / hotspot / shell drifts non-jump and matches optical continuity.
+- Output: motion/drift compatibility.
+- No identity truth.
+
+## 9. Mandatory Reading Order For Future Sessions
+
+Every new OTY2-related session must first read:
+
+1. `docs/OTY2_SESSION_START_HERE.md`
+2. `docs/oty2_phase_reset_open_questions_and_mechanism_lanes.md`
+3. `docs/oty2_gt_support_failure_concept_correction_archive.md`
+4. `docs/oty2_physical_structure_first_not_weighted_fusion_archive.md`
+5. `docs/oty2_gt_local_energy_field_atlas_correction_archive.md`
+
+Then read the task-specific latest report/summary from `reports/oty2`.
+
+## 10. What Not To Do Next
+
+- Do not immediately create another large CSV table without redefining the mechanism question.
+- Do not use support-internal components outside GT to explain vehicle shell.
+- Do not call small green component boxes shell.
+- Do not do weighted fusion as mainline.
+- Do not keep GM_RM011 permanently blocked.
+- Do not assume support is fixed.
+- Do not avoid support-without-GT cases.
+- Do not treat atlas as success unless it actually shows GT-local energy-field structure that humans can inspect.
