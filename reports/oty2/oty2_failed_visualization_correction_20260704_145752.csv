@@ -1,0 +1,2 @@
+artifact_path,status,failure_reason,do_not_use_as,corrected_visualization
+D:\profile\research\optical-sar-visual-diagnosis\reports\oty2\visual_exemplars\oty2_physical_shell_grammar_temporal_drift_atlas_cn_20260704_143456.html,failed_visualization,Still visualizes support-internal peaks/components and small component boxes; can imply baby-car shells.,vehicle shell evidence; selector evidence; final box evidence; identity truth,GT-local energy-field atlas with GT crop as primary coordinate frame

@@ -1,0 +1,75 @@
+{
+  "timestamp": "20260704_145752",
+  "failed_visualization": {
+    "artifact_path": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\oty2_physical_shell_grammar_temporal_drift_atlas_cn_20260704_143456.html",
+    "status": "failed_visualization",
+    "failure_reason": "Still visualizes support-internal peaks/components and small component boxes; can imply baby-car shells.",
+    "do_not_use_as": "vehicle shell evidence; selector evidence; final box evidence; identity truth",
+    "corrected_visualization": "GT-local energy-field atlas with GT crop as primary coordinate frame"
+  },
+  "key_metrics": {
+    "feature_rows": 18,
+    "atlas_panels_generated": 18,
+    "ridge_band_mix": "lower=9;upper=8;right=1",
+    "weak_opposite_side_return_mix": "uncertain=15;yes=3",
+    "vehicle_scale_shell_contour_mix": "yes=16;uncertain=2",
+    "endpoint_hotspot_count_mix": "6=8;5=5;0=2;1=1;2=1;4=1",
+    "support_internal_components_drawn": "no",
+    "small_component_boxes_drawn_as_shell": "no",
+    "previous_physical_atlas_status": "failed_visualization"
+  },
+  "boundary_flags": {
+    "previous_physical_atlas_marked_failed": true,
+    "gt_local_energy_field_atlas_generated": true,
+    "gt_crop_primary_coordinate_frame": true,
+    "support_internal_components_drawn_as_vehicle_parts": false,
+    "small_component_boxes_drawn_as_shell": false,
+    "support_boundary_drawn": false,
+    "posthoc_sar_gt_used": true,
+    "posthoc_sar_image_content_used": true,
+    "annotation_proposal_entered": false,
+    "revised_gt_box_output": false,
+    "final_candidate_box_output": false,
+    "selector_or_ranking_used": false,
+    "training_or_threshold_tuning_entered": false,
+    "identity_truth_claimed": false,
+    "gt_or_sar_image_used_for_runtime_prior_construction": false,
+    "archive_or_old_work_used_as_active_source": false,
+    "zip_7z_rar_committed": false
+  },
+  "outputs": {
+    "correction_archive_doc": "D:\\profile\\research\\optical-sar-visual-diagnosis\\docs\\oty2_gt_local_energy_field_atlas_correction_archive.md",
+    "failed_visualization_correction_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_failed_visualization_correction_20260704_145752.csv",
+    "gt_local_energy_field_features_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_local_energy_field_features_20260704_145752.csv",
+    "report_md": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_local_energy_field_atlas_report_20260704_145752.md",
+    "summary_json": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_local_energy_field_atlas_summary_20260704_145752.json",
+    "visual_atlas_html": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\oty2_gt_local_energy_field_atlas_cn_20260704_145752.html",
+    "workspace_log": "D:\\profile\\research\\workspace\\logs\\oty2_gt_local_energy_field_atlas_20260704_145752.log"
+  },
+  "atlas_panels": [
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\01_GTREF_GM_RM011_s5_10_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\02_GTREF_GM_RM011_s6_12_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\03_GTREF_PAIRED_GM_RM017_s338_132_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\04_GTREF_GM_RM011_s10_18_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\05_GTREF_PAIRED_GM_RM017_s366_217_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\06_GTREF_PAIRED_GM_RM017_s379_255_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\07_GTREF_PAIRED_GM_RM017_s388_282_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\08_GTREF_PAIRED_GM_RM017_s429_303_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\09_GTREF_PAIRED_GM_RM017_s334_123_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\10_GTREF_PAIRED_GM_RM017_s372_236_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\11_GTREF_PAIRED_GM_RM017_s389_285_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\12_GTREF_PAIRED_GM_RM017_s389_286_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\13_GTREF_PAIRED_GM_RM017_s330_116_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\14_GTREF_PAIRED_GM_RM017_s331_117_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\15_GTREF_PAIRED_GM_RM017_s331_118_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\16_GTREF_PAIRED_GM_RM017_s332_119_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\17_GTREF_PAIRED_GM_RM017_s315_100_gt_local_energy_field_cn.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\visual_exemplars\\18_GTREF_PAIRED_GM_RM017_s317_101_gt_local_energy_field_cn.png"
+  ],
+  "sources": {
+    "gt_accounting_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_sample_accounting_audit_20260702_192810.csv",
+    "gt_quality_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_sar_gt_quality_audit_20260703_222135.csv",
+    "gt_morphology_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_anchored_energy_morphology_20260703_222135.csv",
+    "review_candidate_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis\\reports\\oty2\\oty2_gt_quality_visual_review_candidates_20260703_222135.csv"
+  }
+}
