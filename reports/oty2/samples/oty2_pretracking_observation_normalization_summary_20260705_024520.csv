@@ -1,0 +1,7 @@
+scene,detector_label,total_detection_rows,active_before_count,active_after_count,inactive_after_count,suppressed_duplicate_like_rows,duplicate_like_suppression_pairs,class_instability_duplicate_like_pairs,class_mismatch_explained_by_duplicate_like_rows,partial_full_pairs_kept,partial_full_rows_kept,neighbor_crowding_pairs_kept,neighbor_crowding_rows_kept,unjudgeable_pairs_kept,unjudgeable_rows_kept,frames_with_any_suppression,frames_with_detections,full_output_dir
+GM_RM011,yolo11l_baseline,422,422,413,9,9,9,9,16,44,83,11,15,20,29,9,233,outputs/oty0_pretracking_observation_normalization_probe_20260705_024520
+GM_RM019,yolo11l_baseline,334,334,330,4,4,4,2,2,34,60,89,83,14,26,4,193,outputs/oty0_pretracking_observation_normalization_probe_20260705_024520
+GM_RM017,yolo11l_baseline,215,215,215,0,0,0,3,0,14,28,34,57,24,39,0,100,outputs/oty0_pretracking_observation_normalization_probe_20260705_024520
+GM_RM011,yolo26l_probe,413,413,383,30,30,30,19,32,28,56,8,11,15,27,28,243,outputs/oty0_pretracking_observation_normalization_probe_20260705_024520
+GM_RM019,yolo26l_probe,288,288,272,16,16,16,1,0,8,12,50,48,12,22,14,193,outputs/oty0_pretracking_observation_normalization_probe_20260705_024520
+GM_RM017,yolo26l_probe,215,215,211,4,4,4,0,0,14,28,40,56,24,37,4,104,outputs/oty0_pretracking_observation_normalization_probe_20260705_024520
