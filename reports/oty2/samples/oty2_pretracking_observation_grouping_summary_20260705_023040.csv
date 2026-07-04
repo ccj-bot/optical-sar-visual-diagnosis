@@ -1,0 +1,7 @@
+scene,detector_label,total_detections,frames_with_detections,same_frame_pair_count,candidate_multi_box_pairs,high_overlap_pairs,class_instability_duplicate_like_pairs,partial_full_pairs,likely_neighbor_crowding_pairs,unjudgeable_pairs,safe_auto_grouping_count,review_required_count,full_output_dir
+GM_RM011,yolo11l_baseline,422,233,233,97,54,9,44,11,20,0,97,outputs/oty0_pretracking_observation_grouping_audit_20260705_023040
+GM_RM011,yolo26l_probe,413,243,209,92,61,19,28,8,15,0,92,outputs/oty0_pretracking_observation_grouping_audit_20260705_023040
+GM_RM019,yolo11l_baseline,334,193,196,146,29,2,34,89,14,0,146,outputs/oty0_pretracking_observation_grouping_audit_20260705_023040
+GM_RM019,yolo26l_probe,288,193,124,93,28,1,8,50,12,0,93,outputs/oty0_pretracking_observation_grouping_audit_20260705_023040
+GM_RM017,yolo11l_baseline,215,100,167,75,9,3,14,34,24,0,75,outputs/oty0_pretracking_observation_grouping_audit_20260705_023040
+GM_RM017,yolo26l_probe,215,104,171,82,11,0,14,40,24,0,82,outputs/oty0_pretracking_observation_grouping_audit_20260705_023040
