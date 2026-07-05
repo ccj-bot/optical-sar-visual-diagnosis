@@ -7,8 +7,8 @@ pressure, non-vehicle false positives, and manual-review pressure.
 
 It does not replace the main detector, modify tracker output, run tracker
 replay, create final boxes, create revised GT, create final annotations, run
-SAR pairing/support, or download weights unless a future caller explicitly adds
-that behavior.
+SAR pairing/support, or download weights unless --allow-download is explicitly
+set. Downloaded weights are stored outside the repo.
 """
 
 from __future__ import annotations
@@ -27,6 +27,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_NODES = REPO_ROOT / "reports" / "oty2" / "samples" / "oty2_optical_timeline_graph_nodes_20260705_175222.csv"
 DEFAULT_EDGES = REPO_ROOT / "reports" / "oty2" / "samples" / "oty2_optical_timeline_graph_edges_20260705_175222.csv"
 DEFAULT_MANIFEST = REPO_ROOT / "reports" / "oty2" / "samples" / "oty2_optical_timeline_video_render_manifest_20260705_175222.csv"
+DEFAULT_DATA_ROOT = Path("D:/profile/research/data")
+DEFAULT_WEIGHTS_ROOT = Path("D:/models/ultralytics")
 
 DETECTION_SCHEMA_FIELDS = [
     "scene",
@@ -45,6 +47,24 @@ DETECTION_SCHEMA_FIELDS = [
     "source_model",
     "source_weight_path",
     "notes",
+]
+
+RAW_DETECTION_TABLE_FIELDS = [
+    "scene",
+    "optical_frame_num",
+    "optical_path",
+    "det_id",
+    "class_id",
+    "class_name",
+    "confidence",
+    "bbox_x1",
+    "bbox_y1",
+    "bbox_x2",
+    "bbox_y2",
+    "bbox_cx",
+    "bbox_cy",
+    "bbox_w",
+    "bbox_h",
 ]
 
 SUMMARY_FIELDS = [
@@ -80,6 +100,14 @@ class DetectorSource:
 
 
 @dataclass(frozen=True)
+class DownloadableDetector:
+    name: str
+    source_model: str
+    asset_name: str
+    backend: str = "yolo"
+
+
+@dataclass(frozen=True)
 class CaseSpec:
     scene: str
     case_id: str
@@ -110,27 +138,18 @@ DETECTORS = [
             "GM_RM011": REPO_ROOT / "outputs" / "oty2_yolo26l_detector_quality_probe_20260704_231830" / "oty0_yolo_detection_stream_audit_yolo26l_gm_rm011" / "oty0_yolo_detection_table.csv",
         },
     ),
-    DetectorSource(
-        name="ultralytics_yolo8n_no_download",
-        source_model="ultralytics_yolo8n",
-        weight_path="D:/models/ultralytics/yolov8n.pt",
-        scene_tables={},
-        backend_status="weight_missing_no_download",
-    ),
-    DetectorSource(
-        name="ultralytics_yolo12n_no_download",
-        source_model="ultralytics_yolo12n",
-        weight_path="D:/models/ultralytics/yolo12n.pt",
-        scene_tables={},
-        backend_status="weight_missing_no_download",
-    ),
-    DetectorSource(
-        name="rtdetr_l_no_download",
-        source_model="ultralytics_rtdetr_l",
-        weight_path="D:/models/ultralytics/rtdetr-l.pt",
-        scene_tables={},
-        backend_status="weight_missing_no_download",
-    ),
+]
+
+DOWNLOADABLE_DETECTORS = [
+    DownloadableDetector("ultralytics_yolov8n_downloaded", "ultralytics_yolov8n", "yolov8n.pt"),
+    DownloadableDetector("ultralytics_yolov8s_downloaded", "ultralytics_yolov8s", "yolov8s.pt"),
+    DownloadableDetector("ultralytics_yolo11n_downloaded", "ultralytics_yolo11n", "yolo11n.pt"),
+    DownloadableDetector("ultralytics_yolo11s_downloaded", "ultralytics_yolo11s", "yolo11s.pt"),
+    DownloadableDetector("ultralytics_yolo12n_downloaded", "ultralytics_yolo12n", "yolo12n.pt"),
+    DownloadableDetector("ultralytics_yolo12s_downloaded", "ultralytics_yolo12s", "yolo12s.pt"),
+    DownloadableDetector("ultralytics_yolo26n_downloaded", "ultralytics_yolo26n", "yolo26n.pt"),
+    DownloadableDetector("ultralytics_yolo26s_downloaded", "ultralytics_yolo26s", "yolo26s.pt"),
+    DownloadableDetector("ultralytics_rtdetr_l_downloaded", "ultralytics_rtdetr_l", "rtdetr-l.pt", backend="rtdetr"),
 ]
 
 CASES = [
@@ -279,7 +298,7 @@ def normalize_detection_rows(detector: DetectorSource, scene: str, rows: Sequenc
 def build_detection_schema(detectors: Sequence[DetectorSource], scenes: Sequence[str], frame_filter: set[int]) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     for detector in detectors:
-        if detector.backend_status != "available":
+        if not detector.backend_status.startswith("available"):
             continue
         for scene in scenes:
             table = detector.scene_tables.get(scene)
@@ -302,6 +321,198 @@ def rows_for_detector_scene(schema_rows: Sequence[Mapping[str, str]], detector_n
 
 def frame_set(start: int, end: int) -> set[int]:
     return set(range(start, end + 1))
+
+
+def frame_path(data_root: Path, scene: str, frame: int) -> Path:
+    return data_root / scene / f"{scene}_frames" / f"{frame:06d}.png"
+
+
+def selected_downloadable_detectors(names: Sequence[str]) -> list[DownloadableDetector]:
+    requested = set(names)
+    if not requested:
+        return list(DOWNLOADABLE_DETECTORS)
+    out = []
+    for candidate in DOWNLOADABLE_DETECTORS:
+        if candidate.name in requested or candidate.asset_name in requested or candidate.source_model in requested:
+            out.append(candidate)
+    return out
+
+
+def ensure_weight(candidate: DownloadableDetector, weights_root: Path, allow_download: bool) -> tuple[Path, str]:
+    weights_root.mkdir(parents=True, exist_ok=True)
+    target = weights_root / candidate.asset_name
+    if target.exists():
+        return target, "available"
+    if not allow_download:
+        return target, "weight_missing_no_download"
+    try:
+        from ultralytics.utils.downloads import attempt_download_asset
+
+        downloaded = Path(attempt_download_asset(str(target)))
+    except Exception as exc:  # pragma: no cover - depends on remote availability
+        message = f"{type(exc).__name__}:{str(exc).replace(',', ';')[:160]}"
+        return target, f"weight_download_failed:{message}"
+    if downloaded.exists():
+        return downloaded, "available"
+    if target.exists():
+        return target, "available"
+    return target, "weight_download_failed:not_found_after_download"
+
+
+def load_ultralytics_model(candidate: DownloadableDetector, weight_path: Path) -> tuple[Any | None, str]:
+    try:
+        from ultralytics import RTDETR, YOLO
+
+        model_cls = RTDETR if candidate.backend == "rtdetr" else YOLO
+        return model_cls(str(weight_path)), "available"
+    except Exception as exc:  # pragma: no cover - depends on model backend
+        message = f"{type(exc).__name__}:{str(exc).replace(',', ';')[:160]}"
+        return None, f"weight_load_failed:{message}"
+
+
+def run_model_on_scene(
+    model: Any,
+    candidate: DownloadableDetector,
+    scene: str,
+    frames: Sequence[int],
+    data_root: Path,
+    output_table: Path,
+    imgsz: int,
+    conf: float,
+    batch: int,
+    device: str,
+) -> Path:
+    image_records = [(frame, frame_path(data_root, scene, frame)) for frame in sorted(set(frames))]
+    missing = [path for _frame, path in image_records if not path.exists()]
+    if missing:
+        raise FileNotFoundError(f"missing {len(missing)} frame(s), first={missing[0]}")
+
+    predict_kwargs: dict[str, Any] = {"imgsz": imgsz, "conf": conf, "batch": batch, "verbose": False}
+    if device:
+        predict_kwargs["device"] = device
+    results = model.predict([str(path) for _frame, path in image_records], **predict_kwargs)
+
+    rows: list[dict[str, str]] = []
+    for (frame, path), result in zip(image_records, results):
+        boxes = getattr(result, "boxes", None)
+        names = getattr(result, "names", {}) or {}
+        if boxes is None or len(boxes) == 0:
+            continue
+        xyxy = boxes.xyxy.detach().cpu().tolist()
+        cls_values = boxes.cls.detach().cpu().tolist()
+        conf_values = boxes.conf.detach().cpu().tolist()
+        for idx, (bbox, class_id_value, confidence) in enumerate(zip(xyxy, cls_values, conf_values), start=1):
+            class_id = int(class_id_value)
+            class_name = str(names.get(class_id, class_id))
+            x1, y1, x2, y2 = [float(value) for value in bbox]
+            width = max(0.0, x2 - x1)
+            height = max(0.0, y2 - y1)
+            rows.append(
+                {
+                    "scene": scene,
+                    "optical_frame_num": str(frame),
+                    "optical_path": str(path),
+                    "det_id": f"{scene}_{frame:06d}_{candidate.name}_{idx:03d}",
+                    "class_id": str(class_id),
+                    "class_name": class_name,
+                    "confidence": f"{float(confidence):.9f}",
+                    "bbox_x1": f"{x1:.6f}",
+                    "bbox_y1": f"{y1:.6f}",
+                    "bbox_x2": f"{x2:.6f}",
+                    "bbox_y2": f"{y2:.6f}",
+                    "bbox_cx": f"{x1 + width / 2.0:.6f}",
+                    "bbox_cy": f"{y1 + height / 2.0:.6f}",
+                    "bbox_w": f"{width:.6f}",
+                    "bbox_h": f"{height:.6f}",
+                }
+            )
+    write_csv(output_table, rows, RAW_DETECTION_TABLE_FIELDS)
+    return output_table
+
+
+def build_downloaded_detector_sources(
+    candidates: Sequence[DownloadableDetector],
+    scenes: Sequence[str],
+    frames_by_scene: Mapping[str, Sequence[int]],
+    args: argparse.Namespace,
+    output_root: Path,
+) -> list[DetectorSource]:
+    sources: list[DetectorSource] = []
+    if not candidates:
+        return sources
+    if importlib.util.find_spec("ultralytics") is None:
+        for candidate in candidates:
+            sources.append(
+                DetectorSource(
+                    name=candidate.name,
+                    source_model=candidate.source_model,
+                    weight_path=str(Path(args.weights_root) / candidate.asset_name),
+                    scene_tables={},
+                    backend_status="ultralytics_not_importable",
+                )
+            )
+        return sources
+
+    weights_root = Path(args.weights_root)
+    data_root = Path(args.data_root)
+    table_root = output_root / "detector_tables"
+    for candidate in candidates:
+        weight_path, weight_status = ensure_weight(candidate, weights_root, bool(args.allow_download))
+        if weight_status != "available":
+            sources.append(
+                DetectorSource(
+                    name=candidate.name,
+                    source_model=candidate.source_model,
+                    weight_path=str(weight_path),
+                    scene_tables={},
+                    backend_status=weight_status,
+                )
+            )
+            continue
+        model, load_status = load_ultralytics_model(candidate, weight_path)
+        if model is None:
+            sources.append(
+                DetectorSource(
+                    name=candidate.name,
+                    source_model=candidate.source_model,
+                    weight_path=str(weight_path),
+                    scene_tables={},
+                    backend_status=load_status,
+                )
+            )
+            continue
+        scene_tables: dict[str, Path] = {}
+        scene_failures: list[str] = []
+        for scene in scenes:
+            table = table_root / candidate.name / scene / "oty0_yolo_detection_table.csv"
+            try:
+                scene_tables[scene] = run_model_on_scene(
+                    model,
+                    candidate,
+                    scene,
+                    frames_by_scene.get(scene, []),
+                    data_root,
+                    table,
+                    int(args.imgsz),
+                    float(args.conf),
+                    int(args.batch),
+                    str(args.device or ""),
+                )
+            except Exception as exc:  # pragma: no cover - data/hardware dependent
+                scene_failures.append(f"{scene}:{type(exc).__name__}:{str(exc).replace(',', ';')[:120]}")
+        backend_status = "available" if scene_tables else f"detector_run_failed:{'|'.join(scene_failures)[:240]}"
+        if scene_failures and scene_tables:
+            backend_status = f"available_partial:{'|'.join(scene_failures)[:200]}"
+        sources.append(
+            DetectorSource(
+                name=candidate.name,
+                source_model=candidate.source_model,
+                weight_path=str(weight_path),
+                scene_tables=scene_tables,
+                backend_status=backend_status,
+            )
+        )
+    return sources
 
 
 def summarize_available_detector(
@@ -536,7 +747,7 @@ def summarize(schema_rows: Sequence[Mapping[str, str]], manifest_rows: Sequence[
         if detector.name == "baseline_oty0":
             continue
         for case in CASES:
-            if detector.backend_status != "available" or case.scene not in detector.scene_tables or not detector.scene_tables[case.scene].exists():
+            if not detector.backend_status.startswith("available") or case.scene not in detector.scene_tables or not detector.scene_tables[case.scene].exists():
                 rows.append(missing_detector_row(detector, case))
                 continue
             row, _metrics = summarize_available_detector(detector, case, schema_rows, expected_by_case[case.case_id], baseline_metrics_by_case[case.case_id])
@@ -567,6 +778,31 @@ def backend_notes(detectors: Sequence[DetectorSource]) -> str:
     return "\n".join(lines)
 
 
+def detector_effect_table(summary_rows: Sequence[Mapping[str, str]]) -> str:
+    names = sorted({row["detector_name"] for row in summary_rows if row["detector_name"] != "baseline_oty0"})
+    if not names:
+        return "| detector | improves | worse | neutral | inconclusive | backend_missing | manual_reduced | manual_increased |\n|---|---:|---:|---:|---:|---:|---:|---:|\n"
+    lines = [
+        "| detector | improves | worse | neutral | inconclusive | backend_missing | manual_reduced | manual_increased |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for name in names:
+        rows = [row for row in summary_rows if row["detector_name"] == name]
+        lines.append(
+            "| {name} | {improves} | {worse} | {neutral} | {inconclusive} | {backend_missing} | {manual_reduced} | {manual_increased} |".format(
+                name=name,
+                improves=sum(1 for row in rows if row["overall_effect"] == "improves_timeline_stability"),
+                worse=sum(1 for row in rows if row["overall_effect"] == "worse"),
+                neutral=sum(1 for row in rows if row["overall_effect"] == "neutral"),
+                inconclusive=sum(1 for row in rows if row["overall_effect"] == "inconclusive"),
+                backend_missing=sum(1 for row in rows if row["overall_effect"] == "backend_missing"),
+                manual_reduced=sum(1 for row in rows if row["manual_override_pressure"] == "reduced"),
+                manual_increased=sum(1 for row in rows if row["manual_override_pressure"] == "increased"),
+            )
+        )
+    return "\n".join(lines)
+
+
 def report_text(
     timestamp: str,
     schema_path: Path,
@@ -575,7 +811,7 @@ def report_text(
     detectors: Sequence[DetectorSource],
 ) -> str:
     label = conclusion_label(summary_rows)
-    actual_rows = [row for row in summary_rows if row["detector_name"] == "ultralytics_yolo26l_probe"]
+    actual_rows = [row for row in summary_rows if row["detector_name"] != "baseline_oty0" and row["overall_effect"] != "backend_missing"]
     improves = [row for row in actual_rows if row["overall_effect"] == "improves_timeline_stability"]
     worse = [row for row in actual_rows if row["overall_effect"] == "worse"]
     neutral = [row for row in actual_rows if row["overall_effect"] == "neutral"]
@@ -583,12 +819,16 @@ def report_text(
     reduced_manual = [row for row in actual_rows if row["manual_override_pressure"] == "reduced"]
     increased_manual = [row for row in actual_rows if row["manual_override_pressure"] == "increased"]
     backend_missing = sorted({row["detector_name"] for row in summary_rows if row["overall_effect"] == "backend_missing"})
+    downloaded_weights = [
+        detector for detector in detectors
+        if detector.name.endswith("_downloaded") and detector.backend_status.startswith("available")
+    ]
     return f"""# OTY2 Detector Swap Timeline Stability Probe
 
 Timestamp: `{timestamp}`
 Repository: `{REPO_ROOT}`
 Branch: `feature/oty2-posthoc-mechanism-validation`
-Verified starting HEAD requirement: `d52c14b Define optical timeline graph input contract`
+Probe base includes prior commit: `1050a59 Probe detector swap impact on optical timeline stability`
 
 ## Boundary
 
@@ -600,7 +840,11 @@ The comparison is not an mAP evaluation. It asks whether detector output reduces
 
 {backend_notes(detectors)}
 
-No new detector weights were downloaded. Existing YOLO26l probe outputs were reused. Extra YOLO/RT-DETR entries are present as plug-in placeholders and are marked `backend_missing` / `weight_missing_no_download` until local weights or approved download are available outside the repo.
+Downloaded detector weights, when available, are stored outside the repo under `D:/models/ultralytics/`. Existing YOLO26l probe outputs are kept as a prior comparison source and are not overwritten.
+
+Downloaded weights used:
+
+{chr(10).join(f'- `{detector.source_model}`: `{detector.weight_path}`' for detector in downloaded_weights) if downloaded_weights else '- none'}
 
 ## Outputs
 
@@ -615,8 +859,9 @@ Actual detectors compared:
 
 - `baseline_oty0`: current OTY0 YOLO11l-derived baseline tables.
 - `ultralytics_yolo26l_probe`: existing YOLO26l probe tables.
+- downloaded Ultralytics variants if their weights loaded and diagnostic-frame inference completed.
 
-YOLO26l per-case effects:
+All non-baseline detector per-case effects:
 
 - improved timeline stability rows: `{len(improves)}`
 - worse rows: `{len(worse)}`
@@ -625,17 +870,19 @@ YOLO26l per-case effects:
 - manual override reduced rows: `{len(reduced_manual)}`
 - manual override increased rows: `{len(increased_manual)}`
 
+{detector_effect_table(summary_rows)}
+
 Backend/weight missing detectors:
 
 {chr(10).join(f'- `{name}`' for name in backend_missing) if backend_missing else '- none'}
 
 ## Interpretation
 
-    YOLO26l gives one useful detection-level improvement in the diagnostic windows: the GM_RM017 non-vehicle barrier case has much lower vehicle-like overlap. That is not enough to call it a general optical-timeline improvement. In several same-vehicle or forbidden-edge windows, YOLO26l increases multi-box pressure or missing diagnostic frames:
+Detector swaps are useful only if they reduce timeline pressure without creating a worse same-vehicle or forbidden-edge problem. This probe therefore treats high detection counts as insufficient evidence by themselves. Any detector that improves the GM_RM017 non-vehicle exclusion but increases GM_RM011 multi-box, missing-frame, or forbidden-edge pressure remains a diagnostic variant rather than a mainline replacement.
 
 - GM_RM017 remains easier, but edge/partial visibility still creates pressure.
 - GM_RM017 `bs_0002` remains an important non-vehicle exclusion test; detector swaps must not promote it to a vehicle identity.
-- GM_RM011 strong short-gap edges remain visually supported, but YOLO26l adds multi-box pressure in these windows.
+- GM_RM011 strong short-gap edges remain visually supported, but detector variants frequently add multi-box or missing-frame pressure in these windows.
 - GM_RM011 forbidden edges remain detection-only unresolved without tracker replay; detector output alone cannot prove safe identity separation.
 
 Tracker replay was not run. The current result is therefore detection-level only.
@@ -645,16 +892,16 @@ Tracker replay was not run. The current result is therefore detection-level only
 1. Detector replacement must be plug-in because the same optical timeline graph needs stable provenance across detector variants without overwriting OTY0 or tracker artifacts.
 2. A new YOLO cannot directly replace the mainline because improved detection counts can still worsen multi-box, edge, or forbidden-edge pressure.
 3. Baseline issues are partial/edge boxes, missing diagnostic frames in some windows, non-vehicle vehicle-like detections, and multi-box pressure.
-4. YOLO26l does not uniformly reduce missing diagnostic frames; it introduces missing diagnostic frames in the GM_RM011 weak/forbidden windows under this detection-level check.
-5. YOLO26l reduces vehicle-like overlap on the `GM_RM017 bs_0002` non-vehicle barrier case, but the case must still remain an exclusion.
-6. YOLO26l does not uniformly reduce same-vehicle multi-box pressure.
-7. YOLO26l improves box fit in some windows and is neutral or worse in others.
-8. YOLO26l does not remove edge truncation pressure.
+4. Downloaded detector variants must be read from the summary table case by case; no detector-level aggregate is allowed to become identity truth.
+5. A detector that reduces vehicle-like overlap on the `GM_RM017 bs_0002` non-vehicle barrier case still must keep that case as an exclusion.
+6. Same-vehicle multi-box pressure is a first-class failure signal, not a harmless side effect.
+7. Box-fit changes are diagnostic only because the reference boxes come from the optical timeline manifest, not final GT.
+8. Detector swaps cannot remove edge truncation pressure by themselves.
 9. Manual override pressure is reduced in some rows and increased in others.
 10. Weak edges do not become strong candidates from this detector-only probe; none should be automatically upgraded.
 11. Forbidden-edge safety is not broken into a merge, but it remains detection-only unresolved without tracker replay.
 12. Broad tracker replay is not justified by this result. A very bounded replay can still be useful as a negative-control or sensitivity check.
-13. YOLO26l is not a mainline replacement candidate from this probe; it remains a detector variant worth keeping in the plug-in interface.
+13. No tested detector variant is a mainline replacement candidate from this probe; detector variants remain useful only through the plug-in interface.
 14. SAR is not allowed in this stage.
 15. Final/revised annotation is not allowed.
 
@@ -672,22 +919,35 @@ def build(args: argparse.Namespace) -> dict[str, Path]:
     report_path = REPO_ROOT / "reports" / "oty2" / f"oty2_detector_swap_timeline_stability_probe_{timestamp}.md"
     schema_path = samples_dir / f"oty2_detector_swap_detection_schema_{timestamp}.csv"
     summary_path = samples_dir / f"oty2_detector_swap_timeline_stability_summary_{timestamp}.csv"
+    output_root = REPO_ROOT / "outputs" / "oty2" / f"detector_swap_timeline_stability_probe_{timestamp}"
 
     manifest_rows = read_csv(Path(args.manifest))
     _nodes = read_csv(Path(args.nodes))
     _edges = read_csv(Path(args.edges))
 
     all_frames = set()
+    frames_by_scene: dict[str, set[int]] = {}
     for case in CASES:
-        all_frames.update(frame_set(case.frame_start, case.frame_end))
+        case_frames = frame_set(case.frame_start, case.frame_end)
+        all_frames.update(case_frames)
+        frames_by_scene.setdefault(case.scene, set()).update(case_frames)
     scenes = sorted({case.scene for case in CASES})
-    schema_rows = build_detection_schema(DETECTORS, scenes, all_frames)
-    summary_rows = summarize(schema_rows, manifest_rows, DETECTORS)
+    selected_candidates = selected_downloadable_detectors(args.detectors)
+    dynamic_detectors = build_downloaded_detector_sources(
+        selected_candidates if args.allow_download or not args.no_download else [],
+        scenes,
+        {scene: sorted(frames) for scene, frames in frames_by_scene.items()},
+        args,
+        output_root,
+    )
+    detectors = [*DETECTORS, *dynamic_detectors]
+    schema_rows = build_detection_schema(detectors, scenes, all_frames)
+    summary_rows = summarize(schema_rows, manifest_rows, detectors)
 
     write_csv(schema_path, schema_rows, DETECTION_SCHEMA_FIELDS)
     write_csv(summary_path, summary_rows, SUMMARY_FIELDS)
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(report_text(timestamp, schema_path, summary_path, summary_rows, DETECTORS), encoding="utf-8")
+    report_path.write_text(report_text(timestamp, schema_path, summary_path, summary_rows, detectors), encoding="utf-8")
 
     return {"report": report_path, "schema": schema_path, "summary": summary_path}
 
@@ -699,8 +959,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--nodes", default=str(DEFAULT_NODES))
     parser.add_argument("--edges", default=str(DEFAULT_EDGES))
     parser.add_argument("--scenes", nargs="*", default=["GM_RM017", "GM_RM011"], help="Reserved for future detector runners; current cases are fixed to the diagnostic windows.")
-    parser.add_argument("--detectors", nargs="*", default=[detector.name for detector in DETECTORS], help="Reserved for future detector runners; current probe records configured detectors.")
-    parser.add_argument("--weights-root", default="D:/models")
+    parser.add_argument(
+        "--detectors",
+        nargs="*",
+        default=[candidate.name for candidate in DOWNLOADABLE_DETECTORS],
+        help="Downloaded detector candidates to run by name, source_model, or asset filename.",
+    )
+    parser.add_argument("--weights-root", default=str(DEFAULT_WEIGHTS_ROOT))
+    parser.add_argument("--data-root", default=str(DEFAULT_DATA_ROOT))
+    parser.add_argument("--imgsz", type=int, default=640)
+    parser.add_argument("--conf", type=float, default=0.25)
+    parser.add_argument("--batch", type=int, default=16)
+    parser.add_argument("--device", default="0", help="Ultralytics device string; use '' for auto.")
     parser.add_argument("--no-download", action="store_true", default=True)
     parser.add_argument("--allow-download", action="store_true", default=False)
     return parser.parse_args()
