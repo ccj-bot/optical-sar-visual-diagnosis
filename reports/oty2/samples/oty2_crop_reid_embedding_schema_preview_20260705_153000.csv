@@ -1,0 +1,25 @@
+schema_kind,field_name,required,description
+detection_embedding_index,row_uid,yes,stable row key for detection-level embedding index
+detection_embedding_index,scene,yes,scene id such as GM_RM011
+detection_embedding_index,frame_id,yes,optical frame id used for same-frame tracker linkage
+detection_embedding_index,det_id_ignored,yes,"source detection id retained only as a row handle, never identity truth"
+detection_embedding_index,optical_path,yes,real optical frame path used for crop extraction
+detection_embedding_index,bbox_xyxy_original,yes,source OTY0 bbox before clamping
+detection_embedding_index,bbox_xyxy_clamped,yes,image-bounds crop bbox
+detection_embedding_index,crop_w,yes,crop width in pixels
+detection_embedding_index,crop_h,yes,crop height in pixels
+detection_embedding_index,embedding_backend,yes,learned backend name or missing-backend label
+detection_embedding_index,embedding_dim,yes,feature vector dimension when embeddings exist
+detection_embedding_index,embedding_l2_normed,yes,whether vectors are L2-normalized
+detection_embedding_index,embedding_artifact_path_uncommitted,yes,ignored local artifact path under outputs
+tracklet_embedding_aggregation,scene,yes,scene id
+tracklet_embedding_aggregation,tracker_name,yes,botsort or bytetrack
+tracklet_embedding_aggregation,tracker_variant,yes,raw or normalized_active
+tracklet_embedding_aggregation,track_id,yes,"tracker hypothesis id, not identity truth"
+tracklet_embedding_aggregation,frame_start,yes,tracklet start frame
+tracklet_embedding_aggregation,frame_end,yes,tracklet end frame
+tracklet_embedding_aggregation,num_detections,yes,number of linked detections
+tracklet_embedding_aggregation,linked_det_ids_ignored,yes,source detection handles only
+tracklet_embedding_aggregation,linked_embedding_count,yes,number of linked crop embeddings
+tracklet_embedding_aggregation,tracklet_embedding_policy,yes,aggregation policy after detection-to-track linkage validation
+tracklet_embedding_aggregation,motion_summary_path_or_inline_fields,yes,motion/position evidence for report-only stitch proposals
