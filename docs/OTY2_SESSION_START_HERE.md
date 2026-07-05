@@ -159,12 +159,13 @@ Lane D: optical-SAR temporal compatibility
 Every new OTY2-related session must first read:
 
 1. `docs/OTY2_SESSION_START_HERE.md`
-2. `docs/OTY2_OPTICAL_STREAM_GENERALIZATION_PROTOCOL.md`
-3. `docs/OTY2_OPTICAL_STREAM_MECHANISM_ADJUSTMENT_DESIGN.md`
-4. `docs/oty2_phase_reset_open_questions_and_mechanism_lanes.md`
-5. `docs/oty2_gt_support_failure_concept_correction_archive.md`
-6. `docs/oty2_physical_structure_first_not_weighted_fusion_archive.md`
-7. `docs/oty2_gt_local_energy_field_atlas_correction_archive.md`
+2. `docs/OTY2_TEMPORAL_BACKBONE_ROUTE_RESET.md`
+3. `docs/OTY2_OPTICAL_STREAM_GENERALIZATION_PROTOCOL.md`
+4. `docs/OTY2_OPTICAL_STREAM_MECHANISM_ADJUSTMENT_DESIGN.md`
+5. `docs/oty2_phase_reset_open_questions_and_mechanism_lanes.md`
+6. `docs/oty2_gt_support_failure_concept_correction_archive.md`
+7. `docs/oty2_physical_structure_first_not_weighted_fusion_archive.md`
+8. `docs/oty2_gt_local_energy_field_atlas_correction_archive.md`
 
 Then read the task-specific latest report/summary from `reports/oty2`.
 
