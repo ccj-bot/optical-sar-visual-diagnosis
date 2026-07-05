@@ -1,0 +1,4 @@
+scene,rows_total,rows_with_optical_path,image_exists,image_missing,image_unreadable,bbox_present,bbox_parse_failed,bbox_invalid_geometry,bbox_fully_out_of_bounds,bbox_partially_out_of_bounds_clamped,crop_extractable,crop_failed,embedding_backend,embedding_available,embedded_count,conclusion_scene
+GM_RM011,422,422,422,0,0,422,0,0,0,0,422,0,missing_local_embedding_backend,False,0,DETECTION_CROP_EXTRACTION_READY_EMBEDDING_BACKEND_MISSING
+GM_RM019,334,334,334,0,0,334,0,0,0,0,334,0,missing_local_embedding_backend,False,0,DETECTION_CROP_EXTRACTION_READY_EMBEDDING_BACKEND_MISSING
+GM_RM017,215,215,215,0,0,215,0,0,0,0,215,0,missing_local_embedding_backend,False,0,DETECTION_CROP_EXTRACTION_READY_EMBEDDING_BACKEND_MISSING
