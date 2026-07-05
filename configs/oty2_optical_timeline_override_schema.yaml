@@ -1,0 +1,173 @@
+schema_name: oty2_optical_timeline_override_schema
+schema_version: 1
+stage: OTY2 optical diagnostic timeline review
+scope: diagnostic timeline graph and diagnostic render manifest only
+
+contract_boundary:
+  allowed_targets:
+    - diagnostic_node_status
+    - diagnostic_edge_relation
+    - diagnostic_render_manifest
+    - diagnostic_review_report
+  forbidden_targets:
+    - final_annotation
+    - revised_annotation
+    - final_boxes
+    - gt_boxes
+    - identity_truth
+    - sar_pairing
+    - sar_support
+    - selector_ranking
+    - detector_swap_mainline
+    - tracker_replay
+
+table:
+  path: manifests/oty2_optical_timeline_override_template.csv
+  format: csv
+  row_semantics: one manual review event per row
+  required_columns:
+    - override_id
+    - override_type
+    - override_scope
+    - event_id
+    - scene_id
+    - node_id
+    - from_node_id
+    - to_node_id
+    - bs_id
+    - seg_id
+    - frame_start
+    - frame_end
+    - target_node_id
+    - action
+    - edge_strength
+    - source_detection_id
+    - reason_code
+    - evidence_frame_start
+    - evidence_frame_end
+    - confidence
+    - review_status
+    - note
+  forbidden_columns:
+    - bbox_x1
+    - bbox_y1
+    - bbox_x2
+    - bbox_y2
+    - bbox_width
+    - bbox_height
+    - final_box
+    - gt_box
+    - revised_box
+    - final_annotation
+    - revised_annotation
+
+override_types:
+  node:
+    compatible_scopes:
+      - node
+      - interval
+      - event
+    required_fields:
+      - override_id
+      - scene_id
+      - node_id
+      - action
+      - reason_code
+      - review_status
+    allowed_actions:
+      - keep_vehicle_node
+      - exclude_non_vehicle
+      - mark_bad_detection_node
+      - mark_review_required
+      - split_node
+      - merge_node
+    effect_boundary: node status and diagnostic graph review only
+  edge:
+    compatible_scopes:
+      - edge
+      - event
+    required_fields:
+      - override_id
+      - scene_id
+      - from_node_id
+      - to_node_id
+      - action
+      - edge_strength
+      - reason_code
+      - review_status
+    allowed_actions:
+      - force_strong_connect
+      - force_weak_connect
+      - forbid_connect
+      - downgrade_to_weak
+      - upgrade_to_strong
+      - mark_review_required
+    effect_boundary: edge relation in diagnostic graph only
+  render:
+    compatible_scopes:
+      - event
+      - interval
+    required_fields:
+      - override_id
+      - scene_id
+      - frame_start
+      - frame_end
+      - action
+      - reason_code
+      - review_status
+    allowed_actions:
+      - hide_bad_box_for_render
+      - select_diagnostic_primary_box
+      - show_review_marker
+      - show_forbidden_edge_marker
+      - show_weak_edge_marker
+      - show_non_vehicle_marker
+    action_specific_requirements:
+      select_diagnostic_primary_box:
+        required_fields:
+          - target_node_id
+          - source_detection_id
+        interpretation: choose an existing detection box for diagnostic rendering only; do not write coordinates
+      hide_bad_box_for_render:
+        required_one_of:
+          - source_detection_id
+          - target_node_id
+    effect_boundary: diagnostic render manifest only
+
+enums:
+  override_scope:
+    - event
+    - node
+    - edge
+    - interval
+  edge_strength:
+    - strong
+    - weak
+    - forbidden
+    - review_only
+    - excluded
+  review_status:
+    - proposed
+    - reviewed_accept
+    - reviewed_reject
+    - needs_second_review
+  reason_code:
+    - same_vehicle_continuity
+    - weak_continuity_only
+    - forbidden_competitor_switch
+    - non_vehicle_barrier
+    - bad_detection_box_fit
+    - bad_frame_unreadable
+    - edge_contact_thin_crop
+    - part_state_transition
+    - multi_object_competition
+    - diagnostic_primary_box_selection
+    - review_uncertain
+    - other_review_note
+    - custom_*
+
+validation_defaults:
+  nodes: reports/oty2/samples/oty2_optical_timeline_graph_nodes_20260705_175222.csv
+  edges: reports/oty2/samples/oty2_optical_timeline_graph_edges_20260705_175222.csv
+  render_manifest: reports/oty2/samples/oty2_optical_timeline_video_render_manifest_20260705_175222.csv
+  validator: tools/diagnostics/validate_oty2_optical_timeline_overrides.py

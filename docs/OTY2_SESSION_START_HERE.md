@@ -169,6 +169,11 @@ Every new OTY2-related session must first read:
 
 Then read the task-specific latest report/summary from `reports/oty2`.
 
+For optical timeline video review and manual override sessions, also read:
+
+1. `docs/OTY2_OPTICAL_TIMELINE_SESSION_CLOSEOUT_20260705.md`
+2. `docs/OTY2_OPTICAL_TIMELINE_RENDER_REVIEW_AND_OVERRIDE_CONTRACT.md`
+
 ## 10. What Not To Do Next
 
 - Do not immediately create another large CSV table without redefining the mechanism question.
