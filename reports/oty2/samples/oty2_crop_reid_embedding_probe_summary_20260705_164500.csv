@@ -1,0 +1,4 @@
+scene,rows_total,crop_extractable,embedding_computed,embedding_failed,embedding_backend,embedding_dim,embedding_l2_normed,learned_backend_used,weights_path_external,artifact_created_uncommitted,artifact_path_uncommitted,conclusion_scene
+GM_RM011,422,422,0,0,torchvision_resnet18_weights_missing,,,False,D:\models\torchvision\resnet18-f37072fd.pth,False,,CROP_EXTRACTION_READY_REID_WEIGHTS_MISSING
+GM_RM019,334,334,0,0,torchvision_resnet18_weights_missing,,,False,D:\models\torchvision\resnet18-f37072fd.pth,False,,CROP_EXTRACTION_READY_REID_WEIGHTS_MISSING
+GM_RM017,215,215,0,0,torchvision_resnet18_weights_missing,,,False,D:\models\torchvision\resnet18-f37072fd.pth,False,,CROP_EXTRACTION_READY_REID_WEIGHTS_MISSING

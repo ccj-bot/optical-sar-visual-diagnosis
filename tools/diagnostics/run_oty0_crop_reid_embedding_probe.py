@@ -328,7 +328,7 @@ def load_torchvision_resnet18_backend(weight_path: Path, device: str, facts: Map
         model.eval()
         preprocess = transforms.Compose(
             [
-                transforms.Resize((256, 128)),
+                transforms.Resize((224, 224)),
                 transforms.ToTensor(),
                 transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
             ]
@@ -336,7 +336,7 @@ def load_torchvision_resnet18_backend(weight_path: Path, device: str, facts: Map
         _ = Image
         return BackendState(
             requested_backend="torchvision_resnet18",
-            embedding_backend="torchvision_resnet18_imagenet_external_weights",
+            embedding_backend="torchvision_resnet18_imagenet_feature_baseline",
             learned_backend_used=True,
             embedding_dim=512,
             embedding_l2_normed=True,
@@ -345,7 +345,10 @@ def load_torchvision_resnet18_backend(weight_path: Path, device: str, facts: Map
             weights_committed=git_tracked(weight_path),
             available=True,
             status="available",
-            reason="torchvision ResNet18 ImageNet baseline loaded from explicit local/external weights",
+            reason=(
+                "torchvision ResNet18 ImageNet feature baseline loaded from explicit "
+                "local/external weights; this is not a dedicated vehicle ReID model"
+            ),
             model=model,
             preprocess=preprocess,
             device=resolved_device,
@@ -573,6 +576,8 @@ def scene_conclusion(summary: Mapping[str, Any], backend: BackendState, weightle
     computed = int(summary.get("embedding_computed", 0) or 0)
     failed = int(summary.get("embedding_failed", 0) or 0)
     if computed == crops and failed == 0:
+        if backend.embedding_backend == "torchvision_resnet18_imagenet_feature_baseline":
+            return "LEARNED_APPEARANCE_BASELINE_READY_FOR_TRACKLET_STITCHING_INPUT"
         return "LEARNED_REID_CROP_EMBEDDINGS_READY_FOR_TRACKLET_STITCHING_INPUT"
     return "CROP_REID_EMBEDDING_PROBE_FAILED"
 
@@ -587,6 +592,8 @@ def overall_conclusion(rows: Sequence[Mapping[str, Any]]) -> str:
         return "WEIGHTLESS_DESCRIPTOR_ONLY_NOT_REID_READY"
     if "CROP_EXTRACTION_READY_REID_WEIGHTS_MISSING" in labels:
         return "CROP_EXTRACTION_READY_REID_WEIGHTS_MISSING"
+    if "LEARNED_APPEARANCE_BASELINE_READY_FOR_TRACKLET_STITCHING_INPUT" in labels:
+        return "LEARNED_APPEARANCE_BASELINE_READY_FOR_TRACKLET_STITCHING_INPUT"
     return "LEARNED_REID_CROP_EMBEDDINGS_READY_FOR_TRACKLET_STITCHING_INPUT"
 
 
@@ -652,6 +659,7 @@ def render_report(
     artifact_index: str,
     summary_csv: Path,
     schema_preview_csv: Path,
+    checked_weight_candidates: Sequence[str],
     conclusion: str,
 ) -> str:
     selected = [row for row in discovered if row.get("selected") is True or str(row.get("selected")) == "True"]
@@ -697,10 +705,13 @@ def render_report(
         f"- reason: {backend.reason}",
         f"- import status: `{json.dumps(dict(import_status), ensure_ascii=False)}`",
         f"- external weight path: `{backend.weights_path_external}`",
+        f"- checked weight candidates: `{json.dumps(list(checked_weight_candidates), ensure_ascii=False)}`",
         f"- weight downloaded: `{backend.weights_downloaded}`",
         f"- weight committed: `{backend.weights_committed}`",
         "",
-        "If `torchvision_resnet18` is used in a future run, it is an ImageNet feature baseline, not a dedicated ReID model. It should be used only when an explicit local/external ResNet18 weight path is provided and should not be described as a ReID-specific model.",
+        "When `torchvision_resnet18` is used, it is an ImageNet learned appearance feature baseline, not a dedicated vehicle ReID model. It is allowed only with an explicit local/external ResNet18 weight path and must not be described as a ReID-specific model.",
+        "",
+        *missing_weight_setup_lines(backend, command),
         "",
         "## Required Answers",
         "",
@@ -712,52 +723,55 @@ def render_report(
         "",
         f"`{backend.embedding_backend}`. Learned backend used: `{backend.learned_backend_used}`.",
         "",
-        "3. Was any weight file downloaded?",
+        "3. Was the backend a dedicated ReID model or an ImageNet feature baseline?",
+        "",
+        backend_type_answer(backend),
+        "",
+        "4. Was any weight file downloaded?",
         "",
         f"`{backend.weights_downloaded}`. The script does not download weights.",
         "",
-        "4. Was any weight file committed?",
+        "5. Was any weight file committed?",
         "",
         f"`{backend.weights_committed}`. No weight path is staged or committed by this probe.",
         "",
-        "5. Where is the external weight path, if used?",
+        "6. What external weight path was used?",
         "",
         f"`{backend.weights_path_external or 'none'}`",
         "",
-        "6. How many embeddings were computed per scene?",
+        "7. How many embeddings were computed per scene?",
         "",
         answer_field(summaries, "embedding_computed"),
         "",
-        "7. What is the embedding dimension?",
+        "8. What is the embedding dimension?",
         "",
         f"`{backend.embedding_dim}`",
         "",
-        "8. Are embeddings L2-normalized?",
+        "9. Were embeddings L2-normalized?",
         "",
         f"`{backend.embedding_l2_normed}`",
         "",
-        "9. Were any crops skipped or failed after crop extraction?",
+        "10. Were any crops skipped or failed?",
         "",
         answer_crop_failures(crop_facts),
         "",
-        "10. Where are the uncommitted embedding artifacts located?",
+        "11. Where are the uncommitted embedding artifacts located?",
         "",
         f"- output directory: `{artifact_dir}`",
         f"- feature artifact: `{artifact_npz or 'none; no learned backend available'}`",
         f"- index artifact: `{artifact_index or 'none; no learned backend available'}`",
         "",
-        "11. What schema should the next ReID-aware tracklet stitching probe consume?",
+        "12. What exact detection-level embedding schema was produced?",
         "",
-        "- Detection-level embedding index: `row_uid`, `scene`, `frame_id`, `det_id_ignored`, `source_detection_table`, `optical_path`, `bbox_xyxy_original`, `bbox_xyxy_clamped`, `bbox_status`, `crop_w`, `crop_h`, `crop_area`, `embedding_backend`, `embedding_dim`, `embedding_l2_normed`, `embedding_array_key`, `embedding_artifact_path_uncommitted`, `weights_path_external`, `created_at`.",
-        "- Tracklet-level aggregation: `scene`, `tracker_name`, `tracker_variant`, `track_id`, `frame_start`, `frame_end`, `num_detections`, `linked_det_ids_ignored`, `linked_embedding_count`, `tracklet_embedding_policy`, `tracklet_embedding_artifact_path_uncommitted`, `motion_summary_path_or_inline_fields`, `source_tracker_replay`, `created_at`.",
+        "`row_uid`, `scene`, `frame_id`, `det_id_ignored`, `source_detection_table`, `optical_path`, `bbox_xyxy_original`, `bbox_xyxy_clamped`, `bbox_status`, `crop_w`, `crop_h`, `crop_area`, `embedding_backend`, `embedding_dim`, `embedding_l2_normed`, `embedding_array_key`, `embedding_artifact_path_uncommitted`, `weights_path_external`, `created_at`.",
         "",
-        "12. How do these detection-level embeddings connect to OTY1t BoT-SORT/ByteTrack tracks?",
+        "13. How should these embeddings connect to OTY1t BoT-SORT/ByteTrack tracks?",
         "",
         "Detection embeddings do not define identity truth. Detection IDs are ignored for identity. Embeddings connect to OTY1t BoT-SORT/ByteTrack tracks through same-scene/same-frame box association. If OTY1t replay preserves source detection row IDs, use direct linkage. Otherwise, use deterministic IoU matching between tracker boxes and OTY0 detection boxes in the same scene/frame. Only after detection-to-track linkage is validated should tracklet-level embeddings be aggregated. Candidate stitching pairs are only proposals for review/probe, not final identity assignments.",
         "",
-        "13. Why this does not yet produce final identity truth or final annotations.",
+        "14. Why this still does not produce final identity truth, final annotations, or clean-215 promotion.",
         "",
-        "This probe only checks whether real optical crop embeddings can be generated and indexed. It does not merge tracker hypotheses, does not set stitch decisions, does not emit final object identities, and does not write annotation or SAR-support outputs.",
+        "This probe only checks whether real optical crop embeddings can be generated and indexed. It does not merge tracker hypotheses, does not set stitch decisions, does not emit final object identities, does not write annotation or SAR-support outputs, and does not promote `GM_RM011` into the clean `215` pool.",
         "",
         "## Next Stitching Input Contract",
         "",
@@ -812,6 +826,34 @@ def answer_crop_validity(rows: Sequence[Mapping[str, Any]]) -> str:
     )
 
 
+def missing_weight_setup_lines(backend: BackendState, command: str) -> list[str]:
+    if backend.status != "weights_missing":
+        return []
+    return [
+        "## Missing Weight Setup",
+        "",
+        f"- missing external weight file: `{backend.weights_path_external or 'none'}`",
+        "- no embeddings were computed because a valid explicit external weight file was unavailable",
+        "- no download was attempted and no weight file was committed",
+        "- exact rerun command after placing the external weight file at the requested path or replacing `--reid-weights` with another external path:",
+        "",
+        "```powershell",
+        command,
+        "```",
+        "",
+    ]
+
+
+def backend_type_answer(backend: BackendState) -> str:
+    if backend.embedding_backend == "torchvision_resnet18_imagenet_feature_baseline":
+        return "`torchvision_resnet18` is an ImageNet learned appearance feature baseline, not a dedicated ReID model."
+    if backend.requested_backend.startswith("osnet") and backend.learned_backend_used:
+        return f"`{backend.requested_backend}` is treated as a dedicated ReID backend for this probe."
+    if backend.requested_backend == "torchvision_resnet18":
+        return "`torchvision_resnet18` was requested, but no baseline embeddings were produced because valid external weights were unavailable."
+    return "No learned backend ran."
+
+
 def answer_field(rows: Sequence[Mapping[str, Any]], field: str) -> str:
     return "\n".join(f"- `{row.get('scene')}`: `{row.get(field, 0)}`" for row in rows)
 
@@ -834,6 +876,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--device", default="cpu", choices=["cpu", "cuda"])
     parser.add_argument("--max-crops-per-scene", type=int, default=0)
     parser.add_argument("--write-artifacts", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--checked-weight-candidate", action="append", default=[])
     return parser
 
 
@@ -925,6 +968,7 @@ def main() -> None:
         artifact_index=artifact_index,
         summary_csv=summary_path,
         schema_preview_csv=preview_path,
+        checked_weight_candidates=args.checked_weight_candidate,
         conclusion=conclusion,
     )
     write_text(report_path, report)
