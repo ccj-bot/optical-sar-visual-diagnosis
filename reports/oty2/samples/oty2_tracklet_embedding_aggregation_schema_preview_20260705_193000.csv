@@ -1,0 +1,32 @@
+schema_kind,field_name,required,description
+tracklet_embedding_index,scene,yes,scene
+tracklet_embedding_index,tracker_name,yes,tracker_name
+tracklet_embedding_index,tracker_variant,yes,tracker_variant
+tracklet_embedding_index,track_id,yes,track_id
+tracklet_embedding_index,tracklet_segment_id,yes,short tracklet segment handle after frame-gap splitting
+tracklet_embedding_index,frame_start,yes,frame_start
+tracklet_embedding_index,frame_end,yes,frame_end
+tracklet_embedding_index,frame_count,yes,frame_count
+tracklet_embedding_index,linked_embedding_count,yes,number of detection embeddings used in the segment aggregate
+tracklet_embedding_index,missing_embedding_count,yes,segment rows without an attached embedding vector
+tracklet_embedding_index,embedding_coverage,yes,linked_embedding_count / frame_count
+tracklet_embedding_index,embedding_backend,yes,embedding_backend
+tracklet_embedding_index,embedding_dim,yes,embedding_dim
+tracklet_embedding_index,tracklet_embedding_policy,yes,mean detection feature followed by L2 normalization
+tracklet_embedding_index,tracklet_embedding_l2_normed,yes,tracklet_embedding_l2_normed
+tracklet_embedding_index,intra_tracklet_cosine_mean,yes,mean cosine from detection vectors to aggregate vector
+tracklet_embedding_index,intra_tracklet_cosine_min,yes,minimum cosine from detection vectors to aggregate vector
+tracklet_embedding_index,intra_tracklet_cosine_std,yes,population standard deviation of those cosines
+tracklet_embedding_index,bbox_center_x_mean,yes,mean tracker bbox center x for the segment
+tracklet_embedding_index,bbox_center_y_mean,yes,mean tracker bbox center y for the segment
+tracklet_embedding_index,bbox_w_mean,yes,mean tracker bbox width for the segment
+tracklet_embedding_index,bbox_h_mean,yes,mean tracker bbox height for the segment
+tracklet_embedding_index,bbox_center_x_start,yes,bbox_center_x_start
+tracklet_embedding_index,bbox_center_y_start,yes,bbox_center_y_start
+tracklet_embedding_index,bbox_center_x_end,yes,bbox_center_x_end
+tracklet_embedding_index,bbox_center_y_end,yes,bbox_center_y_end
+tracklet_embedding_index,bbox_motion_dx,yes,bbox_motion_dx
+tracklet_embedding_index,bbox_motion_dy,yes,bbox_motion_dy
+tracklet_embedding_index,source_linkage_table,yes,source_linkage_table
+tracklet_embedding_index,tracklet_embedding_artifact_path_uncommitted,yes,ignored local npz path under outputs
+tracklet_embedding_index,created_at,yes,created_at

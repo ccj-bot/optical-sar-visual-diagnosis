@@ -1,0 +1,4 @@
+scene,tracker_name,tracker_variant,track_ids_total,tracklet_segments_total,segments_with_embeddings,segments_without_embeddings,segments_embedding_coverage_mean,segments_embedding_coverage_min,embedding_dim,intra_tracklet_cosine_mean,intra_tracklet_cosine_min,unstable_segments_count,short_segments_count,ready_segments_count,conclusion_scene
+GM_RM011,botsort,normalized_active,17,29,29,0,1.000000,1.000000,512,0.937761,0.714843,0,4,25,TRACKLET_EMBEDDING_AGGREGATION_READY_FOR_CANDIDATE_STITCHING
+GM_RM017,botsort,normalized_active,5,5,5,0,1.000000,1.000000,512,0.926826,0.457126,3,0,2,TRACKLET_EMBEDDING_AGGREGATION_PARTIAL_SHORT_OR_UNSTABLE
+GM_RM019,botsort,normalized_active,19,28,28,0,1.000000,1.000000,512,0.962961,0.621923,2,6,20,TRACKLET_EMBEDDING_AGGREGATION_READY_FOR_CANDIDATE_STITCHING
