@@ -146,6 +146,17 @@ def git_tracked(path: Path) -> bool:
         return False
 
 
+def path_inside_repo(path_text: str) -> bool:
+    if not path_text:
+        return False
+    try:
+        path = Path(path_text).resolve()
+        repo = REPO_ROOT.resolve()
+        return path == repo or repo in path.parents
+    except Exception:
+        return False
+
+
 def import_facts() -> dict[str, Any]:
     return {
         "torch": importlib.util.find_spec("torch") is not None,
@@ -660,9 +671,13 @@ def render_report(
     summary_csv: Path,
     schema_preview_csv: Path,
     checked_weight_candidates: Sequence[str],
+    external_weight_source: str,
+    external_weight_acquisition_method: str,
     conclusion: str,
 ) -> str:
     selected = [row for row in discovered if row.get("selected") is True or str(row.get("selected")) == "True"]
+    external_weight_acquired = bool(backend.weights_path_external and Path(backend.weights_path_external).exists())
+    external_weight_outside_repo = bool(backend.weights_path_external and not path_inside_repo(backend.weights_path_external))
     lines = [
         "# OTY2 Crop ReID Embedding Probe",
         "",
@@ -705,8 +720,12 @@ def render_report(
         f"- reason: {backend.reason}",
         f"- import status: `{json.dumps(dict(import_status), ensure_ascii=False)}`",
         f"- external weight path: `{backend.weights_path_external}`",
+        f"- external weight acquired/present before probe: `{external_weight_acquired}`",
+        f"- external weight source: `{external_weight_source}`",
+        f"- external weight acquisition method: `{external_weight_acquisition_method}`",
+        f"- external weight outside repo: `{external_weight_outside_repo}`",
         f"- checked weight candidates: `{json.dumps(list(checked_weight_candidates), ensure_ascii=False)}`",
-        f"- weight downloaded: `{backend.weights_downloaded}`",
+        f"- probe automatic weight download: `{backend.weights_downloaded}`",
         f"- weight committed: `{backend.weights_committed}`",
         "",
         "When `torchvision_resnet18` is used, it is an ImageNet learned appearance feature baseline, not a dedicated vehicle ReID model. It is allowed only with an explicit local/external ResNet18 weight path and must not be described as a ReID-specific model.",
@@ -715,61 +734,65 @@ def render_report(
         "",
         "## Required Answers",
         "",
-        "1. Did the previous clean crop extraction result remain valid?",
+        "1. Was an external weight downloaded/acquired?",
         "",
-        answer_crop_validity(summaries),
+        f"`{external_weight_acquired}`. Source: `{external_weight_source or 'not_recorded'}`. Acquisition method: `{external_weight_acquisition_method or 'not_recorded'}`. The probe itself did not perform automatic weight download: `{backend.weights_downloaded}`.",
         "",
-        "2. Which learned embedding backend was used?",
-        "",
-        f"`{backend.embedding_backend}`. Learned backend used: `{backend.learned_backend_used}`.",
-        "",
-        "3. Was the backend a dedicated ReID model or an ImageNet feature baseline?",
-        "",
-        backend_type_answer(backend),
-        "",
-        "4. Was any weight file downloaded?",
-        "",
-        f"`{backend.weights_downloaded}`. The script does not download weights.",
-        "",
-        "5. Was any weight file committed?",
-        "",
-        f"`{backend.weights_committed}`. No weight path is staged or committed by this probe.",
-        "",
-        "6. What external weight path was used?",
+        "2. Where is the external weight path?",
         "",
         f"`{backend.weights_path_external or 'none'}`",
         "",
-        "7. How many embeddings were computed per scene?",
+        "3. Is the weight outside the repo?",
+        "",
+        f"`{external_weight_outside_repo}`. Repository: `{REPO_ROOT}`.",
+        "",
+        "4. Was any weight file committed?",
+        "",
+        f"`{backend.weights_committed}`. No weight path is staged or committed by this probe.",
+        "",
+        "5. Which backend was used?",
+        "",
+        f"`{backend.embedding_backend}`. Learned backend used: `{backend.learned_backend_used}`.",
+        "",
+        "6. Is this backend a dedicated ReID model or an ImageNet learned appearance baseline?",
+        "",
+        backend_type_answer(backend),
+        "",
+        "7. Did the previous clean crop extraction result remain valid?",
+        "",
+        answer_crop_validity(summaries),
+        "",
+        "8. How many embeddings were computed per scene?",
         "",
         answer_field(summaries, "embedding_computed"),
         "",
-        "8. What is the embedding dimension?",
+        "9. What is the embedding dimension?",
         "",
         f"`{backend.embedding_dim}`",
         "",
-        "9. Were embeddings L2-normalized?",
+        "10. Are embeddings L2-normalized?",
         "",
         f"`{backend.embedding_l2_normed}`",
         "",
-        "10. Were any crops skipped or failed?",
+        "11. Were any crops skipped or failed?",
         "",
         answer_crop_failures(crop_facts),
         "",
-        "11. Where are the uncommitted embedding artifacts located?",
+        "12. Where are the uncommitted embedding artifacts located?",
         "",
         f"- output directory: `{artifact_dir}`",
         f"- feature artifact: `{artifact_npz or 'none; no learned backend available'}`",
         f"- index artifact: `{artifact_index or 'none; no learned backend available'}`",
         "",
-        "12. What exact detection-level embedding schema was produced?",
+        "13. What exact detection-level embedding schema was produced?",
         "",
         "`row_uid`, `scene`, `frame_id`, `det_id_ignored`, `source_detection_table`, `optical_path`, `bbox_xyxy_original`, `bbox_xyxy_clamped`, `bbox_status`, `crop_w`, `crop_h`, `crop_area`, `embedding_backend`, `embedding_dim`, `embedding_l2_normed`, `embedding_array_key`, `embedding_artifact_path_uncommitted`, `weights_path_external`, `created_at`.",
         "",
-        "13. How should these embeddings connect to OTY1t BoT-SORT/ByteTrack tracks?",
+        "14. How should these embeddings connect to OTY1t BoT-SORT/ByteTrack tracks?",
         "",
         "Detection embeddings do not define identity truth. Detection IDs are ignored for identity. Embeddings connect to OTY1t BoT-SORT/ByteTrack tracks through same-scene/same-frame box association. If OTY1t replay preserves source detection row IDs, use direct linkage. Otherwise, use deterministic IoU matching between tracker boxes and OTY0 detection boxes in the same scene/frame. Only after detection-to-track linkage is validated should tracklet-level embeddings be aggregated. Candidate stitching pairs are only proposals for review/probe, not final identity assignments.",
         "",
-        "14. Why this still does not produce final identity truth, final annotations, or clean-215 promotion.",
+        "15. Why this still does not produce final identity truth, final annotations, or clean-215 promotion.",
         "",
         "This probe only checks whether real optical crop embeddings can be generated and indexed. It does not merge tracker hypotheses, does not set stitch decisions, does not emit final object identities, does not write annotation or SAR-support outputs, and does not promote `GM_RM011` into the clean `215` pool.",
         "",
@@ -877,6 +900,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-crops-per-scene", type=int, default=0)
     parser.add_argument("--write-artifacts", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--checked-weight-candidate", action="append", default=[])
+    parser.add_argument("--external-weight-source", default="")
+    parser.add_argument("--external-weight-acquisition-method", default="")
     return parser
 
 
@@ -969,6 +994,8 @@ def main() -> None:
         summary_csv=summary_path,
         schema_preview_csv=preview_path,
         checked_weight_candidates=args.checked_weight_candidate,
+        external_weight_source=args.external_weight_source,
+        external_weight_acquisition_method=args.external_weight_acquisition_method,
         conclusion=conclusion,
     )
     write_text(report_path, report)
