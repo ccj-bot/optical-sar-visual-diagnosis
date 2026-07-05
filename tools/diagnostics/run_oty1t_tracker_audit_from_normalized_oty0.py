@@ -3,7 +3,7 @@
 This wrapper is intentionally narrower than the main OTY1t runner. It writes
 all runtime/probe artifacts under the requested output directory and does not
 write report samples into ``reports/oty1t``. It can strip normalized OTY0 tables
-to active-only OTY0-compatible detection rows before replaying ByteTrack. It
+to active-only OTY0-compatible detection rows before replaying a standard MOT tracker. It
 does not change OTY0, OTY1, OTY1t, tracker code, tracker parameters, detector
 weights, final annotations, revised GT, final boxes, SAR pairing, support
 audit, selector/ranking logic, or identity truth.
@@ -41,6 +41,7 @@ from run_oty1t_tracker_audit import (  # noqa: E402
     frame_sizes_from_rows,
     optical_frame_inventory,
     read_csv_rows,
+    run_tracker_detection_table_replay,
     sort_events,
     write_csv,
     write_json,
@@ -50,7 +51,6 @@ from src.optical_state.tracker_audit import (  # noqa: E402
     TrackerAuditConfig,
     build_tracker_state_timeseries,
     build_tracker_tracks,
-    run_bytetrack_detection_table_replay,
 )
 from src.optical_state.tracker_diagnosis import (  # noqa: E402
     DiagnosisConfig,
@@ -82,6 +82,7 @@ OTY0_DETECTION_FIELDS = [
 SUMMARY_FIELDS = [
     "scene",
     "detector_label",
+    "tracker_name",
     "input_variant",
     "source_detection_table",
     "tracker_input_table",
@@ -146,6 +147,14 @@ def count_bucket(rows: Sequence[Mapping[str, Any]], bucket: str) -> int:
     return sum(1 for row in rows if str(row.get("diagnosis_bucket", "")) == bucket)
 
 
+def tracker_available(args: argparse.Namespace, dependency_facts: Mapping[str, Any]) -> bool:
+    if args.tracker == "bytetrack":
+        return bool(dependency_facts.get("bytetrack_available"))
+    if args.tracker == "botsort":
+        return bool(dependency_facts.get("botsort_available"))
+    return False
+
+
 def run_probe(args: argparse.Namespace) -> dict[str, Any]:
     timestamp = args.timestamp or datetime.now().strftime("%Y%m%d_%H%M%S")
     output_dir = Path(args.output_dir)
@@ -163,7 +172,7 @@ def run_probe(args: argparse.Namespace) -> dict[str, Any]:
     frame_numbers = optical_frame_inventory(tracker_input_rows, {})
 
     config = TrackerAuditConfig(
-        tracker_name="bytetrack",
+        tracker_name=args.tracker,
         tracker_input_mode="normalized_active_only_probe" if args.active_only else "raw_oty0_probe",
         detector_source=args.detector_label,
         frame_rate=args.frame_rate,
@@ -183,20 +192,20 @@ def run_probe(args: argparse.Namespace) -> dict[str, Any]:
         possible_switch_distance_px=args.possible_switch_distance_px,
     )
 
-    assignments, events, dependency_facts = run_bytetrack_detection_table_replay(detections, frame_numbers, config)
-    tracker_real_run = bool(dependency_facts.get("bytetrack_available"))
+    assignments, events, dependency_facts = run_tracker_detection_table_replay(detections, frame_numbers, config)
+    tracker_real_run = tracker_available(args, dependency_facts)
     events = sort_events(list(events) + ambiguous_association_events(assignments, config))
     tracks = build_tracker_tracks(assignments, events, config)
     state_rows = build_tracker_state_timeseries(assignments, tracks, config)
     diagnosis_config = DiagnosisConfig(
-        tracker_name="bytetrack",
+        tracker_name=args.tracker,
         track_high_thresh=args.track_high_thresh,
         neighbor_distance_px=args.neighbor_distance_px,
         contact_margin_px=args.contact_margin_px,
         duplicate_iou_threshold=args.duplicate_iou_threshold,
     )
     unmatched_audit = build_unmatched_detection_audit(assignments, [], [], diagnosis_config)
-    failure_buckets = build_failure_bucket_summary(unmatched_audit, args.scene, "bytetrack")
+    failure_buckets = build_failure_bucket_summary(unmatched_audit, args.scene, args.tracker)
 
     write_csv(output_dir / "oty1t_tracker_detection_assignments.csv", assignments, ASSIGNMENT_FIELDS)
     write_csv(output_dir / "oty1t_tracker_tracks.csv", tracks, TRACK_FIELDS)
@@ -216,7 +225,7 @@ def run_probe(args: argparse.Namespace) -> dict[str, Any]:
         "source_detection_table": str(input_table),
         "tracker_input_table": str(tracker_input_table),
         "output_dir": str(output_dir),
-        "tracker_name": "bytetrack",
+        "tracker_name": args.tracker,
         "tracker_real_run": tracker_real_run,
         "dependency_status": dependency_facts.get("dependency_status", "missing"),
         "raw_rows_in": len(raw_rows),
@@ -279,6 +288,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--scene", required=True)
     parser.add_argument("--detector-label", required=True)
+    parser.add_argument("--tracker", default="bytetrack", choices=["bytetrack", "botsort"])
     parser.add_argument("--input-variant", required=True, choices=["raw", "normalized_active"])
     parser.add_argument("--input-detection-table", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
