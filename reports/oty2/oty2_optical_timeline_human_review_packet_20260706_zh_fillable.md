@@ -31,6 +31,14 @@
 
 注意：即使选择“仅调整诊断渲染显示”，也只能选择已有 `source_detection_id` 作为诊断渲染主框，不能写新 bbox 坐标，不能生成 final boxes 或 GT boxes。
 
+人工验收要分清三件事：
+
+1. 真实车辆是否在画面中可见。
+2. 当前 node / box 是否稳定覆盖了这辆可见车辆。
+3. 当前 edge 是否能安全连接两个 node。
+
+如果人眼能看到车辆连续存在，但当前诊断图没有稳定 node / box 表达，不要直接把 edge 改成 strong 或 weak。应标记为 `mark_review_required`，并记录 `visible_unboxed_vehicle_gap`。
+
 ## 范围边界
 
 本文件用于指导人工验收当前 optical diagnostic timeline graph。它只基于现有 node table、edge table、render manifest 和 smoke render 诊断帧。
@@ -73,6 +81,7 @@ outputs/oty2/optical_timeline_render_smoke_20260705_175222/frames/GM_RM011_00001
 | 强连接降级为弱连接 | 仍可能是同一辆车，但证据不足以保持强连接。 | `downgrade_to_weak`，并填 `edge_strength=weak`。 |
 | 禁止连接 | 前后节点发生目标切换、指向非车辆、或无法排除其他车辆插入。 | `forbid_connect`，并填 `edge_strength=forbidden`。 |
 | 标记需要复核 | 人工当前无法安全判断。 | `mark_review_required`，并填 `edge_strength=review_only`。 |
+| 可见车辆未被节点/框稳定覆盖 | 人眼可见车辆存在，但当前诊断图没有稳定 node / box 表达。 | `mark_review_required`，`edge_strength=review_only`，优先用 `reason_code=visible_unboxed_vehicle_gap`。 |
 | 确认非车辆节点 | 该节点不是车辆观察片段。 | 不需要填写，或用 node `exclude_non_vehicle` 留显式验收记录。 |
 | 仅调整诊断渲染显示 | 当前渲染主框误导人工阅读，但已有检测框中有更合适的诊断主框。 | render `select_diagnostic_primary_box`；必须使用已有 `source_detection_id`，不能写新坐标。 |
 
@@ -102,15 +111,81 @@ override_id,override_type=render,override_scope=event,scene_id,frame_start,frame
 
 禁止添加 bbox 坐标列。禁止写 final boxes 或 GT boxes。禁止把 override CSV 当成人工逐帧标注表。
 
+`visible_unboxed_vehicle_gap` 是诊断事件，不是人工画框。它只记录“人眼可见车辆存在，但当前诊断图没有稳定 node / box 表达”。它不新增 bbox，不生成 final boxes，不生成 GT boxes，也不生成 final/revised annotation。如果下游 schema 暂时不支持该 `reason_code`，先用 `reason_code=review_uncertain`，并在 `note` 中写 `visible_unboxed_vehicle_gap` 或 `visible-but-unboxed vehicle gap`。
+
+勾选“可见车辆未被节点/框稳定覆盖”时，推荐填写 `override_type=edge`、`action=mark_review_required`、`edge_strength=review_only`、`reason_code=visible_unboxed_vehicle_gap`。如果当前校验器或 schema 暂不支持该 `reason_code`，则填写 `reason_code=review_uncertain`，并在 `note` 中写 `visible_unboxed_vehicle_gap`。
+
 从填写版 Markdown 提取 override CSV 后，用校验器做 dry-run：
 
 ```powershell
 D:\MINICONDA\envs\py311\python.exe tools\diagnostics\validate_oty2_optical_timeline_overrides.py --overrides manifests\oty2_optical_timeline_override_template.csv
 ```
 
+## Node / Edge 中文对照索引
+
+`N00x` 是观察片段，不是真实车辆身份。`V00x` 是候选车辆指称，不是 final identity。`FORBIDDEN_CONTEXT` 是禁止连接上下文片段，用来解释为什么不能连，不等于真实车辆身份。人工判断时先看图中车辆是否连续，再看当前 node / box 是否正确表达该车辆，最后才判断当前 edge 能否连接。
+
+### Node 索引
+
+| node_id | 含义 | 帧范围 | 人工阅读提示 |
+| --- | --- | --- | --- |
+| `GM_RM017_N001` | `GM_RM017_V001` 的观察片段，来源 `bs_0008` | `145-185` | leading dark sedan；注意不要与 `GM_RM017_N003` 混连。 |
+| `GM_RM017_N002` | `GM_RM017_V002` 的观察片段，来源 `bs_0010` | `151-200` | white SUV；强同车指称候选。 |
+| `GM_RM017_N003` | `GM_RM017_V003` 的观察片段，来源 `bs_0012` | `162-214` | trailing dark sedan；与 `GM_RM017_N001` 是禁止连接关系。 |
+| `GM_RM017_N004` | `GM_RM017_V004` 的上下文车辆片段，来源 `bs_0001` | `118-164` | 大白色车/厢式车上下文；不是本轮 edge 检查核心。 |
+| `GM_RM017_N005` | `GM_RM017_NONVEHICLE_001`，来源 `bs_0002` | `121-129` | 非车辆排除候选；先确认是否不是车。 |
+| `GM_RM011_N001` | `GM_RM011_V001` 的观察片段，来源 `bs_0015 seg_001` | `13-16` | 白车 front/windshield 局部链起点。 |
+| `GM_RM011_N002` | `GM_RM011_V001` 的观察片段，来源 `bs_0015 seg_002` | `18-35` | 白车 front/windshield 局部链后段。 |
+| `GM_RM011_N003` | `GM_RM011_V002` 的弱观察片段，来源 `bs_0061 seg_001` | `262-270` | 可能同车，但有 part-state transition 和 review 风险。 |
+| `GM_RM011_N004` | `GM_RM011_V002` 的观察片段，来源 `bs_0061 seg_002` | `279-281` | 中央白车 front/window 片段。 |
+| `GM_RM011_N005` | `GM_RM011_V002` 的观察片段，来源 `bs_0061 seg_003` | `283-292` | 中央白车 front/window 后续片段。 |
+| `GM_RM011_N006` | `GM_RM011_FORBIDDEN_CONTEXT_001`，来源 `bs_0064 seg_001` | `283-292` | 左边缘竞争车辆上下文；不是可直接连接身份。 |
+| `GM_RM011_N007` | `GM_RM011_FORBIDDEN_CONTEXT_002`，来源 `bs_0056 seg_001` | `256-261` | 侧窗/条带或竞争区域上下文；用于禁止连接判断。 |
+| `GM_RM011_N008` | `GM_RM011_V003` 的 review 片段，来源 `bs_0029 seg_001` | `135-161` | 右边缘白车 review 片段。 |
+| `GM_RM011_N009` | `GM_RM011_V003` 的 review 片段，来源 `bs_0029 seg_002` | `164-166` | 右边缘 thin crop；可见信息很少。 |
+| `GM_RM011_N010` | `GM_RM011_V004` 的弱观察片段，来源 `bs_0044 seg_002` | `231-233` | upper side/window 部位。 |
+| `GM_RM011_N011` | `GM_RM011_V004` 的弱观察片段，来源 `bs_0038 seg_002` | `236-245` | front/hood 部位。 |
+| `GM_RM011_N012` | `GM_RM011_V005` 的弱观察片段，来源 `bs_0002 seg_001` | `0-4` | 早期 white SUV rear/body。 |
+| `GM_RM011_N013` | `GM_RM011_V005` 的弱观察片段，来源 `bs_0007 seg_001` | `8-10` | 早期 upper-window strip。 |
+
+### Edge 索引
+
+| edge_id | 当前类型 | 判断重点 |
+| --- | --- | --- |
+| `GM_RM017_E002` | `non_vehicle_exclusion` | 判断 `GM_RM017_N005` 是否确实不是车。 |
+| `GM_RM017_E001` | `forbidden_edge` | 判断 `GM_RM017_N001` 和 `GM_RM017_N003` 是否是两辆不同深色车。 |
+| `GM_RM011_E007` | `forbidden_edge` | 判断 `GM_RM011_N003` 是否不应连到左边缘竞争车辆 `GM_RM011_N006`。 |
+| `GM_RM011_E008` | `forbidden_edge` | 判断 `GM_RM011_N007 -> GM_RM011_N003` 是否是错误桥接；同时重点检查是否存在 `visible_unboxed_vehicle_gap`。 |
+| `GM_RM011_E001` | `strong_same_vehicle_edge` | 判断 `GM_RM011_N001 -> GM_RM011_N002` 是否确实是同一辆白车。 |
+| `GM_RM011_E002` | `strong_same_vehicle_edge` | 判断 `GM_RM011_N004 -> GM_RM011_N005` 是否确实是中央白车连续。 |
+| `GM_RM011_E003` | `weak_same_vehicle_edge` | 判断 `GM_RM011_N003 -> GM_RM011_N004` 是否只能弱连接，或需要复核。 |
+| `GM_RM011_E004` | `weak_same_vehicle_edge` | 判断右边缘 thin crop 是否只能 review-only。 |
+| `GM_RM011_E005` | `weak_same_vehicle_edge` | 判断 upper side/window 到 front/hood 是否是合理弱同车。 |
+| `GM_RM011_E006` | `weak_same_vehicle_edge` | 判断早期 rear/body 到 upper-window strip 是否是合理弱同车。 |
+
+## 光学标记短时时序对比提示
+
+人工验收时，每条 edge 都建议分两层看：先看真实车辆在画面中是否连续存在，再看当前诊断框和 node 标识是否稳定覆盖这辆车。只有这两层都说得清楚时，才判断 edge 是 strong、weak、forbidden 还是 review-only。
+
+对 `GM_RM011_E008`，建议额外按以下现有 smoke render 帧做短时时序对比，不需要运行 detector、tracker 或 SAR：
+
+```text
+outputs/oty2/optical_timeline_render_smoke_20260705_175222/frames/GM_RM011_000237.png
+outputs/oty2/optical_timeline_render_smoke_20260705_175222/frames/GM_RM011_000245.png
+outputs/oty2/optical_timeline_render_smoke_20260705_175222/frames/GM_RM011_000256.png
+outputs/oty2/optical_timeline_render_smoke_20260705_175222/frames/GM_RM011_000261.png
+outputs/oty2/optical_timeline_render_smoke_20260705_175222/frames/GM_RM011_000262.png
+outputs/oty2/optical_timeline_render_smoke_20260705_175222/frames/GM_RM011_000263.png
+outputs/oty2/optical_timeline_render_smoke_20260705_175222/frames/GM_RM011_000270.png
+```
+
+如果上述序列中下方白色车辆人眼连续可见，但 `GM_RM011_N007` 和 `GM_RM011_N003` 没有稳定框/节点表达这辆车，应填写为 `visible_unboxed_vehicle_gap`。这仍然只是诊断事件：不画新框，不新增 bbox，不生成 final boxes 或 GT boxes，不把 detector swap 变成主线。
+
 ## Non-Vehicle Exclusion：非车辆排除
 
 ### GM_RM017_E002
+
+这一项先判断一个观察片段是否确实不是车辆，而不是判断两段车辆轨迹是否相连。`from_node` 和 `to_node` 都是 `GM_RM017_N005`，对应 frames `121-129`；人工应先看 `GM_RM017_000121.png`、`GM_RM017_000125.png`、`GM_RM017_000129.png`。如果图中其实有车辆可见，但当前 node / box 没有稳定覆盖该车辆，不要直接把它改成普通车辆连接，先记录为 `visible_unboxed_vehicle_gap` 或 `mark_review_required`。
 
 | 字段 | 值 |
 | --- | --- |
@@ -161,6 +236,7 @@ override CSV 提示：
   - [ ] 标记为坏检测节点
   - [ ] 标记需要复核
   - [ ] 仅调整诊断渲染显示
+  - [ ] 可见车辆未被节点/框稳定覆盖
 
 - 判断理由：
   TODO
@@ -196,6 +272,8 @@ override CSV 提示：
 ## Forbidden Edges：禁止连接
 
 ### GM_RM017_E001
+
+这一项判断前后两段深色车观察片段是否必须保持禁止连接，重点是避免把前车和后车误认为同一辆车。`from_node` 是 `GM_RM017_N001`，frames `145-185`；`to_node` 是 `GM_RM017_N003`，frames `162-214`。人工应先看 `GM_RM017_000145.png`、`GM_RM017_000179.png`、`GM_RM017_000214.png`，再补看中间帧。若图中有连续可见车辆但没有稳定对应 node / box，请不要直接改成强连接或弱连接，先标记 `mark_review_required` 并记录 `visible_unboxed_vehicle_gap`。
 
 | 字段 | 值 |
 | --- | --- |
@@ -246,6 +324,7 @@ override CSV 提示：
   - [ ] 标记为坏检测节点
   - [ ] 标记需要复核
   - [ ] 仅调整诊断渲染显示
+  - [ ] 可见车辆未被节点/框稳定覆盖
 
 - 判断理由：
   TODO
@@ -279,6 +358,8 @@ override CSV 提示：
   TODO
 
 ### GM_RM011_E007
+
+这一项判断中央白车片段是否不能连接到左边缘竞争车辆片段，重点是确认是否发生了身份串线。`from_node` 是 `GM_RM011_N003`，frames `262-270`；`to_node` 是 `GM_RM011_N006`，frames `283-292`。人工应先看 `GM_RM011_000262.png`、`GM_RM011_000280.png`、`GM_RM011_000292.png`，再补看 key frame range `262-292`。如果中央白车持续可见但当前 node / box 没有稳定覆盖它，请记录为 `visible_unboxed_vehicle_gap`，不要用强/弱连接掩盖缺框问题。
 
 | 字段 | 值 |
 | --- | --- |
@@ -329,6 +410,7 @@ override CSV 提示：
   - [ ] 标记为坏检测节点
   - [ ] 标记需要复核
   - [ ] 仅调整诊断渲染显示
+  - [ ] 可见车辆未被节点/框稳定覆盖
 
 - 判断理由：
   TODO
@@ -363,6 +445,8 @@ override CSV 提示：
 
 ### GM_RM011_E008
 
+这一项不是简单判断 `forbidden_edge` 要不要改成弱连接或强连接；它先判断 frames `237-270` 附近下方白色车辆是否连续可见，以及当前 `GM_RM011_N007` / `GM_RM011_N003` 是否稳定表达了这辆车。`from_node` 是 `GM_RM011_N007`，frames `256-261`；`to_node` 是 `GM_RM011_N003`，frames `262-270`。人工应先看 `GM_RM011_000256.png`、`GM_RM011_000263.png`、`GM_RM011_000270.png`，必要时补看 frames `237-270`。如果确认白色车辆从约 frame `237` 到 `270` 连续可见，但当前 smoke render 没有稳定框或节点标识覆盖它，请不要直接改为 strong / weak；应标记 `mark_review_required`，`edge_strength=review_only`，并在 `note` 中写 `visible-but-unboxed vehicle gap`。
+
 | 字段 | 值 |
 | --- | --- |
 | scene_id | `GM_RM011` |
@@ -387,6 +471,9 @@ outputs/oty2/optical_timeline_render_smoke_20260705_175222/frames/GM_RM011_00027
 
 人工需要判断：
 
+- frames `237-270` 中下方白色车辆是否人眼连续可见？
+- `GM_RM011_N007` 和 `GM_RM011_N003` 的当前框/节点标识是否稳定覆盖了这辆白色车辆？
+- 如果车辆可见但框或 node 标识不稳定，是否应记录为 `visible_unboxed_vehicle_gap`，而不是直接改强连接或弱连接？
 - 前节点是否只是侧窗/条带片段，不能安全连接到 `GM_RM011_N003`？
 - 时间、位置、运动方向是否真的连续，还是只是靠得近？
 - 是否有其他车辆插入导致身份串线？
@@ -399,6 +486,7 @@ override CSV 提示：
 - 如果只能弱连接：填 `action=force_weak_connect`，`edge_strength=weak`，`reason_code=weak_continuity_only`。
 - 如果确认同一辆车：填 `action=force_strong_connect`，`edge_strength=strong`，`reason_code=same_vehicle_continuity`。
 - 如果不确定：填 `action=mark_review_required`，`edge_strength=review_only`，`reason_code=review_uncertain`。
+- 如果确认 frames `237-270` 中白色车辆连续可见，但当前渲染无稳定框或 node 标识：填 `override_type=edge`，`action=mark_review_required`，`edge_strength=review_only`，优先用 `reason_code=visible_unboxed_vehicle_gap`；若下游暂不支持该枚举，则用 `reason_code=review_uncertain`，并在 `note` 中写 `visible-but-unboxed vehicle gap`。
 
 人工填写区：
 
@@ -412,6 +500,7 @@ override CSV 提示：
   - [ ] 标记为坏检测节点
   - [ ] 标记需要复核
   - [ ] 仅调整诊断渲染显示
+  - [ ] 可见车辆未被节点/框稳定覆盖
 
 - 判断理由：
   TODO
@@ -447,6 +536,8 @@ override CSV 提示：
 ## Strong Same-Vehicle Edges：强连接
 
 ### GM_RM011_E001
+
+这一项判断短间隔内的白车车头/挡风玻璃观察片段是否可以保持强连接。`from_node` 是 `GM_RM011_N001`，frames `13-16`；`to_node` 是 `GM_RM011_N002`，frames `18-35`。人工应先看 `GM_RM011_000013.png`、`GM_RM011_000024.png`、`GM_RM011_000035.png`。如果图上车辆连续但当前 node / box 没有稳定覆盖对应车辆，请不要用强连接代替缺框记录，应勾选 `可见车辆未被节点/框稳定覆盖` 并标记 `mark_review_required`。
 
 | 字段 | 值 |
 | --- | --- |
@@ -498,6 +589,7 @@ override CSV 提示：
   - [ ] 标记为坏检测节点
   - [ ] 标记需要复核
   - [ ] 仅调整诊断渲染显示
+  - [ ] 可见车辆未被节点/框稳定覆盖
 
 - 判断理由：
   TODO
@@ -531,6 +623,8 @@ override CSV 提示：
   TODO
 
 ### GM_RM011_E002
+
+这一项判断中央白车在 frames `279-292` 是否保持稳定强连接，同时确认左边缘邻车没有被误接进来。`from_node` 是 `GM_RM011_N004`，frames `279-281`；`to_node` 是 `GM_RM011_N005`，frames `283-292`。人工应先看 `GM_RM011_000279.png`、`GM_RM011_000286.png`、`GM_RM011_000292.png`。如果中央白车可见但当前 node / box 漂移或缺失，应记录为 `visible_unboxed_vehicle_gap` 或 render-only 问题，而不是直接生成新 bbox。
 
 | 字段 | 值 |
 | --- | --- |
@@ -581,6 +675,7 @@ override CSV 提示：
   - [ ] 标记为坏检测节点
   - [ ] 标记需要复核
   - [ ] 仅调整诊断渲染显示
+  - [ ] 可见车辆未被节点/框稳定覆盖
 
 - 判断理由：
   TODO
@@ -616,6 +711,8 @@ override CSV 提示：
 ## Weak Same-Vehicle Edges：弱连接
 
 ### GM_RM011_E003
+
+这一项判断较长间隔内同一辆白车是否只能保留弱连接，重点是 rear/side 到 front/window 的部位转换是否安全。`from_node` 是 `GM_RM011_N003`，frames `262-270`；`to_node` 是 `GM_RM011_N004`，frames `279-281`。人工应先看 `GM_RM011_000262.png`、`GM_RM011_000267.png`、`GM_RM011_000281.png`。如果车辆在人眼上连续，但当前 node / box 没有稳定表达这一连续车辆，请先记录 `visible_unboxed_vehicle_gap`，不要直接升级强连接。
 
 | 字段 | 值 |
 | --- | --- |
@@ -667,6 +764,7 @@ override CSV 提示：
   - [ ] 标记为坏检测节点
   - [ ] 标记需要复核
   - [ ] 仅调整诊断渲染显示
+  - [ ] 可见车辆未被节点/框稳定覆盖
 
 - 判断理由：
   TODO
@@ -700,6 +798,8 @@ override CSV 提示：
   TODO
 
 ### GM_RM011_E004
+
+这一项判断右边缘白车的薄 crop 是否只能保持 `review_only`，而不是被过度解释为可靠弱连接。`from_node` 是 `GM_RM011_N008`，frames `135-161`；`to_node` 是 `GM_RM011_N009`，frames `164-166`。人工应先看 `GM_RM011_000135.png`、`GM_RM011_000149.png`、`GM_RM011_000166.png`。如果右边缘车辆可见但后继框太薄或缺失，请记录 `visible_unboxed_vehicle_gap` 或 node `mark_bad_detection_node`，不要补画 bbox。
 
 | 字段 | 值 |
 | --- | --- |
@@ -751,6 +851,7 @@ override CSV 提示：
   - [ ] 标记为坏检测节点
   - [ ] 标记需要复核
   - [ ] 仅调整诊断渲染显示
+  - [ ] 可见车辆未被节点/框稳定覆盖
 
 - 判断理由：
   TODO
@@ -784,6 +885,8 @@ override CSV 提示：
   TODO
 
 ### GM_RM011_E005
+
+这一项判断 upper side/window 到 front/hood 的部位转换是否能作为弱同车连接保留。`from_node` 是 `GM_RM011_N010`，frames `231-233`；`to_node` 是 `GM_RM011_N011`，frames `236-245`。人工应先看 `GM_RM011_000231.png`、`GM_RM011_000239.png`、`GM_RM011_000245.png`。如果人眼看到车辆连续但 node / box 没有稳定覆盖同一辆车，请记录 `visible_unboxed_vehicle_gap` 并保持复核路径。
 
 | 字段 | 值 |
 | --- | --- |
@@ -834,6 +937,7 @@ override CSV 提示：
   - [ ] 标记为坏检测节点
   - [ ] 标记需要复核
   - [ ] 仅调整诊断渲染显示
+  - [ ] 可见车辆未被节点/框稳定覆盖
 
 - 判断理由：
   TODO
@@ -867,6 +971,8 @@ override CSV 提示：
   TODO
 
 ### GM_RM011_E006
+
+这一项判断早期白色 SUV 的 rear/body 到 upper-window strip 是否只能作为弱连接保留。`from_node` 是 `GM_RM011_N012`，frames `0-4`；`to_node` 是 `GM_RM011_N013`，frames `8-10`。人工应先看 `GM_RM011_000000.png`、`GM_RM011_000003.png`、`GM_RM011_000010.png`。如果车辆可见但当前框没有稳定表达，不要写新坐标，应记录 `visible_unboxed_vehicle_gap` 或仅做诊断渲染主框选择。
 
 | 字段 | 值 |
 | --- | --- |
@@ -917,6 +1023,7 @@ override CSV 提示：
   - [ ] 标记为坏检测节点
   - [ ] 标记需要复核
   - [ ] 仅调整诊断渲染显示
+  - [ ] 可见车辆未被节点/框稳定覆盖
 
 - 判断理由：
   TODO

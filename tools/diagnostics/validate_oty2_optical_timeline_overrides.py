@@ -108,6 +108,7 @@ REASON_CODES = {
     "edge_contact_thin_crop",
     "part_state_transition",
     "multi_object_competition",
+    "visible_unboxed_vehicle_gap",
     "diagnostic_primary_box_selection",
     "review_uncertain",
     "other_review_note",
