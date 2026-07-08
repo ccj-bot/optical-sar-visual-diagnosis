@@ -1,0 +1,4 @@
+edge_id,scene_id,from_fragment_id,to_fragment_id,edge_strength,identity_evidence,failure_risk,review_required,accepted_status,note
+GM_RM011_WG11SVE001,GM_RM011,GM_RM011_WG11F001,GM_RM011_WG11F002,weak,nearfield white SUV body remains plausible across short missing span,part_state_transition_and_multibox_competition,yes,weak,diagnostic same-vehicle candidate only;not final;not SAR-ready
+GM_RM011_WG11SVE002,GM_RM011,GM_RM011_WG11F002,GM_RM011_WG11F003,weak,white vehicle body or front remains plausible across 8-16 after gap,part_state_transition_and_no_identity_truth,yes,weak,requires human check of intermediate frames;not final
+GM_RM011_WG11SVE003,GM_RM011,GM_RM011_WG11F003,GM_RM011_WG11F004,weak,short-gap body continuity before the 26-30 switch zone,old_Y26N004_not_safe_unsplit,yes,weak,only links to split fragment 18-25;does not accept old Y26N004 as a whole
