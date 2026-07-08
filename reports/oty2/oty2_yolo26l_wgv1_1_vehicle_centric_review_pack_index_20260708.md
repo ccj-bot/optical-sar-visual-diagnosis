@@ -34,6 +34,26 @@ The output directory is ignored and must not be committed.
 - baseline comparison frame images: `192`
 - SAR-ready: `no / blocked` for every group and fragment.
 
+## 2026-07-08 Multivehicle Correction
+
+This V1.1 vehicle-centric pack is now superseded for multivehicle identity review. Human inspection found that folders `02`, `13`, `16`, `17`, and `18` expose mechanism-level failures rather than ordinary same-vehicle review questions.
+
+Do not use the following folders to decide same-vehicle identity:
+
+- `02_GM_RM011_fragment_GM_RM011_WG11F005_blocked`
+- `13_GM_RM011_fragment_GM_RM011_WG11F017_forbidden`
+- `16_GM_RM017_fragment_GM_RM017_WG11F002_review_required`
+- `17_GM_RM017_fragment_GM_RM017_WG11F003_blocked`
+- `18_GM_RM017_fragment_GM_RM017_WG11F004_review_required`
+
+Reason: V1.1 still let switch/context/multi-target events appear as `fragment_*` folders, and the pack generator used frame ranges for some folders instead of selected-frame evidence. The follow-up mechanism correction is documented in:
+
+```text
+reports/oty2/oty2_yolo26l_wgv1_1_multivehicle_failure_analysis_and_v1_2_rules_20260708.md
+reports/oty2/samples/oty2_yolo26l_wgv1_1_multivehicle_identity_audit_20260708.csv
+reports/oty2/samples/oty2_yolo26l_wgv1_2_multivehicle_guardrail_rules_20260708.csv
+```
+
 ## Vehicle Groups
 
 - `G001` `01_GM_RM011_vehicle_group_G001_weak` status `weak` fragments `GM_RM011_WG11F001;GM_RM011_WG11F002;GM_RM011_WG11F003;GM_RM011_WG11F004`. Same-vehicle links are weak diagnostic links only. SAR-ready: `no / blocked`.
