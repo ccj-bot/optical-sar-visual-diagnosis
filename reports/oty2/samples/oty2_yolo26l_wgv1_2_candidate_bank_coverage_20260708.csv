@@ -1,0 +1,6 @@
+window_id,scene_id,frame_start,frame_end,expected_frame_count,frames_with_any_candidate,frames_with_raw_all_candidate_table,frames_selected_manifest_only,frames_with_competing_candidate,missing_candidate_frames,raw_candidate_row_count,selected_candidate_row_count,coverage_status,sar_ready,note
+GM_RM011_000_035,GM_RM011,0,35,36,30,0,30,0,5 6 7 11 12 17,0,30,selected_manifest_only,no / blocked,coverage for diagnostic candidate bank only
+GM_RM011_135_166,GM_RM011,135,166,32,30,0,30,0,162 163,0,30,selected_manifest_only,no / blocked,coverage for diagnostic candidate bank only
+GM_RM011_231_292,GM_RM011,231,292,62,47,30,17,19,234 235 240 241 267 268 271 272 273 274 275 276 277 278 282,52,51,partial_all_candidate_available,no / blocked,coverage for diagnostic candidate bank only
+GM_RM011_237_270_visible_gap_focus,GM_RM011,237,270,34,30,30,0,19,240 241 267 268,52,30,partial_all_candidate_available,no / blocked,coverage for diagnostic candidate bank only
+GM_RM017_118_214,GM_RM017,118,214,97,97,0,97,0,,0,97,selected_manifest_only,no / blocked,coverage for diagnostic candidate bank only
