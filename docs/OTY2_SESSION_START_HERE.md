@@ -169,6 +169,16 @@ Every new OTY2-related session must first read:
 
 Then read the task-specific latest report/summary from `reports/oty2`.
 
+For WGV2 factor-graph sessions, after the standard OTY2 reading order, read:
+
+1. `docs/OTY2_CROSS_MODAL_MECHANISM_FACTOR_GRAPH_DESIGN.md`
+2. `docs/OTY2_CROSS_MODAL_FACTOR_IDEA_BANK.md`
+3. `reports/oty2/oty2_wgv2_2_factor_graph_constraint_propagation_and_missing_factor_audit_20260709.md`
+4. `reports/oty2/oty2_wgv2_3_factor_idea_bank_gt_validation_boundary_and_joint_factor_admission_rules_20260709.md`
+5. `docs/OTY2_WGV2_FACTOR_GRAPH_PHASE_CLOSEOUT_AND_REPOSITORY_INHERITANCE_20260709.md`
+
+Future sessions should inherit the repository historically, including failed or corrected work, but must preserve scope, provenance, and anti-leakage boundaries.
+
 For optical timeline video review and manual override sessions, also read:
 
 1. `docs/OTY2_OPTICAL_TIMELINE_SESSION_CLOSEOUT_20260705.md`
