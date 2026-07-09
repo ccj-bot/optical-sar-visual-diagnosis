@@ -87,7 +87,7 @@ SAR can send back:
 - `side_ridge_endpoint_hotspot_weak_opposite_side_evidence`: morphology vocabulary such as dominant side ridge, endpoint or corner hotspot, weak opposite-side return, discontinuous shell contour, or long/short-axis relation.
 - `sar_temporal_drift_or_jump`: non-jump persistence, gradual drift, ambiguous drift, missing drift, or jump-like contradiction.
 - `background_static_reflector_risk`: fixed bright point, road edge, guardrail-like ridge, building edge, texture clutter, or scene-static response.
-- `non_target_negative_contrast`: nearby non-target, outside-GT, background, road-edge, static-reflector, guardrail, or competitor region fails the same vehicle-scale mechanism.
+- `non_target_negative_contrast`: nearby runtime-safe or non-GT background-like region, road-edge, static-reflector, guardrail-like ridge, texture clutter, or competitor region fails the same vehicle-scale mechanism.
 - `boundary_support_or_contradiction`: SAR evidence preserves a boundary, exposes competitor ambiguity, or contradicts an optical bridge.
 - `insufficient_evidence`: SAR image content, temporal chain, geometry, or negative examples are not enough to support the mechanism.
 
@@ -158,7 +158,7 @@ A minimal positive construction route could use `GM_RM011_WGV14T001`:
 
 1. Optical sends `time_tube`, `accepted_or_strong_thread`, `near_field_truncation`, `partial_vehicle`, `edge_contact`, and `allowed_review_constraint`.
 2. Geometry/time converts that message into a feasible review field, not a box.
-3. SAR replies with GT-local or opened-SAR-stage morphology vocabulary such as vehicle-scale ridge, endpoint hotspot, weak opposite-side return, shell contour, temporal non-jump, ambiguity, or insufficient evidence.
+3. SAR replies with runtime-safe or explicitly opened-SAR-stage morphology vocabulary such as vehicle-scale ridge, endpoint hotspot, weak opposite-side return, shell contour, temporal non-jump, ambiguity, or insufficient evidence. GT-local morphology is reserved for later posthoc validation only and must not construct this SAR response.
 4. SAR adds negative contrast against a nearby non-target or background region if available.
 5. Mechanism update records supported posthoc-only, weak-but-plausible, contradicted, missing-factor-exposed, or background-risk-detected.
 6. Feedback tells the optical hypothesis whether truncation expansion, temporal alignment, SAR drift chain, non-target contrast, or boundary evidence is missing.
@@ -234,6 +234,8 @@ WGV3.1 should not start with broad CSV expansion. It should start with:
 - one GT posthoc validation with positive and negative contrast.
 
 The likely first choice is `GM_RM011_WGV14T001` for positive mechanism construction, with `GM_RM011_M005` or `GM_RM011_M016` reserved as a separate boundary-preservation route.
+
+WGV3.1 may choose either `GM_RM011_WGV14T001` or `GM_RM011_WGV14T004`, but it must justify the choice before instantiation. `GM_RM011_WGV14T001` is preferred for near-field truncation and partial-vehicle positive mechanism construction. `GM_RM011_WGV14T004` is preferred if the goal is to reuse stronger WGV2 graph-instantiated mechanism relations. Do not silently substitute windows.
 
 WGV3.1 should remain design/prototype planning until explicitly authorized to run. It should not produce final boxes, revised GT, SAR-ready annotations, selector/ranking artifacts, runtime predictions, or identity-truth claims.
 

@@ -87,6 +87,8 @@ Candidate windows:
 - `GM_RM011_M005` or `GM_RM011_M016` for boundary preservation.
 - one nearby non-target or background comparison region if available from existing reports.
 
+WGV3.1 may choose either `GM_RM011_WGV14T001` or `GM_RM011_WGV14T004`, but it must justify the choice before instantiation. `GM_RM011_WGV14T001` is preferred for near-field truncation and partial-vehicle positive mechanism construction. `GM_RM011_WGV14T004` is preferred if the goal is to reuse stronger WGV2 graph-instantiated mechanism relations. Do not silently substitute windows.
+
 The minimal loop should test:
 
 - whether optical state narrows SAR review space;
