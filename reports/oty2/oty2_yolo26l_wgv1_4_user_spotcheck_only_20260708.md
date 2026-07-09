@@ -1,0 +1,69 @@
+# OTY2 WGV1.4 user spotcheck only
+
+This is not a request to review every WGV1.3 frame. It lists only low-confidence or high-risk WGV1.4 visual repairs.
+
+## SPOT001 - high_risk_accepted_change
+
+- scene_id: `GM_RM011`
+- related_ids: `GM_RM011_WGV14T005`
+- priority: `high`
+- status: `accepted_with_spotcheck`
+- reason: Large WGV1.3 over-split repair across 231-288; many upgraded boundaries lacked edge-review PNGs and frame 286-288 has a competitor white SUV.
+- evidence frames: `231;233;242;250;259;270;279;288`
+- evidence paths: `outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/06_GM_RM011_GM_RM011_WGV13T006_standalone_split/frames_yolo/GM_RM011_WGV13T006_GM_RM011_WGV12TF010_000231_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/07_GM_RM011_GM_RM011_WGV13T007_same_vehicle_candidate/frames_yolo/GM_RM011_WGV13T007_GM_RM011_WGV12TF011_000233_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/08_GM_RM011_GM_RM011_WGV13T008_standalone_split/frames_yolo/GM_RM011_WGV13T008_GM_RM011_WGV12TF013_000242_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/09_GM_RM011_GM_RM011_WGV13T009_standalone_split/frames_yolo/GM_RM011_WGV13T009_GM_RM011_WGV12TF014_000250_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/10_GM_RM011_GM_RM011_WGV13T010_standalone_split/frames_yolo/GM_RM011_WGV13T010_GM_RM011_WGV12TF015_000259_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/12_GM_RM011_GM_RM011_WGV13T012_same_vehicle_candidate/frames_yolo/GM_RM011_WGV13T012_GM_RM011_WGV12TF018_000270_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/12_GM_RM011_GM_RM011_WGV13T012_same_vehicle_candidate/frames_yolo/GM_RM011_WGV13T012_GM_RM011_WGV12TF019_000279_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/12_GM_RM011_GM_RM011_WGV13T012_same_vehicle_candidate/frames_yolo/GM_RM011_WGV13T012_GM_RM011_WGV12TF019_000288_diagnostic_yolo26l.png`
+- SAR-ready: `no / blocked`
+
+## SPOT004 - weak_merge_needing_spotcheck
+
+- scene_id: `GM_RM017`
+- related_ids: `GM_RM017_WGV14T002`
+- priority: `high`
+- status: `weak`
+- reason: Black sedan thread is interleaved with white-SUV selections and has a long 181-200 weak bridge.
+- evidence frames: `149;155;169;173;176;181;200;214`
+- evidence paths: `outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/15_GM_RM017_GM_RM017_WGV13T002_standalone_split/frames_yolo/GM_RM017_WGV13T002_GM_RM017_WGV12TF003_000149_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/15_GM_RM017_GM_RM017_WGV13T002_standalone_split/frames_yolo/GM_RM017_WGV13T002_GM_RM017_WGV12TF003_000155_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/18_GM_RM017_GM_RM017_WGV13T005_standalone_split/frames_yolo/GM_RM017_WGV13T005_GM_RM017_WGV12TF007_000169_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/18_GM_RM017_GM_RM017_WGV13T005_standalone_split/frames_yolo/GM_RM017_WGV13T005_GM_RM017_WGV12TF007_000173_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/20_GM_RM017_GM_RM017_WGV13T007_standalone_split/frames_yolo/GM_RM017_WGV13T007_GM_RM017_WGV12TF009_000176_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/20_GM_RM017_GM_RM017_WGV13T007_standalone_split/frames_yolo/GM_RM017_WGV13T007_GM_RM017_WGV12TF009_000181_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/22_GM_RM017_GM_RM017_WGV13T009_same_vehicle_candidate/frames_yolo/GM_RM017_WGV13T009_GM_RM017_WGV12TF011_000200_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/22_GM_RM017_GM_RM017_WGV13T009_same_vehicle_candidate/frames_yolo/GM_RM017_WGV13T009_GM_RM017_WGV12TF012_000214_diagnostic_yolo26l.png`
+- SAR-ready: `no / blocked`
+
+## SPOT005 - weak_merge_needing_spotcheck
+
+- scene_id: `GM_RM017`
+- related_ids: `GM_RM017_WGV14T003`
+- priority: `high`
+- status: `weak`
+- reason: White SUV thread is interleaved with black-sedan selections; M005 primary-box issue resolved but remains high-risk.
+- evidence frames: `158;164;168;174;175;182;185`
+- evidence paths: `outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/17_GM_RM017_GM_RM017_WGV13T004_primary_box_review/frames_yolo/GM_RM017_WGV13T004_GM_RM017_WGV12TF005_000158_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/17_GM_RM017_GM_RM017_WGV13T004_primary_box_review/frames_yolo/GM_RM017_WGV13T004_GM_RM017_WGV12TF006_000164_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/17_GM_RM017_GM_RM017_WGV13T004_primary_box_review/frames_yolo/GM_RM017_WGV13T004_GM_RM017_WGV12TF006_000168_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/19_GM_RM017_GM_RM017_WGV13T006_standalone_split/frames_yolo/GM_RM017_WGV13T006_GM_RM017_WGV12TF008_000174_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/19_GM_RM017_GM_RM017_WGV13T006_standalone_split/frames_yolo/GM_RM017_WGV13T006_GM_RM017_WGV12TF008_000175_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/21_GM_RM017_GM_RM017_WGV13T008_standalone_split/frames_yolo/GM_RM017_WGV13T008_GM_RM017_WGV12TF010_000182_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/21_GM_RM017_GM_RM017_WGV13T008_standalone_split/frames_yolo/GM_RM017_WGV13T008_GM_RM017_WGV12TF010_000185_diagnostic_yolo26l.png`
+- SAR-ready: `no / blocked`
+
+## SPOT003 - weak_merge_needing_spotcheck
+
+- scene_id: `GM_RM017`
+- related_ids: `GM_RM017_WGV14T001`
+- priority: `medium`
+- status: `weak`
+- reason: White box truck weak merge across an intervening black-car selection and heavy distance/occlusion.
+- evidence frames: `118;145;148;156;157`
+- evidence paths: `outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/14_GM_RM017_GM_RM017_WGV13T001_same_vehicle_candidate/frames_yolo/GM_RM017_WGV13T001_GM_RM017_WGV12TF001_000118_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/14_GM_RM017_GM_RM017_WGV13T001_same_vehicle_candidate/frames_yolo/GM_RM017_WGV13T001_GM_RM017_WGV12TF002_000145_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/14_GM_RM017_GM_RM017_WGV13T001_same_vehicle_candidate/frames_yolo/GM_RM017_WGV13T001_GM_RM017_WGV12TF002_000148_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/16_GM_RM017_GM_RM017_WGV13T003_standalone_split/frames_yolo/GM_RM017_WGV13T003_GM_RM017_WGV12TF004_000156_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/16_GM_RM017_GM_RM017_WGV13T003_standalone_split/frames_yolo/GM_RM017_WGV13T003_GM_RM017_WGV12TF004_000157_diagnostic_yolo26l.png`
+- SAR-ready: `no / blocked`
+
+## SPOT002 - disputed_context_relation
+
+- scene_id: `GM_RM011`
+- related_ids: `GM_RM011_WGV14C002/GM_RM011_WGV12M016`
+- priority: `medium`
+- status: `context_only`
+- reason: Confirm that 289-292 left white SUV is not the right-side white car from 279-288.
+- evidence frames: `286;287;288;289;290;292`
+- evidence paths: `outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/12_GM_RM011_GM_RM011_WGV13T012_same_vehicle_candidate/frames_yolo/GM_RM011_WGV13T012_GM_RM011_WGV12TF019_000286_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/12_GM_RM011_GM_RM011_WGV13T012_same_vehicle_candidate/frames_yolo/GM_RM011_WGV13T012_GM_RM011_WGV12TF019_000287_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/12_GM_RM011_GM_RM011_WGV13T012_same_vehicle_candidate/frames_yolo/GM_RM011_WGV13T012_GM_RM011_WGV12TF019_000288_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/13_GM_RM011_GM_RM011_WGV13T013_standalone_split/frames_yolo/GM_RM011_WGV13T013_GM_RM011_WGV12TF020_000289_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/13_GM_RM011_GM_RM011_WGV13T013_standalone_split/frames_yolo/GM_RM011_WGV13T013_GM_RM011_WGV12TF020_000290_diagnostic_yolo26l.png;outputs/oty2/y26l_wgv1_3_vehicle_thread_review_20260708/13_GM_RM011_GM_RM011_WGV13T013_standalone_split/frames_yolo/GM_RM011_WGV13T013_GM_RM011_WGV12TF020_000292_diagnostic_yolo26l.png`
+- SAR-ready: `no / blocked`
+
+## SPOT006 - sar_blocking_unresolved_item
+
+- scene_id: `ALL`
+- related_ids: `WGV1.4_WORKING_GRAPH`
+- priority: `high`
+- status: `blocked`
+- reason: No WGV1.4 item is SAR-ready; all outputs remain diagnostic working graph only.
+- evidence frames: ``
+- evidence paths: ``
+- SAR-ready: `no / blocked`
