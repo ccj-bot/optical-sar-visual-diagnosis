@@ -1,0 +1,17 @@
+field_name,required,allowed_values_or_format,description,forbidden_interpretation
+sar_evidence_unit_id,yes,WGV15B_<scene>_<zero_padded_index>,Stable identifier for a future SAR-only evidence unit. No unit is instantiated by this schema.,Do not treat schema rows as evidence.
+scene,yes,scene id such as GM_RM011 or GM_RM017,Scene containing the future SAR evidence unit.,Does not imply optical-SAR alignment.
+sar_frame_start,yes,integer SAR frame id after a SAR-only exploration pass,First SAR frame covered by the future evidence unit.,Do not infer from optical frame numbers.
+sar_frame_end,yes,integer SAR frame id after a SAR-only exploration pass,Last SAR frame covered by the future evidence unit.,Do not infer from optical frame numbers.
+optical_frame_start_if_aligned,no,integer or blank,Optional optical frame only after an explicit alignment protocol.,"Blank means unknown, not no object."
+optical_frame_end_if_aligned,no,integer or blank,Optional optical end frame only after an explicit alignment protocol.,Must not be filled by WGV1.4b optical continuity alone.
+evidence_type,yes,vehicle_like_scatter; temporal_continuity; boundary_support; competitor_or_multi_target_signal; background_or_static_reflector_risk; imaging_quality_or_motion_artifact; unknown_or_insufficient_evidence,Primary SAR-internal evidence category.,A category is not a final prediction.
+vehicle_like_signal,yes,present; absent; ambiguous; not_checked,Whether SAR itself shows vehicle-like scatter/shape/energy support.,Optical vehicle evidence cannot fill this field.
+temporal_continuity,yes,supported; contradicted; ambiguous; not_checked,Whether SAR-internal evidence supports continuity across SAR frames.,Optical thread continuity is not SAR temporal continuity.
+boundary_support,yes,supports_boundary; contradicts_boundary; ambiguous; not_checked,Whether SAR evidence supports a boundary or separation.,A preserved optical boundary is not SAR boundary proof.
+competitor_signal,yes,present; absent; ambiguous; not_checked,SAR-internal sign of competitor or multi-target structure.,Do not suppress competitor evidence to make optical identity fit.
+background_risk,yes,low; medium; high; unknown,"Risk that the SAR signal is background, static reflector, or non-vehicle clutter.",Low risk is not a final annotation.
+imaging_quality,yes,usable; degraded; motion_artifact; occluded_or_truncated; unknown,SAR image quality or artifact condition for this unit.,Quality notes do not confirm identity.
+usable_for,yes,exploration_only; supports_search_region; supports_boundary_audit; blocked; unknown,Permitted downstream use after SAR-only review.,Does not mean SAR-ready unless a later protocol says so.
+confidence_level,yes,high; medium; low; blocked; unknown,Confidence in the SAR-internal evidence unit.,Confidence cannot be inherited from WGV1.4b optical stability.
+notes,no,free text,Human-readable SAR-only observation and caveats.,"Must not contain final boxes, GT boxes, revised annotation, selector, ranking, or runtime prediction output."
