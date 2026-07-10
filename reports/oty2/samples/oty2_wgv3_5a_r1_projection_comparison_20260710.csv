@@ -1,0 +1,10 @@
+evaluation_group,method,sample_count,azimuth_median_error,azimuth_p90_error,radial_median_error,radial_p90_error,center_coverage_95,full_box_coverage_95,median_search_ratio,multi_target_rate
+direct_observable_control,M0_local_direct_projection,92,0.428394,1.157673,8.218456,22.310641,0.945652,0,0.00107227,0
+direct_observable_control,M1_interval_inflation_only,92,0.428394,1.157673,8.218456,22.310641,0.945652,0,0.00107227,0
+direct_observable_control,M2_recovered_full_vehicle_state,92,0.428394,1.157673,8.218456,22.310641,0.945652,0,0.00107227,0
+natural_truncation,M0_local_direct_projection,34,1.103418,2.921491,24.599103,63.997887,0.470588,0,0.00107227,0
+natural_truncation,M1_interval_inflation_only,34,1.103418,2.921491,24.599103,63.997887,0.470588,0,0.00107227,0
+natural_truncation,M2_recovered_full_vehicle_state,18,0.9606,1.941507,30.867945,41.388449,0.888889,0,0.00213177,0
+simulated_truncation,M0_local_direct_projection,120,3.718112,6.048506,61.461814,113.955562,0.225,0,0.00107227,0
+simulated_truncation,M1_interval_inflation_only,120,3.718112,6.048506,61.461814,113.955562,0.4,0,0.00525096,0
+simulated_truncation,M2_recovered_full_vehicle_state,120,0.381762,1.040682,9.616955,18.736635,0.916667,0,0.00107227,0
