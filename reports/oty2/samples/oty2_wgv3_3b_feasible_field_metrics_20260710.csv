@@ -1,0 +1,11 @@
+metric_name,metric_value,metric_status,numerator,denominator,notes
+time_source_coverage,1,proxy_available_not_direct_timestamp,1,1,24/50 scale metadata plus software-sync zero-offset assumption and WGV1.7 offset stress band
+sar_window_traceability,1,png_window_traceable_raw_pulse_mapping_missing,1,1,GM_RM011 SAR/SAR-gray PNG images 000000-000765 exist
+azimuth_source_coverage,1,coarse_proxy_available,1,1,scene_config legacy azimuth_k/b + WGV3.3A automatic bbox envelope
+range_source_coverage,0,broad_unknown_range_only,0,1,no runtime-safe per-object range/depth-to-SAR transfer or raw range-axis metadata
+automatic_feasible_field_time_coverage,true,covered,37,37,auto union SAR 0-119; posthoc T001 SAR 0-36
+automatic_feasible_field_joint_time_azimuth_coverage,true,covered_as_proxy,15731,15731,coverage is evaluated over WGV1.4 fragment-level mapped-node time-azimuth proxy cells; range not evaluated
+search_reduction_ratio_time_azimuth,0.088729,proxy_reduction_not_selector,24264,273462,automatic Channel B feasible field area over full SAR-frame by full-azimuth area; range full
+time_only_search_reduction_ratio,0.156658,proxy_reduction_not_selector,120,766,union automatic SAR frame window divided by all SAR frames
+automatic_hypothesis_count,7,multi_hypothesis_preserved,7,,"{""automatic_runtime_hypothesis"": 1, ""automatic_uncertain_hypothesis"": 6}"
+negative_control_count,1,same_time_shifted_azimuth_control,1,,70..85 deg
