@@ -1,0 +1,8 @@
+evaluation_group,method,scene_anchor_plan,sample_count,physical_vehicle_count,azimuth_median_error,azimuth_p90_error,radial_median_error,radial_p90_error,center_coverage_50,center_coverage_80,center_coverage_95,full_box_coverage_95,median_search_ratio,p90_search_ratio,blocked_rate,wrong_identity_rate,raw_counts
+paired-row direct local observation,Z0_local_detection_box,A0,16,5,14.070463,19.28879,170.52959,311.659159,0/16,0/16,0/16,0/16,0.00107227,0.00107227,0,0,unblocked=16;blocked=0
+full-stream optical-anchor recovery,Z1A_full_stream_optical_anchor_recovery,A0,7,2,28.737847,33.247506,71.855407,75.119085,0/7,0/7,0/7,0/7,0.00107227,0.00107227,0.5625,0,unblocked=7;blocked=9
+anchorless track-level recovery,Z1B_anchorless_track_level_completion,A0,15,4,11.647201,19.64927,24.71664,133.273474,1/15,1/15,1/15,0/15,0.00107227,0.00107227,0.0625,0,unblocked=15;blocked=1
+recovery plus scene calibration,Z2_recovery_plus_scene_residual_calibration,A0,15,4,12.617453,25.104047,55.934478,133.273474,0/15,0/15,0/15,0/15,0.00107227,0.00107227,0.0625,0,unblocked=15;blocked=1
+recovery plus scene calibration,Z2_recovery_plus_scene_residual_calibration,A1,14,4,14.560992,27.983262,99.188274,171.430298,0/14,0/14,0/14,0/14,0.00107227,0.00107227,0.125,0,unblocked=14;blocked=2
+recovery plus scene calibration,Z2_recovery_plus_scene_residual_calibration,A3,12,4,22.212065,38.466169,49.023687,80.542033,0/12,1/12,1/12,0/12,0.00107227,0.00107227,0.25,0,unblocked=12;blocked=4
+recovery plus scene calibration,Z2_recovery_plus_scene_residual_calibration,A5,10,4,8.961071,18.384847,26.421373,62.404861,1/10,1/10,1/10,0/10,0.00107227,0.00107227,0.375,0,unblocked=10;blocked=6

@@ -1,0 +1,28 @@
+# OTY2 WGV3.5A-R2B Visual Diagnosis
+
+## Opened Visual Review Sheets
+
+- timeline_PV_GM19_BLACK_SEDAN_NEAR_FIELD: `outputs/wgv3_5a_r2b_gm019_20260710/gm019_full_stream_timeline_PV_GM19_BLACK_SEDAN_NEAR_FIELD.png`
+- timeline_PV_GM19_WHITE_SUV_NEAR_FIELD: `outputs/wgv3_5a_r2b_gm019_20260710/gm019_full_stream_timeline_PV_GM19_WHITE_SUV_NEAR_FIELD.png`
+- timeline_PV_GM19_RIGHT_DARK_FRAGMENT: `outputs/wgv3_5a_r2b_gm019_20260710/gm019_full_stream_timeline_PV_GM19_RIGHT_DARK_FRAGMENT.png`
+- timeline_PV_GM19_UNPAIRED_SMALL_044_049: `outputs/wgv3_5a_r2b_gm019_20260710/gm019_full_stream_timeline_PV_GM19_UNPAIRED_SMALL_044_049.png`
+- timeline_PV_GM19_UNPAIRED_SMALL_060_080: `outputs/wgv3_5a_r2b_gm019_20260710/gm019_full_stream_timeline_PV_GM19_UNPAIRED_SMALL_060_080.png`
+- timeline_PV_GM19_UNPAIRED_SMALL_083_098: `outputs/wgv3_5a_r2b_gm019_20260710/gm019_full_stream_timeline_PV_GM19_UNPAIRED_SMALL_083_098.png`
+- timeline_PV_GM19_SILVER_MPV_NEAR_FIELD: `outputs/wgv3_5a_r2b_gm019_20260710/gm019_full_stream_timeline_PV_GM19_SILVER_MPV_NEAR_FIELD.png`
+- timeline_PV_GM19_GRAY_CAR_LEFT_EDGE: `outputs/wgv3_5a_r2b_gm019_20260710/gm019_full_stream_timeline_PV_GM19_GRAY_CAR_LEFT_EDGE.png`
+- timeline_PV_GM19_UNPAIRED_SMALL_259_261: `outputs/wgv3_5a_r2b_gm019_20260710/gm019_full_stream_timeline_PV_GM19_UNPAIRED_SMALL_259_261.png`
+- gm019_pair_recovery_review: `outputs/wgv3_5a_r2b_gm019_20260710/gm019_z0_z1_recovery_pair_review.png`
+- gm017_anchorless_ablation_review: `outputs/wgv3_5a_r2b_gm019_20260710/gm017_anchorless_ablation_review.png`
+
+## 中文视觉判断
+
+- GM_RM019每辆主物理车辆均生成了完整光学时间线接触图，黄色为当前检测框，绿色为全流直接可观测帧，青色为轨迹级完整车辆隐状态。
+- 黑色近场轿车始终贴近右侧和底边，单帧不能作为完整车体；轨迹级约束主要来自左边界、顶边和时序平滑。
+- 白色SUV在进入后的中段出现非配对完整光学锚点，当前可见侧面、车头/车尾线索连续，允许分支A恢复相邻配对帧。
+- 银色MPV在中段出现若干非硬边缘完整观测，晚段离开时恢复依赖前锚点和轨迹级约束。
+- 灰色左缘车辆的配对帧本身仍是局部前/左边缘，但后续全流中出现完整侧面观测，可支持有限时序恢复。
+- 右侧深色碎片仍为身份不安全的短片段，不参与恢复通过判断。
+- 未配对小目标044-049、060-080、083-098、259-261均为远处小框或短片段，只作为全流盘点和身份分离证据，不与五辆GM_RM019主评价车辆合并。
+- GM_RM017无锚点消融中，青色为隐藏完整框后的模拟局部观测，绿色恢复框沿整段轨迹贴回完整车辆；该结果只证明轨迹级约束机制在受控条件下可恢复，不作为GM_RM019正向SAR投影结论。
+- GM_RM019 Z0/Z1A/Z1B/Z2配对复核中，恢复状态相对黄色局部框有所修正，但绿色SAR参考框多数仍未被覆盖，说明剩余问题主要落在场景残差、近场视差、相对深度尺度和身份短片段，而不是再次归并为配对行内无完整锚点。
+- 最终失败案例按identity_unresolved、scene_azimuth_residual、scene_radial_residual等字段拆分；所有16条配对行仍保留no_full_anchor_in_paired_rows=true，但只有黑色近场轿车和右侧深色碎片属于no_full_anchor_in_full_optical_stream=true。

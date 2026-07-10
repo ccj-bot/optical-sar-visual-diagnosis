@@ -1,0 +1,10 @@
+source_name,source_path,frame_count,detection_count,track_count,coordinate_size,confidence_available,bbox_available,identity_available,usable_for_full_stream_reconstruction,notes
+GM_RM019全部光学帧,D:\profile\research\data\GM_RM019\GM_RM019_frames,368,,,800x600,false,false,false,visual_audit_only,现有16条配对行覆盖帧0;2;4;13;15;37;39;102;114;129;131;138-139;151-152
+GM_RM019相对深度,D:\profile\research\data\GM_RM019\GM_RM019_depth,368,,,800x600,false,false,false,depth_quality_audit,深度只作为相对弱证据，不作为米制距离或硬控制器
+YOLO11l归一化检测,outputs/oty0_pretracking_observation_normalization_probe_20260705_024520/GM_RM019_yolo11l_baseline_normalized_detection_table.csv,193,334,,800x600,true,true,false,true,R2B does not treat tracker ids as physical identity truth
+YOLO26l归一化检测,outputs/oty0_pretracking_observation_normalization_probe_20260705_024520/GM_RM019_yolo26l_probe_normalized_detection_table.csv,193,288,,800x600,true,true,false,true,R2B does not treat tracker ids as physical identity truth
+YOLO26l ByteTrack全流线程,outputs/oty2_wgv3_3a_yolo26l_mot_replay_20260710_000000/GM_RM019_yolo26l_probe_bytetrack_raw/oty1t_tracker_state_timeseries.csv,167,194,15,800x600,false,true,hypothesis,true,R2B does not treat tracker ids as physical identity truth
+YOLO26l BoT-SORT全流线程,outputs/oty2_wgv3_3a_yolo26l_mot_replay_20260710_000000/GM_RM019_yolo26l_probe_botsort_raw/oty1t_tracker_state_timeseries.csv,170,200,14,800x600,false,true,hypothesis,true,R2B does not treat tracker ids as physical identity truth
+WGV3.3A自动线程节点,reports/oty2/samples/oty2_wgv3_3a_auto_tracklet_nodes_20260710.csv,49,53,85,800x600,false,true,hypothesis,cross_check,R2B does not treat tracker ids as physical identity truth
+WGV1.4节点映射,reports/oty2/samples/oty2_wgv3_3a_wgv1_4_node_mapping_20260710.csv,,32,9,800x600,true,false,hypothesis,cross_check,R2B does not treat tracker ids as physical identity truth
+WGV3.3A线程关系审计,reports/oty2/samples/oty2_wgv3_3a_auto_relation_decisions_20260710.csv,,274,,800x600,false,false,hypothesis,cross_check,R2B does not treat tracker ids as physical identity truth
