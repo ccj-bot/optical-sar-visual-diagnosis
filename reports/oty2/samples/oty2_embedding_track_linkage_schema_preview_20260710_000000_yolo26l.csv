@@ -1,0 +1,19 @@
+schema_kind,field_name,required,description
+embedding_track_linkage_rows,scene,yes,scene id
+embedding_track_linkage_rows,frame_id,yes,optical frame id used for same-frame linkage
+embedding_track_linkage_rows,tracker_name,yes,botsort or bytetrack
+embedding_track_linkage_rows,tracker_variant,yes,raw or normalized_active
+embedding_track_linkage_rows,track_id,yes,"tracker hypothesis id, not identity truth"
+embedding_track_linkage_rows,tracker_row_uid,yes,stable linkage row handle
+embedding_track_linkage_rows,tracker_bbox_xyxy,yes,tracker row box
+embedding_track_linkage_rows,embedding_row_uid,yes,linked detection embedding row handle
+embedding_track_linkage_rows,det_id_ignored,yes,"source detection handle only, never identity truth"
+embedding_track_linkage_rows,source_detection_table,yes,OTY0 table that produced the embedding
+embedding_track_linkage_rows,detection_bbox_xyxy_clamped,yes,crop bbox used by embedding extraction
+embedding_track_linkage_rows,link_method,yes,"direct_source, iou, or none"
+embedding_track_linkage_rows,iou,yes,same-scene same-frame bbox IoU when computed
+embedding_track_linkage_rows,link_status,yes,direct/iou/ambiguous/unmatched status
+embedding_track_linkage_rows,embedding_backend,yes,embedding backend label
+embedding_track_linkage_rows,embedding_dim,yes,embedding vector dimension
+embedding_track_linkage_rows,embedding_artifact_path_uncommitted,yes,ignored local embedding array path
+embedding_track_linkage_rows,created_at,yes,probe timestamp

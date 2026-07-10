@@ -1,0 +1,12 @@
+optical_message_type,automatic_source_available,source_table,confidence_or_uncertainty,runtime_reproducible,requires_visual_adjudication,wgv2_wgv3_usage_permission,blocking_reason
+stable_tracklet_segments,True,reports/oty2/samples/oty2_wgv3_3a_auto_tracklet_nodes_20260710.csv,14/53 nodes ready; remaining uncertain/blocked,True,False,automatic_runtime_message,
+strong_continuity_relation,True,reports/oty2/samples/oty2_wgv3_3a_auto_relation_decisions_20260710.csv,1 strong automatic relations,True,False,automatic_runtime_message,
+weak_continuity_relation,True,reports/oty2/samples/oty2_wgv3_3a_auto_relation_decisions_20260710.csv,1 weak automatic relations,True,True,automatic_uncertain_message,
+ambiguous_continuity_relation,True,reports/oty2/samples/oty2_wgv3_3a_auto_relation_decisions_20260710.csv,172 ambiguous automatic relations after competition preservation,True,True,automatic_uncertain_message,
+blocked_continuity_relation,True,reports/oty2/samples/oty2_wgv3_3a_auto_relation_decisions_20260710.csv,37 blocked automatic relations,True,False,automatic_uncertain_message,
+visible_unboxed_gap,False,,not represented by current standard MOT + crop embedding route,False,True,posthoc_visual_constraint_only,requires visual or multimodal judgment outside current automatic source
+same_frame_multicar_competition,True,reports/oty2/samples/oty2_wgv3_3a_auto_relation_decisions_20260710.csv,"available as neighbor/competition pressure, not vehicle identity",True,True,automatic_uncertain_message,
+edge_truncation_pressure,True,reports/oty2/samples/oty2_wgv3_3a_auto_tracklet_nodes_20260710.csv,available from bbox boundary/contact proxies,True,True,automatic_uncertain_message,proxy does not prove physical truncation
+occlusion_or_target_switch,False,reports/oty2/samples/oty2_wgv3_3a_reference_edge_evaluation_20260710.csv,violations or missed edges expose the risk posthoc,False,True,posthoc_visual_constraint_only,current automatic route lacks explicit object-level visual switch adjudication
+non_vehicle_exclusion,False,,not available in current YOLO26l vehicle-only source closure,False,True,not_available,requires negative non-vehicle evidence not produced by this optical route
+forbidden_boundary_preservation,True,reports/oty2/samples/oty2_wgv3_3a_reference_edge_evaluation_20260710.csv,0 forbidden/context violations under posthoc evaluation,True,True,automatic_uncertain_message,

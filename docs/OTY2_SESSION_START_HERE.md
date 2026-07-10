@@ -177,6 +177,16 @@ For WGV2 factor-graph sessions, after the standard OTY2 reading order, read:
 4. `reports/oty2/oty2_wgv2_3_factor_idea_bank_gt_validation_boundary_and_joint_factor_admission_rules_20260709.md`
 5. `docs/OTY2_WGV2_FACTOR_GRAPH_PHASE_CLOSEOUT_AND_REPOSITORY_INHERITANCE_20260709.md`
 
+For WGV3 optical-message source sessions, after the standard OTY2 reading order, read:
+
+1. `docs/OTY2_TEMPORAL_BACKBONE_ROUTE_RESET.md`
+2. `docs/OTY2_OPTICAL_STREAM_GENERALIZATION_PROTOCOL.md`
+3. `docs/OTY2_OPTICAL_STREAM_MECHANISM_ADJUSTMENT_DESIGN.md`
+4. `reports/oty2/oty2_wgv3_3a_optical_message_source_reproducibility_closure_20260710.md`
+5. `reports/oty2/oty2_wgv3_3a_visual_failure_diagnosis_20260710.md`
+
+WGV3.3A audits whether optical messages used by WGV2/WGV3 can be reproduced by the automatic optical backbone. It does not revoke WGV2/WGV3; it separates automatic runtime messages from WGV1.4 human/multimodal posthoc visual constraints.
+
 Future sessions should inherit the repository historically, including failed or corrected work, but must preserve scope, provenance, and anti-leakage boundaries.
 
 For optical timeline video review and manual override sessions, also read:

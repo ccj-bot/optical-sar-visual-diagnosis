@@ -1,0 +1,7 @@
+scene,tracker_name,tracker_variant,tracker_rows_total,tracker_rows_with_valid_bbox,embedding_rows_available,direct_source_links,iou_high_links,iou_acceptable_links,iou_weak_links,unmatched_tracker_rows,ambiguous_links,linked_tracker_rows_total,linked_tracker_row_rate,unique_track_ids,track_ids_with_any_embedding,track_ids_with_embedding_rate,conclusion_scene
+GM_RM011,botsort,raw,413,413,413,413,0,0,0,0,0,413,1.000000,18,18,1.000000,EMBEDDING_TRACK_LINKAGE_READY_FOR_TRACKLET_AGGREGATION
+GM_RM011,bytetrack,raw,413,413,413,413,0,0,0,0,0,413,1.000000,23,23,1.000000,EMBEDDING_TRACK_LINKAGE_READY_FOR_TRACKLET_AGGREGATION
+GM_RM017,botsort,raw,215,215,215,215,0,0,0,0,0,215,1.000000,4,4,1.000000,EMBEDDING_TRACK_LINKAGE_READY_FOR_TRACKLET_AGGREGATION
+GM_RM017,bytetrack,raw,215,215,215,215,0,0,0,0,0,215,1.000000,4,4,1.000000,EMBEDDING_TRACK_LINKAGE_READY_FOR_TRACKLET_AGGREGATION
+GM_RM019,botsort,raw,288,288,288,288,0,0,0,0,0,288,1.000000,14,14,1.000000,EMBEDDING_TRACK_LINKAGE_READY_FOR_TRACKLET_AGGREGATION
+GM_RM019,bytetrack,raw,288,288,288,288,0,0,0,0,0,288,1.000000,15,15,1.000000,EMBEDDING_TRACK_LINKAGE_READY_FOR_TRACKLET_AGGREGATION
