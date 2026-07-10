@@ -1,0 +1,5 @@
+anchor_plan,anchor_count,anchor_pair_ids,anchor_frames,selection_rule,usable_for_scene_residual_calibration,blocked_reason
+A0,0,,,pre-error fixed temporal spread over direct-observable high-confidence rows,true,
+A1,0,,,pre-error fixed temporal spread over direct-observable high-confidence rows,false,no_direct_observable_scene_anchor_available
+A3,0,,,pre-error fixed temporal spread over direct-observable high-confidence rows,false,no_direct_observable_scene_anchor_available
+A5,0,,,pre-error fixed temporal spread over direct-observable high-confidence rows,false,no_direct_observable_scene_anchor_available

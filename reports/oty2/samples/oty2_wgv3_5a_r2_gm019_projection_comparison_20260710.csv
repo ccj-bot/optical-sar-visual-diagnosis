@@ -1,0 +1,12 @@
+evaluation_group,method,anchor_plan,sample_count,physical_vehicle_count,azimuth_median_error,azimuth_p90_error,radial_median_error,radial_p90_error,center_coverage_50,center_coverage_80,center_coverage_95,center_covered_95_count,full_box_coverage_95,median_search_ratio,p90_search_ratio,multi_target_rate,wrong_identity_rate,blocked_rate
+direct_observable,Z0_GM17_model_direct_local_observation,A0,0,0,,,,,0/0,0/0,0/0,0/0,0/0,,,,,0
+direct_observable,Z1_temporal_full_vehicle_recovery,A0,0,0,,,,,0/0,0/0,0/0,0/0,0/0,,,,,0
+temporally_recoverable,Z0_GM17_model_direct_local_observation,A0,0,0,,,,,0/0,0/0,0/0,0/0,0/0,,,,,0
+temporally_recoverable,Z1_temporal_full_vehicle_recovery,A0,0,0,,,,,0/0,0/0,0/0,0/0,0/0,,,,,0
+not_safely_recoverable,Z0_GM17_model_direct_local_observation,A0,16,5,14.070463,19.288789,170.529591,311.659159,0/16,0/16,0/16,0/16,0/16,0.00107227,0.00107227,0.0625,0,0
+not_safely_recoverable,Z1_temporal_full_vehicle_recovery,A0,0,0,,,,,0/0,0/0,0/0,0/0,0/0,,,,,1
+all_evaluable,Z0_GM17_model_direct_local_observation,A0,16,5,14.070463,19.288789,170.529591,311.659159,0/16,0/16,0/16,0/16,0/16,0.00107227,0.00107227,0.0625,0,0
+all_evaluable,Z1_temporal_full_vehicle_recovery,A0,0,0,,,,,0/0,0/0,0/0,0/0,0/0,,,,,1
+all_evaluable,Z2_recovery_plus_scene_residual_calibration,A1,0,0,,,,,0/0,0/0,0/0,0/0,0/0,,,,,1
+all_evaluable,Z2_recovery_plus_scene_residual_calibration,A3,0,0,,,,,0/0,0/0,0/0,0/0,0/0,,,,,1
+all_evaluable,Z2_recovery_plus_scene_residual_calibration,A5,0,0,,,,,0/0,0/0,0/0,0/0,0/0,,,,,1
