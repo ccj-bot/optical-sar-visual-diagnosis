@@ -1,0 +1,4 @@
+model_variant,test_pair_count,center_coverage_50,center_coverage_80,center_coverage_95,full_box_coverage_95,median_search_ratio,p90_search_ratio,median_azimuth_error,p90_azimuth_error,median_radial_error,p90_radial_error,multi_target_rate,wrong_identity_rate
+P0,15,1,1,1,0.2,0.01496172,0.01496172,15.270456,23.061118,507.023,527.7256,0.866667,0.2
+P1,15,0.066667,0.066667,0.066667,0,0.00018258,0.00023299,13.240676,19.043645,258.7801,273.493035,0.066667,0.066667
+P2,15,0.066667,0.066667,0.133333,0,0.0003288,0.0005221,13.240676,19.043645,258.7801,273.493035,0.066667,0.066667

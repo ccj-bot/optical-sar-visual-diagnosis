@@ -1,0 +1,6 @@
+model_family,model_name,input_features,train_count,validation_count,selected,parameters,train_median_error,train_p90_error,validation_median_error,validation_p90_error,notes
+azimuth,pinhole_like_effective_bottom_x,az_bottom,71,52,false,"{""c_eff"": 320.0, ""delta_yaw"": -11.35914144643699, ""f_eff"": 650.0}",1.965246,4.273205,1.27356,5.272055,effective weak parameters only; not true intrinsics/extrinsics
+azimuth,linear_center_x,az_center,71,52,true,"{""mode"": ""az_center""}",0.709793,2.12969,0.589201,1.164437,effective weak parameters only; not true intrinsics/extrinsics
+azimuth,quadratic_bottom_x,az_bottom,71,52,false,"{""mode"": ""az_bottom""}",0.569424,1.429471,0.628133,1.786053,effective weak parameters only; not true intrinsics/extrinsics
+azimuth,cubic_bottom_x,az_bottom,71,52,false,"{""mode"": ""az_bottom""}",0.549652,1.296513,0.679173,1.796499,effective weak parameters only; not true intrinsics/extrinsics
+azimuth,isotonic_bottom_x,az_bottom,71,52,false,"{""mode"": ""az_bottom""}",0.05635,0.647133,0.66764,2.004379,effective weak parameters only; not true intrinsics/extrinsics

@@ -1,0 +1,7 @@
+ablation_id,features,test_pair_count,median_radial_error,p90_radial_error,median_search_ratio,center_coverage_95,interpretation
+A,optical x only,15,244.609878,298.524799,0.00091224,0.266667,post-freeze holdout ablation; test labels used only for final scoring
+B,optical x + bbox geometry,15,388.097134,698.650585,0.00126735,0.266667,post-freeze holdout ablation; test labels used only for final scoring
+C,optical x + bbox geometry + depth,15,296.407441,586.570677,0.00126735,0.266667,post-freeze holdout ablation; test labels used only for final scoring
+D,optical x + bbox geometry + depth + temporal smoothing,15,291.850793,580.401766,0.00126735,0.266667,post-freeze holdout ablation; test labels used only for final scoring
+E,optical x + depth + temporal smoothing + heading proxy,15,298.8063,592.19051,0.00126735,0.266667,post-freeze holdout ablation; test labels used only for final scoring
+F,full state including visibility uncertainty,15,292.687515,526.660316,0.00126735,0.266667,post-freeze holdout ablation; test labels used only for final scoring

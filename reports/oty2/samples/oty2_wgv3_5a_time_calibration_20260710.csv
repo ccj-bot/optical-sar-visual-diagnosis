@@ -1,0 +1,3 @@
+model_family,model_name,input_features,train_count,validation_count,selected,parameters,train_median_error,train_p90_error,validation_median_error,validation_p90_error,notes
+time,global_linear,optical_frame,71,52,false,"{""coef"": 2.079549084425955, ""intercept"": 0.667429335512395}",0.463559,0.888775,0.539775,0.870783,SAR labels from test split not used
+time,legacy_24_50_proxy,optical_frame,71,52,true,"{""a"": 2.0833333333333335, ""b"": 0.0}",0.5,0.916667,0.5,0.833333,SAR labels from test split not used

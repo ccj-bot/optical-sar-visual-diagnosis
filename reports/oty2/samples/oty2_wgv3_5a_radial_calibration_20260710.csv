@@ -1,0 +1,5 @@
+model_family,model_name,input_features,train_count,validation_count,selected,parameters,train_median_error,train_p90_error,validation_median_error,validation_p90_error,notes
+radial,R0_no_depth_bbox_geometry,radial_r0,71,52,false,"{""depth_spearman_like"": 0.7682092555331992, ""mode"": ""radial_r0""}",11.872826,20.637751,34.399947,66.256379,no_depth_baseline
+radial,R1_depth_plus_bbox_geometry,radial_r1,71,52,false,"{""depth_spearman_like"": 0.7682092555331992, ""mode"": ""radial_r1""}",7.244366,17.343568,76.436735,95.428677,main_depth_model
+radial,R2_isotonic_depth_only,ablation_c,71,52,false,"{""depth_spearman_like"": 0.7682092555331992, ""mode"": ""ablation_c""}",7.290321,24.19485,43.120449,67.473491,monotonic_depth_reference
+radial,R3_gradient_boosting_reference,radial_r1,71,52,true,"{""depth_spearman_like"": 0.7682092555331992, ""mode"": ""radial_r1""}",1.232517,4.762293,19.537142,66.214125,nonlinear_reference_not_sole_report
