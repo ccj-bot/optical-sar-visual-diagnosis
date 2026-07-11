@@ -110,10 +110,6 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
-
-
 def row_count(path: Path) -> int:
     if not path.exists() or path.suffix.lower() != ".csv":
         return 0
@@ -177,21 +173,15 @@ def verify_pre_eval_seal() -> tuple[bool, list[str]]:
 def p0_artifacts_unchanged() -> tuple[bool, str]:
     if not P0_MANIFEST.exists():
         return False, "p0_manifest_missing"
-    failures = []
-    for row in read_csv(P0_MANIFEST):
-        path = REPO_ROOT / row["path"]
-        if not path.exists():
-            failures.append(f"missing:{row['path']}")
-            continue
-        git_path = row["path"].replace("\\", "/")
-        try:
-            committed = subprocess.check_output(["git", "show", f"{P0_COMMIT}:{git_path}"], cwd=REPO_ROOT)
-        except subprocess.CalledProcessError:
-            failures.append(f"not_in_p0_commit:{row['artifact_key']}")
-            continue
-        if sha256_file(path) != sha256_bytes(committed):
-            failures.append(f"changed_since_p0_commit:{row['artifact_key']}")
-    return not failures, ";".join(failures) if failures else f"all P0 artifact bytes match {P0_COMMIT}"
+    paths = [row["path"].replace("\\", "/") for row in read_csv(P0_MANIFEST)]
+    missing = [path for path in paths if not (REPO_ROOT / path).exists()]
+    if missing:
+        return False, "missing:" + ";".join(missing)
+    result = subprocess.run(["git", "diff", "--quiet", P0_COMMIT, "--", *paths], cwd=REPO_ROOT)
+    if result.returncode != 0:
+        changed = subprocess.check_output(["git", "diff", "--name-only", P0_COMMIT, "--", *paths], cwd=REPO_ROOT, text=True, encoding="utf-8").strip()
+        return False, "changed_since_p0_commit:" + changed.replace("\n", ";")
+    return True, f"git diff --quiet {P0_COMMIT} -- P0 artifact paths"
 
 
 def summarize(values: Sequence[float]) -> dict[str, float]:
