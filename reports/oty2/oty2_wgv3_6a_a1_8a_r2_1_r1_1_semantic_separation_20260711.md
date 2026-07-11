@@ -25,11 +25,15 @@
 
 ## Top-K Reinterpretation
 
-- residual component rows: `2368`
-- proximity residual candidates: `1615`
+- all component audit rows: `2368`
+- matched frozen-atom / non-residual rows: `52`
+- residual component rows after semantic fix: `2316`
+- unknown match-status rows: `0`
+- proximity residual candidates after semantic fix: `1563`
 - old possible weak vehicle part claim count: `1535`
 - revoked statement: `1535 weak vehicle parts were dropped by Top-K`.
-- corrected statement: Found many small residual components near frozen response regions but unmatched to frozen atoms; whether they are vehicle weak responses is unproven without exact original Top-K replay, dynamic co-motion, or object-by-object visual review.
+- semantic erratum: the previous R1.1 residual audit treated all 2368 component rows as unmatched residuals; 52 rows are matched frozen atoms / kept components and are now retained only as provenance rows.
+- corrected statement: Found many dropped residual components near frozen response regions but unmatched to frozen atoms; whether they are vehicle weak responses is unproven without exact original Top-K replay, dynamic co-motion, or object-by-object visual review.
 - TOP_K_EXACT_DROP_AUDIT: `FAIL`
 - TOP_K_WEAK_RESPONSE_RISK: `UNRESOLVED`
 
@@ -74,9 +78,9 @@
 | SAME_OBJECT_CANDIDATE_EDGE_SEPARATED | PASS | edges=148; counts={'accepted_graph_link_candidate': 137, 'part_part_candidate': 11} | same_object_candidate |
 | SAME_OBJECT_CANDIDATE_NOT_IDENTITY_TRUTH | PASS | edge_state is candidate/weak/blocked only; no confirmed same vehicle | same_object_candidate |
 | STATIC_FAMILY_NOT_EQUAL_PHYSICAL_VEHICLE | PASS | boundary family represents local-response boundary variants, not physical vehicle identity | semantic_boundary |
-| PROXIMITY_RESIDUAL_COMPONENT_AUDIT | PASS | residual components=2368; proximity candidates=1615 | topk_semantic_reinterpretation |
+| PROXIMITY_RESIDUAL_COMPONENT_AUDIT | PASS | all component rows=2368; matched frozen atom rows=52; residual components=2316; proximity residual candidates=1563; unknown match-status rows=0 | topk_semantic_reinterpretation |
 | TOP_K_EXACT_DROP_AUDIT | FAIL | R2.1-R1 top-k file is reinterpreted as proximity residual audit, not exact original top-k replay | topk_semantic_reinterpretation |
-| TOP_K_WEAK_RESPONSE_RISK | UNRESOLVED | vehicle weak-part conclusion revoked; physical_vehicle_part_unproven=true | topk_semantic_reinterpretation |
+| TOP_K_WEAK_RESPONSE_RISK | UNRESOLVED | vehicle weak-part conclusion revoked; residual rows keep physical_vehicle_part_unproven=true | topk_semantic_reinterpretation |
 | INSTANCE_LEVEL_GT_EVALUATION_VALID | PASS | response-unit matrix rows=63; boundary-family matrix rows=45 | eval_only_instance_matrix |
 | MULTI_INSTANCE_GT_UNION_NOT_USED | PASS | GT instances are evaluated as per-instance rows; no frame-level union box is constructed | eval_only_instance_matrix |
 | RAW_REVIEW_FIELDS_COMPLETE | PASS | R2.1-R1 raw review CSV fields checked for completeness | review_gate_semantic_downgrade |

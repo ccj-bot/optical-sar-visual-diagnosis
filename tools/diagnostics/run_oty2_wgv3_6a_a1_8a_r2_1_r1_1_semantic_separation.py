@@ -169,9 +169,11 @@ RESIDUAL_COMPONENT_FIELDS = [
     "near_boundary_family",
     "proximity_residual_candidate",
     "physical_vehicle_part_unproven",
+    "component_match_status",
     "audit_scope",
     "source_component_role_proposal",
     "source_visual_review_required",
+    "residual_semantics_fix_provenance",
 ]
 GT_MATRIX_FIELDS = [
     "object_id",
@@ -728,6 +730,20 @@ def reinterpret_residual_component_audit(topk_rows: Sequence[Mapping[str, str]])
     for idx, row in enumerate(topk_rows, start=1):
         near_core = row.get("near_any_core_bbox", "false") == "true"
         near_family = row.get("near_any_family_bbox", "false") == "true"
+        source_role = row.get("component_role_proposal", "")
+        matched_frozen_atom = bool(source_role and source_role != "dropped_unassigned_component")
+        dropped_residual = source_role == "dropped_unassigned_component"
+        unknown_match_status = not source_role
+        proximity_residual_candidate = dropped_residual and (near_core or near_family)
+        if matched_frozen_atom:
+            component_match_status = "matched_frozen_atom_non_residual"
+            audit_scope = "residual_semantics_fix: matched frozen atom / kept component; retained for provenance, excluded from residual counts"
+        elif dropped_residual:
+            component_match_status = "dropped_unassigned_residual"
+            audit_scope = "residual_semantics_fix: dropped unassigned component; residual audit only, not exact top-k replay and not vehicle-part proof"
+        else:
+            component_match_status = "unknown_match_status"
+            audit_scope = "residual_semantics_fix: source role missing; retained as unknown match-status component"
         rows.append(
             {
                 "residual_component_id": f"R21R11RC{idx:05d}",
@@ -735,14 +751,16 @@ def reinterpret_residual_component_audit(topk_rows: Sequence[Mapping[str, str]])
                 "component_bbox": row.get("component_bbox", ""),
                 "component_area": row.get("component_area", ""),
                 "component_energy": row.get("component_energy", ""),
-                "matched_frozen_atom": "false",
+                "matched_frozen_atom": bool_text(matched_frozen_atom),
                 "near_frozen_core": bool_text(near_core),
                 "near_boundary_family": bool_text(near_family),
-                "proximity_residual_candidate": bool_text(near_core or near_family),
-                "physical_vehicle_part_unproven": "true",
-                "audit_scope": "proximity residual component audit; not exact top-k replay and not vehicle-part proof",
-                "source_component_role_proposal": row.get("component_role_proposal", ""),
+                "proximity_residual_candidate": bool_text(proximity_residual_candidate),
+                "physical_vehicle_part_unproven": bool_text(dropped_residual or unknown_match_status),
+                "component_match_status": component_match_status,
+                "audit_scope": audit_scope,
+                "source_component_role_proposal": source_role,
                 "source_visual_review_required": row.get("visual_review_required", ""),
+                "residual_semantics_fix_provenance": "source=R2.1-R1 topk_component_drop_audit component_role_proposal; matched roles are kept/frozen atoms, dropped_unassigned_component is residual",
             }
         )
     return rows
@@ -793,7 +811,10 @@ def semantic_stats(tables: Mapping[str, Sequence[Mapping[str, Any]]], boundary_s
         "boundary_family_zero_core_overlap_pair_count": zero_inside,
         "boundary_family_different_core_no_overlap_count": diff_no_overlap,
         "boundary_family_accepted_link_only_pair_count": accepted_only,
-        "residual_component_count": len(residual),
+        "component_audit_row_count": len(residual),
+        "matched_frozen_atom_count": sum(row["matched_frozen_atom"] == "true" for row in residual),
+        "unknown_match_status_count": sum(row["component_match_status"] == "unknown_match_status" for row in residual),
+        "residual_component_count": sum(row["component_match_status"] == "dropped_unassigned_residual" for row in residual),
         "proximity_residual_candidate_count": sum(row["proximity_residual_candidate"] == "true" for row in residual),
         "physical_vehicle_part_unproven_count": sum(row["physical_vehicle_part_unproven"] == "true" for row in residual),
         "old_possible_weak_vehicle_part_claim_count": sum(row.get("possible_weak_vehicle_part") == "true" for row in frozen["topk"]),
@@ -1097,9 +1118,9 @@ def gate_rows_for_status(stats: Mapping[str, Any], replay_status: str, replay_ev
         gate("SAME_OBJECT_CANDIDATE_EDGE_SEPARATED", "PASS", f"edges={stats['same_object_candidate_edge_count']}; counts={stats['same_object_candidate_edge_counts']}", "same_object_candidate"),
         gate("SAME_OBJECT_CANDIDATE_NOT_IDENTITY_TRUTH", "PASS", "edge_state is candidate/weak/blocked only; no confirmed same vehicle", "same_object_candidate"),
         gate("STATIC_FAMILY_NOT_EQUAL_PHYSICAL_VEHICLE", "PASS", "boundary family represents local-response boundary variants, not physical vehicle identity", "semantic_boundary"),
-        gate("PROXIMITY_RESIDUAL_COMPONENT_AUDIT", "PASS", f"residual components={stats['residual_component_count']}; proximity candidates={stats['proximity_residual_candidate_count']}", "topk_semantic_reinterpretation"),
+        gate("PROXIMITY_RESIDUAL_COMPONENT_AUDIT", "PASS", f"all component rows={stats['component_audit_row_count']}; matched frozen atom rows={stats['matched_frozen_atom_count']}; residual components={stats['residual_component_count']}; proximity residual candidates={stats['proximity_residual_candidate_count']}; unknown match-status rows={stats['unknown_match_status_count']}", "topk_semantic_reinterpretation"),
         gate("TOP_K_EXACT_DROP_AUDIT", stats["topk_exact_drop_audit"], "R2.1-R1 top-k file is reinterpreted as proximity residual audit, not exact original top-k replay", "topk_semantic_reinterpretation"),
-        gate("TOP_K_WEAK_RESPONSE_RISK", stats["topk_weak_response_risk"], "vehicle weak-part conclusion revoked; physical_vehicle_part_unproven=true", "topk_semantic_reinterpretation"),
+        gate("TOP_K_WEAK_RESPONSE_RISK", stats["topk_weak_response_risk"], "vehicle weak-part conclusion revoked; residual rows keep physical_vehicle_part_unproven=true", "topk_semantic_reinterpretation"),
         gate("INSTANCE_LEVEL_GT_EVALUATION_VALID", "PASS" if stats.get("response_unit_gt_matrix_rows", 0) else "PENDING", f"response-unit matrix rows={stats.get('response_unit_gt_matrix_rows', 0)}; boundary-family matrix rows={stats.get('boundary_family_gt_matrix_rows', 0)}", "eval_only_instance_matrix"),
         gate("MULTI_INSTANCE_GT_UNION_NOT_USED", "PASS", "GT instances are evaluated as per-instance rows; no frame-level union box is constructed", "eval_only_instance_matrix"),
         gate("RAW_REVIEW_FIELDS_COMPLETE", "PASS" if raw_review_fields_complete() else "FAIL", "R2.1-R1 raw review CSV fields checked for completeness", "review_gate_semantic_downgrade"),
@@ -1150,11 +1171,15 @@ def render_report(stats: Mapping[str, Any], replay_status: str, replay_evidence:
         "",
         "## Top-K Reinterpretation",
         "",
-        f"- residual component rows: `{stats.get('residual_component_count', '')}`",
-        f"- proximity residual candidates: `{stats.get('proximity_residual_candidate_count', '')}`",
+        f"- all component audit rows: `{stats.get('component_audit_row_count', '')}`",
+        f"- matched frozen-atom / non-residual rows: `{stats.get('matched_frozen_atom_count', '')}`",
+        f"- residual component rows after semantic fix: `{stats.get('residual_component_count', '')}`",
+        f"- unknown match-status rows: `{stats.get('unknown_match_status_count', '')}`",
+        f"- proximity residual candidates after semantic fix: `{stats.get('proximity_residual_candidate_count', '')}`",
         f"- old possible weak vehicle part claim count: `{stats.get('old_possible_weak_vehicle_part_claim_count', '')}`",
         "- revoked statement: `1535 weak vehicle parts were dropped by Top-K`.",
-        "- corrected statement: Found many small residual components near frozen response regions but unmatched to frozen atoms; whether they are vehicle weak responses is unproven without exact original Top-K replay, dynamic co-motion, or object-by-object visual review.",
+        "- semantic erratum: the previous R1.1 residual audit treated all 2368 component rows as unmatched residuals; 52 rows are matched frozen atoms / kept components and are now retained only as provenance rows.",
+        "- corrected statement: Found many dropped residual components near frozen response regions but unmatched to frozen atoms; whether they are vehicle weak responses is unproven without exact original Top-K replay, dynamic co-motion, or object-by-object visual review.",
         f"- TOP_K_EXACT_DROP_AUDIT: `{stats.get('topk_exact_drop_audit', '')}`",
         f"- TOP_K_WEAK_RESPONSE_RISK: `{stats.get('topk_weak_response_risk', '')}`",
         "",
