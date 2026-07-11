@@ -665,9 +665,9 @@ def run_generation(output_map: Mapping[str, Path], visual_dir: Path) -> None:
                 track.last_orientation = parse_float(selected["orientation_deg"])
                 track.missing_frames = 0
                 used_tracks.append(track.track_id)
-                if support_before >= 2:
+                if track.consecutive_support_frames >= 3:
                     evidence_state = "same_motion_supported"
-                elif support_before >= 1:
+                elif track.support_frames >= 2:
                     evidence_state = "temporally_supported_response"
                 else:
                     evidence_state = "motion_shell_candidate"
