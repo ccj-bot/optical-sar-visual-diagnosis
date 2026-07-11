@@ -1,0 +1,13 @@
+method,mask_class,sample_count,physical_vehicle_count,azimuth_median_error,azimuth_p90_error,radial_median_error,radial_p90_error,azimuth_covered_count,radial_covered_count,joint_covered_count,masked_overlap_covered_count,blocked_count
+Z0_local_detection_box,SAR_MASK_S0_FULLY_OBSERVABLE,0,0,,,,,0,0,0,0,0
+Z0_local_detection_box,SAR_MASK_S1_PARTIALLY_CENSORED_CENTER_INSIDE,11,4,14.231054,18.246886,88.233313,344.745556,1,2,0,5,0
+Z0_local_detection_box,SAR_MASK_S2_CENTER_CENSORED,5,4,13.909872,18.209781,210.075718,250.347321,0,0,0,0,0
+Z0_local_detection_box,SAR_MASK_S3_NOT_CENTER_SUPERVISABLE,0,0,,,,,0,0,0,0,0
+Z1A_full_stream_optical_anchor_recovery,SAR_MASK_S0_FULLY_OBSERVABLE,0,0,,,,,0,0,0,0,0
+Z1A_full_stream_optical_anchor_recovery,SAR_MASK_S1_PARTIALLY_CENSORED_CENTER_INSIDE,6,2,23.793916,31.554096,54.884142,75.316185,1,1,0,2,5
+Z1A_full_stream_optical_anchor_recovery,SAR_MASK_S2_CENTER_CENSORED,1,1,35.144045,35.144045,73.559407,73.559407,0,0,0,0,4
+Z1A_full_stream_optical_anchor_recovery,SAR_MASK_S3_NOT_CENTER_SUPERVISABLE,0,0,,,,,0,0,0,0,0
+Z1B_anchorless_track_level_completion,SAR_MASK_S0_FULLY_OBSERVABLE,0,0,,,,,0,0,0,0,0
+Z1B_anchorless_track_level_completion,SAR_MASK_S1_PARTIALLY_CENSORED_CENTER_INSIDE,10,3,11.603518,19.66768,17.737955,132.053736,1,8,1,5,1
+Z1B_anchorless_track_level_completion,SAR_MASK_S2_CENTER_CENSORED,5,4,11.647201,16.393768,66.616316,117.02756,0,1,0,3,0
+Z1B_anchorless_track_level_completion,SAR_MASK_S3_NOT_CENTER_SUPERVISABLE,0,0,,,,,0,0,0,0,0

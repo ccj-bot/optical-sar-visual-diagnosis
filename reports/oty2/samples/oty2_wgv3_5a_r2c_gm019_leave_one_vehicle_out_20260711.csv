@@ -1,0 +1,4 @@
+fold_id,train_physical_vehicles,test_physical_vehicle,train_S0_count,train_S1_count,test_S0_count,test_S1_count,test_S2_count,selected_model,azimuth_median,azimuth_p90,radial_median,radial_p90,azimuth_coverage,radial_coverage,joint_coverage,masked_overlap_coverage,search_ratio,run_status,blocked_reason
+LOVO_PV_GM19_WHITE_SUV_NEAR_FIELD,not_constructed,PV_GM19_WHITE_SUV_NEAR_FIELD,0,0,0,3,1,none,,,,,0/0,0/0,0/0,not_evaluated,,not_run_M2_gate_failed,S0完整中心监督为0；S1仅能作为区间/相交弱证据，不能支持跨物理车辆方位中心拟合。
+LOVO_PV_GM19_SILVER_MPV_NEAR_FIELD,not_constructed,PV_GM19_SILVER_MPV_NEAR_FIELD,0,0,0,5,1,none,,,,,0/0,0/0,0/0,not_evaluated,,not_run_M2_gate_failed,S0完整中心监督为0；S1仅能作为区间/相交弱证据，不能支持跨物理车辆方位中心拟合。
+LOVO_PV_GM19_GRAY_CAR_LEFT_EDGE,not_constructed,PV_GM19_GRAY_CAR_LEFT_EDGE,0,0,0,0,2,none,,,,,0/0,0/0,0/0,not_evaluated,,not_run_M2_gate_failed,S0完整中心监督为0；S1仅能作为区间/相交弱证据，不能支持跨物理车辆方位中心拟合。

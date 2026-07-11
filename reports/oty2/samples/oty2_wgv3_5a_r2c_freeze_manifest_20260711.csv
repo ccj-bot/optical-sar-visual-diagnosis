@@ -1,0 +1,11 @@
+source_file,sha256,bytes,rows,frozen_scope
+reports\oty2\oty2_wgv3_5a_r1_closure_20260710.md,a1e8ea691d5a4ce77af94c889a5f25793ae87cea3fd31f0f191d020649523163,11085,,R1/R2/R2B historical output; R2C reads only and does not overwrite
+reports\oty2\oty2_wgv3_5a_r2_gm019_closure_20260710.md,7584cfbe78d392446adcc34f313c7bef2b5e99dd7c947f0a0b5a69f5d4ec19c1,7199,,R1/R2/R2B historical output; R2C reads only and does not overwrite
+reports\oty2\oty2_wgv3_5a_r2b_gm019_closure_20260710.md,faf03244e298a08e1f188ca373ab0bef1361f514a81755b27db55777a636ab7a,8905,,R1/R2/R2B historical output; R2C reads only and does not overwrite
+reports\oty2\oty2_wgv3_5a_r2b_gm019_full_stream_anchor_reaudit_20260710.md,3491863d3558361d456a44cb415b64139dd3f019126fe2b1cd9668d079342d57,30489,,R1/R2/R2B historical output; R2C reads only and does not overwrite
+reports\oty2\oty2_wgv3_5a_r2b_gm019_anchorless_reconstruction_method_20260710.md,3a6fa418df6c1b10afa21cc5c84f4b38d98d0612dd8792ae7ba456483911faa3,19379,,R1/R2/R2B historical output; R2C reads only and does not overwrite
+reports\oty2\oty2_wgv3_5a_r2b_gm019_visual_diagnosis_20260710.md,61cfbde4c60844ddb5c6afbd382d69e7ede4e4a1ff8f33dda60fd9c75882fbe1,3383,,R1/R2/R2B historical output; R2C reads only and does not overwrite
+reports\oty2\samples\oty2_wgv3_5a_r2b_gm019_projection_evaluation_rows_20260710.csv,f48753fe33dbf83f7d2a04c1643cb556706a3482e6e1970cb7e2e5965aa93d4b,19917,112,R1/R2/R2B historical output; R2C reads only and does not overwrite
+reports\oty2\samples\oty2_wgv3_5a_r2b_gm019_anchorless_track_reconstruction_20260710.csv,1e3a6eecb79a306a81b4dc0937b3282afb30d4864f29d9e56a4da74949872e9b,37239,173,R1/R2/R2B historical output; R2C reads only and does not overwrite
+reports\oty2\samples\oty2_wgv3_5a_r2b_gm019_optical_recovery_anchors_20260710.csv,3d227bd90b13c68e8730052dbcb55a9373c294ef82364d06e3982492db27984b,25422,173,R1/R2/R2B historical output; R2C reads only and does not overwrite
+reports\oty2\samples\oty2_wgv3_5a_r2b_gm019_sar_scene_calibration_anchors_20260710.csv,eda969462c03faf7028097489c06b398bbbec3a394bd9073a278d7bf319b66fc,2093,16,R1/R2/R2B historical output; R2C reads only and does not overwrite

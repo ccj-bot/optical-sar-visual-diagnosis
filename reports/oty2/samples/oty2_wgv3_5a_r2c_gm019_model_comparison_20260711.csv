@@ -1,0 +1,7 @@
+model_id,model_name,training_mask_classes,training_sample_count,training_physical_vehicle_count,selected_model,azimuth_median_error,azimuth_p90_error,radial_median_error,radial_p90_error,center_coverage,run_status,blocked_reason
+A0,GM17_frozen_model,none,0,0,false,,,,,0/0,not_run_M2_gate_failed,S0完整中心监督为0；S1仅能作为区间/相交弱证据，不能支持跨物理车辆方位中心拟合。
+A1,GM19_scene_linear_model,none,0,0,false,,,,,0/0,not_run_M2_gate_failed,S0完整中心监督为0；S1仅能作为区间/相交弱证据，不能支持跨物理车辆方位中心拟合。
+A2,depth_conditioned_model,none,0,0,false,,,,,0/0,not_run_M2_gate_failed,S0完整中心监督为0；S1仅能作为区间/相交弱证据，不能支持跨物理车辆方位中心拟合。
+A3,vehicle_boundary_conditioned_model,none,0,0,false,,,,,0/0,not_run_M2_gate_failed,S0完整中心监督为0；S1仅能作为区间/相交弱证据，不能支持跨物理车辆方位中心拟合。
+A4,mask_distance_conditioned_model,none,0,0,false,,,,,0/0,not_run_M2_gate_failed,S0完整中心监督为0；S1仅能作为区间/相交弱证据，不能支持跨物理车辆方位中心拟合。
+A5,monotone_piecewise_model,none,0,0,false,,,,,0/0,not_run_M2_gate_failed,S0完整中心监督为0；S1仅能作为区间/相交弱证据，不能支持跨物理车辆方位中心拟合。

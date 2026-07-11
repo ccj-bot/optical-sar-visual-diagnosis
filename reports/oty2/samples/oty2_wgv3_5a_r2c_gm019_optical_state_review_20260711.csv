@@ -1,0 +1,10 @@
+physical_vehicle_id,reviewed_frames,paired_frames,direct_full_stream_anchor_count,branch_a_recovered_pair_count,branch_b_recovered_pair_count,optical_state_review_class,identity_confidence,pure_optical_reason_cn,allowed_for_sar_mapping_audit
+PV_GM19_BLACK_SEDAN_NEAR_FIELD,0-11,0;2;4,0,0,3,OPTICAL_STATE_PARTIALLY_PLAUSIBLE,0.9,早段近场底边截断，Z1B给出连续整车隐状态，但无可用全流完整锚点，径向前几帧不稳定。,true
+PV_GM19_WHITE_SUV_NEAR_FIELD,5-27;29-41,13;15;37;39,11,4,4,OPTICAL_STATE_PLAUSIBLE,0.9,全流存在非配对光学恢复锚点，配对帧前后恢复框与近场车辆横向运动连续；但SAR中心仍受mask语义限制。,true
+PV_GM19_RIGHT_DARK_FRAGMENT,12-14,13,0,0,1,IDENTITY_UNRESOLVED,0.55,短片段且与白色SUV同帧并存，R2B已保持不合并；不能为了恢复强行归并身份。,false
+PV_GM19_UNPAIRED_SMALL_044_049,44-49,,0,0,0,OPTICAL_STATE_PARTIALLY_PLAUSIBLE,0.65,R2B轨迹恢复可用于纯光学审计，但不提升SAR中心语义。,true
+PV_GM19_UNPAIRED_SMALL_060_080,60-80,,0,0,0,OPTICAL_STATE_PARTIALLY_PLAUSIBLE,0.65,R2B轨迹恢复可用于纯光学审计，但不提升SAR中心语义。,true
+PV_GM19_UNPAIRED_SMALL_083_098,83-98,,0,0,0,OPTICAL_STATE_PARTIALLY_PLAUSIBLE,0.65,R2B轨迹恢复可用于纯光学审计，但不提升SAR中心语义。,true
+PV_GM19_SILVER_MPV_NEAR_FIELD,99-140,102;114;129;131;138-139,6,3,6,OPTICAL_STATE_PARTIALLY_PLAUSIBLE,0.9,轨迹较长且Z1B中心/径向连续，部分帧仍有下边缘与深度混合风险，进入SAR映射只能作为审计证据。,true
+PV_GM19_GRAY_CAR_LEFT_EDGE,149-182,151-152,5,0,2,OPTICAL_STATE_PARTIALLY_PLAUSIBLE,0.9,左边缘进入/离开阶段可见约束单侧，恢复框方向合理但短轨迹和mask近边界使中心监督不可用。,true
+PV_GM19_UNPAIRED_SMALL_259_261,259-261,,0,0,0,OPTICAL_STATE_PARTIALLY_PLAUSIBLE,0.65,R2B轨迹恢复可用于纯光学审计，但不提升SAR中心语义。,true

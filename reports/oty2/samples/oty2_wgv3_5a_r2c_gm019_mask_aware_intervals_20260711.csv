@@ -1,0 +1,2 @@
+interval_group,training_count,azimuth_q50,azimuth_q80,azimuth_q95,radial_q50,radial_q80,radial_q95,held_out_center_coverage,held_out_masked_overlap_coverage,search_ratio,run_status,blocked_reason
+M2_GATED_NO_CENTER_SUPERVISION,0,,,,,,,0/0,not_evaluated,,not_run_M2_gate_failed,S0完整中心监督为0；S1仅能作为区间/相交弱证据，不能支持跨物理车辆方位中心拟合。
