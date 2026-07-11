@@ -1,0 +1,18 @@
+gate,status,evidence,provenance
+GENERATION_GT_ISOLATION_VALID,PASS,generate reads R1 frozen atoms/roles/lineage plus A1.7R source shells only,runtime_safe
+SOURCE_SHELL_CAUSALITY_VALID,PASS,historical shell selected for all frames; previous R1 future-source cases=11,runtime_safe
+POLARITY_NOT_USED_IN_GENERATE,PASS,positive/negative labels are loaded only in evaluate through eval_label,runtime_safe
+CORE_SUBGRAPH_INDEPENDENT_OF_OPTIONAL_ATOMS,PASS,core gates are computed before optional membership,runtime_safe
+ISOLATED_ATOM_NOT_GLOBAL_VETO,PASS,accepted/possible/part core boxes with isolated_small_atom in surrounding group=42,runtime_safe
+CORE_COMPACTNESS_LOCAL_VALID,PASS,compactness uses core-only member gaps and distances,runtime_safe
+CORE_TEMPORAL_LINEAGE_VALID,PASS,temporal gate uses core member persistent_part_track_id only,runtime_safe
+BACKGROUND_CONFLICT_EXPLICIT,PASS,optional background exclusions=17,runtime_safe
+IMAGE_DOMAIN_BBOX_GENERATED,PASS,response boxes=71; final_annotation_space=sar_image_pixel_domain,runtime_safe
+OPTIONAL_RESPONSE_MEMBERSHIP_AUDITED,PASS,optional membership rows=230,runtime_safe
+RAW_BLIND_REVIEW_FROZEN,PASS,raw rows=71; sha=999cf05ad086b243461973453c780492ed9c2c7abdf43ae3f09aa5f5005367b4,blind_visual_review
+ASSISTED_REVIEW_SEPARATED,PASS,assisted rows=71; sha=e820e3e03decf5d8d051d4e09d7d3f1ae021903c9e6c6dbe74c93a66167329fc,blind_visual_review
+FROZEN_REPLAY_IDENTICAL,PASS,verify-replay compares all R2 frozen runtime artifacts,runtime_safe
+ERROR_TAXONOMY_VALID,PASS,error taxonomy rows=83,eval_only_gt_assisted
+CORE_RESPONSE_BBOX_R2_READY,PARTIAL,core subgraph bbox logic is local-window validated but not full-scene annotation,eval_only_gt_assisted
+VEHICLE_SUPPORTED_OBSERVATION_READY_FOR_A1_7R2,NO,R2 remains audit-only; final annotation/selector/training still blocked,eval_only_gt_assisted
+GM_RM011_BLOCKED,true,GM_RM011 not executed,eval_only_gt_assisted
