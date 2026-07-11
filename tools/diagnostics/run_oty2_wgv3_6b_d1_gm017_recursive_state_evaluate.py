@@ -461,6 +461,9 @@ def write_report(gates: Sequence[Mapping[str, str]], comparison_rows: Sequence[M
     lines.append(f"- 逐帧 PNG: `outputs/wgv3_6b_d1_gm017_recursive_causal_state_propagation_{DATE}/visual_review/`")
     lines.append(f"- 接触表: `{visual_rows[0]['contact_sheet'] if visual_rows else ''}`")
     lines.append(f"- manifest rows: `{len(visual_rows)}`")
+    lines.append("- 实际审阅范围: 已打开 SAR361-394 接触表，并重点查看 SAR379 最大状态修正帧与 SAR363 track-specific 重现帧。")
+    lines.append("- 图像结论: 主亮响应带连续右移，青色 response track 与主响应/右侧局部响应相邻；紫色 background track 主要位于上边界与静止斑点区域，未在审阅帧中发现需要降级的明显错误关联。")
+    lines.append("- 限制: 视觉审阅只支持递归诊断解释，不提升为最终车辆框、最终标注或唯一成员集合。")
     lines.extend(["", "## Gates", "", "| gate | status | evidence |", "| --- | --- | --- |"])
     for row in gates:
         lines.append(f"| {row['gate_id']} | {row['status']} | {row['evidence']} |")

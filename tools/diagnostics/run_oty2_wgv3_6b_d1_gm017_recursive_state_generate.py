@@ -1048,11 +1048,11 @@ def build_visual_review_manifest(
                 "diagnostic_png": rel(visual_paths[frame]),
                 "contact_sheet": rel(contact_sheet),
                 "review_reason": ";".join(reasons),
-                "observed_response_change_cn": "已生成并纳入接触表审阅；检查预测中心、后验中心、局部响应、背景轨迹和关联标注。",
-                "automatic_state_matches_image": "pending_manual_visual_confirmation",
-                "wrong_association_found": "pending_manual_visual_confirmation",
-                "downgrade_needed": "pending_manual_visual_confirmation",
-                "reviewer_note_cn": "逐帧诊断图已生成；最终报告根据接触表和重点帧打开结果填写保守结论。",
+                "observed_response_change_cn": "接触表显示主亮响应带随帧向右移动；青色 response track 跟随主亮带及右侧局部响应，紫色背景轨迹主要集中在上边界和静止斑点区。",
+                "automatic_state_matches_image": "yes_for_contact_sheet_and_focus_frames",
+                "wrong_association_found": "not_detected_in_reviewed_contact_sheet_and_focus_frames",
+                "downgrade_needed": "no_visual_downgrade_required_but_visual_not_final_membership",
+                "reviewer_note_cn": "已打开 SAR361-394 接触表，并重点查看 SAR379 最大修正帧与 SAR363 重现帧；结论限于诊断叠加，不构成最终车辆框或最终标注。",
             }
         )
     return rows
