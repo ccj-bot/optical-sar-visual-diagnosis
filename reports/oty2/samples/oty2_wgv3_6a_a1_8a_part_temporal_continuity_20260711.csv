@@ -1,0 +1,11 @@
+temporal_id,window_id,physical_vehicle_id,role,frames,atom_ids,delta_radial,delta_azimuth,delta_L,delta_W,delta_theta,role_persistence,shared_motion_trend,background_static_or_different_drift,identity_discontinuity,conclusion_cn
+T8A_001,white_27_31,PV_GM19_WHITE_SUV_NEAR_FIELD,body_core,27;28,A8A_F027_003;A8A_F028_007,-0.959854,0.933621,6.304962,4.723559,1.612704,2/5,false,false,false,该角色在短窗口中不稳定或样本不足，只能保留为条件/不可测试。
+T8A_002,white_27_31,PV_GM19_WHITE_SUV_NEAR_FIELD,side_ridge,28;29;30;31,A8A_F028_005;A8A_F029_003;A8A_F030_003;A8A_F031_004,-72.604752,-70.439453,8.094149,6.244756,9.831715,4/5,true,false,false,局部部件有短窗连续性，但允许出现/消失，不能单独闭合为车辆。
+T8A_003,white_27_31,PV_GM19_WHITE_SUV_NEAR_FIELD,endpoint_hotspot,27;28,A8A_F027_001;A8A_F028_006,-52.989441,44.722479,19.474393,-3.126703,86.519393,2/5,false,false,false,该角色在短窗口中不稳定或样本不足，只能保留为条件/不可测试。
+T8A_004,white_78_81,PV_GM19_WHITE_SUV_NEAR_FIELD,body_core,78;79;80;81,A8A_F078_004;A8A_F079_004;A8A_F080_004;A8A_F081_004,3.070702,2.839657,7.954878,0.574157,0.373127,4/4,true,false,false,主体核心在短窗口内有非跳变相邻帧支持，可作为车辆响应条件之一。
+T8A_005,white_78_81,PV_GM19_WHITE_SUV_NEAR_FIELD,side_ridge,78;79;80;81,A8A_F078_002;A8A_F079_002;A8A_F080_002;A8A_F081_001,6.752365,2.058891,1.031669,-0.391033,3.334748,4/4,true,false,false,局部部件有短窗连续性，但允许出现/消失，不能单独闭合为车辆。
+T8A_006,white_78_81,PV_GM19_WHITE_SUV_NEAR_FIELD,background_arc,78;79;80;81,A8A_F078_003;A8A_F079_001;A8A_F080_001;A8A_F081_002,-1.591263,-0.800607,-27.100791,-9.652204,1.009983,4/4,true,false,false,弧线样结构不应因局部连续或高能量升级为车辆部件。
+T8A_007,silver_270_273,PV_GM19_SILVER_MPV_NEAR_FIELD,body_core,270,A8A_F270_004,0,0,0,0,0,1/4,false,false,true,该角色在短窗口中不稳定或样本不足，只能保留为条件/不可测试。
+T8A_008,silver_270_273,PV_GM19_SILVER_MPV_NEAR_FIELD,side_ridge,270;273,A8A_F270_003;A8A_F273_002,-39.492554,71.124153,-38.688136,-0.276036,88.084494,2/4,true,false,false,局部部件有短窗连续性，但允许出现/消失，不能单独闭合为车辆。
+T8A_009,silver_289_290,PV_GM19_SILVER_MPV_NEAR_FIELD,body_core,289,A8A_F289_006,0,0,0,0,0,1/2,false,false,true,该角色在短窗口中不稳定或样本不足，只能保留为条件/不可测试。
+T8A_010,silver_289_290,PV_GM19_SILVER_MPV_NEAR_FIELD,side_ridge,289;290,A8A_F289_008;A8A_F290_002,11.662399,-5.070086,83.896102,18.244046,5.466337,2/2,true,false,false,局部部件有短窗连续性，但允许出现/消失，不能单独闭合为车辆。

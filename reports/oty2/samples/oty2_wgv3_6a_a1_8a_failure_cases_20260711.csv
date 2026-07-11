@@ -1,0 +1,2 @@
+case_id,failure_type,sar_frame,object_id,physical_vehicle_id,reason_cn,runtime_png,eval_png
+FAIL8A_001,mechanism_not_globally_established,,,GM_RM019,正负闭环只在局部窗口形成条件支持，尚未完成中间帧盲评，不能进入 A1.7R2。,outputs/wgv3_6a_a1_8a_20260711/a1_8a_positive_negative_contrast_sheet.png,outputs/wgv3_6a_a1_8a_20260711/a1_8a_eval_only_target_overlay_sheet.png

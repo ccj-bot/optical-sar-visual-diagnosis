@@ -162,10 +162,11 @@ Every new OTY2-related session must first read:
 2. `docs/OTY2_TEMPORAL_BACKBONE_ROUTE_RESET.md`
 3. `docs/OTY2_OPTICAL_STREAM_GENERALIZATION_PROTOCOL.md`
 4. `docs/OTY2_OPTICAL_STREAM_MECHANISM_ADJUSTMENT_DESIGN.md`
-5. `docs/oty2_phase_reset_open_questions_and_mechanism_lanes.md`
-6. `docs/oty2_gt_support_failure_concept_correction_archive.md`
-7. `docs/oty2_physical_structure_first_not_weighted_fusion_archive.md`
-8. `docs/oty2_gt_local_energy_field_atlas_correction_archive.md`
+5. `docs/OTY2_POINT_TO_STRUCTURE_OPTICAL_SAR_VEHICLE_RESPONSE_FRAMEWORK.md`
+6. `docs/oty2_phase_reset_open_questions_and_mechanism_lanes.md`
+7. `docs/oty2_gt_support_failure_concept_correction_archive.md`
+8. `docs/oty2_physical_structure_first_not_weighted_fusion_archive.md`
+9. `docs/oty2_gt_local_energy_field_atlas_correction_archive.md`
 
 Then read the task-specific latest report/summary from `reports/oty2`.
 
@@ -188,6 +189,8 @@ For WGV3 optical-message source sessions, after the standard OTY2 reading order,
 WGV3.3A audits whether optical messages used by WGV2/WGV3 can be reproduced by the automatic optical backbone. It does not revoke WGV2/WGV3; it separates automatic runtime messages from WGV1.4 human/multimodal posthoc visual constraints.
 
 Future sessions should inherit the repository historically, including failed or corrected work, but must preserve scope, provenance, and anti-leakage boundaries.
+
+For WGV3.6A / A1.7R follow-up sessions: 不得直接从 compact assembly 进入多假设关联；必须先检查 `vehicle-supported observation entity`，并保留正向车辆支持与负向背景排除的闭环证据。
 
 For optical timeline video review and manual override sessions, also read:
 
