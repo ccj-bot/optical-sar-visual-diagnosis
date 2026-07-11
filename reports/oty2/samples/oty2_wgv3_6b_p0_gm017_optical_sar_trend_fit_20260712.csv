@@ -1,0 +1,4 @@
+factor_id,trend_test,support_count,parameter,value,unit,calibration_metric,null_baseline,notes
+F5,optical_x_vs_sar_x_sign,36,sign_agreement_rate,0.805556,fraction,"same optical/SAR paired rows, offset frozen at P0 zero-offset frame-ratio hypothesis",SAR-only constant velocity sign,No holdout GT is used to choose time offset.
+F5,optical_width_vs_sar_range_sign,36,sign_agreement_rate,0.25,fraction,,SAR-only radial trend,Weak physical relation only; not direct center projection.
+F5,time_alignment,37,frozen_time_offset_sar_frames,0,sar_frame,P0 source uses software_sync_zero_offset_assumption,do_not_use_optical_trend,Exact timestamp metadata absent; do not tune offset on holdout.

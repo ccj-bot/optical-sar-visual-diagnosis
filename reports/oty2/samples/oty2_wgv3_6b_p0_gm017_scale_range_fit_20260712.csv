@@ -1,0 +1,7 @@
+factor_id,model,support_count,parameter,value,unit,calibration_metric,null_baseline,notes
+F4,constant_size,37,width_const_px,162.995568,px,mean_abs_width_residual=5.410329,constant_size,
+F4,constant_size,37,height_const_px,74.395297,px,mean_abs_height_residual=3.717755,constant_size,
+F4,range_only,37,"width_intercept,width_radial",192.720916;-0.067223,"px,px/radial_px",,constant_size,
+F4,range_only,37,"height_intercept,height_radial",97.270452;-0.051731,"px,px/radial_px",,constant_size,
+F4,range_plus_theta,37,"width_intercept,width_radial,width_theta",234.599774;-0.19516;-0.558657,"px,px/radial_px,px/deg",mean_size_residual_px=6.832091,constant_size_mean_residual_px=7.386659,Does not impose real car dimensions.
+F4,range_plus_theta,37,"height_intercept,height_radial,height_theta",90.126994;-0.029908;0.095292,"px,px/radial_px,px/deg",,,

@@ -1,0 +1,16 @@
+gate_id,status,evidence,notes
+PARALLEL_WORKTREE_ISOLATED,PASS,branch=feature/oty2-gm017-physical-factor-discovery;head=aba57096e6b38e33bfac4a6e68d6d00aa40ace5c;worktrees=D:/profile/research/optical-sar-visual-diagnosis               0b6f1c5 [feature/oty2-posthoc-mechanism-validation] | D:/profile/research/optical-sar-visual-diagnosis-gm017-physics aba5709 [feature/oty2-gm017-physical-factor-discovery],independent GM017 branch/worktree; live GM_RM019 worktree not checked out here
+CALIBRATION_GT_USAGE_EXPLICIT,PASS,control point table exists,GT allowed only in calibration/evaluation phases
+HOLDOUT_TARGET_GT_ISOLATED,PASS,validate-generate prediction rows declare target_gt_read=false,validate-generate implementation does not open paired GT
+CONTIGUOUS_BLOCK_SPLIT_VALID,PASS,cal=315-360;guard=361-370;holdout=371-394,"continuous SAR blocks, no random split"
+GUARD_GAP_PRESENT,PASS,361-370,10 SAR frames
+FACTOR_PARAMETERS_FROZEN,PASS,d29e5be1e20f0a443ca68ba7eb03fd2a7faf7f359cb689d99b0ff4a8ec3de363,frozen parameter CSV
+HOLDOUT_PREDICTIONS_FROZEN,PASS,c0186ffe0428177d809d7214e8f42b6786c8b68b134294865d74149fb773764d,frozen holdout prediction CSV
+FROZEN_REPLAY_IDENTICAL,PASS,PASS,verify-replay compares regenerated predictions to frozen prediction SHA
+F1_COMMON_MOTION,PASS,SUPPORTED,valid values are SUPPORTED/PARTIAL/REJECTED/INSUFFICIENT_EVIDENCE
+F2_BACKGROUND_STABILITY,PASS,SUPPORTED,
+F3_PART_VISIBILITY,PARTIAL,PARTIAL,"PARTIAL is acceptable as downgrade, not pass"
+F4_SCALE_RANGE_RELATION,PARTIAL,PARTIAL,
+F5_OPTICAL_SAR_TREND,PARTIAL,PARTIAL,trend cue downgraded unless independently timestamped
+GM_RM017_PHYSICAL_FACTOR_LIBRARY_READY,PARTIAL,supported=2;downgraded_or_rejected=3;evaluation_exists=True,"Not an automatic pass; library is a bounded factor study, not a final selector."
+GM_RM017_DYNAMIC_MEMBERSHIP_STAGE_READY,NOT_READY,final response membership/box selection explicitly out of scope,Next stage may consume factor candidates only after separate authorization.

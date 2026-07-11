@@ -1,0 +1,7 @@
+factor_id,model,support_count,parameter,value,unit,calibration_metric,null_baseline,notes
+F1,common_motion_linear_sar_center,37,x_intercept,-1267.792426,px,mean_residual_px=2.763623,static_mean_residual_px=164.41169,"GT center is a control point, not scattering center truth."
+F1,common_motion_linear_sar_center,37,x_slope_per_sar_frame,6.521801,px/frame,p75_residual_px=3.442171,constant position; previous frame; constant velocity compared in report,
+F1,common_motion_linear_sar_center,37,y_intercept,929.877321,px,max_residual_px=6.105982,,
+F1,common_motion_linear_sar_center,37,y_slope_per_sar_frame,0.035881,px/frame,mean_velocity_step_px=8.667294,,
+F1,common_motion_tolerance,37,same_motion_tolerance_px,24.279137,px,p90 residual + 20px guard,,"Used only as candidate tolerance, not final selector."
+F1,common_motion_tolerance,37,reappearance_spatial_tolerance_px,34.61651,px,p95 residual + 30px guard,,

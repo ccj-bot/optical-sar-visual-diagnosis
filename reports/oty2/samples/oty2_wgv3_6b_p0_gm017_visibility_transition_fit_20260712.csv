@@ -1,0 +1,5 @@
+factor_id,state_or_parameter,support_count,value,unit,calibration_metric,null_baseline,notes
+F3,visible_count,46,30,frames,GT-assisted component extraction inside expanded target box,response_missing_immediately_terminates,
+F3,weak_visible_count,46,7,frames,,allow_K_missing_without role checks,
+F3,missing_count,46,9,frames,max_missing_run=3,,"Missing means no minimum-confidence component near GT-assisted control region, not target absence truth."
+F3,allowed_short_missing_gap_frames,46,4,frames,calibrated from observed missing runs plus one-frame guard,terminate_on_missing,Candidate preservation only; not final identity.

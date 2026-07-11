@@ -1,0 +1,10 @@
+factor_id,background_group_id,support_count,parameter,value,unit,calibration_metric,null_baseline,notes
+F2,BG001,3,position_variance_px2,19.910424,px^2,frames=263;269;273,shape_only_or_brightness_only,Stable high-response group from N005 temporal non-vehicle window or other fixed lower-scene structure.
+F2,BG002,3,position_variance_px2,20.01787,px^2,frames=255;257;259,shape_only_or_brightness_only,Stable high-response group from N005 temporal non-vehicle window or other fixed lower-scene structure.
+F2,BG003,5,position_variance_px2,22.90952,px^2,frames=253;255;261;269;273,shape_only_or_brightness_only,Stable high-response group from N005 temporal non-vehicle window or other fixed lower-scene structure.
+F2,BG004,2,position_variance_px2,24.616771,px^2,frames=259;261,shape_only_or_brightness_only,Stable high-response group from N005 temporal non-vehicle window or other fixed lower-scene structure.
+F2,BG005,2,position_variance_px2,30.526722,px^2,frames=255;273,shape_only_or_brightness_only,Stable high-response group from N005 temporal non-vehicle window or other fixed lower-scene structure.
+F2,BG006,3,position_variance_px2,31.228674,px^2,frames=249;261;263,shape_only_or_brightness_only,Stable high-response group from N005 temporal non-vehicle window or other fixed lower-scene structure.
+F2,BG007,3,position_variance_px2,33.383802,px^2,frames=263;271;273,shape_only_or_brightness_only,Stable high-response group from N005 temporal non-vehicle window or other fixed lower-scene structure.
+F2,BG008,3,position_variance_px2,34.372554,px^2,frames=257;261;271,shape_only_or_brightness_only,Stable high-response group from N005 temporal non-vehicle window or other fixed lower-scene structure.
+F2,GLOBAL,443,static_position_variance_threshold_px2,57.536534,px^2,stable_group_count=71,shape_only;brightness_only,Shape is auxiliary; time-position stability is primary.
