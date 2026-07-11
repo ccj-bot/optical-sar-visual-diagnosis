@@ -1,0 +1,13 @@
+case_id,failure_type,object_id,sar_frame,reason_cn,provenance
+R1F0001,runtime_false_reject,BLIND_OBJECT_001,27,运行时拒绝或未判定 body_core_candidate;isolated_small_atom;unresolved_atom，但盲审认为有车辆部件支持；若 GT 关系接近目标，这是 R1 误拒候选。,eval_only_gt_assisted
+R1F0002,runtime_false_reject,BLIND_OBJECT_004,30,运行时拒绝或未判定 body_core_candidate;isolated_small_atom;unresolved_atom，但盲审认为有车辆部件支持；若 GT 关系接近目标，这是 R1 误拒候选。,eval_only_gt_assisted
+R1F0003,runtime_false_reject,BLIND_OBJECT_005,31,运行时拒绝或未判定 endpoint_hotspot_candidate;unresolved_atom，但盲审认为有车辆部件支持；若 GT 关系接近目标，这是 R1 误拒候选。,eval_only_gt_assisted
+R1F0004,runtime_false_reject,BLIND_OBJECT_020,79,运行时拒绝或未判定 body_core_candidate;unresolved_atom，但盲审认为有车辆部件支持；若 GT 关系接近目标，这是 R1 误拒候选。,eval_only_gt_assisted
+R1F0005,runtime_false_reject,BLIND_OBJECT_022,80,运行时拒绝或未判定 body_core_candidate;side_ridge_candidate;unresolved_atom，但盲审认为有车辆部件支持；若 GT 关系接近目标，这是 R1 误拒候选。,eval_only_gt_assisted
+R1F0006,runtime_false_reject,BLIND_OBJECT_024,81,运行时拒绝或未判定 body_core_candidate;isolated_small_atom;unresolved_atom，但盲审认为有车辆部件支持；若 GT 关系接近目标，这是 R1 误拒候选。,eval_only_gt_assisted
+R1F0007,runtime_false_reject,BLIND_OBJECT_025,81,运行时 background_like_runtime、盲审 background、GT 关系 near_gt_eval_only；保留为背景、未解或机制反例。,eval_only_gt_assisted
+R1F0008,runtime_false_accept,BLIND_OBJECT_040,263,运行时接受 endpoint_hotspot_candidate;unresolved_atom，但盲审为 unresolved；GT 关系 no_exact_gt_for_frame 只能作为事后解释，不能回写生成结果。,eval_only_gt_assisted
+R1F0009,runtime_false_reject,BLIND_OBJECT_043,271,运行时拒绝或未判定 body_core_candidate;endpoint_hotspot_candidate;isolated_small_atom;unresolved_atom，但盲审认为有车辆部件支持；若 GT 关系接近目标，这是 R1 误拒候选。,eval_only_gt_assisted
+R1F0010,runtime_false_reject,BLIND_OBJECT_044,272,运行时拒绝或未判定 body_core_candidate;endpoint_hotspot_candidate;isolated_small_atom;unresolved_atom，但盲审认为有车辆部件支持；若 GT 关系接近目标，这是 R1 误拒候选。,eval_only_gt_assisted
+R1F0011,runtime_false_reject,BLIND_OBJECT_045,273,运行时 unresolved_runtime、盲审 unresolved、GT 关系 overlaps_gt_eval_only；保留为背景、未解或机制反例。,eval_only_gt_assisted
+R1F0012,runtime_false_reject,BLIND_OBJECT_053,289,运行时拒绝或未判定 body_core_candidate;isolated_small_atom;side_ridge_candidate;unresolved_atom，但盲审认为有车辆部件支持；若 GT 关系接近目标，这是 R1 误拒候选。,eval_only_gt_assisted

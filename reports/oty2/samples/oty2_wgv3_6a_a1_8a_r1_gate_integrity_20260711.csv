@@ -1,0 +1,16 @@
+gate,status,evidence,provenance
+GENERATION_GT_ISOLATION_VALID,PASS,leakage audit checks all passed,runtime_safe
+POLARITY_LABEL_NOT_USED_IN_GENERATE,PASS,generate uses DISCOVERY_RUNTIME_FRAMES without positive/negative split,runtime_safe
+FROZEN_REPLAY_IDENTICAL,PASS,verify-replay compares frozen atom/role/extent/entity/lineage SHA,runtime_safe
+BLIND_OBJECT_REVIEW_FROZEN,PASS,blind rows=54; sha=daa79eaaae51d97abfe2bb1cc221026830dbae4a0873a5b8c11906a68435ed72,blind_visual_review
+BLIND_REVIEW_NOT_TEMPLATE_GENERATED,PASS,blind judgement was filled after opening blind sheets and varies by visible object evidence,blind_visual_review
+SUPPORT_PIXEL_EXTENT_VALID,PASS,extent_degeneracy_fixed_count=13; no centroid short-axis clamp used,runtime_safe
+PART_LINEAGE_RUNTIME_SAFE,PASS,nodes=202; edges=522; unique_edges=41,runtime_safe
+TEMPORAL_GATE_NOT_CIRCULAR,PASS,"G_temporal comes from persistent_part_track_id, not runtime class",runtime_safe
+POSITIVE_NEGATIVE_EVALUATION_UNBIASED,PARTIAL,false_reject=11; false_accept=1; labels loaded only in evaluate,eval_only_gt_assisted
+GT_ASSISTED_EXPLANATION_COMPLETE,PASS,gt-assisted eval rows=54,eval_only_gt_assisted
+VEHICLE_VS_OTHER_MECHANISM_CLOSED,PARTIAL,contrast rows=35; still local window only,eval_only_gt_assisted
+POINT_TO_STRUCTURE_R1_READY,PARTIAL,R1 fixes isolation and extent/lineage audits but remains local,eval_only_gt_assisted
+VEHICLE_SUPPORTED_OBSERVATION_READY_FOR_A1_7R2,NO,holdout is local and mechanism remains partial,eval_only_gt_assisted
+INTERMEDIATE_FRAME_BLIND_EVAL_PENDING,partially_completed,"12 deterministic holdout frames reviewed, not full scene",blind_visual_review
+GM_RM011_BLOCKED,true,R1 remains GM_RM019 only,eval_only_gt_assisted

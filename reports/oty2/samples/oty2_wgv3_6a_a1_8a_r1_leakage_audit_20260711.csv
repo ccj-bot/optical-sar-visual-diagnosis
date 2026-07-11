@@ -1,0 +1,7 @@
+check_id,layer,check_name,status,evidence,limitation_cn
+L001,generate,paired_gt_not_read_in_generate,PASS,generate call graph does not reference INPUTS['paired'],静态扫描不能形式化证明所有 Python 控制流，但冻结产物和主生成函数均被检查。
+L002,generate,polarity_label_not_used_in_generate,PASS,generate functions use neutral runtime frame list only,静态扫描不能形式化证明所有 Python 控制流，但冻结产物和主生成函数均被检查。
+L003,generate,physical_vehicle_id_not_used_in_generate,PASS,runtime generation has no vehicle identity parameter,静态扫描不能形式化证明所有 Python 控制流，但冻结产物和主生成函数均被检查。
+L004,generate,pair_for_frame_not_present,PASS,no PAIR_FOR_FRAME mapping exists in this R1 script,静态扫描不能形式化证明所有 Python 控制流，但冻结产物和主生成函数均被检查。
+L005,frozen_csv,forbidden_labels_absent_from_frozen_outputs,PASS,scanned frozen artifact values for GT/polarity/identity terms; audit columns such as polarity_used=false are allowed,静态扫描不能形式化证明所有 Python 控制流，但冻结产物和主生成函数均被检查。
+L006,blind,blind_pack_requires_opaque_ids,PASS,blind-pack assigns BLIND_FRAME/BLIND_OBJECT ids and does not write original frame ids to blind review CSVs,静态扫描不能形式化证明所有 Python 控制流，但冻结产物和主生成函数均被检查。
