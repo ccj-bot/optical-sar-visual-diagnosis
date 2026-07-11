@@ -1,0 +1,4 @@
+visual_id,category,source_comparison,physical_vehicle_id,interval_id,sar_frame,ignored_png_path,notes
+A15_VIS_01,P2_moves_to_stronger_response,P1_to_P2,PV_GM19_WHITE_SUV_NEAR_FIELD,WGV35A_PAIR_0204_TO_WGV35A_PAIR_0205,27,outputs/wgv3_6a_a1_5_20260711/a1_5_visual_audit_01_P2_moves_to_stronger_response.png,PNG is under ignored outputs/ and is not intended for commit.
+A15_VIS_02,P2_hurts_coverage,P1_to_P2,PV_GM19_WHITE_SUV_NEAR_FIELD,WGV35A_PAIR_0204_TO_WGV35A_PAIR_0205,31,outputs/wgv3_6a_a1_5_20260711/a1_5_visual_audit_02_P2_hurts_coverage.png,PNG is under ignored outputs/ and is not intended for commit.
+A15_VIS_03,P3_no_op,P2_to_P3,PV_GM19_WHITE_SUV_NEAR_FIELD,WGV35A_PAIR_0204_TO_WGV35A_PAIR_0205,27,outputs/wgv3_6a_a1_5_20260711/a1_5_visual_audit_03_P3_no_op.png,PNG is under ignored outputs/ and is not intended for commit.

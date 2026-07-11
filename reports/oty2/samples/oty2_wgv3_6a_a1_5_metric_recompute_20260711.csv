@@ -1,0 +1,12 @@
+metric_name,value,denominator_count,denominator_type,status,notes
+canvas_area,3078872,,2308x1334_canvas,PASS,Fixed SAR canvas area requested by prompt.
+static_fan_geometry_area,2628414,,static_fan_geometry_area,PASS,WGV3.6A uses this as local_search_ratio denominator.
+stable_nonzero_area,1860594,2628414,R2C_sampled_stable_nonzero_support_not_used_by_WGV36,DIAGNOSTIC_ONLY,Reported from R2C mask source inventory; not the WGV3.6A ratio denominator.
+original_record_level_p3_forward_target_visible_response_coverage,0.952958,4,P3_forward_target_endpoint_records,INVALID_FOR_INDEPENDENT_PROPAGATION,Computed only on future target anchor endpoints whose manual SAR box was read before output.
+original_record_level_p3_forward_target_masked_overlap_coverage,0.952958,4,P3_forward_target_endpoint_records,INVALID_FOR_INDEPENDENT_PROPAGATION,Same denominator and target-endpoint issue as visible_response_coverage.
+unique_non_anchor_visible_box_coverage,not_tested,72,unique_non_anchor_p3_sar_frames,NOT_TESTED,No independent manual/eval visible box exists in the WGV3.6A manifest for non-anchor middle frames.
+unique_non_anchor_mask_intersection_coverage,not_tested,72,unique_non_anchor_p3_sar_frames,NOT_TESTED,Original masked coverage multiplies target endpoint coverage by fan intersection; no middle-frame eval mask target is available.
+unique_non_anchor_region_area_ratio_mean,0.004198,72,unique_non_anchor_p3_sar_frames_over_static_fan,PASS,Each unique non-anchor frame counted once; duplicate directions use the smaller observed P3 area.
+unique_non_anchor_region_area_ratio_median,0.004015,72,unique_non_anchor_p3_sar_frames_over_static_fan,PASS,Area numerator is absolute P3 propagated region pixels divided by static fan area.
+unique_non_anchor_center_distance_to_eval_box,not_tested,72,unique_non_anchor_p3_sar_frames,NOT_TESTED,No independent middle-frame eval box center is available.
+unique_non_anchor_search_ratio_median,0.020842,72,unique_non_anchor_p3_sar_frames_over_static_fan,PASS,Search denominator is static fan geometry for all variants.
