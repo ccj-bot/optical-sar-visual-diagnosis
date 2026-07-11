@@ -1,0 +1,47 @@
+sar_frame,old_family_count,new_family_count,old_member_count,new_member_count,overmerged_old_family_ids,split_new_family_ids,old_spatially_distinct_members_in_same_family,new_spatially_distinct_members_in_same_family,old_arbitrary_representative_bbox,new_family_boundary_status,change_reason_cn
+27,1,5,6,6,R21F00001,R21R1F00001;R21R1F00002;R21R1F00003;R21R1F00004;R21R1F00005,0,0,"1006,1131,1018,1137",common_core_only:1;single_consensus_bbox:4,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+28,1,4,5,5,R21F00002,R21R1F00006;R21R1F00007;R21R1F00008;R21R1F00009,0,0,"1006,1131,1024,1143",common_core_only:1;single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+29,1,3,4,4,R21F00003,R21R1F00010;R21R1F00011;R21R1F00012,0,0,"1042,1131,1192,1197",common_core_only:1;single_consensus_bbox:2,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+30,1,5,8,8,R21F00004,R21R1F00013;R21R1F00014;R21R1F00015;R21R1F00016;R21R1F00017,0,0,"1042,1131,1193,1197",common_core_only:2;single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+31,1,3,8,8,R21F00005,R21R1F00018;R21R1F00019;R21R1F00020,0,0,"1042,1135,1114,1243",common_core_only:1;single_consensus_bbox:2,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+32,1,6,8,8,R21F00006,R21R1F00021;R21R1F00022;R21R1F00023;R21R1F00024;R21R1F00025;R21R1F00026,1,0,"1048,1165,1072,1177",multiple_valid_bbox_variants:1;single_consensus_bbox:5,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+34,1,7,8,8,R21F00007,R21R1F00027;R21R1F00028;R21R1F00029;R21R1F00030;R21R1F00031;R21R1F00032;R21R1F00033,1,0,"1018,1141,1042,1159",common_core_only:1;single_consensus_bbox:6,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+39,1,5,8,8,R21F00008,R21R1F00034;R21R1F00035;R21R1F00036;R21R1F00037;R21R1F00038,1,0,"1048,1165,1192,1276",common_core_only:2;single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+40,2,5,6,6,R21F00009,R21R1F00039;R21R1F00040;R21R1F00041;R21R1F00042;R21R1F00043,1,0,"1054,1207,1108,1237 | 994,1135,1090,1159",common_core_only:1;single_consensus_bbox:4,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+46,1,1,1,1,,R21R1F00044,0,0,"1030,1135,1193,1255",single_consensus_bbox:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+52,1,2,4,4,R21F00012,R21R1F00045;R21R1F00046,0,0,"1024,1135,1193,1189",common_core_only:1;single_consensus_bbox:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+60,2,2,2,2,,R21R1F00047;R21R1F00048,0,0,"1126,1207,1186,1243 | 1162,1249,1192,1267",single_consensus_bbox:2,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+77,1,6,8,8,R21F00015,R21R1F00049;R21R1F00050;R21R1F00051;R21R1F00052;R21R1F00053;R21R1F00054,0,0,"1146,1133,1266,1163",common_core_only:1;single_consensus_bbox:5,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+78,1,6,7,7,R21F00016,R21R1F00055;R21R1F00056;R21R1F00057;R21R1F00058;R21R1F00059;R21R1F00060,1,0,"1146,1247,1164,1271",multiple_valid_bbox_variants:1;single_consensus_bbox:5,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+79,1,6,8,8,R21F00017,R21R1F00061;R21R1F00062;R21R1F00063;R21R1F00064;R21R1F00065;R21R1F00066,1,0,"1146,1247,1164,1271",common_core_only:2;single_consensus_bbox:4,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+80,1,6,8,8,R21F00018,R21R1F00067;R21R1F00068;R21R1F00069;R21R1F00070;R21R1F00071;R21R1F00072,1,0,"1146,1133,1266,1163",common_core_only:1;single_consensus_bbox:5,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+81,1,4,5,5,R21F00019,R21R1F00073;R21R1F00074;R21R1F00075;R21R1F00076,0,0,"1176,1181,1260,1271",common_core_only:1;single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+212,1,1,3,3,R21F00020,R21R1F00077,0,0,"1005,1210,1023,1240",common_core_only:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+213,1,3,4,4,R21F00021,R21R1F00078;R21R1F00079;R21R1F00080,0,0,"1005,1210,1023,1246",multiple_valid_bbox_variants:1;single_consensus_bbox:2,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+216,1,1,3,3,R21F00022,R21R1F00081,0,0,"1017,1216,1035,1240",common_core_only:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+220,1,2,2,2,R21F00023,R21R1F00082;R21R1F00083,0,0,"1011,1126,1132,1240",single_consensus_bbox:2,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+224,1,3,7,7,R21F00024,R21R1F00084;R21R1F00085;R21R1F00086,0,0,"1005,1126,1132,1234",common_core_only:1;multiple_valid_bbox_variants:1;single_consensus_bbox:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+227,1,3,4,4,R21F00025,R21R1F00087;R21R1F00088;R21R1F00089,1,0,"1017,1126,1132,1234",multiple_valid_bbox_variants:1;single_consensus_bbox:2,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+228,1,2,4,4,R21F00026,R21R1F00090;R21R1F00091,0,0,"1023,1126,1132,1240",common_core_only:1;single_consensus_bbox:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+238,1,2,2,2,R21F00027,R21R1F00092;R21R1F00093,0,0,"1051,1135,1177,1255",single_consensus_bbox:2,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+239,1,3,3,3,R21F00028,R21R1F00094;R21R1F00095;R21R1F00096,0,0,"1051,1135,1177,1255",single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+243,1,3,3,3,R21F00029,R21R1F00097;R21R1F00098;R21R1F00099,0,0,"1063,1135,1195,1249",single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+250,1,3,3,3,R21F00030,R21R1F00100;R21R1F00101;R21R1F00102,0,0,"1099,1135,1201,1261",single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+259,1,3,7,7,R21F00031,R21R1F00103;R21R1F00104;R21R1F00105,0,0,"1069,1135,1189,1255",common_core_only:1;multiple_valid_bbox_variants:1;single_consensus_bbox:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+260,1,3,7,7,R21F00032,R21R1F00106;R21R1F00107;R21R1F00108,0,0,"1075,1135,1218,1195",common_core_only:2;single_consensus_bbox:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+262,1,1,1,1,,R21R1F00109,0,0,"1075,1135,1218,1267",single_consensus_bbox:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+263,1,1,1,1,,R21R1F00110,0,0,"1069,1135,1218,1261",single_consensus_bbox:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+269,1,5,8,8,R21F00035,R21R1F00111;R21R1F00112;R21R1F00113;R21R1F00114;R21R1F00115,0,0,"1107,1138,1245,1246",common_core_only:1;single_consensus_bbox:4,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+270,1,4,8,8,R21F00036,R21R1F00116;R21R1F00117;R21R1F00118;R21R1F00119,0,0,"1107,1138,1263,1240",common_core_only:1;single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+271,1,3,8,8,R21F00037,R21R1F00120;R21R1F00121;R21R1F00122,0,0,"1107,1138,1287,1240",common_core_only:2;single_consensus_bbox:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+272,1,6,8,8,R21F00038,R21R1F00123;R21R1F00124;R21R1F00125;R21R1F00126;R21R1F00127;R21R1F00128,1,0,"1107,1138,1251,1240",common_core_only:1;multiple_valid_bbox_variants:1;single_consensus_bbox:4,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+273,2,3,5,5,R21F00039;R21F00040,R21R1F00129;R21R1F00130;R21R1F00131,0,0,"1115,1140,1259,1266 | 1259,1140,1289,1152",common_core_only:1;single_consensus_bbox:2,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+276,1,4,8,8,R21F00041,R21R1F00132;R21R1F00133;R21R1F00134;R21R1F00135,0,0,"1115,1140,1271,1242",common_core_only:1;single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+278,1,3,4,4,R21F00042,R21R1F00136;R21R1F00137;R21R1F00138,1,0,"1121,1140,1277,1236",multiple_valid_bbox_variants:1;single_consensus_bbox:2,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+279,1,4,5,5,R21F00043,R21R1F00139;R21R1F00140;R21R1F00141;R21R1F00142,0,0,"1115,1140,1283,1236",multiple_valid_bbox_variants:1;single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+280,1,3,4,4,R21F00044,R21R1F00143;R21R1F00144;R21R1F00145,0,0,"1115,1140,1277,1236",multiple_valid_bbox_variants:1;single_consensus_bbox:2,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+281,1,3,8,8,R21F00045,R21R1F00146;R21R1F00147;R21R1F00148,0,0,"1115,1140,1283,1236",common_core_only:2;single_consensus_bbox:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+284,1,5,6,6,R21F00046,R21R1F00149;R21R1F00150;R21R1F00151;R21R1F00152;R21R1F00153,0,0,"1115,1140,1301,1236",multiple_valid_bbox_variants:1;single_consensus_bbox:4,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+288,1,4,5,5,R21F00047,R21R1F00154;R21R1F00155;R21R1F00156;R21R1F00157,0,0,"1146,1138,1308,1228",multiple_valid_bbox_variants:1;single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+289,1,5,8,8,R21F00048,R21R1F00158;R21R1F00159;R21R1F00160;R21R1F00161;R21R1F00162,1,0,"1146,1138,1308,1228",common_core_only:2;single_consensus_bbox:3,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。
+290,1,3,7,7,R21F00049,R21R1F00163;R21R1F00164;R21R1F00165,0,0,"1146,1138,1314,1228",common_core_only:2;single_consensus_bbox:1,R2.1-R1 不继承旧 family 身份，按 response-box 成员两两空间一致性重建族边界。

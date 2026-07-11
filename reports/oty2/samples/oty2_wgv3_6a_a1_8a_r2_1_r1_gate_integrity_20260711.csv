@@ -1,0 +1,28 @@
+gate,status,evidence,provenance
+R2_1_FROZEN_ATOMS_UNCHANGED,PASS,R2.1 frozen manifest SHA checks were compared for generation inputs,frozen_input_replay
+R2_1_FROZEN_CORE_HYPOTHESES_UNCHANGED,PASS,core hypotheses are read-only inputs,frozen_input_replay
+TARGET_GT_ISOLATION_VALID,PASS,generate reads frozen response boxes/core/atoms/lineage/graph and SAR gray only; GT is evaluate-only,generation_boundary
+SOURCE_ANCHOR_CONDITIONED_GENERATION,true,R2.1 source shell was already source-anchor-conditioned; R2.1-R1 starts after response boxes,boundary_statement
+SOURCE_ANCHOR_RUNTIME_AVAILABILITY_EXPLICIT,PASS,source-anchor-conditioned generation is explicitly not an automatic source-anchor-free start,boundary_statement
+SOURCE_ANCHOR_FREE_AUTOMATIC_START_NOT_PROVEN,true,automatic anchor-free startup is outside R2.1-R1,boundary_statement
+EMPTY_OPTIONAL_FIELDS_NOT_USED_FOR_GROUPING,PASS,empty strong_optional equality is recorded as no_optional_evidence and never a valid pair relation,family_builder
+HYPOTHESIS_FAMILY_GROUPING_VALID,PASS,new families=165,family_builder
+FAMILY_PAIRWISE_SPATIAL_CONSISTENCY_VALID,PASS,invalid in-family pairs=0,family_builder
+NO_TRANSITIVE_BRIDGE_OVERMERGE,PASS,transitive bridge splits=83,family_builder
+SPATIALLY_DISTINCT_MEMBERS_NOT_GROUPED,PASS,spatially_distinct in-family pairs=0,family_builder
+FAMILY_REPRESENTATIVE_BBOX_VALID,PASS,boundary statuses single/multi/core/unresolved=117/12/36/0,family_boundary
+FAMILY_BOUNDARY_UNCERTAINTY_EXPLICIT,PASS,"multiple variants/common-core-only/unresolved are explicit states, not arbitrary first boxes",family_boundary
+RAW_REVIEW_FAMILY_TARGET_VALID,PASS,raw judgement is family-level and uses R2.1-R1 boundary semantics,blind_review
+ASSISTED_REVIEW_FAMILY_TARGET_VALID,PASS,assisted judgement is family-level and explanatory,blind_review
+ASSISTED_NOT_USED_AS_TRUTH,PASS,assisted review is not read by generate and only interpreted post-freeze,blind_review
+MEMBER_LEVEL_GT_EVALUATION_VALID,PASS,member eval rows=250,eval_only
+FAMILY_LEVEL_GT_EVALUATION_VALID,PASS,family eval rows=165,eval_only
+NO_ARBITRARY_MEMBER_USED_FOR_FAMILY_EVAL,PASS,family conservative metrics are blank unless status is single_consensus_bbox,eval_only
+FAMILY_TEMPORAL_GEOMETRY_VALID,PASS,sparse diagnostic family correspondence rows=594,diagnostic_temporal
+SPARSE_LINEAGE_SCOPE_EXPLICIT,PASS,"output is sparse_diagnostic_family_correspondence, not runtime tracking",diagnostic_temporal
+WEAK_RESPONSE_TRUNCATION_AUDITED,PASS,top-k audit rows=2368,audit_only
+TOP_K_NOT_ASSUMED_SAFE,PASS,TOP_K_WEAK_RESPONSE_RISK=HIGH,audit_only
+FROZEN_REPLAY_IDENTICAL,PASS,corrected_families:PASS; family_members:PASS; family_pairwise_integrity:PASS; family_boundaries:PASS; sparse_family_temporal_edges:PASS; topk_component_drop_audit:PASS,frozen_replay
+CORE_RESPONSE_BBOX_R2_1_R1_READY,PARTIAL,"integrity repair is complete only as posthoc bbox-family object, not runtime selector",stage_readiness
+VEHICLE_SUPPORTED_OBSERVATION_READY_FOR_A1_7R2,NO,R2.1-R1 is not an A1.7R2 runtime contract,stage_boundary
+GM_RM011_BLOCKED,true,GM_RM011 remains blocked and is outside this task,stage_boundary
