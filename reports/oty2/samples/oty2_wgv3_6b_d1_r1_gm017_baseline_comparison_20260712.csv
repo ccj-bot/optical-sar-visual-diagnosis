@@ -1,0 +1,8 @@
+model_id,diagnosis_window_frames,center_error_mean_px,center_error_median_px,center_error_p90_px,center_error_max_px,cumulative_error_px,velocity_error_mean_px,role
+D1_NO_OBSERVATION_UPDATE_BASELINE,24,71.0202,69.812087,101.088271,113.678915,1704.484805,9.357032,ablation_without_current_observation_update
+D1_ORIGINAL_RECURSIVE_OBSERVATION_UPDATED,24,17.53489,19.74117,28.354382,32.889737,420.837372,8.564724,original_d1_recursive_current_sar_observation_updated_control
+D1_R1_ALL_ASSOCIATED_TRACKS,24,8.79039,9.142987,11.782611,15.647391,210.96937,8.662395,d1_r1_policy_a_all_associated_tracks
+D1_R1_STRUCTURE_CONSISTENT_ONLY,24,8.90563,9.306458,12.156289,15.326167,213.735128,8.649488,d1_r1_policy_c_strict_structure_admission
+D1_R1_TEMPORALLY_SUPPORTED_ONLY,24,8.959031,9.304193,11.753662,15.436587,215.016737,8.653362,d1_r1_policy_b_temporal_support_admission
+P0_ABSOLUTE_FRAME_LINEAR_BASELINE,24,6.222823,5.514586,10.891643,13.316413,149.347762,8.641183,p0_absolute_frame_linear_baseline
+P0_STATIC_CENTER_BASELINE,24,148.70794,144.278798,210.68961,220.281051,3568.99057,9.450803,p0_static_state_360_baseline

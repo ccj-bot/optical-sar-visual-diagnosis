@@ -1,0 +1,27 @@
+parameter_name,parameter_value,source,frozen_before_eval,gt_tuned
+constant_width_px,162.995568,P0 frozen scale parameter reused only for ROI size,true,false
+constant_height_px,74.395297,P0 frozen scale parameter reused only for ROI size,true,false
+x_intercept,-1267.792426,P0 absolute-frame linear baseline only,true,false
+x_slope,6.521801,P0 absolute-frame linear baseline only,true,false
+y_intercept,929.877321,P0 absolute-frame linear baseline only,true,false
+y_slope,0.035881,P0 absolute-frame linear baseline only,true,false
+same_motion_tolerance_px,24.279137,P0 loose motion-shell tolerance; not proof,true,false
+response_prediction_tolerance_px,36.279137,D1-R1 runtime constant before diagnosis-window evaluation,true,false
+motion_consistency_tolerance_px,38.279137,D1-R1 runtime constant before diagnosis-window evaluation,true,false
+relative_structure_tolerance_px,24.279137,P0 same-motion tolerance reused as strict relative-structure gate,true,false
+background_match_tolerance_px,10.0,Conservative fixed-coordinate background association radius,true,false
+background_conflict_tolerance_px,12.0,Conservative response/background conflict radius,true,false
+static_position_variance_threshold_px2,57.536534,P0 background variance threshold reused as audit reference,true,false
+background_recurrence_min_unique_frames,2,Two different SAR frames only support recurrence,true,false
+static_background_candidate_min_unique_frames,3,Static candidate requires at least three unique frames,true,false
+static_background_supported_min_unique_frames,5,Supported static background requires longer unique-frame support,true,false
+temporal_support_min_unique_frames,2,Temporal support requires more than one SAR frame,true,false
+same_motion_min_consecutive_frames,3,Same-motion support requires three current consecutive support frames,true,false
+reappearance_provisional_support_frames,2,First post-missing hit cannot become supported in the same frame,true,false
+reappearance_confirm_support_frames,3,Confirmed reappearance requires consecutive post-hit support,true,false
+allowed_missing_gap_frames,8,D1-R1 track-specific termination gap,true,false
+target_gain_all_base,0.24,A policy gain fixed before evaluation,true,false
+target_gain_temporal_base,0.20,B policy gain fixed before evaluation,true,false
+target_gain_structure_base,0.16,C policy gain fixed before evaluation,true,false
+target_gain_per_track,0.02,Small per-track gain increment fixed before evaluation,true,false
+target_gain_max,0.45,Maximum correction gain fixed before evaluation,true,false

@@ -1,0 +1,4 @@
+admission_policy,model_id,diagnosis_window_frames,center_error_mean_px,center_error_p90_px,center_error_max_px,avg_eligible_track_count,no_observation_fallback_frames,admission_rejection_distribution,interpretation
+ALL_ASSOCIATED_TRACKS,D1_R1_ALL_ASSOCIATED_TRACKS,24,8.79039,11.782611,15.647391,6.970588,0,,宽准入基线，检验语义修复后是否仍由大量局部响应推动状态。
+TEMPORALLY_SUPPORTED_ONLY,D1_R1_TEMPORALLY_SUPPORTED_ONLY,24,8.959031,11.753662,15.436587,5.911765,0,state=reappearance_candidate=36,平均有效轨迹5.911765条，用于判断更严格准入是否降低异常修正。
+STRUCTURE_CONSISTENT_ONLY,D1_R1_STRUCTURE_CONSISTENT_ONLY,24,8.90563,12.156289,15.326167,5,1,state=reappearance_candidate=31;state=reappearance_candidate+strict_gate_fail=5;state=reappearance_provisionally_supported=22;state=same_motion_candidate+strict_gate_fail=9,平均有效轨迹5条，用于判断更严格准入是否降低异常修正。
