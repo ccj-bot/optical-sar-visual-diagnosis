@@ -1234,7 +1234,7 @@ def verify_replay() -> None:
     if REPLAY_DIR.exists():
         shutil.rmtree(REPLAY_DIR)
     replay_outputs = {key: REPLAY_DIR / path.name for key, path in OUTPUTS.items()}
-    replay_visual_dir = REPLAY_DIR / "visual_review"
+    replay_visual_dir = VISUAL_DIR
     run_generation(replay_outputs, replay_visual_dir)
     results = []
     for key in CORE_GENERATION_KEYS:
