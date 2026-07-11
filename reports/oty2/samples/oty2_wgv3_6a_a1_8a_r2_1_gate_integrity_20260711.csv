@@ -1,0 +1,29 @@
+gate,status,evidence,provenance
+GENERATION_GT_ISOLATION_VALID,PASS,"generate reads SAR gray, A1.7R source shell, static geometry, embedded runtime frame list only",runtime_safe
+R1_FROZEN_ATOMS_NOT_USED_IN_R2_1_GENERATE,PASS,no R1 atom/role/lineage CSV is read by generate,runtime_safe
+CAUSAL_ATOM_REGENERATION_USED,PASS,regenerated atoms=184,runtime_safe
+SOURCE_SHELL_CAUSALITY_VALID,PASS,selected source frame is max source<=sar frame or fallback,runtime_safe
+SOURCE_SHELL_STALENESS_AUDITED,PASS,high risk rows=35,runtime_safe
+CAUSAL_REGENERATION_DELTA_AUDITED,PASS,delta rows=11,eval_only
+SUPPORT_PIXEL_METRICS_VALID,PASS,support metric rows=434,runtime_safe
+ATOM_GRAPH_USED_FOR_CORE_GENERATION,PASS,multi-atom cores reference accepted graph edge ids,runtime_safe
+CORE_SUBGRAPH_CONNECTED,PASS,core rows=250,runtime_safe
+ISOLATED_ATOM_NOT_GLOBAL_VETO,PASS,single/optional isolated atoms do not globally reject other connected cores,runtime_safe
+NEARBY_BACKGROUND_NOT_GLOBAL_VETO,PASS,nearby_background is separated from core dominance,runtime_safe
+BACKGROUND_DOMINANCE_EXPLICIT,PASS,background counterexamples=46,runtime_safe
+OPTIONAL_MEMBERSHIP_WHOLE_CORE_AWARE,PASS,optional relation is checked against all core atoms,runtime_safe
+OPTIONAL_MEMBERSHIP_LINEAGE_AWARE,PASS,shared-lineage include rows=0; lineage rule evaluated before proximity fallback,runtime_safe
+SPATIAL_PROXIMITY_NOT_AUTO_INCLUDE,PASS,spatial-only relations remain uncertain,runtime_safe
+VEHICLE_PART_BOX_STATE_ACTIVE,PASS,part-only boxes=37,runtime_safe
+HYPOTHESIS_FAMILY_GROUPING_VALID,PASS,families=49,runtime_safe
+DUPLICATE_BOXES_NOT_DOUBLE_COUNTED,PASS,response boxes are grouped into family ids before family-level eval,runtime_safe
+RAW_REVIEW_OBJECT_SPECIFIC,PASS,unique raw reason ratio=1,blind_visual_review
+ASSISTED_REVIEW_OBJECT_SPECIFIC,PASS,unique assisted reason ratio=1,blind_visual_review
+RAW_EVIDENCE_PRIMARY_FOR_ERROR_TAXONOMY,PASS,"error taxonomy starts from raw judgement, assisted is separate",eval_only
+ASSISTED_NOT_USED_AS_TRUTH,PASS,assisted judgement is mechanism interpretation only,blind_visual_review
+METRIC_AUXILIARY_COORDINATE_VALID,PASS,max metric consistency error=0,runtime_safe
+FAMILY_TEMPORAL_GRAPH_NONSELECTIVE,PASS,family temporal edges=50,runtime_safe
+FROZEN_REPLAY_IDENTICAL,PASS,verify-replay compares all R2.1 frozen generation artifacts,runtime_safe
+CORE_RESPONSE_BBOX_R2_1_READY,PARTIAL,family-level causal bbox audit exists but remains local and posthoc-validated,eval_only
+VEHICLE_SUPPORTED_OBSERVATION_READY_FOR_A1_7R2,NO,R2.1 still audit-only; no selector/final annotation/runtime contract,eval_only
+GM_RM011_BLOCKED,true,GM_RM011 not executed,eval_only
