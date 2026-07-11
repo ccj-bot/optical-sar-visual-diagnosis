@@ -1,0 +1,2 @@
+sar_frame,position_x,position_y,velocity_x,velocity_y,position_uncertainty,velocity_uncertainty,last_update_source,last_observation_correction,response_track_count,initialization_source,p0_reinterpretation
+360,1081.56,941.827,9.037,-1.9795,36.418706,6,state_360_from_frozen_calibration_control_point,0,11,reports\oty2\samples\oty2_wgv3_6b_p0_gm017_calibration_control_points_20260712.csv,state_360_only;absolute_frame_linear_fit_baseline_only

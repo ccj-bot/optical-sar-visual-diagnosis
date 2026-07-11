@@ -1,0 +1,5 @@
+model_id,holdout_frames,center_error_mean_px,center_error_median_px,center_error_p90_px,cumulative_error_px,velocity_error_mean_px,role
+D1_NO_OBSERVATION_UPDATE_BASELINE,24,71.0202,69.812087,101.088271,1704.484805,,ablation_without_current_observation_update
+D1_RECURSIVE_OBSERVATION_UPDATED,24,17.53489,19.74117,28.354382,420.837372,8.564724,recursive_current_sar_observation_updated_model
+P0_ABSOLUTE_FRAME_LINEAR_BASELINE,24,6.222823,5.514586,10.891643,149.347762,,p0_absolute_frame_baseline
+P0_STATIC_CENTER_BASELINE,24,148.70794,144.278798,210.68961,3568.99057,,p0_static_state_360_baseline
