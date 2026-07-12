@@ -1,0 +1,13 @@
+field,status,value,source,consequence
+radar_origin_in_image,AVAILABLE_AS_FAN_CENTER,"1154.0,1330.6",configs\scene_config.yaml,local pixel range axis can be defined from fan center to GT center
+pixel_to_range_meter_mapping,UNRESOLVED,,not_found_in_repo_or_config,true range_m fields are NOT_EVALUABLE
+pixel_to_azimuth_meter_mapping,UNRESOLVED,,not_found_in_repo_or_config,true azimuth_m fields are NOT_EVALUABLE
+range_axis_direction,AVAILABLE_AS_LOCAL_PIXEL_AXIS,fan_center_to_gt_center_per_frame,configs\scene_config.yaml,pixel-domain local range offsets are available
+azimuth_axis_direction,AVAILABLE_AS_LOCAL_PIXEL_AXIS,perpendicular_to_local_range_axis,configs\scene_config.yaml,pixel-domain local azimuth offsets are available
+image_projection_type,UNRESOLVED,,not_found_in_repo_or_config,absolute metric physical claims blocked
+sar_resolution_range_m,UNRESOLVED,,not_found_in_repo_or_config,resolution-corrected extent is NOT_EVALUABLE
+sar_resolution_azimuth_m,UNRESOLVED,,not_found_in_repo_or_config,resolution-corrected extent is NOT_EVALUABLE
+mask_definition,UNRESOLVED_ZERO_VALUE_PROXY_ONLY,image_pixel_value==0,SAR PNG observation,mask censoring is proxy-only
+gt_orientation_source,UNRESOLVED_AXIS_ALIGNED_BBOX_ONLY,no_vehicle_heading_field,reports\oty2\samples\oty2_wgv3_5a_paired_annotations_20260710.csv,front/rear and long/short axes are storage-axis tests
+vehicle_dimension_metadata,UNRESOLVED_DATASET_CONDITIONED_GT_STATS_ONLY,,reports\oty2\samples\oty2_wgv3_5a_paired_annotations_20260710.csv,vehicle body size reference is dataset-conditioned
+p0_px_to_m_convention,P0_CONVENTION_ONLY_NOT_VALIDATED_METRIC_MAPPING,0.03,reports\oty2\samples\oty2_wgv3_6b_p0_gm017_frozen_factor_parameters_20260712.csv,p0_convention_m columns are not true meters

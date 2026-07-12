@@ -1,0 +1,7 @@
+reference_id,source,count,min_px,q10_px,median_px,q90_px,max_px,median_m,median_p0_convention_m,median_p0_convention_m2,metric_status,notes
+gt_width_px,dataset_conditioned_gt_statistics,72,143.982,152.452,165.5385,179.4448,193.223,,4.966155,,NOT_EVALUABLE_TRUE_METERS,GT axis-aligned bbox statistics; not external vehicle dimension metadata.
+gt_height_px,dataset_conditioned_gt_statistics,72,64.484,68.7212,74.6415,80.5684,84.468,,2.239245,,NOT_EVALUABLE_TRUE_METERS,GT axis-aligned bbox statistics; not external vehicle dimension metadata.
+gt_area_px2,dataset_conditioned_gt_statistics,72,9772.179112,10786.125717,12509.42252,13586.907506,16012.969679,,,11.25848,NOT_EVALUABLE_TRUE_METERS,GT axis-aligned bbox statistics; not external vehicle dimension metadata.
+gt_aspect_ratio,dataset_conditioned_gt_statistics,72,1.864858,2.041849,2.232012,2.434675,2.658269,,,,NOT_EVALUABLE_TRUE_METERS,GT axis-aligned bbox statistics; not external vehicle dimension metadata.
+gt_projected_range_extent_px,dataset_conditioned_gt_statistics,72,71.610619,84.990636,122.50185,151.691442,167.442046,,3.675056,,NOT_EVALUABLE_TRUE_METERS,GT axis-aligned bbox statistics; not external vehicle dimension metadata.
+gt_projected_azimuth_extent_px,dataset_conditioned_gt_statistics,72,146.663196,165.080642,178.373801,189.76825,208.858421,,5.351214,,NOT_EVALUABLE_TRUE_METERS,GT axis-aligned bbox statistics; not external vehicle dimension metadata.

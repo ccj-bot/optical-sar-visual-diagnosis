@@ -1,0 +1,7 @@
+failure_id,failure_type,severity,evidence,interpretation
+E0_METRIC_MAPPING_FAILURE,metric_mapping_failure,high,pixel_to_range_meter_mapping=UNRESOLVED; pixel_to_azimuth_meter_mapping=UNRESOLVED; sar_resolution_m=UNRESOLVED,True metric-scale physical separability cannot be claimed.
+E0_GT_ORIENTATION_UNRESOLVED,gt_physical_size_inconsistency,medium,max_rotation_principal_axis_delta_mean=177.511364,GT has axis-aligned boxes but no vehicle heading; front/rear and rotation tests remain storage-axis diagnostics.
+E0_MASK_DEFINITION_UNRESOLVED,mask_censoring,medium,max_gt_zero_proxy_contact=0,Zero-valued pixels are only a proxy; mask-censored extents are not reliable metric extents.
+E0_HARD_NEGATIVE_CONFUSION,hard_negative_scale_confusion,high,confusing_controls=known_non_vehicle_same_area;linear_structure_background_same_area;strong_scatterer_background_same_area;near_background_same_area;far_background_same_area,Known non-vehicle/background controls can approach vehicle-region energy or occupancy.
+E0_ABSOLUTE_SCALE_NOT_DISCRIMINATIVE,absolute_scale_not_discriminative,high,NOT_EVALUABLE,Absolute scale adds no evaluable discriminative value without an independent meter mapping.
+E0_VEHICLE_NONVEHICLE_NOT_SEPARABLE,vehicle_nonvehicle_not_separable,high,hard_negative/background controls and unresolved meter/mask/orientation gates prevent a supported separability claim,Do not promote high GT-region energy into a stable SAR vehicle physical mechanism.

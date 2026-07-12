@@ -1,0 +1,6 @@
+ablation_group,feature_name,vehicle_mean,background_mean,contrast_effect_size,status,adds_discriminative_value,notes
+PIXEL_ONLY,mean_energy,50.413749,38.840211,0.855452,EVALUATED,LIMITED,Pixel-domain contrast only; same-area backgrounds are included.
+PIXEL_ONLY,high_energy_pixel_fraction,0.232545,0.10064,1.611219,EVALUATED,LIMITED,Pixel-domain contrast only; same-area backgrounds are included.
+PIXEL_ONLY,range_energy90_width_px,67.558378,64.593946,0.123117,EVALUATED,NOT_SUPPORTED,Pixel-domain contrast only; same-area backgrounds are included.
+GT_NORMALIZED,range_energy90_width_px_div_gt_projected_range_extent_px,0.572852,0.546133,0.13828,EVALUATED,NOT_SUPPORTED,Relative-to-GT normalization avoids true meter claims.
+METRIC_PHYSICAL_SCALE,true_range_m_true_azimuth_m_resolution_corrected_extent,,,,NOT_EVALUABLE,NOT_EVALUABLE,No reliable pixel-to-meter or SAR resolution mapping found; P0 0.03 remains a convention only.
