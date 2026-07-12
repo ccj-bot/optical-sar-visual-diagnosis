@@ -1,0 +1,4 @@
+fold_strategy,potential_group_count,potential_sample_count,min_group_size,max_group_size,same_pair_cross_fold_violation,holdout_fold_count,failed_fold_count,run_status,blocked_reason
+leave_one_gt_pair,10,57,2,8,false,0,0,not_run_absolute_scale_unresolved,"no reliable raw SAR physical coordinate axis, pulse-to-PNG calibration, chirp bandwidth, FFT/grid, or display resize/crop provenance recovered"
+leave_one_sar_frame,10,57,2,8,false,0,0,not_run_absolute_scale_unresolved,"no reliable raw SAR physical coordinate axis, pulse-to-PNG calibration, chirp bandwidth, FFT/grid, or display resize/crop provenance recovered"
+leave_one_physical_vehicle,2,57,27,30,false,0,0,not_run_absolute_scale_unresolved,"no reliable raw SAR physical coordinate axis, pulse-to-PNG calibration, chirp bandwidth, FFT/grid, or display resize/crop provenance recovered"

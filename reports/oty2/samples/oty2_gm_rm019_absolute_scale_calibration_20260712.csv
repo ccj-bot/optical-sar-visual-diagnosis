@@ -1,0 +1,18 @@
+parameter_name,value,unit,source_file,source_line_or_field,derivation_formula,confidence,used_for_current_fit,status,notes_cn
+sar_image_width_px,2308,px,tools/diagnostics/run_oty2_gm_rm019_static_directional_spread_measurement.py,33,constant reused from current SAR PNG geometry,high_for_png_geometry,false,SUPPORTED_FOR_PIXEL_GEOMETRY_ONLY,用于PNG坐标审计；不是米制标定。
+sar_image_height_px,1334,px,tools/diagnostics/run_oty2_gm_rm019_static_directional_spread_measurement.py,34,constant reused from current SAR PNG geometry,high_for_png_geometry,false,SUPPORTED_FOR_PIXEL_GEOMETRY_ONLY,用于PNG坐标审计；不是米制标定。
+fan_center_x_px,1154,px,tools/diagnostics/run_oty2_wgv3_5a_r2c_mask_aware_near_field_mapping.py,39,configured fan center,high_for_display_fan_geometry,false,SUPPORTED_FOR_PIXEL_GEOMETRY_ONLY,可支持径向/方位角像素几何，不能证明物理坐标轴。
+fan_center_y_px,1330.6,px,tools/diagnostics/run_oty2_wgv3_5a_r2c_mask_aware_near_field_mapping.py,40,configured fan center,high_for_display_fan_geometry,false,SUPPORTED_FOR_PIXEL_GEOMETRY_ONLY,可支持径向/方位角像素几何，不能证明物理坐标轴。
+fan_radius_px,1332.7,px,tools/diagnostics/run_oty2_support_region_sar_observation_probe.py,57,configured display fan radius,high_for_display_fan_geometry,false,SUPPORTED_FOR_PIXEL_GEOMETRY_ONLY,只说明PNG扇形半径，不说明真实最大量程。
+azimuth_definition,"atan2(x - 1154.0, 1330.6 - y)",degree,reports/oty2/oty2_wgv3_5a_r2c_sar_mask_definition_20260711.md,Summary/R2C.M0,"degrees(atan2(x-FAN_CENTER_X, FAN_CENTER_Y-y))",medium_for_display_angle,false,SUPPORTED_FOR_ANGLE_ONLY,方位角可在PNG扇形几何内复算，但横向米制仍需要径向米制。
+cross_range_conversion,,m,,,R_ref * delta_theta_rad requires reliable R_ref in meters,none,false,ABSOLUTE_SCALE_UNRESOLVED,缺少可靠R_ref米制，不能把角宽转为横向米制。
+radial_grid_spacing_m_per_px,,m/px,,,requires physical range axis or trusted max range tied to PNG radius,none,false,ABSOLUTE_SCALE_UNRESOLVED,未找到真实成像程序输出的range_axis/x_axis/y_axis或PNG同步元数据。
+radial_extent_m,,m,,,requires imaging-time range extent,none,false,ABSOLUTE_SCALE_UNRESOLVED,未找到真实量程轴；不能由显示扇形半径反推。
+candidate_runtime_max_range_m_rejected,40.0,m,D:/profile/research/workspace/tools/configs/gm_rm019_vehicle_assembly_physics_v2.json,sar.max_range_m / scenes.GM_RM019.max_range_m,"runtime support prior, not imaging calibration",low_for_physical_png_scale,false,REJECTED_FOR_CURRENT_FIT,workspace auto_labeler配置用于运行时支持范围假设，不是PNG成像坐标轴或雷达参数。
+candidate_radial_grid_spacing_from_runtime_config_rejected,0.03001426,m/px,D:/profile/research/workspace/tools/configs/gm_rm019_vehicle_assembly_physics_v2.json,40.0 / 1332.7,max_range_m / fan_radius_px,low_for_physical_png_scale,false,REJECTED_FOR_CURRENT_FIT,这是运行时先验与显示半径的组合，不可称为物理网格间距。
+range_resolution_m,,m,,,c / (2 * effective_bandwidth),none,false,ABSOLUTE_SCALE_UNRESOLVED,未找到真实FMCW有效带宽、chirp、采样率或FFT配置。
+cross_range_resolution_model,,m,,,requires aperture/beam/focusing model,none,false,ABSOLUTE_SCALE_UNRESOLVED,未找到当前数据集的方位分辨率或成像聚焦模型参数。
+display_resize_x,,ratio,D:/profile/research/data/GM_RM019,directory inventory,requires raw/float SAR image source and PNG write transform,none,false,ABSOLUTE_SCALE_UNRESOLVED,GM_RM019数据目录只有PNG/深度npy和一个空fail文本，没有raw-to-PNG缩放记录。
+display_resize_y,,ratio,D:/profile/research/data/GM_RM019,directory inventory,requires raw/float SAR image source and PNG write transform,none,false,ABSOLUTE_SCALE_UNRESOLVED,GM_RM019数据目录只有PNG/深度npy和一个空fail文本，没有raw-to-PNG缩放记录。
+crop_offset_x,,px,D:/profile/research/data/GM_RM019,directory inventory,requires upstream image crop provenance,none,false,ABSOLUTE_SCALE_UNRESOLVED,未找到上游裁剪偏移。
+crop_offset_y,,px,D:/profile/research/data/GM_RM019,directory inventory,requires upstream image crop provenance,none,false,ABSOLUTE_SCALE_UNRESOLVED,未找到上游裁剪偏移。
