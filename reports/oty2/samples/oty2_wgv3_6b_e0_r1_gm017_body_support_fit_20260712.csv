@@ -1,0 +1,2 @@
+fit_id,body_support_model_identifiable,body_length_m_grid,body_width_m_grid,body_length_px_grid,body_width_px_grid,calibration_pair_count,condition_number,median_abs_residual_m_grid,q90_abs_residual_m_grid,fallback_axis_aligned_length_m_grid,fallback_axis_aligned_width_m_grid,source,notes
+e0_r1_body_support_model,PASS,4.764934,2.077648,158.83115,69.254939,26,1.065359,0.139485,0.330216,4.90284,2.24856,SAR_MOTION_HEADING_PROXY_CALIBRATION_FIT,Image-grid metres only; not SAR resolution or PSF-corrected physical extent.

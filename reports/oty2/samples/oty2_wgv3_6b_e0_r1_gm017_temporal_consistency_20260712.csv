@@ -1,0 +1,8 @@
+subject,metric,frame_count,median_value,std_value,temporal_consistency,status
+body_axis_reference,local_background_normalized_energy,72,1.090083,0.077237,0.929675,EVALUATED
+axis_aligned_gt_original,local_background_normalized_energy,72,1.111652,0.070295,0.937343,EVALUATED
+matched_ordinary_background_same_area,local_background_normalized_energy,72,0.981388,0.023361,0.976067,EVALUATED
+matched_strong_scatterer_background_same_area,local_background_normalized_energy,72,1.095575,0.066884,0.93817,EVALUATED
+matched_linear_structure_background_same_area,local_background_normalized_energy,72,1.031076,0.067772,0.935407,EVALUATED
+vehicle_vs_controls,fraction_vehicle_higher,,0.894366,,0.894366,PASS
+metric_translation_surface,near_gt_peak_or_plateau_fraction,284,1,,1,PASS

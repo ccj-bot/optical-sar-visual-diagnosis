@@ -1,0 +1,12 @@
+field,status,value,source,consequence
+maximum_imaging_range_m,AVAILABLE_CURRENT_CONFIG,40.0,verified_checkpoint_and_scene_geometry,supports current image-grid metric conversion only
+image_grid_spacing_m_per_px,AVAILABLE_CURRENT_CONFIG,0.03,P0 frozen parameter convention corrected by E0-R1,pixel offsets can be expressed in current-grid metres
+sar_canvas_px,AVAILABLE,2308x1334,configs/scene_config.yaml,image-grid bounds auditable
+fan_center_px,AVAILABLE_AS_FAN_CENTER,"1154.0,1330.6",configs/scene_config.yaml,local range/azimuth axes available
+fan_radius_max_px,AVAILABLE,1332.7,configs/scene_config.yaml,40m/0.03m grid closure is internally consistent
+METRIC_IMAGE_GRID_MAPPING_AVAILABLE,PASS,current_config,E0_R1_protocol,raw image-grid metric extents may be reported
+PIXEL_TO_METER_CONVERSION_VALID,PASS_CURRENT_IMAGING_CONFIG,0.03,E0_R1_protocol,not a SAR-resolution claim
+RAW_METRIC_IMAGE_EXTENT_AVAILABLE,PASS,grid_m,E0_R1_protocol,raw extents are not PSF-corrected physical dimensions
+SAR_RANGE_RESOLUTION_AVAILABLE,NOT_READY,,not_found_in_repo,do not claim resolution-corrected range extent
+SAR_AZIMUTH_RESOLUTION_AVAILABLE,NOT_READY,,not_found_in_repo,do not claim resolution-corrected azimuth extent
+PSF_CORRECTED_PHYSICAL_EXTENT_READY,NOT_READY,,not_found_in_repo,0.03m/px is not SAR resolution

@@ -1,0 +1,6 @@
+failure_id,failure_type,severity,evidence,interpretation
+E0_R1_PSF_EXTENT_UNRESOLVED,psf_or_resolution_corrected_extent_unresolved,medium,SAR_RANGE_RESOLUTION_AVAILABLE=NOT_READY; SAR_AZIMUTH_RESOLUTION_AVAILABLE=NOT_READY,"Raw image-grid metric extents are available, but PSF-corrected physical dimensions are not claimed."
+E0_R1_BODY_SUPPORT_IDENTIFIABILITY,body_support_model_identifiability,low,status=PASS;condition=1.065359;q90_residual=0.330216,Heading-constrained support is used only if calibration fit is identifiable; otherwise axis-aligned fallback remains explicit.
+E0_R1_TRANSLATION_STABILITY,near_gt_translation_structure,low,near_gt_peak_or_plateau_fraction=1,Translation surfaces support the claim only when near-GT plateau is stable across axes and frames.
+E0_R1_PAIRED_CONTROL_PRESSURE,matched_control_pressure,low,median_fraction_vehicle_higher_local_bg_norm=0.894366,Within-frame controls are the primary non-vehicle pressure; global class means are secondary.
+E0_R1_SINGLE_FEATURE_ENERGY_CONFUSION,single_feature_energy_confusion_only,medium,single_feature_rows=414;multi_gate_confusions=0,High mean energy alone is not treated as physical inseparability.
