@@ -1,0 +1,41 @@
+gt_pair_id,gt_instance_id,physical_vehicle_id,edge_name,edge_status,edge_supported_interval_m,edge_transition_strength,edge_background_sensitivity,edge_mask_context,edge_note_cn
+WGV35A_PAIR_0204,316,PV_GM19_WHITE_SUV_NEAR_FIELD,range_near,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.258361,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0204,316,PV_GM19_WHITE_SUV_NEAR_FIELD,range_far,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.246792,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0204,316,PV_GM19_WHITE_SUV_NEAR_FIELD,azimuth_left,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.269589,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0204,316,PV_GM19_WHITE_SUV_NEAR_FIELD,azimuth_right,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.261545,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0205,317,PV_GM19_WHITE_SUV_NEAR_FIELD,range_near,EDGE_MASK_CENSORED,"[-0.3,0.3]",0.329801,COUNTERFACTUAL_BACKGROUND_SENSITIVE,SAR_MASK_S1_PARTIALLY_CENSORED_CENTER_INSIDE;bottom_near_range_mask;center_semantics_mask_censored_or_unconfirmed;bbox_bottom_within_110px_of_near_range_mask;observed_box_may_be_masked_response_center_not_full_vehicle_center,MASK 指明 bottom_near_range_mask，近距边只作删失解释。
+WGV35A_PAIR_0205,317,PV_GM19_WHITE_SUV_NEAR_FIELD,range_far,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.324212,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0205,317,PV_GM19_WHITE_SUV_NEAR_FIELD,azimuth_left,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.341139,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0205,317,PV_GM19_WHITE_SUV_NEAR_FIELD,azimuth_right,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.322148,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0206,319,PV_GM19_WHITE_SUV_NEAR_FIELD,range_near,EDGE_MASK_CENSORED,"[-0.3,0.3]",0.223748,BACKGROUND_STABLE,SAR_MASK_S1_PARTIALLY_CENSORED_CENTER_INSIDE;bottom_near_range_mask;center_semantics_mask_censored_or_unconfirmed;bbox_bottom_within_110px_of_near_range_mask;observed_box_may_be_masked_response_center_not_full_vehicle_center,MASK 指明 bottom_near_range_mask，近距边只作删失解释。
+WGV35A_PAIR_0206,319,PV_GM19_WHITE_SUV_NEAR_FIELD,range_far,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.235188,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0206,319,PV_GM19_WHITE_SUV_NEAR_FIELD,azimuth_left,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.24841,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0206,319,PV_GM19_WHITE_SUV_NEAR_FIELD,azimuth_right,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.264113,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0207,320,PV_GM19_WHITE_SUV_NEAR_FIELD,range_near,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.239575,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0207,320,PV_GM19_WHITE_SUV_NEAR_FIELD,range_far,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.244332,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0207,320,PV_GM19_WHITE_SUV_NEAR_FIELD,azimuth_left,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.249293,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0207,320,PV_GM19_WHITE_SUV_NEAR_FIELD,azimuth_right,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.275695,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0208,323,PV_GM19_SILVER_MPV_NEAR_FIELD,range_near,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.302696,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0208,323,PV_GM19_SILVER_MPV_NEAR_FIELD,range_far,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.281999,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0208,323,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_left,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.31066,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0208,323,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_right,EDGE_IDENTIFIABLE,"[-0.3,0.3]",0.289499,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0209,324,PV_GM19_SILVER_MPV_NEAR_FIELD,range_near,EDGE_MASK_CENSORED,"[-0.3,0.3]",0.193726,COUNTERFACTUAL_BACKGROUND_SENSITIVE,SAR_MASK_S1_PARTIALLY_CENSORED_CENTER_INSIDE;bottom_near_range_mask;center_semantics_mask_censored_or_unconfirmed;bbox_bottom_within_110px_of_near_range_mask;observed_box_may_be_masked_response_center_not_full_vehicle_center,MASK 指明 bottom_near_range_mask，近距边只作删失解释。
+WGV35A_PAIR_0209,324,PV_GM19_SILVER_MPV_NEAR_FIELD,range_far,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.180313,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0209,324,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_left,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.197887,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0209,324,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_right,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.18585,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0210,325,PV_GM19_SILVER_MPV_NEAR_FIELD,range_near,EDGE_MASK_CENSORED,"[-0.3,0.3]",0.170629,COUNTERFACTUAL_BACKGROUND_SENSITIVE,SAR_MASK_S1_PARTIALLY_CENSORED_CENTER_INSIDE;bottom_near_range_mask;center_semantics_mask_censored_or_unconfirmed;bbox_bottom_within_110px_of_near_range_mask;observed_box_may_be_masked_response_center_not_full_vehicle_center,MASK 指明 bottom_near_range_mask，近距边只作删失解释。
+WGV35A_PAIR_0210,325,PV_GM19_SILVER_MPV_NEAR_FIELD,range_far,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.164443,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0210,325,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_left,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.160662,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0210,325,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_right,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.182825,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0211,326,PV_GM19_SILVER_MPV_NEAR_FIELD,range_near,EDGE_MASK_CENSORED,"[-0.3,0.3]",0.186093,COUNTERFACTUAL_BACKGROUND_SENSITIVE,SAR_MASK_S1_PARTIALLY_CENSORED_CENTER_INSIDE;bottom_near_range_mask;center_semantics_mask_censored_or_unconfirmed;bbox_bottom_within_110px_of_near_range_mask;observed_box_may_be_masked_response_center_not_full_vehicle_center,MASK 指明 bottom_near_range_mask，近距边只作删失解释。
+WGV35A_PAIR_0211,326,PV_GM19_SILVER_MPV_NEAR_FIELD,range_far,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.171916,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0211,326,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_left,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.164179,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0211,326,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_right,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.19733,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0212,327,PV_GM19_SILVER_MPV_NEAR_FIELD,range_near,EDGE_MASK_CENSORED,"[-0.3,0.3]",0.1037,BACKGROUND_STABLE,SAR_MASK_S1_PARTIALLY_CENSORED_CENTER_INSIDE;bottom_near_range_mask;center_semantics_mask_censored_or_unconfirmed;bbox_bottom_within_110px_of_near_range_mask;observed_box_may_be_masked_response_center_not_full_vehicle_center,MASK 指明 bottom_near_range_mask，近距边只作删失解释。
+WGV35A_PAIR_0212,327,PV_GM19_SILVER_MPV_NEAR_FIELD,range_far,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.101602,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0212,327,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_left,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.106035,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0212,327,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_right,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.137917,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0213,328,PV_GM19_SILVER_MPV_NEAR_FIELD,range_near,EDGE_MASK_CENSORED,"[-0.3,0.3]",0.142072,COUNTERFACTUAL_BACKGROUND_SENSITIVE,SAR_MASK_S1_PARTIALLY_CENSORED_CENTER_INSIDE;bottom_near_range_mask;center_semantics_mask_censored_or_unconfirmed;bbox_bottom_within_110px_of_near_range_mask;observed_box_may_be_masked_response_center_not_full_vehicle_center,MASK 指明 bottom_near_range_mask，近距边只作删失解释。
+WGV35A_PAIR_0213,328,PV_GM19_SILVER_MPV_NEAR_FIELD,range_far,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.141317,BACKGROUND_STABLE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0213,328,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_left,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.150035,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。
+WGV35A_PAIR_0213,328,PV_GM19_SILVER_MPV_NEAR_FIELD,azimuth_right,EDGE_INTERVAL_ONLY,"[-0.3,0.3]",0.171192,COUNTERFACTUAL_BACKGROUND_SENSITIVE,,基于预注册单边界扰动的能量密度变化判断。

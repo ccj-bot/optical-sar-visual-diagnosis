@@ -1,0 +1,11 @@
+gt_pair_id,gt_instance_id,physical_vehicle_id,matched_background_present,matched_background_offset_order,gt_inner_energy_density,background_inner_energy_density,gt_background_density_ratio,gt_energy,background_energy,gt_background_energy_ratio,background_sensitivity_status,control_note_cn
+WGV35A_PAIR_0204,316,PV_GM19_WHITE_SUV_NEAR_FIELD,true,diag_range_minus_1.80_azimuth_minus_1.80,8.254286,0.440153,18.753231,110269,5880,18.753231,COUNTERFACTUAL_BACKGROUND_SENSITIVE,matched background 按 plan 固定偏移选择，不按灰度亮度筛选。
+WGV35A_PAIR_0205,317,PV_GM19_WHITE_SUV_NEAR_FIELD,true,diag_range_minus_1.80_azimuth_minus_1.80,9.018797,0.354062,25.472339,102679,4031,25.472339,COUNTERFACTUAL_BACKGROUND_SENSITIVE,matched background 按 plan 固定偏移选择，不按灰度亮度筛选。
+WGV35A_PAIR_0206,319,PV_GM19_WHITE_SUV_NEAR_FIELD,true,azimuth_plus_3.60,6.312627,0.008314,759.301887,80486,106,759.301887,COUNTERFACTUAL_BACKGROUND_SENSITIVE,matched background 按 plan 固定偏移选择，不按灰度亮度筛选。
+WGV35A_PAIR_0207,320,PV_GM19_WHITE_SUV_NEAR_FIELD,true,azimuth_minus_3.60,6.48868,9.594946,0.67626,73945,109344,0.67626,BACKGROUND_STABLE,matched background 按 plan 固定偏移选择，不按灰度亮度筛选。
+WGV35A_PAIR_0208,323,PV_GM19_SILVER_MPV_NEAR_FIELD,true,diag_range_minus_1.80_azimuth_minus_1.80,11.773812,0.260258,45.239078,155379,3476,44.700518,COUNTERFACTUAL_BACKGROUND_SENSITIVE,matched background 按 plan 固定偏移选择，不按灰度亮度筛选。
+WGV35A_PAIR_0209,324,PV_GM19_SILVER_MPV_NEAR_FIELD,true,range_plus_3.60,11.63605,6.875734,1.692336,118071,70270,1.680248,BACKGROUND_STABLE,matched background 按 plan 固定偏移选择，不按灰度亮度筛选。
+WGV35A_PAIR_0210,325,PV_GM19_SILVER_MPV_NEAR_FIELD,true,azimuth_plus_4.50,6.942811,0.000756,9181,73448,8,9181,COUNTERFACTUAL_BACKGROUND_SENSITIVE,matched background 按 plan 固定偏移选择，不按灰度亮度筛选。
+WGV35A_PAIR_0211,326,PV_GM19_SILVER_MPV_NEAR_FIELD,true,azimuth_plus_4.50,4.718499,0,,49917,0,,BACKGROUND_STABLE,matched background 按 plan 固定偏移选择，不按灰度亮度筛选。
+WGV35A_PAIR_0212,327,PV_GM19_SILVER_MPV_NEAR_FIELD,true,azimuth_plus_3.60,5.515087,0.001563,3528.682432,59585,17,3505,COUNTERFACTUAL_BACKGROUND_SENSITIVE,matched background 按 plan 固定偏移选择，不按灰度亮度筛选。
+WGV35A_PAIR_0213,328,PV_GM19_SILVER_MPV_NEAR_FIELD,true,range_plus_4.50,4.148736,2.479248,1.673385,47279,28075,1.684025,BACKGROUND_STABLE,matched background 按 plan 固定偏移选择，不按灰度亮度筛选。

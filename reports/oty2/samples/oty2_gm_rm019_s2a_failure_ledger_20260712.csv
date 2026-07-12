@@ -1,0 +1,7 @@
+failure_id,gt_pair_id,gt_instance_id,failure_type,severity,detail_cn
+WGV35A_PAIR_0200_pairing_review,WGV35A_PAIR_0200,309,GT_REGION_PAIRING_UNRESOLVED,INFO,该 pair 不进入主评价池，仅保留为 pairing-review 和视觉敏感性样本。
+WGV35A_PAIR_0201_pairing_review,WGV35A_PAIR_0201,311,GT_REGION_PAIRING_UNRESOLVED,INFO,该 pair 不进入主评价池，仅保留为 pairing-review 和视觉敏感性样本。
+WGV35A_PAIR_0202_pairing_review,WGV35A_PAIR_0202,314,GT_REGION_PAIRING_UNRESOLVED,INFO,该 pair 不进入主评价池，仅保留为 pairing-review 和视觉敏感性样本。
+WGV35A_PAIR_0203_pairing_review,WGV35A_PAIR_0203,315,GT_REGION_PAIRING_UNRESOLVED,INFO,该 pair 不进入主评价池，仅保留为 pairing-review 和视觉敏感性样本。
+WGV35A_PAIR_0214_pairing_review,WGV35A_PAIR_0214,330,GT_REGION_PAIRING_UNRESOLVED,INFO,该 pair 不进入主评价池，仅保留为 pairing-review 和视觉敏感性样本。
+WGV35A_PAIR_0215_pairing_review,WGV35A_PAIR_0215,331,GT_REGION_PAIRING_UNRESOLVED,INFO,该 pair 不进入主评价池，仅保留为 pairing-review 和视觉敏感性样本。
