@@ -1,0 +1,12 @@
+failure_id,severity,evidence,interpretation
+E0_R2_RESPONSE_INDEX_WITHDRAWN,high,"E0-R3 does not use response_index, total_response_score, weighted_response_score, or multi_aspect_score.",Mechanism evidence is reported factor by factor.
+DIAGNOSIS_OUT_OF_CALIBRATION_DOMAIN_NOT_UPGRADED,medium,Diagnosis frames are explicitly marked IN/OUT of calibration aspect domain.,Out-of-domain success is not mechanism support and out-of-domain failure is not a counterexample.
+SAME_ASPECT_REPEATABILITY_SPARSE_DIFFERENT_CONTROL,medium,same_pairs=160;different_pairs=160 under preregistered 2.0m similar-range window.,Repeatability can be inspected but remains weaker than dense matched controls.
+ASPECT_OBSERVABILITY_STATUS_LIMIT,medium,diagnosis contains OUT_OF_CALIBRATION_ASPECT_DOMAIN; calibration usable for discovery,Factor does not close a full physical-mechanism proof.
+NEAR_FAR_REDISTRIBUTION_STATUS_LIMIT,medium,near/far ratio measured per frame; not front/rear semantics,Factor does not close a full physical-mechanism proof.
+SAME_ASPECT_REPEATABILITY_STATUS_LIMIT,medium,same_pairs=160;different_pairs=160;same_median=1.077615;diff_median=1.028024,Factor does not close a full physical-mechanism proof.
+RANGE_CONFOUNDER_STATUS_LIMIT,medium,different-aspect similar-range controls exist but are sparse under 2.0m preregistered window,Factor does not close a full physical-mechanism proof.
+TIME_CONFOUNDER_STATUS_LIMIT,medium,time reversal control reported,Factor does not close a full physical-mechanism proof.
+MASK_TRANSITION_READINESS_LIMIT,medium,B segment is reserved; no full MASK-transition proof in E0-R3,Factor does not close a full physical-mechanism proof.
+VEHICLE_YAW_READINESS_LIMIT,medium,body-axis proxy and SAR response axes remain separated; true yaw is not recovered,Factor does not close a full physical-mechanism proof.
+E0_R3_TOTAL_STATUS_LIMIT,medium,factor-level result; no weighted score,Factor does not close a full physical-mechanism proof.

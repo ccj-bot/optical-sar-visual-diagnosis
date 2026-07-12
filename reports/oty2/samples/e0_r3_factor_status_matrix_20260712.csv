@@ -1,0 +1,17 @@
+factor_id,status,evidence,score_used,forbidden_interpretation
+HIGH_OBSERVABILITY_ANCHOR_SEGMENTS,SUPPORTED,A_ready=1;segments=3,false,not_selector_not_ranking_not_final_box
+POSITION_CONTINUITY_STATUS,SUPPORTED,adjacent_pairs=70,false,not_selector_not_ranking_not_final_box
+ASPECT_OBSERVABILITY_STATUS,PARTIAL,diagnosis contains OUT_OF_CALIBRATION_ASPECT_DOMAIN; calibration usable for discovery,false,not_selector_not_ranking_not_final_box
+VEHICLE_ENVELOPE_STABILITY_STATUS,SUPPORTED,stable=68;total=71,false,not_selector_not_ranking_not_final_box
+PROJECTED_SUPPORT_CONTINUITY_STATUS,SUPPORTED,"classes={'STRUCTURAL_SPLIT_OR_MERGE': 59, 'ABRUPT_UNEXPLAINED_JUMP': 7, 'SMOOTH_GRADUAL_CHANGE': 2, 'PIECEWISE_GRADUAL_CHANGE': 2}",false,not_selector_not_ranking_not_final_box
+HIGH_ENERGY_SLIDING_STATUS,SUPPORTED,"classes={'STRUCTURAL_SPLIT_OR_MERGE': 59, 'ABRUPT_UNEXPLAINED_JUMP': 7, 'SMOOTH_GRADUAL_CHANGE': 2, 'PIECEWISE_GRADUAL_CHANGE': 2}",false,not_selector_not_ranking_not_final_box
+NEAR_FAR_REDISTRIBUTION_STATUS,PARTIAL,near/far ratio measured per frame; not front/rear semantics,false,not_selector_not_ranking_not_final_box
+COMPONENT_STRUCTURE_CONTINUITY_STATUS,SUPPORTED,"classes={'STRUCTURAL_SPLIT_OR_MERGE': 59, 'ABRUPT_UNEXPLAINED_JUMP': 7, 'SMOOTH_GRADUAL_CHANGE': 2, 'PIECEWISE_GRADUAL_CHANGE': 2}",false,not_selector_not_ranking_not_final_box
+SAME_ASPECT_REPEATABILITY_STATUS,PARTIAL,same_pairs=160;different_pairs=160;same_median=1.077615;diff_median=1.028024,false,not_selector_not_ranking_not_final_box
+RANGE_CONFOUNDER_STATUS,PARTIAL,different-aspect similar-range controls exist but are sparse under 2.0m preregistered window,false,not_selector_not_ranking_not_final_box
+TIME_CONFOUNDER_STATUS,PARTIAL,time reversal control reported,false,not_selector_not_ranking_not_final_box
+BACKGROUND_COUNTERFACTUAL_STATUS,SUPPORTED,causal_background_rejections=358,false,not_selector_not_ranking_not_final_box
+DYNAMIC_INTERVAL_CONTRACTION_STATUS,SUPPORTED,median_causal_ratio=0.831406;median_smoothed_ratio=0.776198;causal_contained=71/71,false,not_selector_not_ranking_not_final_box
+MASK_TRANSITION_READINESS,PARTIAL,B segment is reserved; no full MASK-transition proof in E0-R3,false,not_selector_not_ranking_not_final_box
+VEHICLE_YAW_READINESS,NOT_READY,body-axis proxy and SAR response axes remain separated; true yaw is not recovered,false,not_selector_not_ranking_not_final_box
+E0_R3_TOTAL_STATUS,E0_R3_PARTIAL,factor-level result; no weighted score,false,not_selector_not_ranking_not_final_box

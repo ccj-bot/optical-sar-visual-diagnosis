@@ -1,0 +1,16 @@
+seal_item,status,evidence,path,sha256,row_count,notes
+WORKTREE_BRANCH_VALID,PASS,feature/oty2-gm017-physical-factor-discovery,,,,
+EXPECTED_START_COMMIT_VALID,PASS,7a9d9cba9f38447e10c917227a789f4160569026,,,,
+LOCAL_REMOTE_SYNC_AT_PLAN,PASS,0	0,,,,
+PLAN_STAGE_DOES_NOT_READ_SAR_INTENSITY,PASS,true,,,,No SAR gray path is opened in this script.
+PLAN_STAGE_DOES_NOT_READ_E0_R2_MEASUREMENT_OUTCOMES,PASS,true,,,,Only e0_r2_relative_aspect_timeline is read; descriptors/gates/response_index are not read.
+ANCHOR_SEGMENTS_PRE_REGISTERED,PASS,A=1;segments=3;frames=71,,,,
+ASPECT_MATCHED_PAIR_PLAN_PRE_REGISTERED,PASS,same_aspect=160;different_aspect=160;range_threshold_m=2.0,,,,
+ABSOLUTE_RANGE_USES_RADAR_FAN_CENTER,PASS,"sar_fan_center=(1154.0,1330.6);spacing=0.03",,,,
+MOTION_TANGENT_SEPARATED_FROM_BODY_AXIS,PASS,motion_tangent_image_deg and body_axis_proxy_deg are separate fields,,,,
+NO_RESPONSE_INDEX,PASS,response_index not present in E0-R3 plan fields,,,,
+PLAN_INPUT_BUNDLE_SHA256,SEALED,4c67bfee71775942004e50643fd6d876e6ba9e282c180b4982ab3a87a51787d3,,,,Allowed geometry/mask/aspect/protocol inputs only.
+ARTIFACT_anchor_segment_manifest,SEALED,anchor_segment_manifest,reports\oty2\samples\e0_r3_anchor_segment_manifest_20260712.csv,bb561ccd999b9f908106610cab043259bce688f8993fc7c6775d1a79b93d76f0,3,plan artifact
+ARTIFACT_mask_observability_timeline,SEALED,mask_observability_timeline,reports\oty2\samples\e0_r3_mask_observability_timeline_20260712.csv,5c10e6c3b8e91cab7219f7692b0059e805e3832819ec8cea217548ef67dfd524,71,plan artifact
+ARTIFACT_body_axis_proxy_timeline,SEALED,body_axis_proxy_timeline,reports\oty2\samples\e0_r3_body_axis_proxy_timeline_20260712.csv,11858056a29e55a2b4515de231fea368480815c767bf7044f59c40da86411401,71,plan artifact
+ARTIFACT_aspect_matched_pair_plan,SEALED,aspect_matched_pair_plan,reports\oty2\samples\e0_r3_aspect_matched_pair_plan_20260712.csv,4b070d26a34fc58fa5fc4fb001c9c24abf9a4ef520235be1c1f93dea5b518736,645,plan artifact

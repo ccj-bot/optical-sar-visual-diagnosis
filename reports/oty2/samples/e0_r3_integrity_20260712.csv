@@ -1,0 +1,45 @@
+gate_id,status,evidence
+WORKTREE_BRANCH_VALID,PASS,feature/oty2-gm017-physical-factor-discovery
+EXPECTED_START_COMMIT_VALID,PASS,7a9d9cba9f38447e10c917227a789f4160569026
+STATIC_GM019_BRANCH_UNTOUCHED,PASS,diff under current worktree docs/tools/reports does not touch GM_RM019 static branch files
+PLAN_STAGE_DOES_NOT_READ_SAR_INTENSITY,PASS,plan seal gate PASS
+PLAN_STAGE_DOES_NOT_READ_E0_R2_MEASUREMENT_OUTCOMES,PASS,plan seal gate PASS
+ANCHOR_SEGMENTS_PRE_REGISTERED,PASS,A_ready=1;segments=3
+PLAN_SEAL_VALID,PASS,seal ok
+PROJECT_CONFIRMED_CALIBRATION_APPLIED,PASS,calibration<=360;guard=361-370;diagnosis=371-394
+ABSOLUTE_RANGE_USES_RADAR_FAN_CENTER,PASS,"fan_center=(1154.0,1330.6);spacing=0.03"
+NO_WRONG_LOCAL_DISTANCE_ORIGIN,PASS,no GT top-left/crop origin/first-frame origin used
+MOTION_TANGENT_SEPARATED_FROM_BODY_AXIS,PASS,separate fields in body_axis_proxy_timeline and structured_response_timeline
+BODY_AXIS_PROXY_SEPARATED_FROM_RESPONSE_AXIS,PASS,body_axis_proxy_deg is separate from global/dominant/layout response axes
+NO_TRUE_YAW_OUTPUT,PASS,no true_vehicle_yaw/confirmed_vehicle_heading/front_direction_confirmed fields
+NO_RESPONSE_INDEX,PASS,E0-R3 scripts do not output response_index
+NO_WEIGHTED_SCORE,PASS,factor_status_matrix uses status only
+NO_SELECTOR,PASS,no selector output
+NO_RANKING,PASS,no ranking output
+NO_FINAL_BOX,PASS,no final box output
+HIGH_OBSERVABILITY_ANCHORS_COMPLETE,PASS,A_ready=1;segments=3
+MASK_TRANSITION_SEGMENTS_RESERVED,PASS,B segment is reserved; no full MASK-transition proof in E0-R3
+STRUCTURED_RESPONSE_FIELDS_COMPLETE,PASS,reports\oty2\samples\e0_r3_structured_response_timeline_20260712.csv
+HIGH_ENERGY_SLIDING_MEASURED,PASS,reports\oty2\samples\e0_r3_high_energy_sliding_timeline_20260712.csv
+ANONYMOUS_COMPONENT_CONTINUITY_COMPLETE,PASS,reports\oty2\samples\e0_r3_component_continuity_events_20260712.csv
+SAME_ASPECT_PAIRS_PRESENT_OR_NOT_EVALUABLE,PASS,same_pairs=160;different_pairs=160;same_median=1.077615;diff_median=1.028024
+DIFFERENT_ASPECT_MATCHED_PAIRS_PRESENT_OR_NOT_EVALUABLE,PASS,same_pairs=160;different_pairs=160;same_median=1.077615;diff_median=1.028024
+RANGE_CONFOUNDER_CONTROL_COMPLETE,PASS,different-aspect similar-range controls exist but are sparse under 2.0m preregistered window
+TIME_CONFOUNDER_CONTROL_COMPLETE,PASS,time reversal control reported
+ASPECT_SHUFFLE_CONTROL_COMPLETE,PASS,aspect pairing/control rows are pre-registered; no aspect-shuffle score is promoted
+IDENTITY_BREAK_CONTROL_COMPLETE,PASS,reports\oty2\samples\e0_r3_identity_break_controls_20260712.csv
+CALIBRATION_ASPECT_DOMAIN_EXPLICIT,PASS,aspect_domain_status field present
+OUT_OF_DOMAIN_DIAGNOSIS_NOT_UPGRADED,PASS,diagnosis domain limits appear in failure ledger
+STATIC_INTERVALS_PRESENT,PASS,reports\oty2\samples\e0_r3_static_feasible_intervals_20260712.csv
+CAUSAL_INTERVALS_USE_NO_FUTURE,PASS,causal_uses_future_frames=false in causal rows
+SMOOTHED_INTERVALS_MARKED_POSTHOC,PASS,offline_forward_backward_feasible_interval=posthoc_only
+GT_CONTAINMENT_REPORTED,PASS,gt_response_region_contained_* fields present
+BACKGROUND_REJECTION_REPORTED,PASS,background_region_rejected_by_* fields present
+FIXED_BACKGROUND_CONTROL_COMPLETE,PASS,reports\oty2\samples\e0_r3_background_counterfactuals_20260712.csv
+PERSISTENT_STRONG_COUNTERFACTUAL_VALID,PASS,fixed_strong_scatterer generated from SAR intensity
+GT_ATTACHED_CORRIDOR_CONTROL_COMPLETE,PASS,static intervals and local corridors reported as posthoc controls; no non-target assumption
+VISUAL_REVIEW_ACTUALLY_OPENED,PASS,D:\profile\research\optical-sar-visual-diagnosis-gm017-physics\outputs\wgv3_6b_e0_r3_gm017_structured_continuity_20260712\visual_review_opened_marker.json
+FROZEN_REPLAY_IDENTICAL,PASS,generate_phase_replay_pass
+NO_GT_MODIFICATION,PASS,input GT files are read-only and no GT output edits are produced
+NO_GM019_MODIFICATION,PASS,GM_RM019 static worktree/branch not touched
+E0_R3_TOTAL_STATUS,PASS,E0_R3_PARTIAL

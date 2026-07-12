@@ -1,0 +1,4 @@
+control_id,control_type,sample_count,actual_median_body_long_step_m,control_median_body_long_step_m,control_breaks_continuity,interpretation
+time_order_reversal,time_confounder,71,0.079829,0.456999,true,time reversal should weaken local continuity if frame adjacency is real
+same_vs_different_aspect,range_aspect_confounder,same=160;different=160,1.077615,1.028024,false,different-aspect similar-range pairs must be real or repeatability remains partial
+identity_break_A_to_C,identity_break_control,24,0.079829,0.589037,true,out-of-domain diagnosis is not upgraded to mechanism support
