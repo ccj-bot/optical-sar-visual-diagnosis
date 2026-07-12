@@ -1,0 +1,5 @@
+audit_id,prior_logic,defect,r1_r1_correction,status
+E0_R1_LABEL_DEPENDENT_G7,if is_vehicle evaluate near-GT translation else G7=FAIL_NON_GT_REGION,label_dependent_gate,G7_LOCAL_CENTERED_RESPONSE_STRUCTURE uses subject-specific translation surfaces for every subject,REPAIRED_IN_E0_R1_R1
+E0_R1_LABEL_DEPENDENT_G10,static_rejected = is_vehicle and paired_higher_median >= 0.60,non_vehicle_could_not_pass_G10_by_construction,G10_BACKGROUND_FIXEDNESS_EXPLANATION_REJECTED uses subject motion and image-coordinate fixedness inputs,REPAIRED_IN_E0_R1_R1
+E0_R1_DIRECTED_HEADING_AS_BODY_AXIS,ordinary directed heading difference used for body-axis continuity,360_degree_direction_mixed_with_180_degree_body_axis,"directed motion and axial body-axis proxy are separate outputs; body differences are [0,90]",REPAIRED_IN_E0_R1_R1
+E0_R1_ZERO_CONFUSION_WITHDRAWAL,multi_gate_physical_confusions=0,constant_zero_from_gate_logic_not_scientific_evidence,observable and full physical confusion are recomputed after symmetric Gates,WITHDRAWN_AND_REEVALUATED

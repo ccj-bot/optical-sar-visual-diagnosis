@@ -1,0 +1,6 @@
+failure_id,severity,evidence,interpretation
+E0_R1_PRIOR_ZERO_CONFUSION_INVALID,high,E0-R1 G10 was label-dependent and impossible for non-vehicle regions to pass,E0-R1 multi_gate_physical_confusions=0 is withdrawn as a scientific result.
+DIRECTION_INTERVAL_READY,low,cal_high=26;principal_body_q90=4.515809,Vehicle directional relation is supported only if calibration is narrow enough to freeze a non-wide interval.
+MATCHED_CONTROLS_NO_PERSISTENT_TRACK,medium,matched_linear_structure_background;matched_ordinary_background;matched_strong_scatterer_background,Framewise matched controls cannot be forced through G9/G10 as persistent subject tracks.
+NOT_EVALUABLE_ACCOUNTING,low,not_evaluable_gate_instances=692,NOT_EVALUABLE rows are counted separately and never treated as PASS or FAIL.
+FULL_PHYSICAL_CONFUSION_RECHECK,low,full_physical_confusion_count=0,Full confusion requires observable Gates plus evaluable G9/G10; label shortcuts are not used.

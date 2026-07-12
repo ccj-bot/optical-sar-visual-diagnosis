@@ -1,0 +1,8 @@
+subject_name,frame_count,worst_control_fraction_vehicle_higher,worst_control_paired_effect_size,single_feature_energy_confusion_count,metric_shape_confusion_count,observable_structure_evaluable_count,observable_structure_confusion_count,worst_control_observable_confusion_rate,full_physical_evaluable_count,full_physical_confusion_count,worst_persistent_negative_full_confusion_rate,is_worst_hard_negative
+fixed_known_non_vehicle_N005,71,0.971831,1.862304,71,64,33,5,0.151515,71,0,0,false
+fixed_linear_structure,71,0.929577,1.447754,71,58,33,1,0.030303,71,0,0,false
+fixed_strong_scatterer,71,0.887324,1.630343,71,63,33,5,0.151515,71,0,0,false
+matched_linear_structure_background,71,0.647887,0.713918,71,71,33,7,0.212121,0,0,0,false
+matched_ordinary_background,71,0.971831,2.199248,70,69,33,1,0.030303,0,0,0,false
+matched_strong_scatterer_background,71,0.577465,0.258679,71,71,33,23,0.69697,0,0,0,true
+WORST_CONTROL,71,0.577465,0.258679,71,71,33,23,0.69697,0,0,0,summary_of_worst_subject
