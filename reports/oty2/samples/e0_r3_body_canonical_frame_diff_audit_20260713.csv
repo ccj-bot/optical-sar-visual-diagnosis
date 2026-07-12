@@ -1,0 +1,9 @@
+frame_a,frame_b,delta_png,gain_near_boundary_fraction,loss_near_boundary_fraction,gain_peak_xy,loss_peak_xy,gain_loss_peak_distance_px,s_peak_delta,mask_common_fraction,manual_review_hint
+321,323,outputs\wgv3_6b_e0_r3_gm017_body_canonical_20260713\visual_review\vehicle_diff_sar000321_to_000323.png,0.126525,0.074894,"(133,68)","(130,66)",3.605551,-0.129032,1,localized_gain_loss_reviewable
+323,325,outputs\wgv3_6b_e0_r3_gm017_body_canonical_20260713\visual_review\vehicle_diff_sar000323_to_000325.png,0.126124,0.080574,"(130,72)","(133,67)",5.830952,0.225806,1,localized_gain_loss_reviewable
+339,340,outputs\wgv3_6b_e0_r3_gm017_body_canonical_20260713\visual_review\vehicle_diff_sar000339_to_000340.png,0.015033,0.136539,"(130,64)","(130,69)",5,0,1,possible_registration_or_whole-map_motion
+340,341,outputs\wgv3_6b_e0_r3_gm017_body_canonical_20260713\visual_review\vehicle_diff_sar000340_to_000341.png,0.16231,0.022512,"(132,69)","(128,63)",7.211103,-0.032258,1,localized_gain_loss_reviewable
+351,352,outputs\wgv3_6b_e0_r3_gm017_body_canonical_20260713\visual_review\vehicle_diff_sar000351_to_000352.png,0.008591,0.230463,"(125,66)","(130,70)",6.403124,0.16129,1,localized_gain_loss_reviewable
+352,353,outputs\wgv3_6b_e0_r3_gm017_body_canonical_20260713\visual_review\vehicle_diff_sar000352_to_000353.png,0.144921,0.020674,"(126,69)","(133,64)",8.602325,-0.064516,1,localized_gain_loss_reviewable
+384,385,outputs\wgv3_6b_e0_r3_gm017_body_canonical_20260713\visual_review\vehicle_diff_sar000384_to_000385.png,0.160271,0.071921,"(16,71)","(109,79)",93.343452,0.225807,1,possible_registration_or_whole-map_motion
+385,386,outputs\wgv3_6b_e0_r3_gm017_body_canonical_20260713\visual_review\vehicle_diff_sar000385_to_000386.png,0.085544,0.09492,"(19,65)","(21,75)",10.198039,-0.322581,1,localized_gain_loss_reviewable

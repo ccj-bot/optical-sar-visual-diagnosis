@@ -1,0 +1,22 @@
+gate_id,status,evidence,failure_reason,next_step_allowed
+REPOSITORY_LINEAGE_VERIFIED,PASS,branch=feature/oty2-gm017-physical-factor-discovery;ancestor=7a9d9cba9f38447e10c917227a789f4160569026,,yes
+REQUIRED_FROZEN_ARTIFACTS_READ,PASS,inventory_rows=28,,yes
+LEGACY_CONCLUSIONS_WITHDRAWN,PASS,zero-confusion and range-confounder support withdrawn; response_index exploratory only,,yes
+METRIC_RANGE_ORIGIN_CORRECTED,PASS,"range_m=hypot(cx-fan_center_x,cy-fan_center_y)*0.03",,yes
+CORRECTED_RANGE_WITHIN_IMAGING_DOMAIN,PASS,corrected_over40=0;legacy_over40=56,,yes
+ASPECT_RANGE_TIME_IDENTIFIABILITY_AUDITED,PASS,summary_rows=7,,yes
+ASPECT_CAUSAL_IDENTIFIABILITY,NOT_READY,usable_pairs_exist_but_independent_control_family_or_collinearity_gate_not_closed,independent controls not closed,no
+BODY_AXIS_SIGN_CONTINUITY_VALID,FAIL,axis_fail_count=1,axis flip/low reliability,no
+BODY_CANONICAL_INPUTS_SUFFICIENT,PASS,vehicle_maps=14;L/W=4.764934/2.077648,,yes
+BODY_CANONICAL_FIELD_VALID,PASS,min_valid_support_fraction=1,,yes
+NEAR_SIDE_RESPONSE_LOCALIZATION_VISUALLY_AUDITED,PARTIAL,median_near_boundary_fraction=0.114906;requires manual visual review,not a supported mechanism claim,limited
+MINIMAL_STRUCTURAL_TIMELINE_VISUALLY_AUDITED,PARTIAL,review_windows=5,minimal windows only,limited
+REGISTRATION_FAILURE_MODES_AUDITED,PARTIAL,visible_perturbation_cases=16,some structure may be registration-sensitive,limited
+MINIMAL_COUNTERFACTUAL_STRUCTURAL_AUDIT_COMPLETED,PARTIAL,counterfactual_rows=3,GT-attached corridor contamination blocks rejection,limited
+NEAR_SIDE_RESPONSE_MIGRATION_SUPPORTED,NOT_READY,minimal visual audit only,no full transport closure,no
+RESPONSE_TRANSPORT_BEYOND_REGISTRATION_SUPPORTED,NOT_READY,perturbation audit is sensitivity only,transport beyond registration not established,no
+ASPECT_EFFECT_BEYOND_RANGE_AND_TIME_SUPPORTED,NOT_READY,ASPECT_CAUSAL_IDENTIFIABILITY not closed,range/time controls not sufficient for causality,no
+GT_ATTACHED_CORRIDOR_STRUCTURAL_COUNTERFACTUAL_REJECTED,NOT_READY,corridor rows retain overlap-risk separation,contaminated corridors cannot reject background,no
+PERSISTENT_STRONG_STRUCTURAL_COUNTERFACTUAL_REJECTED,NOT_READY,fixed/persistent strong rendered only as minimal counterfactual,visual parity not enough for rejection,no
+VEHICLE_BODY_STRUCTURAL_DYNAMICS_SUPPORTED,PARTIAL,minimal selected windows show reviewable structure indices,not full sequence support,limited
+E0_R3_PHYSICAL_MECHANISM_SUPPORTED,NOT_READY,"requires near-side, dynamics, aspect causality, registration, and counterfactual closure",not closed in first audit,no

@@ -1,0 +1,8 @@
+failure_id,severity,evidence,interpretation
+E0_R1_ZERO_CONFUSION_WITHDRAWN,high,old G10 used is_vehicle and made non-vehicle pass impossible,zero confusion was a definition artifact
+E0_R2_RANGE_CONFOUNDER_REJECTION_WITHDRAWN,high,legacy range used image-origin distance; E0-R3 recomputes from fan center,range confounder rejection must be reaudited
+RESPONSE_INDEX_DOWNGRADED,medium,equal-weight mean of nine standardized descriptors,exploratory summary only
+SAME_ASPECT_REPEATABILITY_NOT_EVALUABLE,medium,E0-R2 different_aspect_similar_range pairs=0,cannot claim repeatability support
+AXIS_CONTINUITY_FAILURE_IN_REVIEW_SET,high,frames=388,canonical maps may flip or create false transport
+ASPECT_CAUSAL_IDENTIFIABILITY_NOT_READY,high,usable_pairs_exist_but_independent_control_family_or_collinearity_gate_not_closed,do not claim aspect-driven mechanism
+GT_ATTACHED_CORRIDOR_CONTAMINATED,medium,gt_attached_corridor_body_short,corridor cannot reject background explanation

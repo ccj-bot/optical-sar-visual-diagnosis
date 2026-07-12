@@ -1,0 +1,8 @@
+audit_item,value,status,evidence
+similar_range_different_aspect_pairs,83,PASS,range_delta<=0.75m;aspect_delta>=15deg;time_delta>=5
+similar_aspect_different_range_pairs,4,PASS,aspect_delta<=5deg;range_delta>=1m;time_delta>=5
+non_adjacent_similar_aspect_pairs,184,PASS,aspect_delta<=5deg;time_delta>=10
+different_aspect_similar_range_pairs,279,PASS,range_delta<=0.75m;aspect_delta>=10deg;time_delta>=5
+aspect_time_spearman,0.741615,PASS,monotonic_risk_threshold_abs_spearman>=0.85
+aspect_range_spearman,-0.982854,PARTIAL,collinearity_threshold_abs_spearman>=0.80
+ASPECT_CAUSAL_IDENTIFIABILITY,NOT_READY,NOT_READY,usable_pairs_exist_but_independent_control_family_or_collinearity_gate_not_closed
