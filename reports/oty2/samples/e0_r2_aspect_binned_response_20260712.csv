@@ -1,0 +1,17 @@
+split,aspect_bin_id,aspect_bin_low_deg,aspect_bin_high_deg,observable_frame_count,mean_response_index,mean_local_background_normalized_energy,mean_body_long_energy90_width_m,mean_body_short_energy90_width_m,mean_near_far_energy_ratio,mean_centroid_body_long_offset_m,threshold_source
+calibration,B1,44.300205,53.267262,8,-0.548562,1.010976,3.586123,1.51171,1.07025,0.021547,calibration_sar_le_360_bins
+calibration,B2,53.267262,62.234319,10,-0.436306,1.027904,3.220406,1.438614,1.096697,0.007867,calibration_sar_le_360_bins
+calibration,B3,62.234319,71.201376,12,0.214594,1.094021,3.198648,1.138764,1.172722,0.064476,calibration_sar_le_360_bins
+calibration,B4,71.201376,80.168433,7,0.882346,1.127608,3.636715,0.569588,1.240761,0.063852,calibration_sar_le_360_bins
+guard,B1,44.300205,53.267262,0,0,0,0,0,0,0,calibration_sar_le_360_bins
+guard,B2,53.267262,62.234319,0,0,0,0,0,0,0,calibration_sar_le_360_bins
+guard,B3,62.234319,71.201376,0,0,0,0,0,0,0,calibration_sar_le_360_bins
+guard,B4,71.201376,80.168433,0,0,0,0,0,0,0,calibration_sar_le_360_bins
+posthoc_diagnosis,B1,44.300205,53.267262,0,0,0,0,0,0,0,calibration_sar_le_360_bins
+posthoc_diagnosis,B2,53.267262,62.234319,0,0,0,0,0,0,0,calibration_sar_le_360_bins
+posthoc_diagnosis,B3,62.234319,71.201376,3,-0.131617,1.064365,3.113629,1.777282,1.082275,-0.022765,calibration_sar_le_360_bins
+posthoc_diagnosis,B4,71.201376,80.168433,11,-0.110212,1.073923,2.892422,1.569322,1.104236,-0.031696,calibration_sar_le_360_bins
+all,B1,44.300205,53.267262,8,-0.548562,1.010976,3.586123,1.51171,1.07025,0.021547,calibration_sar_le_360_bins
+all,B2,53.267262,62.234319,10,-0.436306,1.027904,3.220406,1.438614,1.096697,0.007867,calibration_sar_le_360_bins
+all,B3,62.234319,71.201376,15,0.145352,1.088089,3.181644,1.266468,1.154633,0.047028,calibration_sar_le_360_bins
+all,B4,71.201376,80.168433,18,0.275783,1.094801,3.18187,1.180537,1.157329,0.005461,calibration_sar_le_360_bins

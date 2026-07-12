@@ -1,0 +1,2 @@
+counterfactual_group,observable_frame_count,aspect_span_deg,abs_corr_response_index_aspect,mean_response_index,reproduces_vehicle_aspect_coupling,evaluation_note
+fixed_strong_scatterer,71,45.380729,0.301636,-5.391032,false,vehicle_abs_corr=0.601984;same_response_index_normalization

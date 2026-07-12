@@ -1,0 +1,4 @@
+counterfactual_group,observable_frame_count,aspect_span_deg,abs_corr_response_index_aspect,mean_response_index,reproduces_vehicle_aspect_coupling,evaluation_note
+fixed_known_non_vehicle_N005,71,45.380729,0.240127,-2.956461,false,vehicle_abs_corr=0.601984;same_response_index_normalization
+fixed_linear_structure,71,45.380729,0.100151,16.25011,false,vehicle_abs_corr=0.601984;same_response_index_normalization
+fixed_strong_scatterer,71,45.380729,0.301636,-5.391032,false,vehicle_abs_corr=0.601984;same_response_index_normalization

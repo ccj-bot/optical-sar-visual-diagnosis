@@ -1,0 +1,11 @@
+descriptor,observable_frame_count,corr_with_aspect,corr_with_absolute_range,corr_with_time,r2_aspect_only,r2_range_only,r2_time_only,r2_aspect_plus_range,r2_aspect_plus_time,threshold_source
+local_background_normalized_energy,71,0.766598,0.379827,0.387324,0.587672,0.144269,0.15002,0.681935,0.684759,calibration_model_form_no_fit_to_diagnosis
+high_energy_pixel_fraction,71,0.667595,0.347814,0.355657,0.445683,0.120975,0.126492,0.503903,0.504623,calibration_model_form_no_fit_to_diagnosis
+body_long_energy90_width_m,71,-0.430181,-0.375496,-0.377258,0.185055,0.140997,0.142323,0.190867,0.190542,calibration_model_form_no_fit_to_diagnosis
+body_short_energy90_width_m,71,-0.263487,0.089583,0.080726,0.069425,0.008025,0.006517,0.265224,0.263015,calibration_model_form_no_fit_to_diagnosis
+near_far_energy_ratio,71,0.667027,0.186541,0.196505,0.444925,0.034798,0.038614,0.682578,0.684869,calibration_model_form_no_fit_to_diagnosis
+energy_centroid_body_long_offset_m,71,-0.329496,-0.48936,-0.476412,0.108567,0.239474,0.226968,0.243413,0.230041,calibration_model_form_no_fit_to_diagnosis
+response_fragmentation_index,71,0.712641,0.787445,0.789781,0.507858,0.620069,0.623755,0.651847,0.651696,calibration_model_form_no_fit_to_diagnosis
+response_compactness,71,0.724486,0.220443,0.229588,0.524881,0.048595,0.052711,0.77708,0.781818,calibration_model_form_no_fit_to_diagnosis
+response_linearity,71,0.19579,-0.11947,-0.109527,0.038334,0.014273,0.011996,0.206255,0.201599,calibration_model_form_no_fit_to_diagnosis
+response_index,71,0.601984,0.237902,0.247951,0.362385,0.056597,0.06148,0.473606,0.47272,calibration_model_form_no_fit_to_diagnosis

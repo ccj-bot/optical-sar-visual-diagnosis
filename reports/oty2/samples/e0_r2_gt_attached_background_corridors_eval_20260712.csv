@@ -1,0 +1,5 @@
+counterfactual_group,observable_frame_count,aspect_span_deg,abs_corr_response_index_aspect,mean_response_index,reproduces_vehicle_aspect_coupling,evaluation_note
+body_long,288,45.380729,0.187234,0.282908,false,vehicle_abs_corr=0.601984;same_response_index_normalization
+body_short,288,45.380729,0.268226,1.502455,false,vehicle_abs_corr=0.601984;same_response_index_normalization
+local_azimuth,288,45.380729,0.358617,0.014451,false,vehicle_abs_corr=0.601984;same_response_index_normalization
+local_range,288,45.380729,0.231667,1.831724,false,vehicle_abs_corr=0.601984;same_response_index_normalization

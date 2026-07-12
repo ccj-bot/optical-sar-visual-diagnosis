@@ -1,0 +1,5 @@
+aspect_split,aspect_min_deg,aspect_max_deg,aspect_span_deg,aspect_step_median_deg,aspect_step_q90_deg,observable_frame_count,observable_high_frame_count,observable_medium_frame_count,unresolved_frame_count,median_aspect_ci_width_deg,calibration_aspect_span,guard_aspect_span,diagnosis_aspect_span,diagnosis_inside_calibration_domain,ASPECT_SPAN_SUFFICIENT,ASPECT_TEMPORAL_ORDER_VALID,ASPECT_UNCERTAINTY_BOUNDED
+calibration,44.300205,80.168433,35.868228,1.128249,2.39632,37,33,4,0,1.048169,35.868228,5.592755,18.756001,,PASS,PARTIAL,PASS
+guard,81.472382,87.065137,5.592755,0.842481,2.016996,10,1,9,0,0.705514,35.868228,5.592755,18.756001,,PARTIAL,NOT_EVALUABLE,PASS
+posthoc_diagnosis,70.924933,89.680934,18.756001,0.831359,2.463867,24,0,24,0,0.745718,35.868228,5.592755,18.756001,false,PARTIAL,PARTIAL,PASS
+all,44.300205,89.680934,45.380729,0.954409,2.40866,71,34,37,0,0.921609,35.868228,5.592755,18.756001,,PARTIAL,PARTIAL,PASS
