@@ -1,0 +1,18 @@
+gate_name,status,detail,source_file,sha256,row_count
+WORKTREE_BRANCH_VALID,PASS,checked before generation in required command sequence,,,
+PROJECT_CONFIRMED_CALIBRATION_APPLIED,PASS,"max_range_m=40.0; radial_grid_spacing_m_per_px=0.03; fan_center=(1154.0,1330.6)",,,
+GT_NOT_READ_DURING_GENERATION,PASS,generation artifacts record gt_file_opened=false,,,
+PAIRED_ANNOTATIONS_NOT_READ_DURING_GENERATION,PASS,generation artifacts record paired_annotations_opened=false,,,
+MASK_AUDIT_NOT_READ_DURING_GENERATION,PASS,generation artifacts record mask_audit_opened=false,,,
+FROZEN_REPLAY_IDENTICAL,PASS,replay_rows=7,,,
+OUTPUT_ROW_COUNT_STABLE,PASS,rows=250 expected=250,reports/oty2/samples/oty2_gm_rm019_static_physical_observation_field_rows_20260712.csv,e332ea6470494b7d4d80d2d4c4864b4169ced09635a408c4d162fe0c9c0e6e37,250
+UNIQUE_RESPONSE_UNIT_COUNT_STABLE,PASS,unique_response_unit_count=250,,,
+INDEPENDENT_GEOMETRY_COUNT_RECORDED,PASS,unique_conservative_bbox_count=215,,,
+THRESHOLD_STABILITY_RECOMPUTABLE,PASS,threshold_rows=750,,,
+SCALE_YAW_AUDIT_RECOMPUTABLE,PASS,scale_yaw_rows=250,,,
+COUNTERFACTUAL_TEMPLATE_BANK_READY,PASS,template_rows=9000,,,
+NO_SELECTOR_OUTPUT,PASS,no selector/ranking output names,,,
+NO_FINAL_BOX_OUTPUT,PASS,no final/revised/runtime/best-box output names,,,
+S2_PROTOCOL_WRITTEN_NOT_EXECUTED,PASS,main report contains next-stage protocol; no GT反事实判优 executed,,,
+ALLOWED_INPUT_HASH_LOCAL_RESPONSE_UNITS,PASS,allowed generation input hash,reports/oty2/samples/oty2_wgv3_6a_a1_8a_r2_1_r1_1_local_response_units_20260711.csv,83a62fb7ca01e91270c5c64ea63997b5676259ccfb5d22c3e8e789d37bdcaf64,250
+ALLOWED_INPUT_HASH_BOUNDARY_VARIANTS,PASS,allowed generation input hash,reports/oty2/samples/oty2_wgv3_6a_a1_8a_r2_1_r1_1_boundary_variant_families_20260711.csv,f76cc9d4caefa98310ac843116b9e1283073b3a18715630243a66346f30016ac,176

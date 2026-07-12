@@ -1,0 +1,15 @@
+summary_id,metric,count,mean,median,min,max,notes_cn
+FIELD_NUMERIC,absolute_range_m,250,4.618258,4.38394,2.104187,7.736485,physical observation field描述统计
+FIELD_NUMERIC,range_p80_width_m,250,1.367047,0.921395,0.095201,3.538813,physical observation field描述统计
+FIELD_NUMERIC,azimuth_p80_width_m,250,1.577525,1.176829,0.09842,3.843956,physical observation field描述统计
+FIELD_NUMERIC,principal_axis_angle_to_range_deg,250,54.23991,61.44578,0.073471,89.843151,physical observation field描述统计
+FIELD_NUMERIC,scale_yaw_residual_m,250,1.510877,1.827444,0.002171,3.154541,physical observation field描述统计
+FIELD_NUMERIC,min_extra_blur_margin_m,250,0,0,0,0,physical observation field描述统计
+FIELD_NUMERIC,distance_to_fan_boundary_m,250,3.114,2.718,1.458,5.808,physical observation field描述统计
+THRESHOLD_NUMERIC,threshold_stability_count,250,2.968,3,2,3,每个对象三档固定阈值中核心连通分量持续存在的次数
+THRESHOLD_NUMERIC,principal_axis_angle_std_deg,250,3.81161,2.119371,0.080379,21.146384,主轴角跨阈值稳定性
+SHAPE_CLASS,azimuth_dominant,105,,,,,range/azimuth p80米制展宽的形状代理分类
+SHAPE_CLASS,near_isotropic,122,,,,,range/azimuth p80米制展宽的形状代理分类
+SHAPE_CLASS,range_dominant,23,,,,,range/azimuth p80米制展宽的形状代理分类
+SCALE_YAW,vehicle_scale_yaw_feasible_count,98,,,,,软尺度-yaw一致性描述量，不是车辆确认或selector
+DISPLAY_FAN,touches_display_fan_boundary_count,0,,,,,显示扇形上下文，不是R2C pair-level物理MASK语义
