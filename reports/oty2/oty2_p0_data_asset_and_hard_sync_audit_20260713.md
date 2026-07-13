@@ -1,5 +1,7 @@
 # OTY2 P0 Data Asset and Hard-Sync Audit (20260713)
 
+> Post-audit stage decision: see `docs/OTY2_P0_EXIT_AND_P1_ENTRY_DECISION_20260713.md`. That independent document preserves the original `P0_DATA_FOUNDATION_PARTIALLY_READY` audit conclusion while recording the later operational hard-sync contract and bounded optical-only P1 entry decision. The audit-time conclusions below are intentionally unchanged.
+
 ## 1. 执行结论
 
 - P0 最终状态：`P0_DATA_FOUNDATION_PARTIALLY_READY`。

@@ -156,6 +156,15 @@ Lane D: optical-SAR temporal compatibility
 
 ## 9. Mandatory Reading Order For Future Sessions
 
+Current route-reset decision stack, in this order:
+
+1. `docs/OTY2_RESEARCH_ROUTE_RESET_RECORD_20260713.md`
+2. `docs/OTY2_DATA_FOUNDATION_AND_GLOBAL_IDENTITY_ROUTE_RESET.md`
+3. `reports/oty2/oty2_p0_data_asset_and_hard_sync_audit_20260713.md`
+4. `docs/OTY2_P0_EXIT_AND_P1_ENTRY_DECISION_20260713.md`
+
+The first three items are respectively the highest-level route basis, the execution contract, and the P0 evidence record. The fourth is the independent P0-exit/P1-entry stage decision. Then preserve the historical mechanism reading stack below.
+
 Every new OTY2-related session must first read:
 
 1. `docs/OTY2_SESSION_START_HERE.md`

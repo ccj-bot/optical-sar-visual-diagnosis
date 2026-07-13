@@ -1,10 +1,21 @@
 # OTY2 Data Foundation and Global Identity Route Reset
 
+## Document hierarchy and reading order
+
+1. `docs/OTY2_RESEARCH_ROUTE_RESET_RECORD_20260713.md`
+   - Highest-level research decision and complete route rationale.
+2. `docs/OTY2_DATA_FOUNDATION_AND_GLOBAL_IDENTITY_ROUTE_RESET.md`
+   - Execution contract for the current data foundation, global identity, coordinate, and mapping freeze boundaries.
+3. `reports/oty2/oty2_p0_data_asset_and_hard_sync_audit_20260713.md`
+   - P0 data evidence and reproducible audit result.
+
+The post-audit stage gate is recorded separately in `docs/OTY2_P0_EXIT_AND_P1_ENTRY_DECISION_20260713.md`. It preserves `P0_DATA_FOUNDATION_PARTIALLY_READY` while authorizing bounded optical-only P1 under the project operational hard-sync assumption.
+
 ## Purpose and boundary
 
-This document resets the optical-timeline-assisted SAR annotation route around data facts that must be established before any model work. The current executable scope is **P0 raw data assets and hard-sync foundation audit only**.
+This document resets the optical-timeline-assisted SAR annotation route around data facts that must be established before downstream cross-modal or SAR model work. Its original executable scope was **P0 raw data assets and hard-sync foundation audit only**. Current stage authorization is controlled by the independent P0-exit/P1-entry decision linked above.
 
-Until P0 is frozen, this route must not run or revise optical tracking, Working Graph construction, multi-vehicle identity merging, azimuth mapping, SAR candidate generation, Gate logic, selector/ranking, GT-driven box selection, GM_RM017 physical-factor experiments, SAR structural dynamics, training, threshold tuning, or final automatic annotation.
+Unless an independent stage decision explicitly authorizes a bounded exception, this route must not run or revise optical tracking, Working Graph construction, multi-vehicle identity merging, azimuth mapping, SAR candidate generation, Gate logic, selector/ranking, GT-driven box selection, GM_RM017 physical-factor experiments, SAR structural dynamics, training, threshold tuning, or final automatic annotation. The current exception authorizes optical-only P1 global physical-vehicle identity work; it does not authorize any SAR or cross-modal stage.
 
 ## Research principles
 
@@ -16,7 +27,7 @@ Until P0 is frozen, this route must not run or revise optical tracking, Working 
 6. The future azimuth mapping must be calibrated once from complete optical vehicle histories and high-quality SAR GT anchors, validated with physical-vehicle holdout, and then frozen.
 7. SAR imagery must have one unique metric coordinate system, an effective-imaging Mask, and explicit Mask semantics.
 8. A SAR vehicle must ultimately be represented as a canonical body response field, scattering-structure elements, and view-dependent structural state, not as a weighted score over several grayscale statistics.
-9. No later model research is allowed before P0 is complete.
+9. Cross-modal and SAR model research is not allowed before its foundations are frozen. Optical-only P1 may proceed only when an explicit independent stage decision authorizes it without changing the P0 overall state.
 
 ## Evidence-state separation
 
@@ -53,7 +64,7 @@ The following routes are frozen as historical evidence only and are not P0 input
 | Phase | Purpose | Entry condition | Output/freeze condition |
 | --- | --- | --- | --- |
 | P0 | Raw asset, numbering, lineage, rate-evidence, and common-start hard-sync audit | Clean branch from the approved posthoc baseline | Asset manifest, candidate or confirmed full-frame maps, missing-evidence list, and explicit P0 state |
-| P1 | Complete optical-stream offline trajectory reconstruction | `P0_DATA_FOUNDATION_READY` only | Complete optical observation graph with source provenance; no SAR identity authority |
+| P1 | Complete optical-stream offline global physical-vehicle identity reconstruction | Explicit `P1_OPTICAL_GLOBAL_IDENTITY_ALLOWED` decision; optical asset sub-foundation confirmed | Physical-vehicle threads and identity relations with source provenance; no SAR identity authority |
 | P2 | Global same-vehicle identity and multi-vehicle exclusive assignment | P1 optical observations frozen | Physical-vehicle threads with admission/occlusion/recovery/exit states and reviewable conflicts |
 | P3 | SAR coordinate system and effective-imaging Mask foundation | P0 asset lineage frozen; required imaging metadata available | Unique metric coordinate definition, Mask file, and frozen Mask semantics |
 | P4 | One-time azimuth mapping calibration | P2 vehicle threads and P3 coordinates frozen; high-quality SAR GT anchors available | Physical-vehicle holdout validation and frozen mapping parameters |
@@ -61,7 +72,7 @@ The following routes are frozen as historical evidence only and are not P0 input
 | P6 | Cross-modal inference and bounded SAR localization research | P2/P4/P5 frozen | Auditable optical prior plus SAR-localized structural prediction, without GT runtime leakage |
 | P7 | Final automatic annotation validation and release | P6 frozen and independently validated | Versioned automatic annotation contract, failure policy, and release audit |
 
-The dependency is strict: `P0 -> P1/P3 -> P2 -> P4 -> P5 -> P6 -> P7`. P1 is not automatically authorized by completing this document; it requires the P0 report to state `P0_DATA_FOUNDATION_READY`.
+The complete P0-P7 phase definitions are governed by `docs/OTY2_RESEARCH_ROUTE_RESET_RECORD_20260713.md`. P1 is not automatically authorized by this execution contract; its current bounded authorization is recorded by `docs/OTY2_P0_EXIT_AND_P1_ENTRY_DECISION_20260713.md`, without promoting the P0 overall state.
 
 ## Hard-sync contract for P0
 
