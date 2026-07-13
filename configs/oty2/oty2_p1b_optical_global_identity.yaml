@@ -1,0 +1,255 @@
+version: oty2_p1b_v1
+random_seed: 20260713
+scenes:
+  - GM_RM011
+  - GM_RM017
+  - GM_RM019
+
+paths:
+  source_repo_root: D:/profile/research/optical-sar-visual-diagnosis
+  optical_data_root: D:/profile/research/data
+  output_root: outputs/oty2_p1b_optical_global_identity_20260713
+  known_evidence: manifests/oty2/oty2_p1a_known_optical_identity_evidence.csv
+  observation_manifest: manifests/oty2/oty2_p1b_observation_alternative_clusters.csv
+  atomic_tracklet_manifest: manifests/oty2/oty2_p1b_atomic_tracklets.csv
+  evidence_roles_manifest: manifests/oty2/oty2_p1b_identity_evidence_roles.csv
+  edge_manifest: manifests/oty2/oty2_p1b_global_identity_edges.csv
+  thread_manifest: manifests/oty2/oty2_p1b_global_vehicle_threads.csv
+  thread_summary_manifest: manifests/oty2/oty2_p1b_global_vehicle_thread_summary.csv
+  review_manifest: manifests/oty2/oty2_p1b_global_identity_review_manifest.csv
+  report: reports/oty2/oty2_p1b_optical_global_identity_solver_20260713.md
+
+assets:
+  normalized_detection_dir: outputs/oty0_pretracking_observation_normalization_probe_20260705_024520
+  yolo26l_embedding_index: outputs/oty2_wgv3_3a_yolo26l_embedding_source_20260710_000000/oty2/crop_reid_embedding_probe_20260710_000000_yolo26l/crop_reid_embedding_index.csv
+  yolo26l_embedding_npz: outputs/oty2_wgv3_3a_yolo26l_embedding_source_20260710_000000/oty2/crop_reid_embedding_probe_20260710_000000_yolo26l/crop_reid_embeddings.npz
+  yolo26l_tracker_root: outputs/oty2_wgv3_3a_yolo26l_mot_replay_20260710_000000
+  yolo11l_tracker_root: outputs/oty1t_standard_mot_backbone_closure_20260705_110947
+
+parameters:
+  observation_alternative_iou:
+    value: 0.45
+    meaning: Cross-detector same-frame boxes at or above this IoU can be alternative observations of one visible subject.
+    source: P1-A duplicate-pressure audit plus conservative cross-source geometry.
+    role: hard_same_frame_observation_construction
+    data_tuned: false
+  observation_alternative_containment:
+    value: 0.72
+    meaning: Minimum smaller-box coverage used when one detector returns a partial body box inside a fuller body box.
+    source: P1-A partial/full-box failure taxonomy.
+    role: hard_same_frame_observation_construction
+    data_tuned: false
+  observation_alternative_center_ratio:
+    value: 0.55
+    meaning: Maximum normalized center separation for containment-based alternatives.
+    source: conservative image-geometry sanity bound.
+    role: hard_same_frame_observation_construction
+    data_tuned: false
+  atomic_max_internal_gap:
+    value: 1
+    meaning: Maximum missing-frame count retained inside an atomic tracker-seeded segment.
+    source: atomic-tracklet protocol requiring continuous or extremely short gaps.
+    role: hard_atomic_construction
+    data_tuned: false
+  atomic_motion_jump_ratio:
+    value: 1.8
+    meaning: Center displacement per frame divided by mean box diagonal that triggers a purity diagnostic when appearance or color also changes.
+    source: structural tracker-pollution diagnostic, deliberately permissive.
+    role: hard_atomic_split_diagnostic
+    data_tuned: false
+  atomic_appearance_cosine_floor:
+    value: 0.50
+    meaning: Appearance cosine below this value supports an automatic split only together with a large motion jump.
+    source: below the P1-A observed GM_RM017 minimum intra-tracklet cosine of 0.476059 after rounding to a conservative diagnostic floor.
+    role: hard_atomic_split_diagnostic
+    data_tuned: false
+  atomic_color_distance_trigger:
+    value: 0.42
+    meaning: Normalized central-crop Lab color distance supporting a split only with a large motion jump.
+    source: broad color-change diagnostic; not used as an identity Gate.
+    role: hard_atomic_split_diagnostic
+    data_tuned: false
+  max_transition_gap_frames:
+    value: 42
+    meaning: Longest optical gap represented by one direct tracklet transition edge.
+    source: 24 fps stream and P1-A long-window recovery cases; longer gaps remain unresolved births/exits.
+    role: hard_physical_feasibility
+    data_tuned: false
+  max_instant_displacement_base_px:
+    value: 150.0
+    meaning: Base image-plane displacement allowance before time-scaled motion allowance.
+    source: 800x600 fixed-camera geometry and near-field truncation allowance.
+    role: hard_physical_feasibility
+    data_tuned: false
+  max_instant_displacement_per_frame_px:
+    value: 55.0
+    meaning: Additional conservative displacement allowance per elapsed frame.
+    source: fixed-camera full-stream vehicle motion envelope chosen to reject only obvious teleportation.
+    role: hard_physical_feasibility
+    data_tuned: false
+  credible_yolo26l_confidence:
+    value: 0.25
+    meaning: An otherwise unsupported YOLO26l observation above this confidence contributes to the credible-observation objective.
+    source: P1-A low-confidence audit; tracker and multi-source support can admit lower-confidence rows.
+    role: soft_coverage_credibility
+    data_tuned: false
+  credible_yolo11l_confidence:
+    value: 0.35
+    meaning: An otherwise unsupported YOLO11l supplement above this confidence contributes to the credible-observation objective.
+    source: P1-A designation of YOLO11l as controlled supplement with higher low-confidence load.
+    role: soft_coverage_credibility
+    data_tuned: false
+  minimum_credible_tracklet_frames:
+    value: 3
+    meaning: Minimum locally supported duration before an atomic tracklet contributes mandatory credible-coverage reward; shorter fragments remain available only as globally useful bridge evidence.
+    source: P1 protocol forbids turning a single new box into a permanent identity and requires a stable visible lifecycle; three frames is the smallest nontrivial local motion sequence.
+    role: soft_coverage_credibility
+    data_tuned: false
+  long_gap_review_frames:
+    value: 6
+    meaning: Selected transitions longer than this are mandatory visual-review events.
+    source: more than 0.25 seconds at 24 fps.
+    role: review_policy
+    data_tuned: false
+  high_risk_transition_cost:
+    value: 315
+    meaning: Selected edges at or above this integer soft-evidence cost enter mandatory review.
+    source: audit-oriented upper-cost band, not a feasibility threshold.
+    role: review_policy
+    data_tuned: false
+  stability_perturbation_fraction:
+    value: 0.15
+    meaning: Symmetric limited perturbation applied to a small set of soft evidence weights.
+    source: P1-B requirement for finite sensitivity analysis without parameter search.
+    role: diagnostic_only
+    data_tuned: false
+
+soft_costs:
+  birth_cost:
+    value: 120
+    meaning: Cost for explaining a selected atomic tracklet as a new vehicle birth or entry.
+    source: direct P1-B full-thread visual review showed that 150 over-merged clear exit/new-entry lifecycles; reduced once to keep a new lifecycle cheaper than a visibly inconsistent bridge.
+    role: soft_lifecycle_cost
+    data_tuned: true
+  exit_cost:
+    value: 120
+    meaning: Cost for explaining a selected atomic tracklet as a vehicle exit or terminal disappearance.
+    source: symmetric with the one-time visually justified birth-cost correction.
+    role: soft_lifecycle_cost
+    data_tuned: true
+  motion_weight:
+    value: 110
+    meaning: Integer multiplier for normalized constant-velocity residual.
+    source: motion is the strongest generic fixed-camera continuity cue.
+    role: soft_transition_cost
+    data_tuned: false
+  appearance_weight:
+    value: 70
+    meaning: Integer multiplier for one minus ResNet18 cosine similarity.
+    source: P1-A treats ImageNet appearance as useful but weaker than motion.
+    role: soft_transition_cost
+    data_tuned: false
+  color_weight:
+    value: 55
+    meaning: Integer multiplier for normalized Lab central-crop color distance.
+    source: optical color is a strong identity cue but cannot decide alone.
+    role: soft_transition_cost
+    data_tuned: false
+  shape_weight:
+    value: 45
+    meaning: Integer multiplier for aspect-ratio and area-change inconsistency.
+    source: P1 protocol shape and scale continuity evidence.
+    role: soft_transition_cost
+    data_tuned: false
+  gap_weight:
+    value: 65
+    meaning: Integer multiplier for normalized missing-frame length.
+    source: unsupported long gaps require stronger overall evidence.
+    role: soft_transition_cost
+    data_tuned: false
+  tracker_support_bonus:
+    value: 80
+    meaning: Cost reduction when independent provenance supports the transition through a shared tracker identity.
+    source: trackers are local continuity evidence, never physical identity truth.
+    role: soft_transition_cost
+    data_tuned: false
+  cross_detector_penalty:
+    value: 8
+    meaning: Small cost for changing selected detector source across a transition.
+    source: detector changes are allowed and reviewed; provenance continuity is mildly preferred.
+    role: soft_transition_cost
+    data_tuned: false
+  missing_feature_penalty:
+    value: 18
+    meaning: Cost for an edge lacking appearance or color evidence.
+    source: missing evidence lowers stability but does not forbid a relation.
+    role: soft_transition_cost
+    data_tuned: false
+
+forced_split_windows:
+  GM_RM011:
+    - [18, 30, GM011_P1A_E003_subject_switch]
+    - [135, 166, GM011_P1A_E004_occlusion_subject_switch]
+  GM_RM017:
+    - [118, 214, GM017_P1A_E010_multisubject_stream]
+  GM_RM019: []
+
+hard_nonvehicle_rules:
+  - scene: GM_RM017
+    frame_start: 80
+    frame_end: 117
+    tracker_ids: []
+    evidence_id: GM017_P1A_E001
+  - scene: GM_RM017
+    frame_start: 121
+    frame_end: 129
+    tracker_ids: [YOLO11l:botsort:bs_0002]
+    evidence_id: GM017_P1A_E002
+  - scene: GM_RM019
+    frame_start: 259
+    frame_end: 261
+    tracker_ids: [YOLO26l:botsort:bs_0083, YOLO26l:bytetrack:bt_0090]
+    evidence_id: GM019_P1A_E008
+
+hard_forbidden_tracker_pairs:
+  - scene: GM_RM011
+    a: YOLO11l:botsort:bs_0061
+    b: YOLO11l:botsort:bs_0064
+    evidence_id: GM011_P1A_E013
+  - scene: GM_RM011
+    a: YOLO11l:botsort:bs_0056
+    b: YOLO11l:botsort:bs_0061
+    evidence_id: GM011_P1A_E014
+  - scene: GM_RM017
+    a: YOLO11l:botsort:bs_0008
+    b: YOLO11l:botsort:bs_0012
+    evidence_id: GM017_P1A_E007
+
+hard_forbidden_anchor_pairs:
+  - scene: GM_RM011
+    evidence_id: GM011_P1A_E002
+    a: {frame: 10, selector: largest_area}
+    b: {frame: 33, selector: largest_area}
+  - scene: GM_RM011
+    evidence_id: GM011_P1A_E006
+    a: {frame: 237, selector: rightmost}
+    b: {frame: 245, selector: leftmost}
+  - scene: GM_RM019
+    evidence_id: GM019_P1A_E006
+    a: {frame: 120, selector: largest_area}
+    b: {frame: 165, selector: largest_area}
+
+heldout_evidence_ids:
+  - GM011_P1A_E005
+  - GM011_P1A_E007
+  - GM011_P1A_E008
+  - GM011_P1A_E011
+  - GM011_P1A_E012
+  - GM017_P1A_E003
+  - GM017_P1A_E004
+  - GM017_P1A_E005
+  - GM017_P1A_E006
+  - GM019_P1A_E001
+  - GM019_P1A_E004
+  - GM019_P1A_E005
+  - GM019_P1A_E007
