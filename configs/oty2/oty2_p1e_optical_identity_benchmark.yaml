@@ -1,0 +1,106 @@
+version: oty2_p1e_optical_identity_benchmark_v1
+date: 2026-07-14
+source_boundary: optical_only_no_sar_no_gt
+stage_status: P1E_OPTICAL_IDENTITY_BENCHMARK_READY
+visual_review_complete: true
+p1f_entry_allowed: true
+p2_entry_allowed: false
+benchmark_runtime_separation: true
+
+inputs:
+  p1d_registry: manifests/oty2/oty2_p1d_physical_vehicle_registry.csv
+  p1c_threads: manifests/oty2/oty2_p1c_global_vehicle_threads.csv
+  p1c_atomic_tracklets: manifests/oty2/oty2_p1c_atomic_tracklets.csv
+  p1c_observations: manifests/oty2/oty2_p1c_observation_alternative_clusters.csv
+  normalized_detection_tables:
+    GM_RM011:
+      YOLO11l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM011_yolo11l_baseline_normalized_detection_table.csv'
+      YOLO26l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM011_yolo26l_probe_normalized_detection_table.csv'
+    GM_RM017:
+      YOLO11l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM017_yolo11l_baseline_normalized_detection_table.csv'
+      YOLO26l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM017_yolo26l_probe_normalized_detection_table.csv'
+    GM_RM019:
+      YOLO11l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM019_yolo11l_baseline_normalized_detection_table.csv'
+      YOLO26l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM019_yolo26l_probe_normalized_detection_table.csv'
+
+outputs:
+  canonical_registry: manifests/oty2/oty2_p1e_canonical_optical_vehicle_registry.csv
+  frame_states: manifests/oty2/oty2_p1e_canonical_vehicle_frame_states.csv
+  detection_map: manifests/oty2/oty2_p1e_detection_to_canonical_identity_map.csv
+  failure_inventory: manifests/oty2/oty2_p1e_optical_observation_failure_inventory.csv
+  fragmentation_attribution: manifests/oty2/oty2_p1e_atomic_tracklet_fragmentation_attribution.csv
+  benchmark_roles: manifests/oty2/oty2_p1e_identity_benchmark_roles.csv
+  report: reports/oty2/oty2_p1e_optical_identity_benchmark_and_observation_audit_20260714.md
+
+canonical_overrides:
+  GM_RM011:PV005:
+    frame_first_visible: 87
+    frame_last_visible: 130
+    visible_frame_ranges: 87-130
+    occlusion_or_missed_ranges: ''
+    identity_evidence_summary: The white Nissan sedan is already partially visible at the left boundary in frame 87; both existing detector boxes correctly observe that entering vehicle, while PV004 remains visible at the right boundary in the same frame.
+  GM_RM019:PV003:
+    frame_first_visible: 98
+    frame_last_visible: 143
+    visible_frame_ranges: 98-143
+    occlusion_or_missed_ranges: ''
+    identity_evidence_summary: The silver MPV first enters at frame 98 and remains visible through frame 143; all earlier GV004 observations are non-vehicle fragments and pedestrians.
+
+direct_reference_keyframes:
+  GM_RM011:PV005:
+    87: [0, 296, 51, 420]
+  GM_RM011:PV004:
+    56: [0, 105, 800, 600]
+    60: [0, 195, 800, 600]
+    70: [20, 245, 800, 600]
+    80: [590, 300, 800, 600]
+    87: [775, 340, 800, 600]
+  GM_RM011:PV009:
+    167: [0, 245, 540, 600]
+    175: [0, 275, 800, 600]
+    183: [0, 310, 800, 600]
+    187: [250, 330, 800, 600]
+    192: [510, 275, 800, 600]
+    196: [750, 295, 800, 600]
+  GM_RM011:PV014:
+    307: [0, 320, 250, 600]
+    315: [0, 305, 560, 600]
+    320: [0, 255, 800, 600]
+    328: [155, 280, 800, 600]
+    336: [705, 335, 800, 600]
+
+benchmark_roles:
+  development:
+    - GM_RM011:PV001
+    - GM_RM011:PV002
+    - GM_RM011:PV005
+    - GM_RM011:PV006
+    - GM_RM011:PV007
+    - GM_RM011:PV010
+    - GM_RM011:PV011
+    - GM_RM011:PV012
+    - GM_RM017:PV001
+    - GM_RM017:PV002
+    - GM_RM019:PV001
+  heldout_validation:
+    - GM_RM011:PV003
+    - GM_RM011:PV008
+    - GM_RM011:PV013
+    - GM_RM017:PV003
+    - GM_RM017:PV004
+    - GM_RM019:PV002
+    - GM_RM019:PV004
+  diagnostic_only:
+    - GM_RM011:PV004
+    - GM_RM011:PV009
+    - GM_RM011:PV014
+    - GM_RM019:PV003
+
+forbidden_actions:
+  - read_sar
+  - read_sar_gt
+  - start_p2
+  - modify_p1c_solver
+  - runtime_manual_override
+  - train_detector_or_reid
+  - use_benchmark_as_runtime_prediction
