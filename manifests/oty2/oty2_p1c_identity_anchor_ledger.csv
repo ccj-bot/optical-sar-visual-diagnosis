@@ -1,0 +1,12 @@
+evidence_id,scene,review_window_start,review_window_end,identity_anchor_start,identity_anchor_end,anchor_semantics,input_to_solver,notes
+GM011_P1A_E001,GM_RM011,0,18,0,18,visible same-vehicle anchor pair,false,Development evidence only.
+GM011_P1A_E005,GM_RM011,151,166,151,166,visible same-vehicle anchor pair,false,Heldout validation only.
+GM011_P1A_E007,GM_RM011,245,262,245,262,visible same-vehicle anchor pair,false,Heldout validation only.
+GM017_P1A_E003,GM_RM017,118,164,118,164,visible same-vehicle anchor pair,false,Heldout validation only.
+GM017_P1A_E004,GM_RM017,145,185,145,185,visible same-vehicle anchor pair,false,Heldout validation only.
+GM017_P1A_E005,GM_RM017,151,200,151,200,visible same-vehicle anchor pair,false,Heldout validation only.
+GM017_P1A_E006,GM_RM017,162,214,162,214,visible same-vehicle anchor pair,false,Heldout validation only.
+GM019_P1A_E001,GM_RM019,0,29,0,14,black sedan visible lifecycle anchors,false,Frame 29 is the review-window end and belongs to the overlapping white MPV lifecycle.
+GM019_P1A_E002,GM_RM019,14,49,14,43,white MPV visible lifecycle anchors,false,Development evidence only; frame 49 is review context after exit.
+GM019_P1A_E004,GM_RM019,99,143,99,143,visible same-vehicle anchor pair,false,Heldout validation only.
+GM019_P1A_E005,GM_RM019,149,183,149,183,visible same-vehicle anchor pair,false,Heldout validation only.

@@ -1,0 +1,31 @@
+base_config: configs/oty2/oty2_p1b_optical_global_identity.yaml
+
+version: oty2_p1c_v1
+
+paths:
+  output_root: outputs/oty2_p1c_global_identity_failure_repair_20260714
+  observation_manifest: manifests/oty2/oty2_p1c_observation_alternative_clusters.csv
+  atomic_tracklet_manifest: manifests/oty2/oty2_p1c_atomic_tracklets.csv
+  evidence_roles_manifest: manifests/oty2/oty2_p1c_identity_evidence_roles.csv
+  edge_manifest: manifests/oty2/oty2_p1c_global_identity_edges.csv
+  thread_manifest: manifests/oty2/oty2_p1c_global_vehicle_threads.csv
+  thread_summary_manifest: manifests/oty2/oty2_p1c_global_vehicle_thread_summary.csv
+  review_manifest: manifests/oty2/oty2_p1c_global_identity_review_manifest.csv
+  report: reports/oty2/oty2_p1c_global_identity_failure_repair_20260714.md
+  identity_anchor_ledger: manifests/oty2/oty2_p1c_identity_anchor_ledger.csv
+
+p1c:
+  local_supplement_chaining_enabled: true
+  overlap_fragment_union_enabled: true
+  boundary_reentry_turnover_enabled: true
+  second_order_boundary_reentry_enabled: true
+  subject_switch_lifecycle_reset_enabled: true
+  boundary_reentry_turnover_multiplier: 1.0
+  mechanism_notes:
+    - Chain only untracked same-source observations with one-to-one local geometry/color support.
+    - Union same-source tracklet fragments only when they overlap for at most the existing atomic gap allowance and every overlap frame satisfies the existing containment/center agreement.
+    - Never cross configured subject-switch boundaries and never restore a tracker ID as an indivisible node.
+    - Charge an exit-plus-birth lifecycle reset cost only to a mandatory-review long gap that re-enters from the opposite boundary or moves back into the image from the same boundary after an apparent exit.
+    - Apply the same soft reset to a two-edge path when one short bridge node would otherwise bypass the direct boundary-reentry term.
+    - Allow a subject-switch split to reconnect only through a zero-gap edge with explicit shared-tracker continuity; unrelated predecessors entering the split fragment pay the same lifecycle reset as exit-plus-birth.
+    - The turnover term is soft and contains no scene name, frame number, edge ID, SAR, SAR GT, or manual override.

@@ -144,6 +144,7 @@ class Edge:
     shared_trackers: list[str]
     detector_change: bool
     missing_feature_count: int
+    turnover_reset_penalty: int
     total_cost: int
     selected: bool = False
     rejection_reason: str = "not_selected_by_global_solver"
@@ -299,7 +300,26 @@ def central_lab_feature(image_path: Path, bbox: Sequence[float]) -> np.ndarray |
 
 def load_config(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
-        return yaml.safe_load(handle)
+        config = yaml.safe_load(handle)
+    base_config = config.get("base_config") if isinstance(config, dict) else None
+    if not base_config:
+        return config
+    base_path = Path(base_config)
+    if not base_path.is_absolute():
+        base_path = path.resolve().parents[2] / base_path
+    base = load_config(base_path)
+
+    def merge(target: dict[str, Any], overlay: Mapping[str, Any]) -> dict[str, Any]:
+        for key, value in overlay.items():
+            if key == "base_config":
+                continue
+            if isinstance(value, Mapping) and isinstance(target.get(key), dict):
+                merge(target[key], value)
+            else:
+                target[key] = value
+        return target
+
+    return merge(base, config)
 
 
 def scene_asset_paths(source_root: Path, scene: str, config: Mapping[str, Any]) -> dict[str, Path]:
@@ -513,6 +533,125 @@ def make_tracklet(scene: str, source: str, seed: str, index: int, obs_rows: list
     )
 
 
+def build_local_supplement_chains(singles: Sequence[Observation], config: Mapping[str, Any]) -> list[list[Observation]]:
+    """Form short, high-confidence local chains without restoring tracker IDs.
+
+    The matcher is deliberately limited to one-to-one consecutive/near-consecutive
+    observations from the same detector source.  It reuses the existing P1-B
+    geometry and color thresholds and respects every configured subject-switch
+    boundary.
+    """
+
+    max_elapsed = int(param(config, "parameters", "atomic_max_internal_gap")) + 1
+    iou_floor = param(config, "parameters", "observation_alternative_iou")
+    containment_floor = param(config, "parameters", "observation_alternative_containment")
+    center_floor = param(config, "parameters", "observation_alternative_center_ratio")
+    color_trigger = param(config, "parameters", "atomic_color_distance_trigger")
+    by_stream: dict[tuple[str, str], dict[int, list[Observation]]] = defaultdict(lambda: defaultdict(list))
+    for obs in singles:
+        by_stream[(obs.scene, obs.source)][obs.frame].append(obs)
+
+    completed: list[list[Observation]] = []
+    for (scene, _source), frame_rows in sorted(by_stream.items()):
+        active: list[list[Observation]] = []
+        for frame in sorted(frame_rows):
+            retained = []
+            for chain in active:
+                if frame - chain[-1].frame <= max_elapsed:
+                    retained.append(chain)
+                else:
+                    completed.append(chain)
+            active = retained
+            current = sorted(frame_rows[frame], key=lambda o: (o.center[0], o.det_id))
+            candidates: list[tuple[float, int, int]] = []
+            for cidx, chain in enumerate(active):
+                previous = chain[-1]
+                elapsed = frame - previous.frame
+                if elapsed <= 0 or elapsed > max_elapsed or forced_split_reason(scene, previous.frame, frame, config):
+                    continue
+                for oidx, obs in enumerate(current):
+                    iou = bbox_iou(previous.bbox, obs.bbox)
+                    containment = bbox_containment(previous.bbox, obs.bbox)
+                    center = normalized_center_distance(previous, obs)
+                    color = None if previous.cluster_color is None or obs.cluster_color is None else float(np.linalg.norm(previous.cluster_color - obs.cluster_color))
+                    geometry_ok = iou >= iou_floor or (containment >= containment_floor and center <= center_floor)
+                    local_motion_ok = center <= center_floor and (color is None or color <= color_trigger)
+                    if not (geometry_ok or local_motion_ok):
+                        continue
+                    score = 2.0 * iou + containment - 0.5 * center - 0.25 * (color or 0.0) - 0.1 * (elapsed - 1)
+                    candidates.append((score, cidx, oidx))
+            used_chains: set[int] = set()
+            used_obs: set[int] = set()
+            for _score, cidx, oidx in sorted(candidates, reverse=True):
+                if cidx in used_chains or oidx in used_obs:
+                    continue
+                active[cidx].append(current[oidx])
+                used_chains.add(cidx)
+                used_obs.add(oidx)
+            for oidx, obs in enumerate(current):
+                if oidx not in used_obs:
+                    active.append([obs])
+        completed.extend(active)
+    return completed
+
+
+def merge_overlapping_local_tracklets(tracklets: Sequence[Tracklet], config: Mapping[str, Any]) -> list[Tracklet]:
+    """Union short same-source fragments when every overlapping frame agrees.
+
+    This handles partial-to-full tracker handoffs that overlap briefly in time.
+    It does not use tracker identity as truth: the merge requires strong bbox
+    containment/center agreement on all overlapping frames and cannot cross a
+    configured subject-switch boundary.
+    """
+
+    containment_floor = param(config, "parameters", "observation_alternative_containment")
+    center_floor = param(config, "parameters", "observation_alternative_center_ratio")
+    max_overlap = int(param(config, "parameters", "atomic_max_internal_gap")) + 1
+    working = list(tracklets)
+    changed = True
+    while changed:
+        changed = False
+        ordered = sorted(range(len(working)), key=lambda idx: (working[idx].scene, working[idx].source, working[idx].start, working[idx].end, working[idx].tracklet_id))
+        for left_pos, left_idx in enumerate(ordered):
+            a = working[left_idx]
+            for right_idx in ordered[left_pos + 1 :]:
+                b = working[right_idx]
+                if b.scene != a.scene or b.source != a.source:
+                    continue
+                if b.start > a.end or b.end <= a.end:
+                    continue
+                overlap_frames = sorted({o.frame for o in a.observations} & {o.frame for o in b.observations})
+                if not overlap_frames or len(overlap_frames) > max_overlap:
+                    continue
+                if forced_split_reason(a.scene, a.start, b.end, config):
+                    continue
+                a_by_frame = {o.frame: o for o in a.observations}
+                b_by_frame = {o.frame: o for o in b.observations}
+                compatible = True
+                for frame in overlap_frames:
+                    left = a_by_frame[frame]
+                    right = b_by_frame[frame]
+                    if bbox_containment(left.bbox, right.bbox) < containment_floor or normalized_center_distance(left, right) > center_floor:
+                        compatible = False
+                        break
+                if not compatible:
+                    continue
+                merged_by_frame: dict[int, Observation] = {}
+                for obs in sorted(a.observations + b.observations, key=lambda o: (o.frame, -o.area, -o.confidence)):
+                    merged_by_frame.setdefault(obs.frame, obs)
+                merged_rows = [merged_by_frame[frame] for frame in sorted(merged_by_frame)]
+                index_match = re.search(r"AT(\d+)$", a.tracklet_id)
+                index = int(index_match.group(1)) if index_match else 1
+                merged = make_tracklet(a.scene, a.source, f"{a.seed_track_id}|{b.seed_track_id}", index, merged_rows, "local_overlap_fragment_union", config)
+                working[left_idx] = merged
+                del working[right_idx]
+                changed = True
+                break
+            if changed:
+                break
+    return working
+
+
 def build_tracklets(observations: Sequence[Observation], config: Mapping[str, Any]) -> list[Tracklet]:
     max_gap = int(param(config, "parameters", "atomic_max_internal_gap"))
     motion_trigger = param(config, "parameters", "atomic_motion_jump_ratio")
@@ -556,9 +695,18 @@ def build_tracklets(observations: Sequence[Observation], config: Mapping[str, An
         if segment:
             per_scene_counter[scene] += 1
             all_tracklets.append(make_tracklet(scene, source, seed, per_scene_counter[scene], segment, next_reason, config))
-    for obs in sorted(singles, key=lambda o: (o.scene, o.frame, o.source, o.det_id)):
-        per_scene_counter[obs.scene] += 1
-        all_tracklets.append(make_tracklet(obs.scene, obs.source, "untracked", per_scene_counter[obs.scene], [obs], "supplement_singleton", config))
+    p1c = config.get("p1c", {})
+    if bool(p1c.get("local_supplement_chaining_enabled", False)):
+        supplement_chains = build_local_supplement_chains(singles, config)
+    else:
+        supplement_chains = [[obs] for obs in sorted(singles, key=lambda o: (o.scene, o.frame, o.source, o.det_id))]
+    for chain in sorted(supplement_chains, key=lambda rows: (rows[0].scene, rows[0].frame, rows[-1].frame, rows[0].source, rows[0].det_id)):
+        scene = chain[0].scene
+        per_scene_counter[scene] += 1
+        reason = "local_high_confidence_continuity" if len(chain) > 1 else "supplement_singleton"
+        all_tracklets.append(make_tracklet(scene, chain[0].source, "local_supplement_chain" if len(chain) > 1 else "untracked", per_scene_counter[scene], chain, reason, config))
+    if bool(p1c.get("overlap_fragment_union_enabled", False)):
+        all_tracklets = merge_overlapping_local_tracklets(all_tracklets, config)
     return sorted(all_tracklets, key=lambda t: (t.scene, t.start, t.end, t.tracklet_id))
 
 
@@ -606,6 +754,30 @@ def transition_features(a: Tracklet, b: Tracklet, scene_observations: Sequence[O
     total += param(config, "soft_costs", "missing_feature_penalty") * missing
     total -= param(config, "soft_costs", "tracker_support_bonus") * float(bool(shared_trackers))
     total -= 12.0 * boundary_support * min(1.0, gap_norm + 0.25)
+    turnover_reset_penalty = 0
+    p1c = config.get("p1c", {})
+    opposite_horizontal_boundaries = (
+        ("left" in a.last.border_state and "right" in b.first.border_state)
+        or ("right" in a.last.border_state and "left" in b.first.border_state)
+    )
+    same_boundary_reentry = (
+        ("right" in a.last.border_state and "right" in b.first.border_state and b.first.center[0] < a.last.center[0])
+        or ("left" in a.last.border_state and "left" in b.first.border_state and b.first.center[0] > a.last.center[0])
+    )
+    boundary_reentry = opposite_horizontal_boundaries or same_boundary_reentry
+    turnover_gap_floor = int(param(config, "parameters", "long_gap_review_frames"))
+    boundary_turnover = bool(p1c.get("boundary_reentry_turnover_enabled", False)) and gap > turnover_gap_floor and boundary_reentry
+    locally_supported_subject_switch_continuation = gap == 0 and bool(shared_trackers)
+    subject_switch_reset = (
+        bool(p1c.get("subject_switch_lifecycle_reset_enabled", False))
+        and "subject_switch" in b.split_reason
+        and not locally_supported_subject_switch_continuation
+    )
+    if boundary_turnover or subject_switch_reset:
+        multiplier = float(p1c.get("boundary_reentry_turnover_multiplier", 1.0))
+        turnover_reset_penalty = int(round(multiplier * (param(config, "soft_costs", "birth_cost") + param(config, "soft_costs", "exit_cost"))))
+        total += turnover_reset_penalty
+        total = max(total, float(turnover_reset_penalty))
     return {
         "gap": gap,
         "motion": motion,
@@ -618,6 +790,7 @@ def transition_features(a: Tracklet, b: Tracklet, scene_observations: Sequence[O
         "shared_trackers": shared_trackers,
         "detector_change": a.source != b.source,
         "missing_feature_count": missing,
+        "turnover_reset_penalty": turnover_reset_penalty,
         "total_cost": max(0, int(round(total))),
     }
 
@@ -641,6 +814,41 @@ def build_edges(tracklets: Sequence[Tracklet], observations: Sequence[Observatio
             edge_id = f"{a.scene}:E{len(edges)+1:06d}"
             edges.append(Edge(scene=a.scene, edge_id=edge_id, src=i, dst=j, **features))
     return edges
+
+
+def is_boundary_reentry(a: Tracklet, c: Tracklet) -> bool:
+    opposite = (
+        ("left" in a.last.border_state and "right" in c.first.border_state)
+        or ("right" in a.last.border_state and "left" in c.first.border_state)
+    )
+    same_side_inward = (
+        ("right" in a.last.border_state and "right" in c.first.border_state and c.first.center[0] < a.last.center[0])
+        or ("left" in a.last.border_state and "left" in c.first.border_state and c.first.center[0] > a.last.center[0])
+    )
+    return opposite or same_side_inward
+
+
+def build_second_order_turnovers(tracklets: Sequence[Tracklet], edges: Sequence[Edge], config: Mapping[str, Any]) -> list[tuple[int, int, int]]:
+    if not bool(config.get("p1c", {}).get("second_order_boundary_reentry_enabled", False)):
+        return []
+    outgoing: dict[int, list[int]] = defaultdict(list)
+    for eidx, edge in enumerate(edges):
+        outgoing[edge.src].append(eidx)
+    gap_floor = int(param(config, "parameters", "long_gap_review_frames"))
+    multiplier = float(config.get("p1c", {}).get("boundary_reentry_turnover_multiplier", 1.0))
+    penalty = int(round(multiplier * (param(config, "soft_costs", "birth_cost") + param(config, "soft_costs", "exit_cost"))))
+    triplets: list[tuple[int, int, int]] = []
+    for first_idx, first in enumerate(edges):
+        for second_idx in outgoing.get(first.dst, []):
+            second = edges[second_idx]
+            if first.turnover_reset_penalty or second.turnover_reset_penalty:
+                continue
+            source = tracklets[first.src]
+            target = tracklets[second.dst]
+            total_gap = target.start - source.end - 1
+            if total_gap > gap_floor and is_boundary_reentry(source, target):
+                triplets.append((first_idx, second_idx, penalty))
+    return triplets
 
 
 def anchor_cluster(scene: str, spec: Mapping[str, Any], observations: Sequence[Observation]) -> str:
@@ -692,8 +900,11 @@ def create_constraint_matrix(nvar: int, rows: Sequence[tuple[dict[int, float], f
 def solve_milp(tracklets: Sequence[Tracklet], edges: Sequence[Edge], config: Mapping[str, Any], forbidden_edge_ids: set[str]) -> tuple[np.ndarray, dict[str, Any]]:
     n = len(tracklets)
     m = len(edges)
+    second_order = build_second_order_turnovers(tracklets, edges, config)
+    q = len(second_order)
     x0, y0, b0, d0 = 0, n, n + m, n + m + n
-    nvar = 3 * n + m
+    z0 = 3 * n + m
+    nvar = z0 + q
     incoming: dict[int, list[int]] = defaultdict(list)
     outgoing: dict[int, list[int]] = defaultdict(list)
     for eidx, edge in enumerate(edges):
@@ -716,6 +927,13 @@ def solve_milp(tracklets: Sequence[Tracklet], edges: Sequence[Edge], config: Map
     for nodes in cluster_nodes.values():
         if len(nodes) > 1:
             rows.append(({x0 + idx: 1.0 for idx in nodes}, -np.inf, 1.0))
+    for zidx, (first_edge, second_edge, _penalty) in enumerate(second_order):
+        z = z0 + zidx
+        y_first = y0 + first_edge
+        y_second = y0 + second_edge
+        rows.append(({z: 1.0, y_first: -1.0}, -np.inf, 0.0))
+        rows.append(({z: 1.0, y_second: -1.0}, -np.inf, 0.0))
+        rows.append(({z: 1.0, y_first: -1.0, y_second: -1.0}, -1.0, np.inf))
     lower = np.zeros(nvar)
     upper = np.ones(nvar)
     for eidx, edge in enumerate(edges):
@@ -738,6 +956,8 @@ def solve_milp(tracklets: Sequence[Tracklet], edges: Sequence[Edge], config: Map
     c3[d0 : d0 + n] = param(config, "soft_costs", "exit_cost")
     for eidx, edge in enumerate(edges):
         c3[y0 + eidx] = edge.total_cost
+    for zidx, (_first_edge, _second_edge, penalty) in enumerate(second_order):
+        c3[z0 + zidx] = penalty
     result3 = milp(c3, integrality=integrality, bounds=bounds, constraints=create_constraint_matrix(nvar, rows3), options={"time_limit": 300})
     if not result3.success or result3.x is None:
         raise RuntimeError(f"lifecycle stage failed: {result3.message}")
@@ -748,6 +968,8 @@ def solve_milp(tracklets: Sequence[Tracklet], edges: Sequence[Edge], config: Map
         identity_coeffs[d0 + idx] = param(config, "soft_costs", "exit_cost")
     for eidx, edge in enumerate(edges):
         identity_coeffs[y0 + eidx] = edge.total_cost
+    for zidx, (_first_edge, _second_edge, penalty) in enumerate(second_order):
+        identity_coeffs[z0 + zidx] = penalty
     rows4 = rows3 + [(identity_coeffs, identity_explanation_cost, identity_explanation_cost)]
 
     c4 = np.zeros(nvar)
@@ -762,6 +984,8 @@ def solve_milp(tracklets: Sequence[Tracklet], edges: Sequence[Edge], config: Map
         "coverage_score": max_coverage,
         "identity_explanation_cost": identity_explanation_cost,
         "birth_plus_exit_count": int(round(np.sum(result4.x[b0:b0+n]) + np.sum(result4.x[d0:d0+n]))),
+        "second_order_turnover_count": int(round(np.sum(result4.x[z0:z0+q]))) if q else 0,
+        "second_order_turnover_cost": int(round(sum(penalty * result4.x[z0 + idx] for idx, (_first, _second, penalty) in enumerate(second_order)))) if q else 0,
         "tie_break_gap_and_source_cost": float(result4.fun),
         "stage2_status": result2.message,
         "stage3_status": result3.message,
@@ -1102,6 +1326,7 @@ def build_edge_rows(edges: Sequence[Edge], tracklets: Sequence[Tracklet]) -> lis
             "detector_source_change": edge.detector_change,
             "shared_tracker_support": edge.shared_trackers,
             "missing_feature_count": edge.missing_feature_count,
+            "turnover_reset_penalty": edge.turnover_reset_penalty,
             "total_integer_cost": edge.total_cost,
             "selected_by_solver": edge.selected,
             "decision_reason": edge.rejection_reason,
