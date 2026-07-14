@@ -1,0 +1,110 @@
+version: oty2_p1f_subject_observation_v1
+date: 2026-07-14
+source_boundary: optical_runtime_only_no_sar_no_gt
+stage_status: P1F_SUBJECT_OBSERVATION_LAYER_PARTIALLY_READY
+p1f_representation_entry_allowed: false
+p2_entry_allowed: false
+runtime_benchmark_separation: true
+visual_review_complete: true
+
+runtime_inputs:
+  optical_frame_root: 'D:\profile\research\data'
+  p1c_observation_manifest: manifests/oty2/oty2_p1c_observation_alternative_clusters.csv
+  p1c_atomic_tracklets: manifests/oty2/oty2_p1c_atomic_tracklets.csv
+  normalized_detection_tables:
+    GM_RM011:
+      YOLO11l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM011_yolo11l_baseline_normalized_detection_table.csv'
+      YOLO26l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM011_yolo26l_probe_normalized_detection_table.csv'
+    GM_RM017:
+      YOLO11l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM017_yolo11l_baseline_normalized_detection_table.csv'
+      YOLO26l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM017_yolo26l_probe_normalized_detection_table.csv'
+    GM_RM019:
+      YOLO11l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM019_yolo11l_baseline_normalized_detection_table.csv'
+      YOLO26l: 'D:\profile\research\optical-sar-visual-diagnosis\outputs\oty0_pretracking_observation_normalization_probe_20260705_024520\GM_RM019_yolo26l_probe_normalized_detection_table.csv'
+
+evaluation_inputs:
+  canonical_registry: manifests/oty2/oty2_p1e_canonical_optical_vehicle_registry.csv
+  frame_states: manifests/oty2/oty2_p1e_canonical_vehicle_frame_states.csv
+  detection_map: manifests/oty2/oty2_p1e_detection_to_canonical_identity_map.csv
+  benchmark_roles: manifests/oty2/oty2_p1e_identity_benchmark_roles.csv
+
+outputs:
+  runtime_observations: manifests/oty2/oty2_p1f_runtime_optical_observations.csv
+  runtime_clusters: manifests/oty2/oty2_p1f_runtime_observation_clusters.csv
+  selected_observations: manifests/oty2/oty2_p1f_selected_subject_observations.csv
+  recovered_observations: manifests/oty2/oty2_p1f_recovered_subject_observations.csv
+  evaluation: manifests/oty2/oty2_p1f_subject_observation_evaluation.csv
+  failure_inventory: manifests/oty2/oty2_p1f_subject_observation_failure_inventory.csv
+  leakage_audit: manifests/oty2/oty2_p1f_runtime_leakage_audit.csv
+  metrics: outputs/oty2_p1f_multiframe_subject_observation_recovery_20260714/metrics.json
+  report: reports/oty2/oty2_p1f_multiframe_subject_observation_recovery_20260714.md
+
+parameters:
+  same_frame_cluster:
+    iou_min: 0.50
+    intersection_over_min_min: 0.82
+    normalized_center_distance_max: 0.30
+  local_subject_linking:
+    max_frame_gap: 2
+    shared_tracker_bonus: 0.55
+    geometry_weight: 0.25
+    color_weight: 0.10
+    source_support_weight: 0.10
+    minimum_link_score: 0.42
+    subject_switch_color_distance: 0.58
+    subject_switch_normalized_jump: 1.45
+  quality_evidence:
+    minimum_vehicle_area_ratio: 0.0025
+    maximum_vehicle_area_ratio: 0.65
+    minimum_aspect_ratio: 0.55
+    maximum_aspect_ratio: 5.50
+    mixed_internal_iou_max: 0.18
+    mixed_union_expansion_min: 1.55
+    reliable_vehicle_likeness: 0.52
+    identity_appearance_min: 0.68
+  recovery:
+    maximum_forward_span: 32
+    maximum_backward_span: 12
+    maximum_bridge_span: 32
+    lk_max_corners: 120
+    lk_quality_level: 0.01
+    lk_min_distance: 5
+    lk_min_good_points: 7
+    affine_min_inlier_ratio: 0.45
+    step_scale_min: 0.84
+    step_scale_max: 1.20
+    template_ncc_min: 0.36
+    bidirectional_iou_min: 0.42
+    accepted_runtime_confidence_min: 0.46
+    conflict_iom_max: 0.45
+  stability_variants:
+    - name: conservative
+      vehicle_likeness_delta: 0.05
+      template_ncc_delta: 0.04
+    - name: permissive
+      vehicle_likeness_delta: -0.05
+      template_ncc_delta: -0.04
+
+parameter_provenance:
+  design_scope: development_vehicles_only
+  heldout_used_for_parameter_selection: false
+  diagnostic_only_used_for_parameter_selection: false
+  large_parameter_search_performed: false
+  rationale: Small mechanism-driven parameter set for duplicate grouping, tracker-supported local continuity, vehicle-likeness evidence, and auditable optical-flow propagation.
+
+forbidden_runtime_inputs:
+  - canonical_vehicle_id
+  - reference_bbox
+  - benchmark_role
+  - p1e_frame_states
+  - sar
+  - sar_gt
+
+forbidden_actions:
+  - modify_p1c_solver
+  - train_detector
+  - train_vehicle_reid
+  - use_frame_or_scene_specific_gate
+  - use_manual_override
+  - use_linear_interpolation_as_final_recovery
+  - start_p2
