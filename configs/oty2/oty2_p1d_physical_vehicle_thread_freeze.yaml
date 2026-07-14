@@ -1,0 +1,52 @@
+version: oty2_p1d_blocked_audit_v1
+date: 2026-07-14
+source_boundary: optical_only_no_sar_no_gt
+stage_status: P1D_PHYSICAL_VEHICLE_THREADS_BLOCKED
+manual_override_used: false
+p2_entry_allowed: false
+
+inputs:
+  thread_manifest: manifests/oty2/oty2_p1c_global_vehicle_threads.csv
+  thread_summary_manifest: manifests/oty2/oty2_p1c_global_vehicle_thread_summary.csv
+  p1c_metrics: outputs/oty2_p1c_global_identity_failure_repair_20260714/solver_metrics.json
+
+outputs:
+  physical_vehicle_registry: manifests/oty2/oty2_p1d_physical_vehicle_registry.csv
+  thread_lifecycle_audit: manifests/oty2/oty2_p1d_thread_lifecycle_audit.csv
+  gm011_thread_pair_audit: manifests/oty2/oty2_p1d_gm011_thread_pair_audit.csv
+  gm019_thread_pair_audit: manifests/oty2/oty2_p1d_gm019_thread_pair_audit.csv
+  thread_pairwise_identity_audit: manifests/oty2/oty2_p1d_thread_pairwise_identity_audit.csv
+  lifecycle_reset_audit: manifests/oty2/oty2_p1d_lifecycle_reset_audit.csv
+  freeze_acceptance_checklist: manifests/oty2/oty2_p1d_freeze_acceptance_checklist.csv
+  report: reports/oty2/oty2_p1d_physical_vehicle_thread_freeze_20260714.md
+
+review_completion:
+  joint_scene_count: 3
+  joint_scene_frame_count_each: 368
+  p1c_thread_count: 24
+  thread_context_review_count: 24
+  temporary_visuals_committable: false
+
+blocked_findings:
+  false_threads:
+    - GM_RM019:GV003
+  incomplete_visible_lifecycle_threads:
+    - GM_RM011:GV004
+  mixed_identity_threads:
+    - GM_RM019:GV004
+  duplicated_physical_vehicle_thread_sets:
+    - [GM_RM011:GV009, GM_RM011:GV010]
+    - [GM_RM019:GV004, GM_RM019:GV005]
+  physical_vehicles_missing_from_p1c:
+    - GM_RM011:PV014
+  optically_unresolvable_intervals: []
+
+forbidden_actions:
+  - read_sar
+  - read_sar_gt
+  - start_p2
+  - manual_identity_override
+  - edit_p1c_identity_output
+  - train_detector_or_reid
+  - parameter_search
+  - scene_specific_runtime_gate

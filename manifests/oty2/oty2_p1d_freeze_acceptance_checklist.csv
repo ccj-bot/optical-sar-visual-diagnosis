@@ -1,0 +1,15 @@
+check_id,acceptance_condition,result,evidence,blocking,notes
+C01,Three complete 368-frame joint scenes and every P1-C thread context reviewed,pass,3 joint scenes; 24/24 thread contexts reviewed,false,audited
+C02,Every output thread corresponds to exactly one physical vehicle,fail,GM_RM019:GV003 is non-vehicle; GM_RM019:GV004 mixes subjects; GM_RM011:GV009/GV010 duplicate one covered car,true,P1D_PHYSICAL_VEHICLE_THREADS_BLOCKED
+C03,Every observed physical vehicle corresponds to exactly one output identity,fail,GM_RM011 has one covered vehicle with two IDs and another covered vehicle with no P1-C ID; GM_RM019 silver MPV has two IDs,true,P1D_PHYSICAL_VEHICLE_THREADS_BLOCKED
+C04,No unexplained duplicate thread,fail,GM_RM011:GV009/GV010 and GM_RM019:GV004/GV005 each duplicate one physical vehicle,true,P1D_PHYSICAL_VEHICLE_THREADS_BLOCKED
+C05,No unexplained identity mixture,fail,GV004 switches from non-vehicle fragments to the silver MPV,true,P1D_PHYSICAL_VEHICLE_THREADS_BLOCKED
+C06,All entries and exits are physically interpretable,fail,GM_RM011:GV004 exits while its vehicle remains visible; GM_RM011:GV009/GV010 split a continuous lifecycle; GM_RM019 has false/mixed interior events,true,P1D_PHYSICAL_VEHICLE_THREADS_BLOCKED
+C07,All long gaps reviewed,pass,All rendered gap and recovery intervals were reviewed,false,audited
+C08,All plausible duplicate pairs reviewed,pass,"GM011, GM017, and GM019 pair ledgers completed",false,audited
+C09,Hard constraint violations equal zero,pass,"{""same_frame_duplicate_identity_count"": 0, ""forbidden_merge_violation_count"": 0, ""observation_duplicate_use_count"": 0, ""track_time_reverse_count"": 0, ""total_hard_constraint_violations"": 0}",false,audited
+C10,No manual override used,pass,manual_override_used=false,false,audited
+C11,Audit remains traceable to P1-C observations and provenance,pass,"Registry aggregates observation, detector, and tracker provenance",false,audited
+C12,Blocked-audit validator passes,pass,"Validator checks schemas, conflict assertions, protected artifacts, and forbidden assets",false,audited
+C13,"Final frozen registry, mapping, and per-frame thread outputs may be emitted",fail,Blocked by C02-C06; final frozen outputs intentionally absent,true,P1D_PHYSICAL_VEHICLE_THREADS_BLOCKED
+C14,P2 entry allowed,fail,Only FROZEN permits P2; current status is BLOCKED,true,P1D_PHYSICAL_VEHICLE_THREADS_BLOCKED
