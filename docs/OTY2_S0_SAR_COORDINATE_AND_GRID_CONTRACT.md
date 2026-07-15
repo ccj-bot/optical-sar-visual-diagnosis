@@ -1,13 +1,11 @@
-# OTY2 S0 SAR Coordinate and Grid Contract
+# OTY2 S0-M SAR Coordinate, Grid, and Imaging-Mask Contract
 
 Date: `2026-07-15`
-Status: `PARTIAL_DISPLAY_COORDINATE_CONFIRMED_METRIC_GRID_BLOCKED`
+Status: `DISPLAY_FAN_COORDINATE_AND_IMAGING_VALID_MASK_FROZEN_METRIC_GRID_BLOCKED`
 
-## Frozen conclusion
+## 1. Frozen display coordinate
 
-The `2308×1334` files are a Cartesian **display pixel canvas** containing a fan-shaped raster. The display canvas supports a reproducible fan-polar interpretation with origin `(1154.0, 1330.6)` and radius `1332.7 px`. This does not prove the upstream SAR imager produced a Cartesian metric grid, nor does it prove a uniform metric scale in either display axis.
-
-The only frozen transforms are:
+The `2308 x 1334` SAR PNG is a Cartesian display canvas with a reproducible fan-polar interpretation:
 
 ```text
 r_px = hypot(x - 1154.0, y - 1330.6)
@@ -16,48 +14,66 @@ x = 1154.0 + r_px * sin(theta)
 y = 1330.6 - r_px * cos(theta)
 ```
 
-- display `x` increases right;
-- display `y` increases down;
-- radial distance increases away from the bottom-center origin;
-- local tangential direction changes with `theta` and range;
-- no uniform full-image `m/px` is allowed.
+Display `x` increases right, display `y` increases down, and radial distance increases away from the bottom-center origin. This contract does not assert a uniform Cartesian `m/px` grid. Tangential metric width still depends on range and azimuth.
 
-## Why metric coordinates are not frozen
+## 2. Frozen `imaging_valid_mask`
 
-No current-scene ADC/IQ, range-compressed array, complex image matrix, acquisition configuration, imaging configuration, grid-generation code, maximum physical range, PRF/aperture definition, or independent imaging-time mask was found. The checked MATLAB toolbox is only a similar-imaging reference and is not the OTY2 pipeline.
+The deterministic imaging-valid support is the canvas-clipped shared fan:
 
-The historical `0.03 m/pixel` value is therefore classified as a project/local evaluation radial grid-spacing claim. It is not independently traceable to the current imaging pipeline and must not be described as:
+```text
+canvas = 2308 x 1334
+origin = (1154.0, 1330.6)
+radius_px = 1332.7
+valid = r_px <= 1332.7 and -90 deg <= theta_deg <= 90 deg
+```
 
-- uniform Cartesian scale over the full image;
-- range resolution;
-- azimuth resolution;
+- pixel count: `2,628,412`;
+- canvas fraction: `0.8536931707456497`;
+- packed-bit SHA-256: `7bdfbc5417db5f96405751d7503973f16db85957cf9aa0c6a8f30975cc0502ef`;
+- scenes: `GM_RM011`, `GM_RM017`, `GM_RM019`;
+- verified frame binding: `766` frames per scene, `2,298` frame indices total;
+- result: the generation parameters and mask hash are identical for every scene/frame binding.
+
+This mask is a fixed imaging-chain contract. It is not a learned vehicle mask, not a per-frame threshold, and not a claim that the full canvas has a solved physical metric grid.
+
+## 3. Mask semantics that must remain separate
+
+- `imaging_valid_mask`: fixed valid imaging support defined above.
+- `fixed_black_region_inside_mask`: pixels that are zero in all 766 gray frames of one scene while still inside `imaging_valid_mask`.
+- `display_nonzero_mask`: per-frame `gray_scalar > 0` display support.
+- `gt_box_region`: reviewed rotated GT evaluation region.
+- `gt_valid_intersection_mask`: `gt_box_region AND imaging_valid_mask`.
+- `vehicle_response_mask`: not established in S0-M; it must not be replaced by a GT box or bright-pixel threshold.
+
+| scene | fixed black inside mask | fraction of valid mask | per-frame nonzero pixels |
+| --- | ---: | ---: | ---: |
+| GM_RM011 | 749,541 | 0.285169 | 1,865,902..1,873,468 |
+| GM_RM017 | 749,427 | 0.285125 | 1,866,198..1,871,943 |
+| GM_RM019 | 749,903 | 0.285306 | 1,866,020..1,873,334 |
+
+The fixed black regions differ slightly by scene and remain empirical display/no-response facts inside a common valid support. They do not redefine the valid mask.
+
+## 4. GT relation to the valid mask
+
+All `442` reviewed GT rows were rasterized as rotated rectangles and intersected with the frozen mask. Results:
+
+- `gt_clipped_by_valid_mask = true`: `0`;
+- `gt_touches_valid_mask_boundary = true`: `0`;
+- all 442 rows have `gt_valid_mask_fraction = 1.0`.
+
+Mask-clipped and mask-boundary diagnostic subsets are therefore empty for the current GT corpus. The fields remain mandatory because later data may exercise them.
+
+## 5. Metric-grid boundary
+
+No current-scene ADC/IQ, range-compressed array, complex image matrix, acquisition configuration, imaging configuration, maximum physical range, PRF/aperture definition, or authoritative pixel-to-meter grid generator was located. The historical `0.03 m/pixel` is retained only as a project/local radial grid-spacing claim. It is not accepted as:
+
+- uniform full-image Cartesian scale;
+- range or azimuth resolution;
 - PSF/main-lobe width;
 - actual vehicle-structure resolving power.
 
-Metric `x/y`, metric GT width/height, and metric mapping error are intentionally blank in S0 manifests.
+Metric GT dimensions and metric mapping errors remain blank. `imaging_valid_mask` is frozen; the uniform physical metric grid is not.
 
-## Raster operations
+## 6. Permitted use
 
-No S0 evidence proves the upstream crop/flip/rotation/resampling chain. The current display formula itself is reproducible and uses no additional flip or rotation after loading the PNG. Pseudocolor and gray use the same `2308×1334` display grid.
-
-## Mask separation
-
-- `imaging_valid_mask`: not located; physical semantics blocked.
-- `fan_geometry_mask`: reconstructed display fan, `r<=1332.7` and `-90<=theta<=90`.
-- `display_nonzero_mask`: per-frame gray intensity `>0`.
-- `fixed_black_region_mask`: zero in every gray frame, inside the reconstructed fan.
-- `gt_box_region`: reviewed rotated GT region, not scattering truth.
-- `gt_valid_intersection_mask`: blocked because `imaging_valid_mask` is missing.
-- `vehicle_response_mask`, `registration_valid_mask`, and `occlusion_or_boundary_missing_mask`: semantic contracts only in S0.
-
-| scene | fan pixels | fixed black inside fan | fixed-black/fan | per-frame nonzero pixels |
-| --- | ---: | ---: | ---: | ---: |
-| GM_RM011 | 2628412 | 749541 | 0.285169 | 1865902..1873468 |
-| GM_RM017 | 2628412 | 749427 | 0.285125 | 1866198..1871943 |
-| GM_RM019 | 2628412 | 749903 | 0.285306 | 1866020..1873334 |
-
-The empirical black region is a rendered-pixel fact. It does not distinguish physical non-imaging, invalid samples, clipping, display masking, or true zero return.
-
-## Permitted use
-
-The display `(x,y)`, `r_px`, `theta_deg`, fan geometry, and display-only masks may be used for S0 research indexing and display-angle mapping audit. They may not be promoted to a solved physical calibration. S1 remains blocked until the authoritative metric imaging grid and physical valid-mask semantics are supplied or independently reconstructed from the true imager.
+Later calibration and search-corridor construction must intersect all SAR regions with `imaging_valid_mask`. Mask-exterior pixels are forbidden inputs. GT remains a research/evaluation anchor, not a runtime vehicle-response mask.

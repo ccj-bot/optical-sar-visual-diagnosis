@@ -165,6 +165,15 @@ Current route-reset decision stack, in this order:
 
 The first three items are respectively the highest-level route basis, the execution contract, and the P0 evidence record. The fourth is the independent P0-exit/P1-entry stage decision. Then preserve the historical mechanism reading stack below.
 
+For the independent SAR-foundation line, read next in this order:
+
+1. `docs/OTY2_S0_SAR_GT_STRUCTURE_FOUNDATION_PROTOCOL.md`
+2. `docs/OTY2_S0_SAR_COORDINATE_AND_GRID_CONTRACT.md`
+3. `docs/OTY2_S0_OPTICAL_TO_SAR_AZIMUTH_MAPPING_CONTRACT.md`
+4. `reports/oty2/oty2_s0_sar_gt_structure_foundation_audit_20260715.md`
+
+The S0-M correction is authoritative: the deterministic shared fan is the fixed `imaging_valid_mask`; mapping qualification is decided before residuals; only Mask-inside, optically complete, identity-clear anchors may support mapping freeze or future S1-L structure claims.
+
 Every new OTY2-related session must first read:
 
 1. `docs/OTY2_SESSION_START_HERE.md`

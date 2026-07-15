@@ -14,6 +14,8 @@ from typing import Any, Iterable
 
 import numpy as np
 
+from validate_oty2_s0m_mask_anchor_pose_mapping_outputs import validate_s0m
+
 
 BASE_COMMIT = "1ea130fdc91683dd1f6d45bf44fe6bf00b1cecb5"
 SCENES = {"GM_RM011", "GM_RM017", "GM_RM019"}
@@ -36,7 +38,15 @@ FORMAL_OUTPUTS = (
     MANIFEST_DIR / "oty2_s0_sar_gt_quality_audit.csv",
     MANIFEST_DIR / "oty2_s0_sar_golden_vehicle_threads.csv",
     MANIFEST_DIR / "oty2_s0_optical_to_sar_azimuth_mapping_audit.csv",
+    MANIFEST_DIR / "oty2_s0_imaging_valid_mask_parameters.json",
+    MANIFEST_DIR / "oty2_s0m_imaging_valid_mask_verification.csv",
+    MANIFEST_DIR / "oty2_s0m_mapping_anchor_eligibility_audit.csv",
+    MANIFEST_DIR / "oty2_s0m_mapping_subset_metrics.csv",
+    MANIFEST_DIR / "oty2_s0m_pose_proxy_bias_audit.csv",
+    MANIFEST_DIR / "oty2_s0m_azimuth_corridor_audit.csv",
+    MANIFEST_DIR / "oty2_s0m_s1l_frame_eligibility_ledger.csv",
     REPORTS_DIR / "oty2_s0_sar_gt_structure_foundation_audit_20260715.md",
+    REPORTS_DIR / "oty2_s0m_mask_anchor_pose_mapping_summary.json",
 )
 
 PROTECTED_INPUTS = (
@@ -116,7 +126,7 @@ def validate_coordinate_contract() -> None:
 def validate_mask_contract() -> None:
     rows = read_csv(MANIFEST_DIR / "oty2_s0_sar_mask_contract.csv")
     expected_masks = {
-        "imaging_valid_mask", "display_nonzero_mask", "fixed_black_region_mask", "fan_geometry_mask",
+        "imaging_valid_mask", "display_nonzero_mask", "fixed_black_region_inside_mask", "fan_geometry_mask",
         "gt_box_region", "gt_valid_intersection_mask", "intensity_threshold_mask", "vehicle_response_mask",
         "registration_valid_mask", "occlusion_or_boundary_missing_mask",
     }
@@ -124,8 +134,13 @@ def validate_mask_contract() -> None:
     expected_fan_hash = fan_hash()
     for row in rows:
         by_scene[row["scene"]].add(row["mask_name"])
-        if row["mask_name"] == "fan_geometry_mask" and row["content_hash_or_formula_hash"] != expected_fan_hash:
-            fail("fan geometry mask hash is not reproducible")
+        if row["mask_name"] in {"fan_geometry_mask", "imaging_valid_mask"} and row["content_hash_or_formula_hash"] != expected_fan_hash:
+            fail("fixed imaging geometry mask hash is not reproducible")
+        if row["mask_name"] == "imaging_valid_mask":
+            if row["confidence_status"] != "FROZEN_DETERMINISTIC_CONTRACT":
+                fail("imaging_valid_mask must be frozen")
+            if row["all_scene_frame_masks_identical"] != "true" or row["verified_frame_count"] != "766":
+                fail("imaging_valid_mask frame invariance missing")
         if row["mask_name"] in {"gt_box_region", "vehicle_response_mask"} and row["may_be_used_as_vehicle_mask"] == "true":
             fail(f"illegal vehicle-mask promotion: {row['mask_name']}")
     if set(by_scene) != SCENES:
@@ -191,8 +206,15 @@ def validate_threads_and_quality() -> None:
     for row in quality:
         if row["bbox_width_meter"] or row["bbox_height_meter"] or row["center_x_meter"] or row["center_y_meter"]:
             fail("metric GT fields must remain blank")
-        if row["valid_mask_fraction"] or row["touches_invalid_region"] != "unknown":
-            fail("authoritative imaging-valid values were fabricated")
+        if not row["valid_mask_fraction"] or not row["gt_valid_mask_fraction"]:
+            fail("deterministic imaging-valid relation is missing")
+        if row["validity_basis"] != "deterministic_shared_imaging_valid_mask":
+            fail("GT validity basis does not use the frozen imaging mask")
+        if row["mapping_anchor_eligibility"] not in {
+            "calibration_gold", "calibration_usable", "heldout_gold", "heldout_usable",
+            "mask_clipped_diagnostic", "pose_or_geometry_diagnostic", "identity_conflict", "exclude",
+        }:
+            fail("illegal mapping anchor eligibility")
 
 
 def validate_vehicle_roles_and_mapping() -> None:
@@ -214,12 +236,12 @@ def validate_vehicle_roles_and_mapping() -> None:
     for row in mapping:
         if row["mapping_status"] != "MAPPING_BLOCKED":
             fail("mapping status mismatch")
-        if row["vehicle_holdout_tangential_error_meter"]:
-            fail("metric mapping error must remain blank")
-        if row["benchmark_role"] == "heldout_validation" and row["model_fit_membership"] != "heldout_evaluation_only_no_fit":
+        if row["benchmark_role"] == "heldout_validation" and row["model_fit_membership"] not in {
+            "heldout_complete_evaluation_only", "historical_anchor_diagnostic_only"
+        }:
             fail("heldout vehicle leaked into mapping fit")
-        if row["benchmark_role"] == "development" and "leave_one_out" not in row["model_fit_membership"]:
-            fail("development mapping row lacks vehicle-level LOO status")
+        if row["vehicle_leave_one_out_status"] != "not_estimable_only_one_development_complete_vehicle":
+            fail("development vehicle-LOO insufficiency is not explicit")
 
 
 def validate_protected_inputs() -> None:
@@ -253,7 +275,7 @@ def validate_scope_and_worktree() -> None:
 def validate_docs() -> None:
     text = (REPORTS_DIR / "oty2_s0_sar_gt_structure_foundation_audit_20260715.md").read_text(encoding="utf-8")
     required = [
-        "S0_SAR_FOUNDATION_PARTIALLY_READY", "MAPPING_BLOCKED", "S1 entry allowed: `false`",
+        "S0_SAR_FOUNDATION_PARTIALLY_READY", "MAPPING_BLOCKED", "S1-L entry allowed: `false`",
         "0.03 m/pixel", "does not add a physical observation dimension", "Explicit non-execution",
     ]
     for item in required:
@@ -293,6 +315,7 @@ def main() -> int:
     validate_lineage()
     validate_threads_and_quality()
     validate_vehicle_roles_and_mapping()
+    validate_s0m()
     validate_protected_inputs()
     validate_scope_and_worktree()
     validate_docs()

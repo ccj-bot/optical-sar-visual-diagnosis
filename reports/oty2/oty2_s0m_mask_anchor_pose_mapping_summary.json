@@ -1,0 +1,145 @@
+{
+  "center_function_decision": "do_not_freeze_new_center_function; retain_old_linear_as_diagnostic_prior_only",
+  "development_complete_anchor_count": 20,
+  "development_complete_vehicles": [
+    "GM_RM017:PV002"
+  ],
+  "development_vehicle_leave_one_out": "not_estimable_only_one_development_complete_vehicle",
+  "eligibility_counts": {
+    "calibration_usable": 20,
+    "exclude": 7,
+    "heldout_usable": 45,
+    "identity_conflict": 32,
+    "pose_or_geometry_diagnostic": 338
+  },
+  "filtered_complete_anchor_count": 65,
+  "filtered_extreme": {
+    "absolute_center_error_deg": 3.740868213100006,
+    "canonical_vehicle_id": "GM_RM017:PV003",
+    "optical_frame_index": 185,
+    "sar_frame_index": 386,
+    "scene": "GM_RM017"
+  },
+  "gt_mask_boundary_touch_count": 0,
+  "gt_mask_clipped_count": 0,
+  "gt_rows": 442,
+  "heldout_complete_anchor_count": 45,
+  "heldout_complete_vehicles": [
+    "GM_RM017:PV003",
+    "GM_RM017:PV004"
+  ],
+  "historical_anchor_count": 70,
+  "imaging_valid_mask": {
+    "all_frame_masks_identical": true,
+    "canvas_fraction": 0.8536931707456497,
+    "frame_count_per_scene": 766,
+    "hash": "7bdfbc5417db5f96405751d7503973f16db85957cf9aa0c6a8f30975cc0502ef",
+    "pixel_count": 2628412,
+    "scene_count": 3
+  },
+  "mapping_status": "MAPPING_BLOCKED",
+  "models": {
+    "centered_linear": {
+      "available": true,
+      "b": -40.421051198962886,
+      "fit_scope": "development_complete_only_reparameterization",
+      "k": 0.09177857930104251,
+      "kind": "centered_linear",
+      "theta_at_x0": -3.709619478545882,
+      "x0": 400.0
+    },
+    "development_complete_linear": {
+      "available": true,
+      "b": -40.421051198962886,
+      "fit_scope": "development_complete_only",
+      "k": 0.09177857930104251,
+      "kind": "linear"
+    },
+    "low_order_monotonic_nonlinear": {
+      "available": false,
+      "reason": "not_justified_one_development_vehicle_and_no_heldout_tuning_allowed"
+    },
+    "old_linear": {
+      "available": true,
+      "b": -40.413555,
+      "fit_scope": "historical_fixed",
+      "k": 0.0875154,
+      "kind": "linear"
+    },
+    "pinhole_los": {
+      "available": true,
+      "fit_scope": "development_complete_only_effective_not_physical_intrinsics",
+      "focal_px": 485.1113844960557,
+      "kind": "pinhole",
+      "offset": -3.7345559936409956,
+      "principal_x_px": 400.0,
+      "rmse": 0.5237111070215004,
+      "scale": 46.70365561369162
+    }
+  },
+  "old_mapping_filtered_metrics": {
+    "center_error_max_deg": 3.740868213100006,
+    "center_error_median_deg": 1.0295022864000032,
+    "center_error_over_gt_width_median": 0.04196574240416278,
+    "center_error_over_gt_width_p90": 0.11428366447620653,
+    "center_error_p90_deg": 3.064206152060006,
+    "gt_azimuth_width_median_deg": 25.41544060552092,
+    "model": "old_linear",
+    "outside_full_interval_median_deg": 0.0,
+    "outside_full_interval_p90_deg": 0.0,
+    "outside_valid_interval_median_deg": 0.0,
+    "outside_valid_interval_p90_deg": 0.0,
+    "prediction_inside_full_gt_interval_fraction": 1.0,
+    "prediction_inside_gt_intersection_mask_interval_fraction": 1.0,
+    "row_count": 65,
+    "scene_count": 1,
+    "subset": "mask_inside_complete_vehicle_anchors",
+    "vehicle_count": 3
+  },
+  "old_mapping_raw_metrics": {
+    "center_error_max_deg": 39.439805383700005,
+    "center_error_median_deg": 1.0650563380000082,
+    "center_error_over_gt_width_median": 0.045764497817414235,
+    "center_error_over_gt_width_p90": 0.1199886862765322,
+    "center_error_p90_deg": 3.2045130289700112,
+    "gt_azimuth_width_median_deg": 25.295411914048202,
+    "model": "old_linear",
+    "outside_full_interval_median_deg": 0.0,
+    "outside_full_interval_p90_deg": 0.0,
+    "outside_valid_interval_median_deg": 0.0,
+    "outside_valid_interval_p90_deg": 0.0,
+    "prediction_inside_full_gt_interval_fraction": 1.0,
+    "prediction_inside_gt_intersection_mask_interval_fraction": 1.0,
+    "row_count": 70,
+    "scene_count": 3,
+    "subset": "all_historical_anchors",
+    "vehicle_count": 5
+  },
+  "pose_counts_complete_anchors": {
+    "approx_front": 0,
+    "approx_rear": 0,
+    "left_side_dominant": 65,
+    "oblique": 0,
+    "pose_unstable": 0,
+    "right_side_dominant": 0
+  },
+  "pose_decision": "no_pose_conditioned_center_correction; only one stable pose group is represented",
+  "raw_extreme": {
+    "absolute_center_error_deg": 39.439805383700005,
+    "canonical_vehicle_id": "GM_RM019:PV004",
+    "eligibility": "pose_or_geometry_diagnostic",
+    "exclusion_reason": "optical_vehicle_not_fully_visible_after_direct_review;direct_optical_review_foreground_vehicle_is_cut_by_left_right_and_bottom_image_edges;reference_bbox_is_a_local_fragment_not_the_full_vehicle_extent",
+    "optical_frame_index": 168,
+    "sar_frame_index": 350,
+    "scene": "GM_RM019"
+  },
+  "s1l_blockers": [
+    "mapping center function is not frozen",
+    "only one development complete vehicle remains",
+    "complete anchors cover only GM_RM017 after independent optical-completeness filtering",
+    "complete anchors contain only left_side_dominant pose"
+  ],
+  "s1l_candidate_count": 12,
+  "s1l_entry_authorized": false,
+  "status": "S0_SAR_FOUNDATION_PARTIALLY_READY"
+}

@@ -1,0 +1,28 @@
+{
+  "canvas": {
+    "height": 1334,
+    "width": 2308
+  },
+  "canvas_fraction": 0.8536931707456497,
+  "contract": "imaging_valid_mask",
+  "generation_rule": "radial<=radius and theta_min<=theta<=theta_max",
+  "origin_px": {
+    "x": 1154.0,
+    "y": 1330.6
+  },
+  "pixel_count": 2628412,
+  "radius_px": 1332.7,
+  "scene_frame_binding": {
+    "GM_RM011": 766,
+    "GM_RM017": 766,
+    "GM_RM019": 766
+  },
+  "sha256_packbits_little": "7bdfbc5417db5f96405751d7503973f16db85957cf9aa0c6a8f30975cc0502ef",
+  "theta_deg": {
+    "formula": "atan2(x-origin_x, origin_y-y)",
+    "maximum": 90.0,
+    "minimum": -90.0
+  },
+  "uniform_metric_grid_claim": false,
+  "vehicle_mask_claim": false
+}

@@ -392,17 +392,17 @@ def audit_streams(valid_fan: np.ndarray) -> tuple[list[dict[str, Any]], list[dic
                 {
                     **common,
                     "mask_name": "imaging_valid_mask",
-                    "definition": "authoritative physical imaging-valid region",
-                    "availability": "not_located",
-                    "static_or_dynamic": "unknown",
-                    "generation_rule": "unresolved_without_upstream_imaging_code_or_mask",
-                    "pixel_count_or_range": "",
-                    "fraction_or_range": "",
-                    "content_hash_or_formula_hash": "",
-                    "physical_semantics": "unknown",
+                    "definition": "fixed imaging-process valid region reconstructed from shared fan geometry",
+                    "availability": "reproducible_from_frozen_geometry_contract",
+                    "static_or_dynamic": "static_shared_across_all_frames",
+                    "generation_rule": "r<=1332.7 and -90<=atan2(x-1154,1330.6-y)<=90",
+                    "pixel_count_or_range": int(valid_fan.sum()),
+                    "fraction_or_range": fmt(valid_fan.mean(), 9),
+                    "content_hash_or_formula_hash": common_fan_hash,
+                    "physical_semantics": "fixed valid imaging support contract; not a vehicle mask or display threshold",
                     "may_be_used_as_vehicle_mask": "false",
-                    "confidence_status": "BLOCKED",
-                    "notes": "fan/display support must not be silently promoted to physical imaging validity",
+                    "confidence_status": "FROZEN_DETERMINISTIC_CONTRACT",
+                    "notes": "shared by all three scenes and all 766 frame indices per scene",
                 },
                 {
                     **common,
@@ -421,33 +421,33 @@ def audit_streams(valid_fan: np.ndarray) -> tuple[list[dict[str, Any]], list[dic
                 },
                 {
                     **common,
-                    "mask_name": "fixed_black_region_mask",
-                    "definition": "pixels equal to zero in every one of 766 gray PNG frames, intersected with fan geometry",
+                    "mask_name": "fixed_black_region_inside_mask",
+                    "definition": "pixels equal to zero in every one of 766 gray PNG frames, restricted to imaging_valid_mask",
                     "availability": "reproducible_from_full_gray_stream",
                     "static_or_dynamic": "static_empirical",
-                    "generation_rule": "all_frames(gray_scalar == 0) AND fan_geometry_mask",
+                    "generation_rule": "all_frames(gray_scalar == 0) AND imaging_valid_mask",
                     "pixel_count_or_range": int(fixed_black_inside_fan.sum()),
                     "fraction_or_range": fmt(fixed_black_inside_fan.sum() / max(1, valid_fan.sum()), 9),
                     "content_hash_or_formula_hash": fixed_black_hash,
-                    "physical_semantics": "fixed rendered black region; upstream cause unresolved",
+                    "physical_semantics": "fixed rendered black or no-response region inside valid imaging support",
                     "may_be_used_as_vehicle_mask": "false",
                     "confidence_status": "CONFIRMED_EMPIRICAL_DISPLAY_MASK",
-                    "notes": "does not prove the corresponding pixels are physically un-imaged",
+                    "notes": "distinct from invalid support and from vehicle_response_mask",
                 },
                 {
                     **common,
                     "mask_name": "fan_geometry_mask",
-                    "definition": "shared reconstructed display fan",
-                    "availability": "reproducible_from_historical_geometry_code",
+                    "definition": "geometric reconstruction identical to frozen imaging_valid_mask",
+                    "availability": "reproducible_alias_for_geometry_audit",
                     "static_or_dynamic": "static_shared_formula",
                     "generation_rule": "r<=1332.7 and -90<=atan2(x-1154,1330.6-y)<=90",
                     "pixel_count_or_range": int(valid_fan.sum()),
                     "fraction_or_range": fmt(valid_fan.mean(), 9),
                     "content_hash_or_formula_hash": common_fan_hash,
-                    "physical_semantics": "display/fallback geometry support",
+                    "physical_semantics": "geometry representation of imaging_valid_mask",
                     "may_be_used_as_vehicle_mask": "false",
-                    "confidence_status": "CONFIRMED_GEOMETRY_NOT_PHYSICAL_VALIDITY",
-                    "notes": "shared by checked scene code; no independent imaging-time mask was found",
+                    "confidence_status": "CONFIRMED_GEOMETRY_ALIAS",
+                    "notes": "retained for backward schema continuity; mapping must use imaging_valid_mask",
                 },
                 {
                     **common,
@@ -468,16 +468,16 @@ def audit_streams(valid_fan: np.ndarray) -> tuple[list[dict[str, Any]], list[dic
                     **common,
                     "mask_name": "gt_valid_intersection_mask",
                     "definition": "GT rectangle intersected with authoritative imaging_valid_mask",
-                    "availability": "blocked_by_missing_imaging_valid_mask",
-                    "static_or_dynamic": "per_annotation_if_available",
+                    "availability": "reproducible_per_gt_row",
+                    "static_or_dynamic": "per_annotation",
                     "generation_rule": "gt_box_region AND imaging_valid_mask",
                     "pixel_count_or_range": "",
                     "fraction_or_range": "",
                     "content_hash_or_formula_hash": "",
-                    "physical_semantics": "unresolved",
+                    "physical_semantics": "GT evaluation region restricted to fixed valid imaging support",
                     "may_be_used_as_vehicle_mask": "false",
-                    "confidence_status": "BLOCKED",
-                    "notes": "quality audit separately reports intersection with fan_geometry_mask",
+                    "confidence_status": "CONFIRMED_DERIVED_REGION",
+                    "notes": "does not become a vehicle-response mask",
                 },
                 {
                     **common,
@@ -751,9 +751,9 @@ def build_quality_audit(linked_rows: list[dict[str, Any]], valid_fan: np.ndarray
                 "center_y_meter": "",
                 "center_radius_px": radius,
                 "center_theta_deg": theta,
-                "valid_mask_fraction": "",
+                "valid_mask_fraction": fan_fraction,
                 "fan_geometry_fraction": fan_fraction,
-                "touches_invalid_region": "unknown",
+                "touches_invalid_region": fan_fraction < 0.999,
                 "touches_fan_geometry_outside": fan_fraction < 0.999,
                 "touches_image_boundary": touches_image,
                 "neighbor_vehicle_overlap_risk": neighbor_overlap > 0.05 or neighbor_near,
@@ -857,10 +857,10 @@ def build_quality_audit(linked_rows: list[dict[str, Any]], valid_fan: np.ndarray
                 "center_y_meter": "",
                 "center_radius_px": fmt(row["center_radius_px"], 3),
                 "center_theta_deg": fmt(row["center_theta_deg"], 6),
-                "valid_mask_fraction": "",
-                "validity_basis": "authoritative_imaging_valid_mask_unavailable",
+                "valid_mask_fraction": fmt(row["fan_geometry_fraction"], 9),
+                "validity_basis": "deterministic_shared_imaging_valid_mask",
                 "fan_geometry_fraction": fmt(row["fan_geometry_fraction"], 9),
-                "touches_invalid_region": "unknown",
+                "touches_invalid_region": bool_text(row["touches_fan_geometry_outside"]),
                 "touches_fan_geometry_outside": bool_text(row["touches_fan_geometry_outside"]),
                 "touches_image_boundary": bool_text(row["touches_image_boundary"]),
                 "neighbor_vehicle_overlap_risk": bool_text(row["neighbor_vehicle_overlap_risk"]),
@@ -1407,6 +1407,9 @@ def count_by(rows: Sequence[Mapping[str, Any]], key: str) -> dict[str, int]:
 
 
 def write_protocol() -> None:
+    # S0-M owns the revised protocol and prevents the base S0 replay from
+    # restoring the superseded unknown-mask interpretation.
+    return
     write_text(
         DOCS_DIR / "OTY2_S0_SAR_GT_STRUCTURE_FOUNDATION_PROTOCOL.md",
         f"""# OTY2 S0 SAR GT Structure Foundation Protocol
@@ -1445,7 +1448,7 @@ The upstream acquisition/imaging grid, maximum metric range, range/azimuth resol
 
 ## Mask rule
 
-`fan_geometry_mask`, `display_nonzero_mask`, and `fixed_black_region_mask` are reproducible display/geometry masks. They are not silently renamed `imaging_valid_mask`. GT boxes are research/evaluation regions and are never vehicle-scattering masks.
+`imaging_valid_mask` is the fixed shared fan geometry. `display_nonzero_mask` and `fixed_black_region_inside_mask` remain separate rendered-pixel masks. GT boxes are research/evaluation regions and are never vehicle-scattering masks.
 
 ## Vehicle and split rule
 
@@ -1468,12 +1471,14 @@ Temporary contact sheets and case atlases are written only to `{VISUAL_OUTPUT}` 
 
 ## Stage boundary
 
-The only valid S0 status produced by the current evidence is `S0_SAR_FOUNDATION_PARTIALLY_READY`: display geometry, lineage, GT threads, quality audit, and display-angle mapping are reproducible, but authoritative metric coordinates and `imaging_valid_mask` remain blocked. S1 entry is therefore not authorized.
+The only valid S0 status produced by the current evidence is `S0_SAR_FOUNDATION_PARTIALLY_READY`: the imaging-valid mask, display geometry, lineage, GT threads, and quality audit are reproducible, while authoritative metric coordinates and mapping freeze remain blocked. S1 entry is therefore not authorized.
 """,
     )
 
 
 def write_coordinate_doc(mask_summary: Mapping[str, Any]) -> None:
+    # The S0-M contract is maintained by the follow-up audit.
+    return
     scene_lines = []
     for scene in SCENES:
         item = mask_summary[scene]
@@ -1527,12 +1532,12 @@ No S0 evidence proves the upstream crop/flip/rotation/resampling chain. The curr
 
 ## Mask separation
 
-- `imaging_valid_mask`: not located; physical semantics blocked.
-- `fan_geometry_mask`: reconstructed display fan, `r<=1332.7` and `-90<=theta<=90`.
+- `imaging_valid_mask`: fixed shared fan, `r<=1332.7` and `-90<=theta<=90`.
+- `fan_geometry_mask`: backward-compatible geometry alias of `imaging_valid_mask`.
 - `display_nonzero_mask`: per-frame gray intensity `>0`.
-- `fixed_black_region_mask`: zero in every gray frame, inside the reconstructed fan.
+- `fixed_black_region_inside_mask`: zero in every gray frame while inside `imaging_valid_mask`.
 - `gt_box_region`: reviewed rotated GT region, not scattering truth.
-- `gt_valid_intersection_mask`: blocked because `imaging_valid_mask` is missing.
+- `gt_valid_intersection_mask`: reproducible intersection of each GT region and `imaging_valid_mask`.
 - `vehicle_response_mask`, `registration_valid_mask`, and `occlusion_or_boundary_missing_mask`: semantic contracts only in S0.
 
 | scene | fan pixels | fixed black inside fan | fixed-black/fan | per-frame nonzero pixels |
@@ -1553,6 +1558,8 @@ def metric_line(label: str, values: Mapping[str, Any]) -> str:
 
 
 def write_mapping_doc(mapping: Mapping[str, Any]) -> None:
+    # The S0-M mapping contract is maintained by the follow-up audit.
+    return
     k = mapping["linear_coefficients"]["k"]
     b = mapping["linear_coefficients"]["b"]
     metrics = [
@@ -1630,6 +1637,8 @@ def write_main_report(
     mapping: Mapping[str, Any],
     visual_manifest: Mapping[str, Any],
 ) -> None:
+    # The S0-M report supersedes the base S0 report generator.
+    return
     linked_counts = Counter(row["scene"] for row in linked_rows if row["canonical_vehicle_id"])
     linked_vehicle_counts = {
         scene: len({row["canonical_vehicle_id"] for row in linked_rows if row["scene"] == scene and row["canonical_vehicle_id"]})
@@ -1687,7 +1696,7 @@ def write_main_report(
 - Mapping state: `{mapping['status']}`.
 - S1 entry allowed: `false`.
 
-The display fan coordinate, full gray/pseudocolor index lineage, canonical-to-GT research links, per-GT quality audit, vehicle-level research-role preservation, and display-angle mapping evaluation are reproducible. S0 cannot be `READY` because the current-scene acquisition/imaging configuration, complex or intermediate matrices, authoritative metric grid, and physical `imaging_valid_mask` remain unavailable.
+The display fan coordinate, fixed imaging-valid mask, full gray/pseudocolor index lineage, canonical-to-GT research links, per-GT quality audit, vehicle-level research-role preservation, and display-angle mapping evaluation are reproducible. S0 cannot be `READY` because the current-scene acquisition/imaging configuration, complex or intermediate matrices, authoritative metric grid, and mapping freeze remain unavailable.
 
 ## 2. SAR asset lineage
 
@@ -1710,7 +1719,7 @@ The display origin is near the bottom center. Range-like behavior is radial, not
 
 ## 4. Mask audit
 
-`fan_geometry_mask` is reproducible from the shared display formula. `display_nonzero_mask` and the full-stream `fixed_black_region_mask` are rendered-pixel facts. The physical `imaging_valid_mask` remains missing. Consequently GT/fan intersection is reported, but GT/physical-valid intersection is not fabricated.
+`imaging_valid_mask` is reproducible from the shared fan formula. `display_nonzero_mask` and the full-stream `fixed_black_region_inside_mask` remain separate rendered-pixel facts. GT/valid-mask intersection is reported directly and is never treated as vehicle-response support.
 
 | scene | min gray-pseudo gradient alignment | median alignment | fixed black / fan |
 | --- | ---: | ---: | ---: |
@@ -1780,7 +1789,7 @@ These assets are temporary and live only under `{VISUAL_OUTPUT}`. They are exclu
 2. Raw or intermediate complex/amplitude/power matrices with lineage.
 3. Authoritative maximum range and pixel-to-meter grid generation.
 4. Physical range and azimuth resolution/PSF evidence.
-5. Independent physical `imaging_valid_mask` and its annotation semantics.
+5. Independent physical metric-grid and resolution evidence beyond the frozen imaging-support geometry.
 6. Manual resolution for the remaining unresolved or identity-conflict GT rows.
 7. Physical metric validation of the display-angle mapping.
 

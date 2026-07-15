@@ -1,0 +1,4 @@
+scene,frame_count,image_width,image_height,origin_x_px,origin_y_px,radius_px,theta_min_deg,theta_max_deg,mask_pixel_count,mask_canvas_fraction,mask_sha256_packbits_little,all_766_frame_masks_identical,verification_basis
+GM_RM011,766,2308,1334,1154.000,1330.600,1332.700,-90.000,90.000,2628412,0.853693171,7bdfbc5417db5f96405751d7503973f16db85957cf9aa0c6a8f30975cc0502ef,true,same_frozen_geometry_and_2308x1334_dimensions_for_all_lineage_rows
+GM_RM017,766,2308,1334,1154.000,1330.600,1332.700,-90.000,90.000,2628412,0.853693171,7bdfbc5417db5f96405751d7503973f16db85957cf9aa0c6a8f30975cc0502ef,true,same_frozen_geometry_and_2308x1334_dimensions_for_all_lineage_rows
+GM_RM019,766,2308,1334,1154.000,1330.600,1332.700,-90.000,90.000,2628412,0.853693171,7bdfbc5417db5f96405751d7503973f16db85957cf9aa0c6a8f30975cc0502ef,true,same_frozen_geometry_and_2308x1334_dimensions_for_all_lineage_rows
