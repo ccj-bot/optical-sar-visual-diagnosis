@@ -1,0 +1,11 @@
+conclusion_id,status,evidence,prohibited_interpretation
+LOCAL_VISIBLE_VEHICLE_RESPONSE_FLOW,VISUALLY_SUPPORTED_DISPLAY_FLOW_BACKGROUND_RELATIVE_OWNERSHIP_NOT_ESTABLISHED,"21帧直接审阅持续看到GT中心下方近水平亮带；330-338弱/分散，339过渡起始，340-350强/紧致；但两种位移法均显示该局部位移与共同背景漂移更一致","不得解释为物理车辆运动所有权、完整车体、最终框或自动标注"
+VEHICLE_MOTION_OWNERSHIP,NOT_ESTABLISHED_MULTI_BACKGROUND_CO_MOTION,"相位相关世界残差中位数0.092616 px、车辆残差4.606634 px；光流世界残差0.115809 px、车辆残差4.662695 px；两种方法车辆残差优于世界残差均为0/20对","不得因亮带与GT在原始像素中共同右移就声明车辆归属"
+WORLD_BACKGROUND_SEPARATION,PARTIALLY_SUPPORTED_BACKGROUND_DRIFT_IDENTIFIED_LOCAL_SEPARATION_NOT_ESTABLISHED,"四类背景控制给出相位/光流背景漂移中位数6.250750/6.307327 px每对；背景累计约125.02/125.55 px而GT累计126.336 px；已识别共同漂移，但局部亮带未从背景运动中分离","不得把原始像素零位移当作世界固定，也不得把背景参考等同绝对地理配准"
+RESPONSE_STATE_TRANSITION,SUPPORTED_339_ONSET_340_350_STRONG,"直接审阅确认339为过渡起始；响应robust-z均值从330-338的0.306842升到340-350的0.481655，水平连续长度代理从39.11 px升到61.55 px","不得把状态变化解释为车辆身份或完整车体支撑"
+MOTION_COHERENT_SUPPORT_CORRIDOR,NOT_ESTABLISHED_NO_VALID_OFFSET_PASSED_BOTH_METHODS,"123个偏移中112为BACKGROUND_DOMINATED_REGION、2为AMBIGUOUS_OVERLAP_REGION、9为OUTSIDE_VALID_REGION，0个偏移满足两种方法的车辆残差优势","不得生成最佳中心、候选排名、winner或最终框"
+VISIBLE_RESPONSE_UNIQUENESS_IN_LOCAL_NEIGHBORHOOD,NOT_ESTABLISHED_NEAR_OFFSETS_AND_CONTROLS_RETAIN_STRUCTURE,"近左/近右偏移、竖直强线和固定中心均保留清晰结构；正确轨迹均值清晰度30.509，近右31.221，竖线32.035，固定中心30.761；无唯一局部峰","不得把邻近偏移当真正车辆阴性，也不得用清晰度排序选中心"
+EXACT_CENTER_IDENTIFIABILITY,NOT_ESTABLISHED,"正确中心未形成独立运动走廊或唯一邻域响应；背景漂移与GT轨迹累计位移近似相同","不得输出唯一中心或用GT IoU选参"
+FULL_BODY_SUPPORT_READINESS,NOT_READY,"探索性分层图83.827%为UNRESOLVED_MIXED_RESPONSE，CURRENTLY_DARK_LATENT_BODY_REGION未自动赋值；本轮只审计可见显示响应","不得把GT框内暗区或亮带外推为完整车体"
+OPTICAL_INPUT_REPLACEMENT_READINESS,NOT_READY,"本轮使用GT研究参考发现机制，未执行真实光学输入替代或无GT运行链","不得声明光学先验已可替代GT轨迹"
+S1D_READINESS,NOT_READY,"车辆运动所有权、运动走廊、唯一中心和完整支撑均未建立；本轮严格停留S1-L","不得进入S1-D、最终预测或自动标注"
