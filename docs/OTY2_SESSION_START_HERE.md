@@ -160,11 +160,13 @@ Before entering any task-specific stack, every future OTY2 session must first re
 
 1. `docs/reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md`
 2. `docs/OTY2_RESEARCH_CONCLUSION_STATUS_REGISTER_20260718.md`
+3. `reports/oty2/oty2_rsa2_o0_open_book_vehicle_level_multitimescale_mechanism_review_20260718.md`
 
 - 后续会话不得只读取 RSA0/RSA1 而跳过本次全量深度复盘；上述复盘与状态索引必须位于 RSA0、RSA1 文档之前。
 - 若旧阶段术语或解释与本复盘冲突，以本复盘中的纠偏解释作为当前研究口径。
 - 旧文档继续作为历史过程保留，不应被误读为当前已经成立的科学结论。
 - 本复盘不授权任何新的算法实现、实验、阈值调整、候选生成、打分、排序或自动标注。
+- RSA2-O0 报告是当前车辆级完整时序、四时间尺度、多车排他和响应对象语义的开卷审阅入口；后续会话不得跳过它而直接继承 RSA0/RSA1 的旧代理解释。该报告同样不授权算法实现。
 
 Current route-reset decision stack, in this order:
 
