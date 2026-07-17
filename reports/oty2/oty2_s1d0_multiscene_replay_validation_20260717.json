@@ -1,0 +1,986 @@
+{
+  "check_count": 234,
+  "checks": [
+    {
+      "check": "single repaired inference version is v1.1",
+      "passed": true
+    },
+    {
+      "check": "single minimal repair records exactly three bounded changes",
+      "passed": true
+    },
+    {
+      "check": "repair did not change robust-z response thresholds",
+      "passed": true
+    },
+    {
+      "check": "repair did not change selected threads",
+      "passed": true
+    },
+    {
+      "check": "all candidate-ranking-box prohibitions are enabled",
+      "passed": true
+    },
+    {
+      "check": "inventory covers all 22 canonical vehicles",
+      "passed": true
+    },
+    {
+      "check": "inventory scene counts are 14/4/4",
+      "passed": true
+    },
+    {
+      "check": "inventory and selection do not use target SAR reference",
+      "passed": true
+    },
+    {
+      "check": "all four frozen lifecycle roles are present",
+      "passed": true
+    },
+    {
+      "check": "role selection is target-reference-free",
+      "passed": true
+    },
+    {
+      "check": "roles were frozen before inference",
+      "passed": true
+    },
+    {
+      "check": "lifecycle conditions contain 645 identity-frame rows",
+      "passed": true
+    },
+    {
+      "check": "target cases contain 324 frames",
+      "passed": true
+    },
+    {
+      "check": "all lifecycle conditions are target-reference-free",
+      "passed": true
+    },
+    {
+      "check": "optical canonical lifecycle owns every identity",
+      "passed": true
+    },
+    {
+      "check": "causal has 324 frame-state rows",
+      "passed": true
+    },
+    {
+      "check": "causal state rows remain separated",
+      "passed": true
+    },
+    {
+      "check": "causal inference uses no target reference",
+      "passed": true
+    },
+    {
+      "check": "causal generates no candidate bank",
+      "passed": true
+    },
+    {
+      "check": "causal uses no score or ranking",
+      "passed": true
+    },
+    {
+      "check": "causal forces no component winner",
+      "passed": true
+    },
+    {
+      "check": "causal generates no unique box",
+      "passed": true
+    },
+    {
+      "check": "causal has six directly reviewed blind pages",
+      "passed": true
+    },
+    {
+      "check": "causal blind review is complete",
+      "passed": true
+    },
+    {
+      "check": "bidirectional has 324 frame-state rows",
+      "passed": true
+    },
+    {
+      "check": "bidirectional state rows remain separated",
+      "passed": true
+    },
+    {
+      "check": "bidirectional inference uses no target reference",
+      "passed": true
+    },
+    {
+      "check": "bidirectional generates no candidate bank",
+      "passed": true
+    },
+    {
+      "check": "bidirectional uses no score or ranking",
+      "passed": true
+    },
+    {
+      "check": "bidirectional forces no component winner",
+      "passed": true
+    },
+    {
+      "check": "bidirectional generates no unique box",
+      "passed": true
+    },
+    {
+      "check": "bidirectional has six directly reviewed blind pages",
+      "passed": true
+    },
+    {
+      "check": "bidirectional blind review is complete",
+      "passed": true
+    },
+    {
+      "check": "inference freeze contains exactly 46 artifacts",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1d0_dynamic_response.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1d0_dynamic_response.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1d0_dynamic_response.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1d0_dynamic_response.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1d0_inventory.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1d0_inventory.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1d0_inventory.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1d0_inventory.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_multiscene_lifecycle_inventory.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_multiscene_lifecycle_inventory.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_multiscene_lifecycle_inventory.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_multiscene_lifecycle_inventory.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_inventory_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_inventory_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_inventory_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_inventory_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_selected_lifecycle_roles.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_selected_lifecycle_roles.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_selected_lifecycle_roles.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_selected_lifecycle_roles.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_lifecycle_conditions.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_lifecycle_conditions.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_lifecycle_conditions.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_lifecycle_conditions.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_inventory_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_inventory_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_inventory_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_inventory_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_lifecycle_condition_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_lifecycle_condition_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_lifecycle_condition_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_lifecycle_condition_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_transport_diagnostics.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_transport_diagnostics.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_transport_diagnostics.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_transport_diagnostics.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_frame_states.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_frame_states.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_frame_states.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_frame_states.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_graph_nodes.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_graph_nodes.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_graph_nodes.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_graph_nodes.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_graph_edges.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_graph_edges.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_graph_edges.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_graph_edges.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_events.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_events.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_events.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_response_events.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_causal_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_causal_inference_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_causal_inference_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_causal_inference_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_causal_inference_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_transport_diagnostics.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_transport_diagnostics.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_transport_diagnostics.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_transport_diagnostics.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_frame_states.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_frame_states.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_frame_states.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_frame_states.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_graph_nodes.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_graph_nodes.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_graph_nodes.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_graph_nodes.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_graph_edges.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_graph_edges.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_graph_edges.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_graph_edges.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_events.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_events.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_events.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_response_events.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_bidirectional_blind_review_manifest.csv",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_bidirectional_inference_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_bidirectional_inference_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_bidirectional_inference_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_s1d0_bidirectional_inference_summary_20260717.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\causal\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\dynamic_state_masks.npz",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\inference_summary.json",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact exists: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact hash matches: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "frozen artifact is target-reference-free: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "artifact frozen before reference review: D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png",
+      "passed": true
+    },
+    {
+      "check": "visible-response review queue contains eight uniform frames",
+      "passed": true
+    },
+    {
+      "check": "visible-response queue review is complete",
+      "passed": true
+    },
+    {
+      "check": "queue records the pre-review inference freeze hash",
+      "passed": true
+    },
+    {
+      "check": "reference manifest uses all four permitted categories",
+      "passed": true
+    },
+    {
+      "check": "visible-response reference was drawn without target reference",
+      "passed": true
+    },
+    {
+      "check": "visible-response reference did not change inference rules",
+      "passed": true
+    },
+    {
+      "check": "recovery entrance gate is conservatively not passed",
+      "passed": true
+    },
+    {
+      "check": "physical event interpretation remains blocked",
+      "passed": true
+    },
+    {
+      "check": "evaluation confirms no target-reference inference leakage",
+      "passed": true
+    },
+    {
+      "check": "evaluation did not update inference rules",
+      "passed": true
+    },
+    {
+      "check": "no second repair was performed",
+      "passed": true
+    },
+    {
+      "check": "exactly six project-level answers are present",
+      "passed": true
+    },
+    {
+      "check": "two posthoc evaluation pages were generated",
+      "passed": true
+    },
+    {
+      "check": "posthoc evaluation pages were directly reviewed",
+      "passed": true
+    },
+    {
+      "check": "formal six-question report exists",
+      "passed": true
+    },
+    {
+      "check": "no large S1D0 image or NPZ artifact is stored inside Git",
+      "passed": true
+    }
+  ],
+  "frozen_rule_modified_after_reference_review": false,
+  "inventory_scene_counts": {
+    "GM_RM011": 14,
+    "GM_RM017": 4,
+    "GM_RM019": 4
+  },
+  "next_stage_recommendation": "do not tune v1.1 or perform a second repair; reopen only bounded cross-scene mapping calibration and independent visible-response reference work",
+  "passed": true,
+  "project_question_answer_count": 6,
+  "recovery_entrance_gate_passed": false,
+  "selected_threads": [
+    {
+      "case_id": "S1D0-DISCOVERY-GM_RM017-PV002",
+      "role": "MECHANISM_DISCOVERY",
+      "selection_basis": "same-scene independent PV004 calibration; complete optical lifecycle; inherits S1X evidence but runs the new dynamic method over natural entry and exit"
+    },
+    {
+      "case_id": "S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003",
+      "role": "CROSS_SCENE_FROZEN_REPLAY",
+      "selection_basis": "different scene; isolated 46-frame optical lifecycle; no simultaneously visible canonical vehicle; post-roll reaches the following PV004 entry without manual cropping"
+    },
+    {
+      "case_id": "S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003",
+      "role": "ENTRY_EXIT_LIFECYCLE_CASE",
+      "selection_basis": "different scene; isolated 46-frame optical lifecycle; no simultaneously visible canonical vehicle; post-roll reaches the following PV004 entry without manual cropping"
+    },
+    {
+      "case_id": "S1D0-STRESS-GM_RM011-PV008",
+      "role": "MULTI_VEHICLE_OR_OCCLUSION_STRESS",
+      "selection_basis": "three simultaneously visible vehicles; full lifecycle overlap on both sides; one visible-but-unboxed frame; Working Graph marks the surrounding 135-166 interval as subject competition"
+    }
+  ],
+  "single_minimal_repair": {
+    "changes": [
+      "inside-shell background uses pre-entry/closed context persistence rather than shell-clipped frequency",
+      "maintenance requires sliding or lifecycle persistence support",
+      "graph edges use a tighter relational gate and per-edge dynamics only for one-to-one relations"
+    ],
+    "response_thresholds_changed": false,
+    "selected_threads_changed": false,
+    "trigger": "blind causal review showed weak-maintenance shell flooding and graph combinatorics in cross-scene/stress cases"
+  },
+  "target_gt_entered_inference": false,
+  "validated_utc": "2026-07-17T06:34:48.162962+00:00",
+  "version": "OTY2-S1D0-multiscene-replay-validator-v1"
+}

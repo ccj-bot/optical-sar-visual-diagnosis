@@ -1,0 +1,18 @@
+{
+  "created_utc": "2026-07-17T06:00:51.287739+00:00",
+  "freeze_manifest": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_inference_freeze_manifest.csv",
+  "freeze_manifest_sha256": "9a8d3a0963bf8bc109e5bdb2921b9257161563996a001afd1705509f697c6038",
+  "frozen_artifact_count": 46,
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "70f3cbbd62eb1889bcf7537ae27cd7f6842680ec"
+  },
+  "inference_rules_frozen_before_visible_response_review": true,
+  "review_counts": {
+    "bidirectional": 6,
+    "causal": 6
+  },
+  "single_allowed_minimal_repair_used": true,
+  "target_reference_content_rows": 0,
+  "version": "OTY2-S1D0-inference-freeze-v1"
+}

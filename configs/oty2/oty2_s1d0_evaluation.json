@@ -1,0 +1,29 @@
+{
+  "version": "OTY2-S1D0-postfreeze-evaluation-v1",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "expected_start_head": "70f3cbbd62eb1889bcf7537ae27cd7f6842680ec",
+  "inference_freeze_manifest": "manifests/oty2/oty2_s1d0_inference_freeze_manifest.csv",
+  "reference_review_queue": "manifests/oty2/oty2_s1d0_visible_response_reference_review_queue.csv",
+  "visible_response_reference_manifest": "manifests/oty2/oty2_s1d0_visible_response_reference_manifest.csv",
+  "full_gt_context_manifest": "manifests/oty2/oty2_s0_sar_gt_quality_audit.csv",
+  "output_root": "D:/profile/research/workspace/output/oty2_s1d0_20260717",
+  "reference_review_output": "D:/profile/research/workspace/output/oty2_s1d0_20260717/visible_response_reference_review",
+  "reference_frame_count_per_case": 4,
+  "reference_cases": [
+    "S1D0-DISCOVERY-GM_RM017-PV002",
+    "S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003"
+  ],
+  "gate": {
+    "minimum_reviewed_frame_count_per_case": 4,
+    "minimum_visible_reference_pixels_per_case": 100,
+    "minimum_f1_margin_over_each_equal_area_baseline": 0.05
+  },
+  "semantics": {
+    "reference_is_direct_image_review": true,
+    "reference_is_not_full_vehicle_gt": true,
+    "full_gt_is_context_only": true,
+    "no_rule_update_from_evaluation": true,
+    "mapping_failure_separate_from_response_dynamics_failure": true,
+    "event_interpretation_requires_gate": true
+  }
+}

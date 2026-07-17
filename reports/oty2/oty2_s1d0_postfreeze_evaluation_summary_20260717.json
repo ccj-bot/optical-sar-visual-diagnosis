@@ -1,0 +1,207 @@
+{
+  "case_metrics": [
+    {
+      "axis_baseline_visible_f1": "0.041517153",
+      "bidirectional_background_attachment_fraction": "0.003011364",
+      "bidirectional_f1_increment_over_causal": "0.004042568",
+      "bidirectional_intermittent_response_recall": "0.020749064",
+      "bidirectional_main_response_recall": "0.035205047",
+      "bidirectional_visible_f1": "0.055503855",
+      "bidirectional_visible_precision": "0.940315315",
+      "bidirectional_visible_recall": "0.028595890",
+      "case_id": "S1D0-DISCOVERY-GM_RM017-PV002",
+      "causal_background_attachment_fraction": "0.003920455",
+      "causal_beats_both_equal_area_baselines": "false",
+      "causal_f1_margin_over_axis": "0.009944134",
+      "causal_f1_margin_over_center": "-0.020229590",
+      "causal_intermittent_response_recall": "0.020149813",
+      "causal_main_response_recall": "0.031798107",
+      "causal_visible_f1": "0.051461288",
+      "causal_visible_precision": "0.918052257",
+      "causal_visible_recall": "0.026472603",
+      "center_baseline_visible_f1": "0.071690878",
+      "diagnosed_failure_layer": "RESPONSE_EXTRACTION_OR_BACKGROUND_SEPARATION_LIMITATION",
+      "posthoc_full_gt_available_frame_count": "2",
+      "posthoc_full_gt_causal_joint_coverage_context": "0.057812363",
+      "posthoc_full_gt_shell_coverage_context": "0.614085993",
+      "reference_coverage_adequate": "true",
+      "reviewed_frame_count": "4",
+      "rule_update_from_evaluation": "false",
+      "shell_visible_reference_recall": "0.877431507",
+      "target_reference_used_for_inference": "false",
+      "visible_reference_pixel_count": "29200"
+    },
+    {
+      "axis_baseline_visible_f1": "0.000000000",
+      "bidirectional_background_attachment_fraction": "0.000000000",
+      "bidirectional_f1_increment_over_causal": "0.000000000",
+      "bidirectional_intermittent_response_recall": "0.000000000",
+      "bidirectional_main_response_recall": "0.000000000",
+      "bidirectional_visible_f1": "0.000000000",
+      "bidirectional_visible_precision": "0.000000000",
+      "bidirectional_visible_recall": "0.000000000",
+      "case_id": "S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003",
+      "causal_background_attachment_fraction": "0.000000000",
+      "causal_beats_both_equal_area_baselines": "false",
+      "causal_f1_margin_over_axis": "0.000000000",
+      "causal_f1_margin_over_center": "0.000000000",
+      "causal_intermittent_response_recall": "0.000000000",
+      "causal_main_response_recall": "0.000000000",
+      "causal_visible_f1": "0.000000000",
+      "causal_visible_precision": "0.000000000",
+      "causal_visible_recall": "0.000000000",
+      "center_baseline_visible_f1": "0.000000000",
+      "diagnosed_failure_layer": "VISIBLE_RESPONSE_REFERENCE_INADEQUATE_FOR_MAPPING_RESPONSE_SEPARATION",
+      "posthoc_full_gt_available_frame_count": "0",
+      "posthoc_full_gt_causal_joint_coverage_context": "nan",
+      "posthoc_full_gt_shell_coverage_context": "nan",
+      "reference_coverage_adequate": "false",
+      "reviewed_frame_count": "4",
+      "rule_update_from_evaluation": "false",
+      "shell_visible_reference_recall": "0.000000000",
+      "target_reference_used_for_inference": "false",
+      "visible_reference_pixel_count": "0"
+    }
+  ],
+  "created_utc": "2026-07-17T06:22:30.804754+00:00",
+  "evaluation_config": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1d0_evaluation.json",
+  "evaluation_config_sha256": "8f423ec11f730ebc516fd8bc705c2161e578e96485fe26701765780c7c4d278a",
+  "event_recurrence_in_at_least_two_cases": {
+    "bidirectional:EXIT_DECAY": 3,
+    "bidirectional:IDENTITY_OVERLAP_ONSET": 2,
+    "bidirectional:IDENTITY_OVERLAP_RESOLUTION": 2,
+    "bidirectional:RESPONSE_BIRTH": 3,
+    "bidirectional:RESPONSE_MERGE": 3,
+    "bidirectional:RESPONSE_MIGRATION": 3,
+    "bidirectional:RESPONSE_SPLIT": 3,
+    "bidirectional:RESPONSE_STRENGTHENING": 3,
+    "bidirectional:RESPONSE_WEAKENING": 2,
+    "causal:EXIT_DECAY": 3,
+    "causal:IDENTITY_OVERLAP_ONSET": 2,
+    "causal:IDENTITY_OVERLAP_RESOLUTION": 2,
+    "causal:RESPONSE_BIRTH": 3,
+    "causal:RESPONSE_MERGE": 3,
+    "causal:RESPONSE_MIGRATION": 3,
+    "causal:RESPONSE_SPLIT": 3,
+    "causal:RESPONSE_STRENGTHENING": 3,
+    "causal:RESPONSE_WEAKENING": 2
+  },
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "70f3cbbd62eb1889bcf7537ae27cd7f6842680ec"
+  },
+  "inference_freeze_audit": {
+    "all_hashes_match": true,
+    "manifest_sha256": "9a8d3a0963bf8bc109e5bdb2921b9257161563996a001afd1705509f697c6038",
+    "row_count": 46
+  },
+  "inference_outputs_modified": false,
+  "lifecycle_metrics": {
+    "S1D0-DISCOVERY-GM_RM017-PV002": {
+      "bidirectional": {
+        "active_frame_count": 85,
+        "active_state_coverage": 1.0,
+        "admission_delay_sar_frames": 0,
+        "closed_identity_reactivation_count": 0,
+        "closed_support_tail_frame_count": 0,
+        "maximum_maintenance_age_frames": 1,
+        "premature_pre_entry_support_frame_count": 0,
+        "weak_or_occluded_frame_count": 33
+      },
+      "causal": {
+        "active_frame_count": 85,
+        "active_state_coverage": 1.0,
+        "admission_delay_sar_frames": 0,
+        "closed_identity_reactivation_count": 0,
+        "closed_support_tail_frame_count": 0,
+        "maximum_maintenance_age_frames": 2,
+        "premature_pre_entry_support_frame_count": 0,
+        "weak_or_occluded_frame_count": 33
+      }
+    },
+    "S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003": {
+      "bidirectional": {
+        "active_frame_count": 95,
+        "active_state_coverage": 1.0,
+        "admission_delay_sar_frames": 0,
+        "closed_identity_reactivation_count": 0,
+        "closed_support_tail_frame_count": 0,
+        "maximum_maintenance_age_frames": 1,
+        "premature_pre_entry_support_frame_count": 0,
+        "weak_or_occluded_frame_count": 76
+      },
+      "causal": {
+        "active_frame_count": 95,
+        "active_state_coverage": 1.0,
+        "admission_delay_sar_frames": 0,
+        "closed_identity_reactivation_count": 0,
+        "closed_support_tail_frame_count": 0,
+        "maximum_maintenance_age_frames": 2,
+        "premature_pre_entry_support_frame_count": 0,
+        "weak_or_occluded_frame_count": 76
+      }
+    },
+    "S1D0-STRESS-GM_RM011-PV008": {
+      "bidirectional": {
+        "active_frame_count": 66,
+        "active_state_coverage": 1.0,
+        "admission_delay_sar_frames": 0,
+        "closed_identity_reactivation_count": 0,
+        "closed_support_tail_frame_count": 0,
+        "maximum_maintenance_age_frames": 1,
+        "premature_pre_entry_support_frame_count": 0,
+        "weak_or_occluded_frame_count": 54
+      },
+      "causal": {
+        "active_frame_count": 66,
+        "active_state_coverage": 1.0,
+        "admission_delay_sar_frames": 0,
+        "closed_identity_reactivation_count": 0,
+        "closed_support_tail_frame_count": 0,
+        "maximum_maintenance_age_frames": 2,
+        "premature_pre_entry_support_frame_count": 0,
+        "weak_or_occluded_frame_count": 54
+      }
+    }
+  },
+  "physical_event_interpretation_allowed": false,
+  "project_questions": [
+    {
+      "direct_answer": "未证实",
+      "evidence": "discovery causal/axis/center F1=0.051/0.042/0.072; replay=0.000/0.000/0.000",
+      "question_id": "Q1_SAR_INCREMENT_OVER_EQUAL_AREA_OPTICAL_PRIOR"
+    },
+    {
+      "direct_answer": "按直接可见响应参考分别报告，不以完整车体 GT 代替分母",
+      "evidence": "discovery recall/precision=0.026/0.918; replay positive reference coverage is inadequate and its zero-valued recall/precision are not interpreted",
+      "question_id": "Q2_VISIBLE_MAIN_AND_INTERMITTENT_RECOVERY"
+    },
+    {
+      "direct_answer": "生命周期由光学 canonical thread 和硬同步自动驱动；关闭后支撑清零",
+      "evidence": "S1D0-DISCOVERY-GM_RM017-PV002: active_coverage=1.000, preentry=0, closed_tail=0; S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003: active_coverage=1.000, preentry=0, closed_tail=0; S1D0-STRESS-GM_RM011-PV008: active_coverage=1.000, preentry=0, closed_tail=0",
+      "question_id": "Q3_NATURAL_LIFECYCLE_OPERATION"
+    },
+    {
+      "direct_answer": "双向路径仅作为离线未来帧平滑增量单列，不视为可部署能力",
+      "evidence": "F1 increment discovery=0.004; replay=0.000",
+      "question_id": "Q4_CAUSAL_VS_OFFLINE_BIDIRECTIONAL_INCREMENT"
+    },
+    {
+      "direct_answer": "仅保留相关性事件计数；入口门未通过时不作 S1-D 物理解释",
+      "evidence": "{\"bidirectional:EXIT_DECAY\": 3, \"bidirectional:IDENTITY_OVERLAP_ONSET\": 2, \"bidirectional:IDENTITY_OVERLAP_RESOLUTION\": 2, \"bidirectional:RESPONSE_BIRTH\": 3, \"bidirectional:RESPONSE_MERGE\": 3, \"bidirectional:RESPONSE_MIGRATION\": 3, \"bidirectional:RESPONSE_SPLIT\": 3, \"bidirectional:RESPONSE_STRENGTHENING\": 3, \"bidirectional:RESPONSE_WEAKENING\": 2, \"causal:EXIT_DECAY\": 3, \"causal:IDENTITY_OVERLAP_ONSET\": 2, \"causal:IDENTITY_OVERLAP_RESOLUTION\": 2, \"causal:RESPONSE_BIRTH\": 3, \"causal:RESPONSE_MERGE\": 3, \"causal:RESPONSE_MIGRATION\": 3, \"causal:RESPONSE_SPLIT\": 3, \"causal:RESPONSE_STRENGTHENING\": 3, \"causal:RESPONSE_WEAKENING\": 2}",
+      "question_id": "Q5_RECURRENT_RESPONSE_EVENTS"
+    },
+    {
+      "direct_answer": "跨场景与压力案例均完成冻结重放；失败层分别报告，不用第二次修复掩盖",
+      "evidence": "replay failure_layer=VISIBLE_RESPONSE_REFERENCE_INADEQUATE_FOR_MAPPING_RESPONSE_SEPARATION; stress active_coverage=1.000, closed_tail=0",
+      "question_id": "Q6_FROZEN_CROSS_SCENE_AND_STRESS_BEHAVIOR"
+    }
+  ],
+  "recovery_entrance_gate_passed": false,
+  "rule_update_from_evaluation": false,
+  "second_repair_performed": false,
+  "target_reference_used_for_inference": false,
+  "version": "OTY2-S1D0-postfreeze-evaluation-summary-v1",
+  "visible_response_reference_manifest": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_visible_response_reference_manifest.csv",
+  "visible_response_reference_manifest_sha256": "cd6c894ebbdc2a3fa601abc208f9f0ce0ad75031ac168b262b9af378e5bc989d"
+}

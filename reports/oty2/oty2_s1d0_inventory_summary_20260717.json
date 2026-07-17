@@ -1,0 +1,40 @@
+{
+  "candidate_role_counts": {
+    "CROSS_SCENE_FROZEN_REPLAY_CANDIDATE": 3,
+    "ENTRY_EXIT_LIFECYCLE_CANDIDATE": 18,
+    "MECHANISM_DISCOVERY_CANDIDATE": 3,
+    "MULTI_VEHICLE_OR_OCCLUSION_STRESS_CANDIDATE": 14
+  },
+  "config_sha256": "972477d0aabf07a64c0bbfa68f66e346179cac2c756707689806ab7170677b20",
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "70f3cbbd62eb1889bcf7537ae27cd7f6842680ec"
+  },
+  "inventory_rows": 22,
+  "old_work_runtime_dependency": false,
+  "review_artifact_count": 21,
+  "scene_counts": {
+    "GM_RM011": 14,
+    "GM_RM017": 4,
+    "GM_RM019": 4
+  },
+  "scene_input_manifest_hashes": {
+    "GM_RM011": "6c2b8e2e57edb8e33303ce03cde3164aedb1fbc8db4631340583ef9c49756d06",
+    "GM_RM017": "0104c44701bab574b3aac932e3c00860b421dfdd305fb6f277185e9cc20e2472",
+    "GM_RM019": "c134097b309fc6ac814227cd3b0e080cee8fa9e4f2b97f0a21908f341a37e4db"
+  },
+  "selected_case_count": 3,
+  "selected_role_count": 4,
+  "selected_roles_sha256": "05f2e7622419b0912efabab7ea293510f5fbae2892d88027be446e1d5087f2c8",
+  "source_hashes": {
+    "calibration": "e963a6d532815dfc2cd9c03c9cefb2c5da9c92751e698fca53cba83d20fbb037",
+    "canonical_frame_states": "0bc08ac2307efada5ca846745cc09ffea72ff798acc3ac3e72182535ce159557",
+    "canonical_vehicle_registry": "27342a7b99404598387da859091640f6eef1f3e56877a37a56fc9ff58a653c49",
+    "detection_identity_map": "e689d01b0c8f588bdd5dc3028efd333683dd6d393100fa6fad200080a74bfaed",
+    "p0_asset_manifest": "67a4fdaefd974c2e50e1e561b0649fb45d247857864b8e504ef7783105f6c1ae",
+    "sar_to_optical_time_map": "8521767b2ed8fc40771b1fde4f8bffff41e07e0dcc3849d6acba265920f4d293",
+    "scene_config": "1755456909b82c512017af8b0d48523429ac51d43f3aeb076b2250e490bc7c10"
+  },
+  "target_sar_reference_used": false,
+  "version": "OTY2-S1D0-inventory-v1"
+}

@@ -1,0 +1,4 @@
+stage,status,finding
+A_RECOVERY_MECHANISM_VALIDATION,NOT_PASSED,at least one required case does not beat both equal-area optical baselines or lacks adequate visible-response reference coverage
+B_SMALL_SCALE_S1D_EVENT_INTERPRETATION,BLOCKED_BY_RECOVERY_ENTRANCE_GATE,event vocabulary remains correlation-level; no unique physical scattering mechanism is claimed
+C_FROZEN_REPLAY_AND_STRESS_DIAGNOSIS,COMPLETED_DIAGNOSTIC,cross-scene replay and GM_RM011 stress were executed with v1.1 frozen rules and no second repair

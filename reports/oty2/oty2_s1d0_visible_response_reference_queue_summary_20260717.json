@@ -1,0 +1,20 @@
+{
+  "case_counts": {
+    "S1D0-DISCOVERY-GM_RM017-PV002": 4,
+    "S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003": 4
+  },
+  "created_utc": "2026-07-17T06:01:41.182189+00:00",
+  "freeze_audit": {
+    "all_hashes_match": true,
+    "artifact_count": 46,
+    "manifest_sha256": "9a8d3a0963bf8bc109e5bdb2921b9257161563996a001afd1705509f697c6038"
+  },
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "70f3cbbd62eb1889bcf7537ae27cd7f6842680ec"
+  },
+  "inference_overlay_visible_to_reviewer": false,
+  "review_frame_count": 8,
+  "target_reference_used_for_sampling": false,
+  "version": "OTY2-S1D0-visible-response-reference-queue-v1"
+}

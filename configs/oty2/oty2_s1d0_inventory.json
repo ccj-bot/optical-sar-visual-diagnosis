@@ -1,0 +1,62 @@
+{
+  "version": "OTY2-S1D0-inventory-v1",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "expected_start_head": "70f3cbbd62eb1889bcf7537ae27cd7f6842680ec",
+  "python": "D:/MINICONDA/envs/py311/python.exe",
+  "sources": {
+    "scene_config": "configs/scene_config.yaml",
+    "p0_asset_manifest": "manifests/oty2/oty2_p0_data_asset_manifest.csv",
+    "canonical_vehicle_registry": "manifests/oty2/oty2_p1e_canonical_optical_vehicle_registry.csv",
+    "canonical_frame_states": "manifests/oty2/oty2_p1e_canonical_vehicle_frame_states.csv",
+    "detection_identity_map": "manifests/oty2/oty2_p1e_detection_to_canonical_identity_map.csv",
+    "sar_to_optical_time_map": "manifests/oty2/oty2_p0_hard_sync_sar_to_optical.csv",
+    "calibration": "configs/oty2/oty2_s1x_optical_condition_calibration.json"
+  },
+  "scenes": ["GM_RM011", "GM_RM017", "GM_RM019"],
+  "pre_roll_sar_frames": 8,
+  "post_roll_sar_frames": 20,
+  "inventory_shell_sample_count": 5,
+  "review_frame_count": 4,
+  "output_root": "D:/profile/research/workspace/output/oty2_s1d0_20260717/inventory_review",
+  "selected_cases": [
+    {
+      "case_id": "S1D0-DISCOVERY-GM_RM017-PV002",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV002",
+      "roles": ["MECHANISM_DISCOVERY"],
+      "selection_reason": "same-scene independent PV004 calibration; complete optical lifecycle; inherits S1X evidence but runs the new dynamic method over natural entry and exit",
+      "direct_review_finding": "optical identity is continuous from partial entry through full visibility to partial exit; shell traverses heterogeneous SAR background and overlaps other active vehicle lifecycles"
+    },
+    {
+      "case_id": "S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003",
+      "scene": "GM_RM019",
+      "vehicle_id": "GM_RM019:PV003",
+      "roles": ["CROSS_SCENE_FROZEN_REPLAY", "ENTRY_EXIT_LIFECYCLE_CASE"],
+      "selection_reason": "different scene; isolated 46-frame optical lifecycle; no simultaneously visible canonical vehicle; post-roll reaches the following PV004 entry without manual cropping",
+      "direct_review_finding": "silver MPV has a continuous left-to-right lifecycle; broad cross-scene proxy shell contains strong arcs and fixed structures, making mapping and response recovery separable diagnostics"
+    },
+    {
+      "case_id": "S1D0-STRESS-GM_RM011-PV008",
+      "scene": "GM_RM011",
+      "vehicle_id": "GM_RM011:PV008",
+      "roles": ["MULTI_VEHICLE_OR_OCCLUSION_STRESS"],
+      "selection_reason": "three simultaneously visible vehicles; full lifecycle overlap on both sides; one visible-but-unboxed frame; Working Graph marks the surrounding 135-166 interval as subject competition",
+      "direct_review_finding": "white Honda remains optically identifiable while adjacent vehicles and covered cars compete; shell is broad and clutter-rich, appropriate for pressure diagnosis rather than parameter discovery"
+    }
+  ],
+  "uncertainty": {
+    "theta_cross_scene_extra_deg": 5.0,
+    "radial_cross_scene_extra_px": 90.0,
+    "missing_bbox_multiplier": 1.6,
+    "partial_visibility_multiplier": 1.4
+  },
+  "prohibitions": {
+    "target_sar_gt_for_selection": true,
+    "target_sar_gt_for_inference": true,
+    "manual_sar_frame_crop": true,
+    "candidate_box_bank": true,
+    "weighted_score": true,
+    "ranking_or_selector": true,
+    "unique_box": true
+  }
+}

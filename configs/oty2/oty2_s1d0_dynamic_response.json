@@ -1,0 +1,84 @@
+{
+  "version": "OTY2-S1D0-dynamic-response-v1.1",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "expected_start_head": "70f3cbbd62eb1889bcf7537ae27cd7f6842680ec",
+  "python": "D:/MINICONDA/envs/py311/python.exe",
+  "sources": {
+    "scene_config": "configs/scene_config.yaml",
+    "inventory": "manifests/oty2/oty2_s1d0_multiscene_lifecycle_inventory.csv",
+    "selected_roles": "manifests/oty2/oty2_s1d0_selected_lifecycle_roles.csv",
+    "canonical_vehicle_registry": "manifests/oty2/oty2_p1e_canonical_optical_vehicle_registry.csv",
+    "canonical_frame_states": "manifests/oty2/oty2_p1e_canonical_vehicle_frame_states.csv",
+    "sar_to_optical_time_map": "manifests/oty2/oty2_p0_hard_sync_sar_to_optical.csv",
+    "calibration": "configs/oty2/oty2_s1x_optical_condition_calibration.json",
+    "lifecycle_conditions": "manifests/oty2/oty2_s1d0_lifecycle_conditions.csv"
+  },
+  "output_root": "D:/profile/research/workspace/output/oty2_s1d0_20260717",
+  "lifecycle": {
+    "entry_provisional_sar_frames": 4,
+    "exit_sar_frames": 6,
+    "closure_grace_sar_frames": 2
+  },
+  "uncertainty": {
+    "theta_cross_scene_extra_deg": 5.0,
+    "radial_cross_scene_extra_px": 90.0,
+    "missing_bbox_multiplier": 1.6,
+    "partial_visibility_multiplier": 1.4
+  },
+  "transport": {
+    "downsample": 0.25,
+    "tile_rows": 4,
+    "tile_cols": 6,
+    "minimum_tile_response": 0.05,
+    "maximum_pair_shift_px": 16.0,
+    "highpass_sigma_px_at_downsampled_scale": 2.0,
+    "active_shell_exclusion_dilation_px": 20,
+    "minimum_fit_tile_count": 4,
+    "holdout_tile_modulus": 4
+  },
+  "response": {
+    "context_expansion_px": 80,
+    "strong_response_robust_z": 2.5,
+    "weak_response_robust_z": 0.8,
+    "minimum_component_area_px": 16,
+    "shell_crossing_background_fraction": 0.55,
+    "inside_shell_background_frequency": 0.65,
+    "background_pre_or_post_frequency": 0.45,
+    "sliding_window_frames": 7,
+    "sliding_persistent_frequency": 0.40,
+    "lifecycle_persistent_frequency": 0.55,
+    "maintenance_radius_frames": 2,
+    "maintenance_neighbourhood_px": 18,
+    "maximum_maintenance_age_frames": 2
+  },
+  "relation": {
+    "maximum_centroid_distance_px": 30.0,
+    "minimum_mask_iou": 0.02,
+    "strength_change_ratio": 1.25,
+    "migration_distance_px": 8.0
+  },
+  "visualization": {
+    "display_min": 0,
+    "display_max": 85,
+    "representative_frame_count": 8
+  },
+  "single_allowed_minimal_repair": {
+    "trigger": "blind causal review showed weak-maintenance shell flooding and graph combinatorics in cross-scene/stress cases",
+    "changes": [
+      "inside-shell background uses pre-entry/closed context persistence rather than shell-clipped frequency",
+      "maintenance requires sliding or lifecycle persistence support",
+      "graph edges use a tighter relational gate and per-edge dynamics only for one-to-one relations"
+    ],
+    "response_thresholds_changed": false,
+    "selected_threads_changed": false
+  },
+  "prohibitions": {
+    "target_reference_input": true,
+    "manual_sar_window": true,
+    "candidate_bank": true,
+    "weighted_total_score": true,
+    "ranking_or_selector": true,
+    "forced_component_winner": true,
+    "unique_box_output": true
+  }
+}

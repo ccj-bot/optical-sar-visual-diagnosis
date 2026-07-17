@@ -1,0 +1,29 @@
+{
+  "active_shell_rows": 567,
+  "case_target_frame_counts": {
+    "S1D0-DISCOVERY-GM_RM017-PV002": 111,
+    "S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003": 121,
+    "S1D0-STRESS-GM_RM011-PV008": 92
+  },
+  "condition_output": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1d0_lifecycle_conditions.csv",
+  "condition_row_count": 645,
+  "condition_sha256": "047eb9afcdbda6d5b5016ea814a3377ac758288f8b2e2f27bec7426cd6319b9f",
+  "config_sha256": "1786558d3d75a7197f033e85835bc910673cef3742bfc153ad26bc5069c6ada2",
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "70f3cbbd62eb1889bcf7537ae27cd7f6842680ec"
+  },
+  "input_file_count": 490,
+  "old_work_runtime_dependency": false,
+  "source_hashes": {
+    "calibration": "e963a6d532815dfc2cd9c03c9cefb2c5da9c92751e698fca53cba83d20fbb037",
+    "canonical_frame_states": "0bc08ac2307efada5ca846745cc09ffea72ff798acc3ac3e72182535ce159557",
+    "canonical_vehicle_registry": "27342a7b99404598387da859091640f6eef1f3e56877a37a56fc9ff58a653c49",
+    "inventory": "b88e76d760950e1625144d520fffe2e9df604d71f2deba03cb5eaf62eda03717",
+    "sar_to_optical_time_map": "8521767b2ed8fc40771b1fde4f8bffff41e07e0dcc3849d6acba265920f4d293",
+    "scene_config": "1755456909b82c512017af8b0d48523429ac51d43f3aeb076b2250e490bc7c10",
+    "selected_roles": "05f2e7622419b0912efabab7ea293510f5fbae2892d88027be446e1d5087f2c8"
+  },
+  "target_reference_dependency_rows": 0,
+  "version": "OTY2-S1D0-dynamic-response-v1.1"
+}

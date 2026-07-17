@@ -1,0 +1,137 @@
+{
+  "candidate_bank_generated": false,
+  "cases": [
+    {
+      "active_frame_count": 85,
+      "ambiguous_frame_count": 46,
+      "canonical_vehicle_id": "GM_RM017:PV002",
+      "case_id": "S1D0-DISCOVERY-GM_RM017-PV002",
+      "closed_support_nonzero_frame_count": 0,
+      "edge_count": 1695,
+      "event_count": 1799,
+      "fallback_transport_frame_count": 0,
+      "forced_component_winner": false,
+      "frame_count": 111,
+      "frame_range": [
+        295,
+        405
+      ],
+      "joint_nonempty_frame_count": 85,
+      "mean_axis_baseline_area_px": 1202.6036036036037,
+      "mean_center_baseline_area_px": 1202.6036036036037,
+      "mean_joint_support_area_px": 1202.6036036036037,
+      "node_count": 2153,
+      "npz_path": "D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\dynamic_state_masks.npz",
+      "review_paths": [
+        "D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+        "D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-DISCOVERY-GM_RM017-PV002\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png"
+      ],
+      "roi": [
+        439,
+        317,
+        1458,
+        1334
+      ],
+      "scene": "GM_RM017",
+      "state_mode": "bidirectional",
+      "target_reference_used_for_inference": false,
+      "transport_holdout_residual_median_px": 1.385168577672357,
+      "unique_box_generated": false,
+      "weighted_score_or_ranking_used": false
+    },
+    {
+      "active_frame_count": 95,
+      "ambiguous_frame_count": 0,
+      "canonical_vehicle_id": "GM_RM019:PV003",
+      "case_id": "S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003",
+      "closed_support_nonzero_frame_count": 0,
+      "edge_count": 6955,
+      "event_count": 7441,
+      "fallback_transport_frame_count": 0,
+      "forced_component_winner": false,
+      "frame_count": 121,
+      "frame_range": [
+        197,
+        317
+      ],
+      "joint_nonempty_frame_count": 95,
+      "mean_axis_baseline_area_px": 9274.578512396694,
+      "mean_center_baseline_area_px": 9274.578512396694,
+      "mean_joint_support_area_px": 9274.578512396694,
+      "node_count": 7576,
+      "npz_path": "D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\dynamic_state_masks.npz",
+      "review_paths": [
+        "D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+        "D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-REPLAY-ENTRYEXIT-GM_RM019-PV003\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png"
+      ],
+      "roi": [
+        393,
+        13,
+        1999,
+        1334
+      ],
+      "scene": "GM_RM019",
+      "state_mode": "bidirectional",
+      "target_reference_used_for_inference": false,
+      "transport_holdout_residual_median_px": 1.1242431231325347,
+      "unique_box_generated": false,
+      "weighted_score_or_ranking_used": false
+    },
+    {
+      "active_frame_count": 66,
+      "ambiguous_frame_count": 53,
+      "canonical_vehicle_id": "GM_RM011:PV008",
+      "case_id": "S1D0-STRESS-GM_RM011-PV008",
+      "closed_support_nonzero_frame_count": 0,
+      "edge_count": 13680,
+      "event_count": 9100,
+      "fallback_transport_frame_count": 0,
+      "forced_component_winner": false,
+      "frame_count": 92,
+      "frame_range": [
+        274,
+        365
+      ],
+      "joint_nonempty_frame_count": 66,
+      "mean_axis_baseline_area_px": 6675.630434782609,
+      "mean_center_baseline_area_px": 6675.630434782609,
+      "mean_joint_support_area_px": 6675.630434782609,
+      "node_count": 7359,
+      "npz_path": "D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\dynamic_state_masks.npz",
+      "review_paths": [
+        "D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\blind_review\\blind_dynamic_review_page_01.png",
+        "D:\\profile\\research\\workspace\\output\\oty2_s1d0_20260717\\S1D0-STRESS-GM_RM011-PV008\\bidirectional\\blind_review\\blind_dynamic_review_page_02.png"
+      ],
+      "roi": [
+        539,
+        633,
+        1590,
+        1334
+      ],
+      "scene": "GM_RM011",
+      "state_mode": "bidirectional",
+      "target_reference_used_for_inference": false,
+      "transport_holdout_residual_median_px": 1.3184448287254624,
+      "unique_box_generated": false,
+      "weighted_score_or_ranking_used": false
+    }
+  ],
+  "condition_sha256": "047eb9afcdbda6d5b5016ea814a3377ac758288f8b2e2f27bec7426cd6319b9f",
+  "config_sha256": "1786558d3d75a7197f033e85835bc910673cef3742bfc153ad26bc5069c6ada2",
+  "created_utc": "2026-07-17T05:55:46.565316+00:00",
+  "forced_component_winner": false,
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "70f3cbbd62eb1889bcf7537ae27cd7f6842680ec"
+  },
+  "leakage_audit": {
+    "condition_forbidden_columns": [],
+    "config_forbidden_hits": [],
+    "target_dependency_rows": 0
+  },
+  "state_mode": "OFFLINE_BIDIRECTIONAL_STATE",
+  "target_reference_used_for_inference": false,
+  "unique_box_generated": false,
+  "version": "OTY2-S1D0-dynamic-response-v1.1",
+  "weighted_score_or_ranking_used": false
+}
