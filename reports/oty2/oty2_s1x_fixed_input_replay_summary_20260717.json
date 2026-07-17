@@ -1,0 +1,41 @@
+{
+  "condition_sha256": "a603c60b4ad5bf4fdf79ffaebe00a5829bf74e1840b8fa6cd0dbd1fd2a0e459b",
+  "config_sha256": "e91c6ee555601d61f6d53bd9d17f069d8c1af6a25a94ed39250a33d62b59346e",
+  "frame_rows_equal_excluding_output_path": true,
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "fb69df0bd050106a9cad62f2d8cc50e5c6750319"
+  },
+  "replay_root": "D:\\profile\\research\\workspace\\output\\oty2_s1x_20260717_replay_check",
+  "sar_only_object_rows_equal": true,
+  "status": "PASS",
+  "version": "OTY2-S1X-fixed-input-replay-v1",
+  "windows": [
+    {
+      "npz": {
+        "all_arrays_equal": true,
+        "array_mismatches": [],
+        "file_sha_equal": true,
+        "frozen_sha256": "3cf767845b4757880fa1b1212da8170017c67a7c979ff997bedb544583b04820",
+        "keys_equal": true,
+        "replay_sha256": "3cf767845b4757880fa1b1212da8170017c67a7c979ff997bedb544583b04820"
+      },
+      "review_names_equal": true,
+      "review_pixels_equal": true,
+      "window_id": "DISCOVERY_GM_RM017_PV002_330_350"
+    },
+    {
+      "npz": {
+        "all_arrays_equal": true,
+        "array_mismatches": [],
+        "file_sha_equal": true,
+        "frozen_sha256": "60498d44304833965121add51f8d09e65019542900df42cbd021853686a11d71",
+        "keys_equal": true,
+        "replay_sha256": "60498d44304833965121add51f8d09e65019542900df42cbd021853686a11d71"
+      },
+      "review_names_equal": true,
+      "review_pixels_equal": true,
+      "window_id": "REPLAY_GM_RM017_PV003_338_391"
+    }
+  ]
+}

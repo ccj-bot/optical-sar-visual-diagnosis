@@ -1,0 +1,5 @@
+question_id,direct_answer,evidence
+Q1_VISIBLE_SEQUENCE_WITHOUT_TARGET_REFERENCE,YES_CONSERVATIVE_VISIBLE_RESPONSE_SEQUENCE_RECOVERED,blind review supported; discovery reference-hit fraction=1.000; mean target coverage=0.110
+Q2_SAR_INCREMENT_OVER_OPTICAL_SHELL,YES_SUPPORT_RANGE_STRONGLY_CONTRACTED_BACKGROUND_REDUCTION_MEASURED,discovery shell contraction=0.946; replay shell contraction=0.961; other-vehicle overlap reported separately
+Q3_TEMPORAL_JOINT_MORE_STABLE_THAN_PER_FRAME,PARTIAL_YES_LOWER_JITTER_BUT_NO_ADDITIONAL_BREAK_RECOVERY,joint/independent centroid-jump medians=11.469/13.743 and 3.707/4.911; recovered reference-hit frames=0/0; weak-maintained target frames=21/54
+Q4_FROZEN_RULE_REPLAY,YES_PARTIAL_REPRODUCTION_ON_INDEPENDENT_OPTICAL_VEHICLE_THREAD,replay reference-hit fraction=1.000; mean target coverage=0.120; same inference config hash was frozen for both windows

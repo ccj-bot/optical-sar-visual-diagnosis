@@ -1,0 +1,15 @@
+conclusion_id,status,evidence,boundary
+PROJECT_STAGE,OTY2_S1X_PROJECT_LEVEL_CLOSED_LOOP_COMPLETED,"target-reference-free inference; blind review; frozen replay; independent posthoc evaluation",not automatic annotation
+OPTICAL_CONDITION_INPUT,AVAILABLE_AS_REAL_OPTICAL_RESEARCH_BENCHMARK,"P1-E canonical optical vehicle thread and per-frame bbox/visibility; 75 condition rows",benchmark_only not deployment runtime output
+TARGET_REFERENCE_ISOLATION,PASS,"freeze audit 17/17 hashes; inference target dependency rows=0; separate evaluation entry",PV004 calibration reference is independent and excluded from project evaluation
+OPTICAL_ONLY_CONDITION_SHELL,VALID_BUT_BROAD,"mean target coverage discovery=0.589779 replay=0.698985; mean precision discovery=0.178893 replay=0.213298",shell is a prior not a final location
+SAR_ONLY_BLIND_DIAGNOSTIC,AMBIGUOUS_BACKGROUND_RICH,"17 discovery and 6 replay temporal objects; mean target coverage 0.032077 and 0.020194",not an identity method and not a mainline gate
+JOINT_VISIBLE_RESPONSE_SEQUENCE,SUPPORTED,"reference-hit frames 21/21 and 54/54; blind and posthoc direct review support a persistent lower or mid response band",visible response only not full body
+SAR_INCREMENT_OVER_OPTICAL_ONLY,SUPPORTED_BY_CONTRACTION_AND_PRECISION,"mean shell contraction 0.946484 and 0.960618; joint precision 0.624273 and 0.941533; other-vehicle overlap=0",automatic background class remained conservative
+TEMPORAL_JOINT_VALUE,PARTIAL_LOWER_JITTER_NO_BREAK_RECOVERY,"joint centroid jump median 11.469<13.743 and 3.707<4.911; both independent and joint had zero break episodes",does not prove extra frame recovery
+WEAK_RESPONSE_MAINTENANCE,SUPPORTED_AS_PIXEL_LEVEL_CONTINUITY,"weak-maintained target intersections in 21/21 and 54/54 reference frames",not a claim that independent per-frame path was empty
+FROZEN_RULE_REPLAY,SUPPORTED_PARTIAL_REPRODUCTION,"PV003 replay used identical config hash; 54/54 reference hits; mean precision 0.941533",same-scene other-vehicle replay not cross-scene generalization
+FULL_BODY_SUPPORT,NOT_RECOVERED,"mean target coverage remains 0.109554 and 0.119835",not required for S1X success
+UNIQUE_BOX_OR_CENTER,NOT_EVALUATED_NOT_AUTHORIZED,"no unique box output; no candidate bank; no ranking",must remain separate from later annotation
+S1D_READINESS,SMALL_SCALE_S1D_ALLOWED_WITH_RESEARCH_PROXY_INPUTS,"continuous visible response; SAR increment; independent target replay; zero other-vehicle overlap",deployment and automatic annotation remain not ready
+AUTOMATIC_ANNOTATION_READINESS,NOT_READY,"optical identity is benchmark-only; calibration is single vehicle and single scene; metric and grayscale lineage unresolved",requires later deployment-source replacement and broader validation

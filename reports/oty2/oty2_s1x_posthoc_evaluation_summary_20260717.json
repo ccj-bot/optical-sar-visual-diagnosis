@@ -1,0 +1,108 @@
+{
+  "evaluation_config": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1x_posthoc_evaluation.json",
+  "evaluation_config_sha256": "7af3b2cd60b06773cab7e91d652ab4b0fb734c363a834276d9f5a08891bcff2f",
+  "evaluation_started_utc": "2026-07-17T02:36:44.147427+00:00",
+  "freeze_audit": {
+    "all_hashes_match": true,
+    "freeze_row_count": 17
+  },
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "fb69df0bd050106a9cad62f2d8cc50e5c6750319"
+  },
+  "inference_outputs_modified": false,
+  "project_questions": [
+    {
+      "direct_answer": "YES_CONSERVATIVE_VISIBLE_RESPONSE_SEQUENCE_RECOVERED",
+      "evidence": "blind review supported; discovery reference-hit fraction=1.000; mean target coverage=0.110",
+      "question_id": "Q1_VISIBLE_SEQUENCE_WITHOUT_TARGET_REFERENCE"
+    },
+    {
+      "direct_answer": "YES_SUPPORT_RANGE_STRONGLY_CONTRACTED_BACKGROUND_REDUCTION_MEASURED",
+      "evidence": "discovery shell contraction=0.946; replay shell contraction=0.961; other-vehicle overlap reported separately",
+      "question_id": "Q2_SAR_INCREMENT_OVER_OPTICAL_SHELL"
+    },
+    {
+      "direct_answer": "PARTIAL_YES_LOWER_JITTER_BUT_NO_ADDITIONAL_BREAK_RECOVERY",
+      "evidence": "joint/independent centroid-jump medians=11.469/13.743 and 3.707/4.911; recovered reference-hit frames=0/0; weak-maintained target frames=21/54",
+      "question_id": "Q3_TEMPORAL_JOINT_MORE_STABLE_THAN_PER_FRAME"
+    },
+    {
+      "direct_answer": "YES_PARTIAL_REPRODUCTION_ON_INDEPENDENT_OPTICAL_VEHICLE_THREAD",
+      "evidence": "replay reference-hit fraction=1.000; mean target coverage=0.120; same inference config hash was frozen for both windows",
+      "question_id": "Q4_FROZEN_RULE_REPLAY"
+    }
+  ],
+  "reference_manifest": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s0_sar_gt_quality_audit.csv",
+  "reference_manifest_sha256": "c6d3618221d846837f8fd25dc1b662a3ff1b398005a2f01f4409ccc6130ce961",
+  "rule_update_from_evaluation": false,
+  "version": "OTY2-S1X-posthoc-evaluation-summary-v1",
+  "window_metrics": [
+    {
+      "canonical_vehicle_id": "GM_RM017:PV002",
+      "independent_break_episode_count": 0,
+      "independent_centroid_jump_median_px": 13.742905498638438,
+      "independent_centroid_jump_p90_px": 25.487098260841304,
+      "independent_empty_frame_count": 0,
+      "independent_reference_hit_frame_fraction": 1.0,
+      "independent_total_other_vehicle_overlap_px": 0,
+      "inference_frame_count": 21,
+      "joint_break_episode_count": 0,
+      "joint_centroid_jump_median_px": 11.468657963796636,
+      "joint_centroid_jump_p90_px": 24.74167770337705,
+      "joint_empty_frame_count": 0,
+      "joint_mean_precision": 0.6242729662380954,
+      "joint_mean_shell_contraction_fraction": 0.9464838273333334,
+      "joint_mean_target_coverage": 0.10955419323809522,
+      "joint_reference_hit_frame_fraction": 1.0,
+      "joint_total_background_area_reduction_px": 638464,
+      "joint_total_other_vehicle_overlap_px": 0,
+      "optical_shell_mean_precision": 0.17889276657142858,
+      "optical_shell_mean_target_coverage": 0.5897787097619047,
+      "reference_available_frame_count": 21,
+      "reference_temporal_coverage_fraction": 1.0,
+      "sar_only_mean_precision": 0.2498858160952381,
+      "sar_only_mean_target_coverage": 0.03207681061904762,
+      "scene": "GM_RM017",
+      "target_reference_used_for_inference": false,
+      "temporally_recovered_reference_hit_frames": 0,
+      "weak_maintained_target_frame_count": 21,
+      "weak_maintained_target_intersection_total_px": 3367,
+      "window_id": "DISCOVERY_GM_RM017_PV002_330_350",
+      "window_role": "discovery"
+    },
+    {
+      "canonical_vehicle_id": "GM_RM017:PV003",
+      "independent_break_episode_count": 0,
+      "independent_centroid_jump_median_px": 4.910569675261874,
+      "independent_centroid_jump_p90_px": 17.101154427163827,
+      "independent_empty_frame_count": 0,
+      "independent_reference_hit_frame_fraction": 1.0,
+      "independent_total_other_vehicle_overlap_px": 0,
+      "inference_frame_count": 54,
+      "joint_break_episode_count": 0,
+      "joint_centroid_jump_median_px": 3.7072991995621902,
+      "joint_centroid_jump_p90_px": 14.237908957149456,
+      "joint_empty_frame_count": 0,
+      "joint_mean_precision": 0.9415331751666668,
+      "joint_mean_shell_contraction_fraction": 0.9606182518333333,
+      "joint_mean_target_coverage": 0.11983484424074074,
+      "joint_reference_hit_frame_fraction": 1.0,
+      "joint_total_background_area_reduction_px": 1782633,
+      "joint_total_other_vehicle_overlap_px": 0,
+      "optical_shell_mean_precision": 0.21329838579629629,
+      "optical_shell_mean_target_coverage": 0.6989854945185184,
+      "reference_available_frame_count": 54,
+      "reference_temporal_coverage_fraction": 1.0,
+      "sar_only_mean_precision": 0.4705986022962963,
+      "sar_only_mean_target_coverage": 0.020193528074074072,
+      "scene": "GM_RM017",
+      "target_reference_used_for_inference": false,
+      "temporally_recovered_reference_hit_frames": 0,
+      "weak_maintained_target_frame_count": 54,
+      "weak_maintained_target_intersection_total_px": 9278,
+      "window_id": "REPLAY_GM_RM017_PV003_338_391",
+      "window_role": "frozen_rule_replay"
+    }
+  ]
+}

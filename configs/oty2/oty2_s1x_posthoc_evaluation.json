@@ -1,0 +1,32 @@
+{
+  "version": "OTY2-S1X-posthoc-evaluation-v1",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "expected_start_head": "fb69df0bd050106a9cad62f2d8cc50e5c6750319",
+  "inference_freeze_manifest": "manifests/oty2/oty2_s1x_inference_freeze_manifest.csv",
+  "reference_manifest": "manifests/oty2/oty2_s0_sar_gt_quality_audit.csv",
+  "output_root": "D:/profile/research/workspace/output/oty2_s1x_20260717",
+  "targets": [
+    {
+      "window_id": "DISCOVERY_GM_RM017_PV002_330_350",
+      "role": "discovery",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV002",
+      "sar_frame_start": 330,
+      "sar_frame_end": 350
+    },
+    {
+      "window_id": "REPLAY_GM_RM017_PV003_338_391",
+      "role": "frozen_rule_replay",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV003",
+      "sar_frame_start": 338,
+      "sar_frame_end": 391
+    }
+  ],
+  "evaluation_semantics": {
+    "reference_use": "posthoc_only_after_inference_and_blind_review_freeze",
+    "support_is_not_full_body_box": true,
+    "no_weighted_total_score": true,
+    "no_rule_update_from_evaluation": true
+  }
+}

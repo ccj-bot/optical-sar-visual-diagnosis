@@ -1,0 +1,98 @@
+{
+  "candidate_bank_generated": false,
+  "created_utc": "2026-07-17T02:24:01.787664+00:00",
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "fb69df0bd050106a9cad62f2d8cc50e5c6750319"
+  },
+  "inference_config": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1x_joint_temporal_support.json",
+  "inference_config_sha256": "e91c6ee555601d61f6d53bd9d17f069d8c1af6a25a94ed39250a33d62b59346e",
+  "leakage_audit": {
+    "condition_forbidden_columns": [],
+    "config_forbidden_fragment_hits": [],
+    "target_dependency_rows": 0
+  },
+  "optical_condition_sha256": "a603c60b4ad5bf4fdf79ffaebe00a5829bf74e1840b8fa6cd0dbd1fd2a0e459b",
+  "target_reference_used_for_inference": false,
+  "unique_box_generated": false,
+  "version": "OTY2-S1X-inference-summary-v1",
+  "weighted_score_or_ranking_used": false,
+  "windows": [
+    {
+      "background_region_area_px": 0,
+      "canonical_vehicle_id": "GM_RM017:PV002",
+      "empty_independent_frame_count": 0,
+      "empty_joint_frame_count": 0,
+      "frame_count": 21,
+      "frame_range": [
+        330,
+        350
+      ],
+      "intermittent_region_area_px": 1308,
+      "mean_independent_support_area_px": 1812.142857142857,
+      "mean_joint_support_area_px": 2031.857142857143,
+      "mean_optical_shell_area_px": 37942.47619047619,
+      "mixed_region_area_px": 566,
+      "npz_path": "D:\\profile\\research\\workspace\\output\\oty2_s1x_20260717\\DISCOVERY_GM_RM017_PV002_330_350\\frozen_inference_masks.npz",
+      "persistent_core_area_px": 1272,
+      "review_paths": [
+        "D:\\profile\\research\\workspace\\output\\oty2_s1x_20260717\\DISCOVERY_GM_RM017_PV002_330_350\\blind_review\\blind_transfer_review_page_01.png",
+        "D:\\profile\\research\\workspace\\output\\oty2_s1x_20260717\\DISCOVERY_GM_RM017_PV002_330_350\\blind_review\\blind_transfer_review_page_02.png",
+        "D:\\profile\\research\\workspace\\output\\oty2_s1x_20260717\\DISCOVERY_GM_RM017_PV002_330_350\\blind_review\\blind_temporal_summary.png"
+      ],
+      "roi": [
+        747,
+        709,
+        1320,
+        1334
+      ],
+      "sar_only_temporal_object_count": 17,
+      "scene": "GM_RM017",
+      "transport_cumulative_dx_px": 126.51644497061244,
+      "transport_cumulative_dy_px": -0.7423512479154084,
+      "transport_pair_dx_median_px": 6.341643786079814,
+      "transport_pair_dy_median_px": 0.002995280789512833,
+      "weak_maintained_frame_count": 21,
+      "window_id": "DISCOVERY_GM_RM017_PV002_330_350",
+      "window_role": "discovery"
+    },
+    {
+      "background_region_area_px": 0,
+      "canonical_vehicle_id": "GM_RM017:PV003",
+      "empty_independent_frame_count": 0,
+      "empty_joint_frame_count": 0,
+      "frame_count": 54,
+      "frame_range": [
+        338,
+        391
+      ],
+      "intermittent_region_area_px": 870,
+      "mean_independent_support_area_px": 1469.5925925925926,
+      "mean_joint_support_area_px": 1640.2962962962963,
+      "mean_optical_shell_area_px": 42083.11111111111,
+      "mixed_region_area_px": 104,
+      "npz_path": "D:\\profile\\research\\workspace\\output\\oty2_s1x_20260717\\REPLAY_GM_RM017_PV003_338_391\\frozen_inference_masks.npz",
+      "persistent_core_area_px": 1205,
+      "review_paths": [
+        "D:\\profile\\research\\workspace\\output\\oty2_s1x_20260717\\REPLAY_GM_RM017_PV003_338_391\\blind_review\\blind_transfer_review_page_01.png",
+        "D:\\profile\\research\\workspace\\output\\oty2_s1x_20260717\\REPLAY_GM_RM017_PV003_338_391\\blind_review\\blind_transfer_review_page_02.png",
+        "D:\\profile\\research\\workspace\\output\\oty2_s1x_20260717\\REPLAY_GM_RM017_PV003_338_391\\blind_review\\blind_temporal_summary.png"
+      ],
+      "roi": [
+        627,
+        653,
+        1260,
+        1334
+      ],
+      "sar_only_temporal_object_count": 6,
+      "scene": "GM_RM017",
+      "transport_cumulative_dx_px": 335.61568219471167,
+      "transport_cumulative_dy_px": -4.46770084689139,
+      "transport_pair_dx_median_px": 6.323066594412069,
+      "transport_pair_dy_median_px": -0.09239874882625543,
+      "weak_maintained_frame_count": 54,
+      "window_id": "REPLAY_GM_RM017_PV003_338_391",
+      "window_role": "frozen_rule_replay"
+    }
+  ]
+}

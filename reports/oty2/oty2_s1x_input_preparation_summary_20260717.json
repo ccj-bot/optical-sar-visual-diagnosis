@@ -1,0 +1,34 @@
+{
+  "calibration_input_bundle_sha256": "8be20f93f73b3de9b3fbfdc72906a104b779a8963cfc9686c3b370f3a5ce241e",
+  "calibration_output": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1x_optical_condition_calibration.json",
+  "calibration_output_sha256": "e963a6d532815dfc2cd9c03c9cefb2c5da9c92751e698fca53cba83d20fbb037",
+  "calibration_rows": 43,
+  "calibration_vehicle": "GM_RM017:PV004",
+  "condition_counts": {
+    "discovery": 21,
+    "frozen_rule_replay": 54
+  },
+  "condition_output": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1x_optical_condition_frames.csv",
+  "condition_output_sha256": "a603c60b4ad5bf4fdf79ffaebe00a5829bf74e1840b8fa6cd0dbd1fd2a0e459b",
+  "condition_row_count": 75,
+  "condition_row_hash": "a80f00e95c09b6bc07c892b64bc22a61d85495eca13c314835c8160558a01060",
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "fb69df0bd050106a9cad62f2d8cc50e5c6750319"
+  },
+  "lineage_output": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s1x_optical_condition_input_lineage.csv",
+  "lineage_output_sha256": "36c7c970a13981796ead8fdcdcceb7d77333be4144a963a8f1cb14f498aa7a99",
+  "missing_or_unresolved": [
+    "automatic runtime optical canonical identity stream",
+    "depth sidecar generator and absolute scale lineage",
+    "cross-scene and cross-pose mapping calibration",
+    "authoritative SAR metric grid and raw amplitude/complex/IQ/ADC",
+    "fixed grayscale display mapping lineage"
+  ],
+  "old_work_runtime_dependency": false,
+  "preparation_config": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\configs\\oty2\\oty2_s1x_input_preparation.json",
+  "preparation_config_sha256": "4a1851cb2d03197036f101f68501dcb6454989530dec369b35e98983b95b72b6",
+  "target_input_bundle_sha256": "d6af65405f7cc836eb38ac5df722fe35f0f2047823fe5446fd0d9acf67295ca7",
+  "target_reference_dependency": false,
+  "version": "OTY2-S1X-input-preparation-summary-v1"
+}

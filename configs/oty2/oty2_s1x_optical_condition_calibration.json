@@ -1,0 +1,71 @@
+{
+  "calibration_role": "independent_calibration_only_not_discovery_or_replay",
+  "calibration_vehicle_id": "GM_RM017:PV004",
+  "depth_lineage_status": "derived_optical_sidecar_generator_unresolved_research_proxy_only",
+  "depth_to_radius_diagnostic_not_used_for_center": {
+    "intercept": 163.73254269964,
+    "max_abs_error": 51.370189211140655,
+    "median_abs_error": 13.975750768069929,
+    "p90_abs_error": 33.25990739885228,
+    "p95_abs_error": 36.0395936283492,
+    "pearson": 0.6150616898274491,
+    "residual_p05": -29.436116685219037,
+    "residual_p95": 33.3591149804891,
+    "slope": 29.444122361147365
+  },
+  "forbidden_target_vehicle_ids": [
+    "GM_RM017:PV002",
+    "GM_RM017:PV003"
+  ],
+  "metric_grid_status": "display_fan_pixels_only_metric_grid_unresolved",
+  "optical_frame_range": [
+    169,
+    189
+  ],
+  "preparation_config_sha256": "4a1851cb2d03197036f101f68501dcb6454989530dec369b35e98983b95b72b6",
+  "radius_from_optical_bbox_height": {
+    "intercept": 1196.4181818144689,
+    "max_abs_error": 17.89726113618451,
+    "median_abs_error": 4.549484463109252,
+    "p90_abs_error": 11.983690531632302,
+    "p95_abs_error": 13.753625536357992,
+    "pearson": -0.9659697158260926,
+    "residual_p05": -13.249294036009394,
+    "residual_p95": 10.166464074354295,
+    "slope": -10.417269249604772
+  },
+  "response_size_reference": {
+    "long_side_median_px": 166.226,
+    "long_side_p10_px": 155.922,
+    "long_side_p90_px": 176.9278,
+    "short_side_median_px": 77.111,
+    "short_side_p10_px": 71.708,
+    "short_side_p90_px": 82.1688
+  },
+  "row_count": 43,
+  "sar_frame_range": [
+    352,
+    394
+  ],
+  "scene": "GM_RM017",
+  "source_manifest_sha256": "c6d3618221d846837f8fd25dc1b662a3ff1b398005a2f01f4409ccc6130ce961",
+  "source_reference_hash": "88d68f39795be24319cce9451f75a7dcb4c6baf250dd5ae0ed227da5467307fe",
+  "target_vehicle_ids_present_in_source_but_excluded": [
+    "GM_RM017:PV002",
+    "GM_RM017:PV003"
+  ],
+  "target_vehicle_rows_loaded_for_fit": 0,
+  "theta_from_optical_center_x": {
+    "intercept": -42.19680625008502,
+    "max_abs_error": 1.1452338788857777,
+    "median_abs_error": 0.3944998253009402,
+    "p90_abs_error": 0.8129420945551141,
+    "p95_abs_error": 0.8441990234422071,
+    "pearson": 0.9985546526818185,
+    "residual_p05": -0.8437460791562712,
+    "residual_p95": 0.7211051403080821,
+    "slope": 0.09524266452904367
+  },
+  "uncertainty_interpretation": "single-scene single-vehicle research proxy; target shells use additional cross-vehicle allowances",
+  "version": "OTY2-S1X-independent-calibration-v1"
+}

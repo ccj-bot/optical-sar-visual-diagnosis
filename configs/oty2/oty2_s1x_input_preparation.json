@@ -1,0 +1,55 @@
+{
+  "version": "OTY2-S1X-input-preparation-v1",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "expected_start_head": "fb69df0bd050106a9cad62f2d8cc50e5c6750319",
+  "python": "D:/MINICONDA/envs/py311/python.exe",
+  "sources": {
+    "scene_config": "configs/scene_config.yaml",
+    "canonical_vehicle_registry": "manifests/oty2/oty2_p1e_canonical_optical_vehicle_registry.csv",
+    "canonical_frame_states": "manifests/oty2/oty2_p1e_canonical_vehicle_frame_states.csv",
+    "detection_identity_map": "manifests/oty2/oty2_p1e_detection_to_canonical_identity_map.csv",
+    "sar_to_optical_time_map": "manifests/oty2/oty2_p0_hard_sync_sar_to_optical.csv",
+    "calibration_reference_manifest": "manifests/oty2/oty2_s0_sar_gt_quality_audit.csv"
+  },
+  "calibration": {
+    "scene": "GM_RM017",
+    "vehicle_id": "GM_RM017:PV004",
+    "sar_frame_start": 352,
+    "sar_frame_end": 394,
+    "required_optical_visibility": "full_visible",
+    "allowed_reference_quality": ["gold", "usable"],
+    "theta_model": "linear_optical_center_x",
+    "radius_model": "interval_union_of_linear_optical_bbox_height_and_depth_proxy",
+    "forbidden_target_vehicle_ids": ["GM_RM017:PV002", "GM_RM017:PV003"]
+  },
+  "target_windows": [
+    {
+      "window_id": "DISCOVERY_GM_RM017_PV002_330_350",
+      "role": "discovery",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV002",
+      "sar_frame_start": 330,
+      "sar_frame_end": 350
+    },
+    {
+      "window_id": "REPLAY_GM_RM017_PV003_338_391",
+      "role": "frozen_rule_replay",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV003",
+      "sar_frame_start": 338,
+      "sar_frame_end": 391
+    }
+  ],
+  "uncertainty": {
+    "theta_min_half_width_deg": 8.0,
+    "theta_cross_vehicle_allowance_deg": 3.0,
+    "radial_min_half_width_px": 120.0,
+    "radial_cross_vehicle_allowance_px": 70.0,
+    "partial_visibility_multiplier": 1.4,
+    "unsigned_axis_half_width_deg": 35.0,
+    "response_length_min_px": 60.0,
+    "response_length_max_px": 300.0,
+    "response_width_min_px": 18.0,
+    "response_width_max_px": 150.0
+  }
+}

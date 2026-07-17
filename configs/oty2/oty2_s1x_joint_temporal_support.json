@@ -1,0 +1,47 @@
+{
+  "version": "OTY2-S1X-joint-temporal-support-v1",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "expected_start_head": "fb69df0bd050106a9cad62f2d8cc50e5c6750319",
+  "python": "D:/MINICONDA/envs/py311/python.exe",
+  "scene_config": "configs/scene_config.yaml",
+  "optical_condition_frames": "manifests/oty2/oty2_s1x_optical_condition_frames.csv",
+  "output_root": "D:/profile/research/workspace/output/oty2_s1x_20260717",
+  "windows": [
+    "DISCOVERY_GM_RM017_PV002_330_350",
+    "REPLAY_GM_RM017_PV003_338_391"
+  ],
+  "transport": {
+    "downsample": 0.25,
+    "tile_rows": 3,
+    "tile_cols": 4,
+    "minimum_tile_response": 0.05,
+    "maximum_pair_shift_px": 16.0,
+    "highpass_sigma_px_at_downsampled_scale": 2.0
+  },
+  "response": {
+    "context_expansion_px": 80,
+    "local_positive_robust_z": 2.5,
+    "weak_response_robust_z": 0.8,
+    "persistent_frequency": 0.55,
+    "intermittent_frequency": 0.20,
+    "sar_only_persistent_frequency": 0.65,
+    "minimum_component_area_px": 16,
+    "background_outside_shell_fraction": 0.55,
+    "background_temporal_frequency": 0.45,
+    "support_neighbourhood_px": 18,
+    "temporal_maintenance_radius_frames": 2,
+    "minimum_shell_presence_fraction": 0.50
+  },
+  "visualization": {
+    "display_min": 0,
+    "display_max": 85,
+    "representative_frame_count": 8
+  },
+  "prohibitions": {
+    "per_frame_candidate_bank": true,
+    "weighted_total_score": true,
+    "ranking_or_selector": true,
+    "unique_box_output": true,
+    "target_reference_input": true
+  }
+}

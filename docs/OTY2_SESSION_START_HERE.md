@@ -172,6 +172,13 @@ For the independent SAR-foundation line, read next in this order:
 3. `docs/OTY2_S0_OPTICAL_TO_SAR_AZIMUTH_MAPPING_CONTRACT.md`
 4. `reports/oty2/oty2_s0_sar_gt_structure_foundation_audit_20260715.md`
 
+For the S1X project-level transition on `feature/oty2-sar-gt-structure-foundation`, after the S0/S0-M/S0-MV and S1-L/S1-LR/S1-LR2 inheritance stack, read:
+
+1. `docs/OTY2_S1X_PROJECT_UNDERSTANDING_AND_EXECUTION_CONTRACT.md`
+2. `reports/oty2/oty2_s1x_optical_conditioned_joint_temporal_support_recovery_20260717.md`
+
+S1X is a controlled transition from target-reference-neighbourhood audit to target-reference-free optical-conditioned SAR temporal support recovery. It permits optical-only, SAR-only diagnostic, and optical+SAR inference under explicit freeze/evaluation isolation. It still does not authorize final boxes, unique centres, revised GT, selector/ranking, training, or automatic annotation. All prior S0/S1-L/S1-LR/S1-LR2 reports remain frozen evidence and must not be rewritten.
+
 The S0-M correction is authoritative: the deterministic shared fan is the fixed `imaging_valid_mask`; mapping qualification is decided before residuals; only Mask-inside, optically complete, identity-clear anchors may support mapping freeze or future S1-L structure claims.
 
 Every new OTY2-related session must first read:
