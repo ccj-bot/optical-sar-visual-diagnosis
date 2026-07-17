@@ -1,0 +1,43 @@
+{
+  "version": "OTY2-RSA0-response-atlas-v1-free-geometry",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "expected_start_head": "206fe5f5f587fec711df8d1856fbce925817d940",
+  "python": "D:/MINICONDA/envs/py311/python.exe",
+  "sources": {
+    "s1x_optical_condition_frames": "manifests/oty2/oty2_s1x_optical_condition_frames.csv",
+    "s0_sar_gt_quality_audit": "manifests/oty2/oty2_s0_sar_gt_quality_audit.csv",
+    "s1d0_causal_transport_diagnostics": "manifests/oty2/oty2_s1d0_causal_transport_diagnostics.csv",
+    "v0_response_atlas_config": "configs/oty2/oty2_rsa0_response_atlas.json",
+    "v0_response_skeletons": "manifests/oty2/oty2_rsa0_response_skeletons.csv",
+    "v0_response_regions": "manifests/oty2/oty2_rsa0_response_atlas_regions.csv",
+    "v0_background_controls": "manifests/oty2/oty2_rsa0_background_controls.csv",
+    "v0_representation_metrics": "manifests/oty2/oty2_rsa0_representation_channel_metrics.csv"
+  },
+  "output_root": "D:/profile/research/workspace/output/oty2_rsa0_r1_20260717",
+  "continuous_windows": [
+    {
+      "window_id": "RSA0_CANONICAL_GM_RM017_PV002_330_350",
+      "case_id": "PV002_330_350",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV002",
+      "frame_start": 330,
+      "frame_end": 350,
+      "keyframes": [330, 334, 339, 344, 350],
+      "weak_state_frames": [330, 334],
+      "strong_state_frames": [339, 344, 350]
+    },
+    {
+      "window_id": "RSA0_SECONDARY_GM_RM017_PV003_360_384",
+      "case_id": "PV003_360_384",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV003",
+      "frame_start": 360,
+      "frame_end": 384,
+      "keyframes": [360, 364, 372, 378, 384],
+      "weak_state_frames": [360, 364, 384],
+      "strong_state_frames": [372, 378]
+    }
+  ],
+  "annotation_coordinate_note": "Per-frame free geometry is recorded as manual offsets in the GT-aligned review crop coordinate system after direct visual inspection. The GT center is used only to map the manually selected crop coordinates back to SAR display pixels; there is no geometry_template, fixed x-offset bank, fixed rectangle, fixed background translation, or per-frame shared area.",
+  "temporal_half_windows": [2, 4]
+}

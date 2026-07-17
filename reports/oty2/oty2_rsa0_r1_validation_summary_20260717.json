@@ -1,0 +1,16 @@
+{
+  "background_controls": 30,
+  "boundary": "validated_r1_free_geometry_continuous_temporal_reaudit_no_propagation_no_training",
+  "coordinate_family_summary": 130,
+  "frames": 10,
+  "freeze_entries": 10,
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "206fe5f5f587fec711df8d1856fbce925817d940"
+  },
+  "metrics": 650,
+  "proxy_drift": 10,
+  "regions": 45,
+  "skeletons": 20,
+  "status": "PASS"
+}

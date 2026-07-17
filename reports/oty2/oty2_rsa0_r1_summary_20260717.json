@@ -1,0 +1,72 @@
+{
+  "aggregate_input_sha256": "537d37ce941706f2ba95a58653d26c9c347565228e30bd6ca9d1333f69ebe59b",
+  "aggregate_output_sha256": "4e3724bc5d93e203fd2cdfdd1c75a164264377f2102a0611f47ead1b67f3f9b3",
+  "atlas_v1_freeze_sha256": "e30c9b6d20abf16c0dc753ebd5bb75e6f213b0de7220c1c2c47f0c0d4ad478cd",
+  "background_control_count": 30,
+  "boundary": "r1_free_geometry_atlas_and_continuous_representation_reaudit_no_propagation_no_training_no_winner",
+  "coordinate_family_summary_count": 130,
+  "frame_count": 10,
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "206fe5f5f587fec711df8d1856fbce925817d940"
+  },
+  "metric_count": 650,
+  "outputs": {
+    "oty2_rsa0_background_controls_v1.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_background_controls_v1.csv",
+      "sha256": "b6feb5f7ad4fe38f99d320ddb22aca3d47b0496423ef18222cfcff2ad6727c09"
+    },
+    "oty2_rsa0_r1_atlas_consistency_audit.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_r1_atlas_consistency_audit.csv",
+      "sha256": "700f7c039161b499849afad9c7dc205f910a31c5b384b9eb3ab61a5a3aafab32"
+    },
+    "oty2_rsa0_r1_coordinate_family_summary.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_r1_coordinate_family_summary.csv",
+      "sha256": "42c7b3e4c37334a96e14b4fc8d1ad49a02cdb84e76e2c9ad66e41b6f31b734ce"
+    },
+    "oty2_rsa0_r1_proxy_drift.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_r1_proxy_drift.csv",
+      "sha256": "97549e79a2ecec24c531d559d94803ad1aeb86b37830acc4c436d8a829bbb757"
+    },
+    "oty2_rsa0_r1_representation_channel_metrics.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_r1_representation_channel_metrics.csv",
+      "sha256": "e58764dbf5cfa12cbc7dd628bed96b902a4227fa6cdd8d5706dbc2f2f6f27f6f"
+    },
+    "oty2_rsa0_r1_representation_reaudit_20260717.md": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_rsa0_r1_representation_reaudit_20260717.md",
+      "sha256": "2d873e64d6d553fff545e6ed7be212d4c19a5b48d58c3051860c3d5cf9e13488"
+    },
+    "oty2_rsa0_response_atlas_direct_visual_review_v1_20260717.md": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_rsa0_response_atlas_direct_visual_review_v1_20260717.md",
+      "sha256": "31d133ad08df493a5a8eb29c349cdf1474f5afbce84025de0af3b462088360c2"
+    },
+    "oty2_rsa0_response_atlas_frames_v1.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_response_atlas_frames_v1.csv",
+      "sha256": "b7fcfbc1d0c40132b93645ea46c7b169e943ffafce8056225e9c9b1078361a49"
+    },
+    "oty2_rsa0_response_atlas_freeze_manifest_v1.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_response_atlas_freeze_manifest_v1.csv",
+      "sha256": "a8f70dc8cb225826a0c781ea1110f26172cef45c695e9685ff773700bc3fcc3f"
+    },
+    "oty2_rsa0_response_atlas_regions_v1.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_response_atlas_regions_v1.csv",
+      "sha256": "3c39bbd16649d013d0afa47cef2f3b815cf35f52c158f8347aaabc20334ee27d"
+    },
+    "oty2_rsa0_response_skeletons_v1.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_response_skeletons_v1.csv",
+      "sha256": "4e89a8ae5aa6b26781e0ba8784aeabd9e66fd29d2984c909beee8c606793caad"
+    }
+  },
+  "proxy_drift_count": 10,
+  "region_count": 45,
+  "row_hashes": {
+    "background": "776291e1f15291b9824c98640b3fc2e7ae042095ef9a6569ef84faa1c9b45194",
+    "frames": "00536c1d41002470205ba8b0e8c5f8ca0552e126b3eac450fadfa38214cf73cc",
+    "metrics": "f22e4ff6a2502237e9a422325522c88f94b72f7f933a6be90fb5d2ba62991b90",
+    "regions": "408b86dda905b17eeffc4ec86867b18f8d62fb2e179bdfcf7c3c3af0bcb8ed72",
+    "skeletons": "53a33f05692b5285acda932facb4bfc933cd1ab378150737259260c1fd75e290"
+  },
+  "skeleton_count": 20,
+  "status": "PASS",
+  "version": "OTY2-RSA0-response-atlas-v1-free-geometry"
+}
