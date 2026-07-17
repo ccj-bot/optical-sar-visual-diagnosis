@@ -1,0 +1,24 @@
+# OTY2 研究结论状态索引（2026-07-18）
+
+## 文件性质与边界
+
+- 本索引只依据 `docs/reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md` 整理“旧结论/旧表述—当前状态—纠偏依据章节”的映射。
+- 本索引不产生新的研究判断，不提出下一阶段算法，不授权实现、实验、阈值调整、候选生成、打分、排序或自动标注。
+- 与旧文档冲突时，以深度复盘中的纠偏解释作为当前研究口径；旧文档继续保留为历史记录，不应被改写成“从未发生”，也不应被误读为当前已经成立的科学结论。
+
+## 旧结论状态登记
+
+| 编号 | 旧结论或旧表述 | 当前状态 | 当前纠偏口径 | 纠偏依据章节 |
+| --- | --- | --- | --- | --- |
+| C01 | `0.03 m/px` 因不等于真实分辨率而不能作为物理尺度使用。 | **纠偏后保留，限界解释。** | `0.03 m/px` 可作为当前 SAR 重建显示网格的有效物理尺度，可用于车辆尺寸、物理间距、搜索范围和跨帧移动；它不等同于 3 cm 的真实独立距离或方位分辨率。 | [§3.2 实图与 GT 尺度一致性](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-3-2)；[§3.3 正确使用口径](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-3-3)；[附录 C](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#appendix-c) |
+| C02 | 多帧频率、NCC、面积、阈值或通道统计已经构成“完整时序”。 | **未完成；旧等同关系撤回。** | 现有研究没有真正完成多帧互补观测的联合解释。完整时序还承担车辆身份、排他关系、进入、退出、遮挡、恢复和主体切换约束，不能被通道统计或单一 temporal score 代替。 | [§4.1 时序的常见退化](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-4-1)；[§4.2 四个时间尺度](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-4-2)；[§4.4 现有指标的能力边界](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-4-4)；[§4.5 当前判定](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-4-5) |
+| C03 | tracker ID、局部框关联或短窗连续性可以当作完整的同车身份真值。 | **未成立。** | 当前尚未形成稳定、完整、可部署的同车身份线程；tracker ID、局部框关联和短窗连续性只能作为局部连续性证据，不能被当作完整车辆身份真值。 | [§5.1 现有记录](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-5-1)；[§5.2 与完整身份的矛盾](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-5-2)；[§5.3 未闭合的身份线程](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-5-3)；[§5.4 当前判定](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-5-4) |
+| C04 | 为避免部署泄漏，研究阶段也应把 GT 限制为最终数值评价或中心对齐。 | **研究期与部署期边界纠正。** | 研究阶段 GT 是用于机制发现、问题拆解和验证的开卷答案，不应只用于最终数值评价；部署阶段禁止依赖目标 GT。 | [§6.1 GT 实际包含的信息](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-6-1)；[§6.2 实际使用程度](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-6-2)；[§6.3 研究与部署混淆](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-6-3)；[§6.4 当前判定](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-6-4) |
+| C05 | S1X 的 `support recovery` 可解释为车辆响应体已被恢复；高精度足以支持该结论。 | **降级解释。** | `support recovery` 应解释为保守亮响应子集提取。高精度、低覆盖不能证明车辆响应体被恢复。 | [§8.1 S1X 结果的实际含义](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-8-1)；[§17.1 错误登记](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-17-1) |
+| C06 | RSA1-A0 已经部分支持“响应对象传播”。 | **支持性表述撤回；作为负面证据保留。** | 实际机制是沿人工种子切线预构造固定直线段，再利用图像通道接受或拒绝；连接性主要由构造保证，人工背景屏障和歧义区承担大量安全性。PV002 局部成立、PV003 未复现。RSA1-A0 是负面方法论证据和表示错误证据，不是对象传播证据。 | [§9.1 代码实际行为](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-9-1)；[§9.2 固定切线问题](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-9-2)；[§9.3 人工背景屏障](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-9-3)；[§9.4 PV002/PV003](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-9-4)；[§9.5 当前结论](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-9-5)；[§9.6 方法论影响](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-9-6) |
+| C07 | `component continuity` 表示物理车辆部件的连续性。 | **术语纠正。** | `component continuity` 应解释为高强度像素出现频率，而不是物理部件连续性。 | [§8.2 `component continuity` 的实际含义](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-8-2)；[§17.1 错误登记](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-17-1) |
+| C08 | `temporal propagation` 表示车辆响应结构随时序传播。 | **术语纠正；机制主张不成立。** | 现有实现主要是固定位置或固定几何的邻帧一致性支持，不能等同于车辆响应结构随时序传播。 | [§4.1 时序统计化退化](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-4-1)；[§17.1 错误登记](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-17-1) |
+| C09 | 仅使用中心平移或局部壳层已充分利用物理尺度、车辆长宽和旋转角。 | **未充分使用。** | 过去没有充分使用 GT 中的车长、车宽、朝向和米制结构；仅使用中心平移或局部壳层，丢失了大量开卷信息。 | [§3.4 错误造成的信息损失](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-3-4)；[§6.2 GT 的实际使用程度](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-6-2)；[§12 被忽略信息总表](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-12)；[附录 C](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#appendix-c) |
+| C10 | 同一车辆的多帧观测可由简单并集、交集、最大值、频率图或面积比较充分代表。 | **等同关系撤回。** | 同一车辆在不同帧中呈现不同局部响应；这些帧应被理解为对同一潜在车辆响应体的互补、不完整观测。简单并集、交集、最大值、频率图和面积比较都不能代替这种联合解释。 | [§4.3 GM17 多帧互补证据](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-4-3)；[§4.4 聚合指标边界](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-4-4)；[附录 B](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#appendix-b) |
+
+本索引只登记上述状态映射，不构成实施计划。
