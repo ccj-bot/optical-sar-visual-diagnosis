@@ -1,0 +1,15 @@
+{
+  "array_lineage_count": 1160,
+  "branch": "feature/oty2-sar-gt-structure-foundation",
+  "channel_audit_count": 216,
+  "coordinate_family_count": 4,
+  "evidence_card_count": 241,
+  "external_output_file_count": 262,
+  "head": "ef9b6cc47434d46a34b6cea7179f6e35c510c428",
+  "phase_a_freeze_preserved": true,
+  "point_trace_count": 2700,
+  "propagation_design_authorized": false,
+  "sampling_method_count": 6,
+  "status": "PASS_ENGINEERING_CONTRACT_PROPAGATION_NOT_AUTHORIZED",
+  "synthetic_test_count": 7
+}

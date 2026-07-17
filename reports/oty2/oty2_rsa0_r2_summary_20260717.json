@@ -1,0 +1,14 @@
+{
+  "array_lineage_count": 1160,
+  "atlas_point_audit_count": 16,
+  "channel_audit_count": 216,
+  "conclusion_count": 8,
+  "coordinate_audit_count": 52,
+  "normalization_audit_count": 864,
+  "phase_a_finding_count": 8,
+  "point_trace_count": 2700,
+  "propagation_design_authorized": false,
+  "sampling_audit_count": 3888,
+  "status": "R2_FORENSIC_AUDIT_COMPLETE_PROPAGATION_NOT_AUTHORIZED",
+  "synthetic_test_count": 7
+}

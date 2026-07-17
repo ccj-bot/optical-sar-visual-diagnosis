@@ -1,0 +1,84 @@
+{
+  "version": "OTY2-RSA0-R2-forensic-audit-v1",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "expected_start_head": "ef9b6cc47434d46a34b6cea7179f6e35c510c428",
+  "python": "D:/MINICONDA/envs/py311/python.exe",
+  "output_root": "D:/profile/research/workspace/output/oty2_rsa0_r2_20260717",
+  "sources": {
+    "conditions": "manifests/oty2/oty2_s1x_optical_condition_frames.csv",
+    "gt": "manifests/oty2/oty2_s0_sar_gt_quality_audit.csv",
+    "transport": "manifests/oty2/oty2_s1d0_causal_transport_diagnostics.csv",
+    "atlas_frames": "manifests/oty2/oty2_rsa0_response_atlas_frames_v1.csv",
+    "atlas_skeletons": "manifests/oty2/oty2_rsa0_response_skeletons_v1.csv",
+    "atlas_regions": "manifests/oty2/oty2_rsa0_response_atlas_regions_v1.csv",
+    "atlas_background": "manifests/oty2/oty2_rsa0_background_controls_v1.csv",
+    "r1_metrics": "manifests/oty2/oty2_rsa0_r1_representation_channel_metrics.csv",
+    "r1_family_summary": "manifests/oty2/oty2_rsa0_r1_coordinate_family_summary.csv",
+    "r1_proxy_drift": "manifests/oty2/oty2_rsa0_r1_proxy_drift.csv",
+    "r1_runner": "tools/diagnostics/run_oty2_rsa0_r1_free_geometry_reaudit.py",
+    "r1_report": "reports/oty2/oty2_rsa0_r1_representation_reaudit_20260717.md"
+  },
+  "transport_case_id": "S1D0-DISCOVERY-GM_RM017-PV002",
+  "display_clip": [0.0, 85.0],
+  "normalization_percentiles": [2.0, 98.0],
+  "frozen_sample_stride": 16,
+  "audit_crop_width": 600,
+  "audit_crop_height": 420,
+  "patch_size": 41,
+  "windows": [
+    {
+      "case_id": "PV002_337_341",
+      "source_case_id": "PV002_330_350",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV002",
+      "frames": [337, 338, 339, 340, 341],
+      "primary_frame": 339,
+      "extension_frames": [330, 344],
+      "weak_frames": [337, 338],
+      "strong_frames": [339, 340, 341],
+      "background_subtypes": {
+        "0": "vertical_line",
+        "1": "fan_arc",
+        "2": "clutter"
+      }
+    },
+    {
+      "case_id": "PV003_380_384",
+      "source_case_id": "PV003_360_384",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV003",
+      "frames": [380, 381, 382, 383, 384],
+      "primary_frame": 384,
+      "extension_frames": [360, 372],
+      "weak_frames": [384],
+      "strong_frames": [380, 381, 382, 383],
+      "background_subtypes": {
+        "0": "vertical_line",
+        "1": "fan_arc",
+        "2": "clutter"
+      }
+    }
+  ],
+  "atlas_review_decisions": {
+    "PV002_337_341": {
+      "skeleton_left": "MINOR_OFFSET",
+      "skeleton_mid": "CONFIRMED",
+      "skeleton_right": "SEMANTICALLY_AMBIGUOUS",
+      "seed_mid": "CONFIRMED",
+      "background_vertical_line": "CONFIRMED",
+      "background_fan_arc": "SEMANTICALLY_AMBIGUOUS",
+      "background_clutter": "SEMANTICALLY_AMBIGUOUS",
+      "unresolved_centroid": "SEMANTICALLY_AMBIGUOUS"
+    },
+    "PV003_380_384": {
+      "skeleton_left": "MINOR_OFFSET",
+      "skeleton_mid": "CONFIRMED",
+      "skeleton_right": "SEMANTICALLY_AMBIGUOUS",
+      "seed_mid": "CONFIRMED",
+      "background_vertical_line": "CONFIRMED",
+      "background_fan_arc": "SEMANTICALLY_AMBIGUOUS",
+      "background_clutter": "SEMANTICALLY_AMBIGUOUS",
+      "unresolved_centroid": "SEMANTICALLY_AMBIGUOUS"
+    }
+  }
+}

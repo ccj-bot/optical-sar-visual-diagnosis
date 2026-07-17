@@ -1,0 +1,8 @@
+test_id,input,theoretical_expectation,actual,error,status
+SYN01_HORIZONTAL_LINE,single horizontal bright line,Sobel-y and radial-normal response dominate,sobel_y=240.0;sobel_x=0.0;radial=344.52001953125;tangential=119.84215545654297,0.000000000,PASS
+SYN02_VERTICAL_LINE,single vertical bright line,Sobel-x dominates,sobel_x=240.0;sobel_y=0.0,0.000000000,PASS
+SYN03_KNOWN_ARC,circular arc centered on fan origin,radial-normal gradient response exceeds tangential-normal response,radial=259.96405029296875;tangential=44.62175369262695,0.000000000,PASS
+SYN04_TRANSLATED_STATIC_LINE,"global translations 0,2,4,6,8 px",world stabilization reduces temporal max-min change near zero,raw_change_mean=0.311279296875;stable_change_mean=0.0,0.000000000,PASS
+SYN05_TARGET_RELATIVE_BACKGROUND_MOTION,fixed background plus moving local target,GT-aligned target stack is more stable than world stack in target ROI,world_target_change=13.877551078796387;gt_target_change=0.0,0.000000000,PASS
+SYN06_SINGLE_FRAME_PULSE,positive pulse at frame 2 only,positive change at frame 2 and negative change at frame 3,positive_sum=180000.0;negative_sum=180000.0,0.0,PASS
+SYN07_CONSTANT_IMAGE,constant 42-valued five-frame stack,"gradient, highpass, MAD, and adjacent change are zero within float convolution tolerance",max_error=1.9073486328125e-05,1.9073486328125e-05,PASS
