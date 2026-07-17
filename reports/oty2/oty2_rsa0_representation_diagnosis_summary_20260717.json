@@ -1,0 +1,26 @@
+{
+  "aggregate_input_sha256": "0e6c82f4fd494e87944b32a57913dcd605a01e4f60dcddbc8794ce7f9553c1a0",
+  "aggregate_output_sha256": "34fa294dd309f54c6caec9f4353c4c8df4e1292784b63398fc827a777822209a",
+  "boundary": "independent_channel_diagnosis_no_weighted_score_no_winner",
+  "failure_count": 150,
+  "freeze_manifest_row_hash": "ac2def58c237412c4c7072d087bf09f4c8c7e7ff92d2a933e52ab36509750a04",
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "0f1655546ea402857ab054421067f1bf075c4c20"
+  },
+  "metric_count": 150,
+  "outputs": {
+    "oty2_rsa0_representation_channel_metrics.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_representation_channel_metrics.csv",
+      "sha256": "1eb9826ae5faed60938be1c6c564fad21ac30d91e9b9841105dc4e058662ed90"
+    },
+    "oty2_rsa0_representation_diagnosis_20260717.md": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_rsa0_representation_diagnosis_20260717.md",
+      "sha256": "d0034d7fd01f0d6cbeff346b1364ac9212c9f8d3851cc6389ec7472032050466"
+    },
+    "oty2_rsa0_representation_failure_modes.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_representation_failure_modes.csv",
+      "sha256": "3d2e3d816cfebe28b833014a3b8195a762e338542093eb1a19e0dd2965a92575"
+    }
+  }
+}

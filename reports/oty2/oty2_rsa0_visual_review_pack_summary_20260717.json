@@ -1,0 +1,29 @@
+{
+  "aggregate_input_sha256": "8f6b2e09f29b68a18a5b70478e973d77365f00b7eafc795376086e140b9d5654",
+  "artifact_count": 24,
+  "artifact_types": [
+    "continuous_mp4",
+    "gt_center_aligned_montage",
+    "local_zoom_review_page",
+    "optical_proxy_center_aligned_montage",
+    "phase_average_montage",
+    "positive_negative_change_montage",
+    "raw_full_frame_montage",
+    "raw_gt_proxy_overlay_montage",
+    "trajectory_aligned_average",
+    "world_stabilized_montage",
+    "x_t_gt_center_strip",
+    "y_t_gt_center_strip"
+  ],
+  "boundary": "visual_review_pack_only_no_response_atlas_labels_no_representation_scoring",
+  "config_sha256": "0acd7ba1c7980e4bd783a3955499ca9d2cab9a0cf2555d0bbc60af1da7c9bdce",
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "0f1655546ea402857ab054421067f1bf075c4c20"
+  },
+  "manifest_row_hash": "e250e2c42e6bc4f57d353d6dbe9ee91217caa6d815a1ddf92c2a00d0369c5f74",
+  "output_manifest": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_visual_review_pack_manifest.csv",
+  "output_manifest_sha256": "c0751de49438331e141b68cfa0aaddbc79d836762f2cb14431b9b1ca4b4ea8e9",
+  "output_root": "D:/profile/research/workspace/output/oty2_rsa0_20260717/visual_review_pack",
+  "version": "OTY2-RSA0-visual-review-pack-v1"
+}

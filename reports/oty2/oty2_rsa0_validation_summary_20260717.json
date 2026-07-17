@@ -1,0 +1,17 @@
+{
+  "atlas_frames": 10,
+  "background_controls": 20,
+  "boundary": "validated_no_candidate_bank_no_weighted_winner_no_final_box",
+  "failures": 150,
+  "freeze_entries": 20,
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "0f1655546ea402857ab054421067f1bf075c4c20"
+  },
+  "inventory_rows": 6,
+  "metrics": 150,
+  "regions": 50,
+  "skeletons": 20,
+  "status": "PASS",
+  "visual_artifacts": 24
+}

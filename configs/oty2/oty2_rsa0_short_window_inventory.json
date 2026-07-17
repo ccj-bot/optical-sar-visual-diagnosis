@@ -1,0 +1,82 @@
+{
+  "version": "OTY2-RSA0-short-window-inventory-v1",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "expected_start_head": "0f1655546ea402857ab054421067f1bf075c4c20",
+  "python": "D:/MINICONDA/envs/py311/python.exe",
+  "sources": {
+    "p0_asset_manifest": "manifests/oty2/oty2_p0_data_asset_manifest.csv",
+    "sar_to_optical_time_map": "manifests/oty2/oty2_p0_hard_sync_sar_to_optical.csv",
+    "canonical_vehicle_registry": "manifests/oty2/oty2_p1e_canonical_optical_vehicle_registry.csv",
+    "canonical_frame_states": "manifests/oty2/oty2_p1e_canonical_vehicle_frame_states.csv",
+    "s0_canonical_sar_gt_threads": "manifests/oty2/oty2_s0_canonical_vehicle_sar_gt_threads.csv",
+    "s0_sar_gt_quality_audit": "manifests/oty2/oty2_s0_sar_gt_quality_audit.csv",
+    "s1x_optical_condition_frames": "manifests/oty2/oty2_s1x_optical_condition_frames.csv",
+    "s1d0_inventory_stage_conclusions": "manifests/oty2/oty2_s1d0_stage_conclusions.csv"
+  },
+  "required_canonical_window": {
+    "window_id": "RSA0_CANONICAL_GM_RM017_PV002_330_350",
+    "scene": "GM_RM017",
+    "vehicle_id": "GM_RM017:PV002",
+    "sar_frame_start": 330,
+    "sar_frame_end": 350,
+    "role": "canonical_atlas_window",
+    "decision": "selected_required",
+    "reason": "mandatory RSA0 canonical short window; prior direct review saw continuous near-horizontal response, but atlas must be rebuilt from direct SAR display pixels"
+  },
+  "second_window_candidates": [
+    {
+      "window_id": "RSA0_SECONDARY_GM_RM017_PV003_360_384",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV003",
+      "sar_frame_start": 360,
+      "sar_frame_end": 384,
+      "role": "second_clear_window_candidate",
+      "decision": "selected_for_direct_review",
+      "reason": "same scene as PV002 with independent S1X replay lineage; 25-frame candidate inside the existing PV003 338-391 replay span, expected to contain state variation without using only brightest frames"
+    },
+    {
+      "window_id": "RSA0_REJECTED_GM_RM017_PV003_338_391_FULL",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV003",
+      "sar_frame_start": 338,
+      "sar_frame_end": 391,
+      "role": "second_clear_window_candidate",
+      "decision": "rejected_for_atlas_window",
+      "reason": "54 frames exceeds the RSA0 15-30 frame second-window requirement; kept as context for choosing a bounded subwindow"
+    },
+    {
+      "window_id": "RSA0_REJECTED_GM_RM017_PV004_352_394",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV004",
+      "sar_frame_start": 352,
+      "sar_frame_end": 394,
+      "role": "second_clear_window_candidate",
+      "decision": "rejected_for_atlas_window",
+      "reason": "PV004 was the S1X independent calibration vehicle; using it as the second atlas discovery window would entangle calibration lineage with response semantics"
+    }
+  ],
+  "cross_scene_candidates": [
+    {
+      "window_id": "RSA0_GM_RM019_PV003_120_144_CANDIDATE",
+      "scene": "GM_RM019",
+      "vehicle_id": "GM_RM019:PV003",
+      "sar_frame_start": 120,
+      "sar_frame_end": 144,
+      "role": "cross_scene_candidate_inventory",
+      "decision": "mapping_reference_debt_pending_direct_review",
+      "reason": "GM_RM019 was a S1D0 cross-scene replay case, but current positive response reference is inadequate; record candidate only, do not include in representation statistics unless direct review establishes a trustworthy atlas"
+    }
+  ],
+  "excluded_pressure_cases": [
+    {
+      "window_id": "RSA0_EXCLUDED_GM_RM011_PV008",
+      "scene": "GM_RM011",
+      "vehicle_id": "GM_RM011:PV008",
+      "sar_frame_start": 0,
+      "sar_frame_end": 0,
+      "role": "pressure_case_not_discovery",
+      "decision": "excluded_from_rsa0_method_discovery",
+      "reason": "GM_RM011 remains a clutter and multi-vehicle pressure case; RSA0 contract forbids using it for recovery method discovery"
+    }
+  ]
+}

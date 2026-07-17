@@ -1,0 +1,40 @@
+{
+  "version": "OTY2-RSA0-visual-review-pack-v1",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "expected_start_head": "0f1655546ea402857ab054421067f1bf075c4c20",
+  "python": "D:/MINICONDA/envs/py311/python.exe",
+  "sources": {
+    "short_window_inventory": "manifests/oty2/oty2_rsa0_short_window_inventory.csv",
+    "s1x_optical_condition_frames": "manifests/oty2/oty2_s1x_optical_condition_frames.csv",
+    "s0_sar_gt_quality_audit": "manifests/oty2/oty2_s0_sar_gt_quality_audit.csv",
+    "s1d0_causal_transport_diagnostics": "manifests/oty2/oty2_s1d0_causal_transport_diagnostics.csv"
+  },
+  "output_root": "D:/profile/research/workspace/output/oty2_rsa0_20260717/visual_review_pack",
+  "windows": [
+    {
+      "window_id": "RSA0_CANONICAL_GM_RM017_PV002_330_350",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV002",
+      "sar_frame_start": 330,
+      "sar_frame_end": 350,
+      "case_id": "PV002_330_350"
+    },
+    {
+      "window_id": "RSA0_SECONDARY_GM_RM017_PV003_360_384",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV003",
+      "sar_frame_start": 360,
+      "sar_frame_end": 384,
+      "case_id": "PV003_360_384"
+    }
+  ],
+  "display": {
+    "display_min": 0,
+    "display_max": 85,
+    "montage_scale": 0.20,
+    "crop_width": 360,
+    "crop_height": 240,
+    "strip_half_width": 90,
+    "strip_half_height": 55
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "aggregate_input_sha256": "8b39248a107ea5513c7b85f74f92d90bf8b02faa243eb2fa96dead2009c84670",
+  "boundary": "inventory_only_no_atlas_no_representations_no_scoring",
+  "config_sha256": "18b67d49fba8be37ff43ce026acd9efb917d1e5db8963d3116b6fd35aff7cdf0",
+  "debt_windows": [
+    "RSA0_GM_RM019_PV003_120_144_CANDIDATE"
+  ],
+  "decision_counts": {
+    "excluded_from_rsa0_method_discovery": 1,
+    "mapping_reference_debt_pending_direct_review": 1,
+    "rejected_for_atlas_window": 2,
+    "selected_for_direct_review": 1,
+    "selected_required": 1
+  },
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "0f1655546ea402857ab054421067f1bf075c4c20"
+  },
+  "output_csv": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_short_window_inventory.csv",
+  "output_csv_sha256": "9fb9af4bd7991c5c83d8e68eaad9dfc6ae638209d4658cd99bfeec6d6de3059f",
+  "row_count": 6,
+  "row_hash": "50fb45ef27a94303b889c5c60fdb2258777e98dfcd68fb66b286ca6bee1316e5",
+  "selected_windows": [
+    "RSA0_CANONICAL_GM_RM017_PV002_330_350",
+    "RSA0_SECONDARY_GM_RM017_PV003_360_384"
+  ],
+  "source_hashes": {
+    "canonical_frame_states": "0bc08ac2307efada5ca846745cc09ffea72ff798acc3ac3e72182535ce159557",
+    "canonical_vehicle_registry": "27342a7b99404598387da859091640f6eef1f3e56877a37a56fc9ff58a653c49",
+    "p0_asset_manifest": "67a4fdaefd974c2e50e1e561b0649fb45d247857864b8e504ef7783105f6c1ae",
+    "s0_canonical_sar_gt_threads": "4dd7d3e3f5650d4e23ac3a4d8d5352b1c82ebdba1ca895bd3f05ab3d0a682c68",
+    "s0_sar_gt_quality_audit": "c6d3618221d846837f8fd25dc1b662a3ff1b398005a2f01f4409ccc6130ce961",
+    "s1d0_inventory_stage_conclusions": "66d788f27bb6037b2d67b9dfd96cdf62e60ba8bc5122ce5f300fdcbfeca6722e",
+    "s1x_optical_condition_frames": "a603c60b4ad5bf4fdf79ffaebe00a5829bf74e1840b8fa6cd0dbd1fd2a0e459b",
+    "sar_to_optical_time_map": "8521767b2ed8fc40771b1fde4f8bffff41e07e0dcc3849d6acba265920f4d293"
+  },
+  "version": "OTY2-RSA0-short-window-inventory-v1"
+}

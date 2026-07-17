@@ -1,0 +1,13 @@
+{
+  "aggregate_freeze_sha256": "12ba29f758053da5bda024d160fad4fef5fe150017b1bcd5c008bdebba26476c",
+  "atlas_version": "OTY2-RSA0-response-atlas-v0-manual-review-seeded",
+  "boundary": "atlas_frozen_before_representation_scoring",
+  "freeze_manifest": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_response_atlas_freeze_manifest.csv",
+  "freeze_manifest_sha256": "705c75ff389270cec4309153bae2fb0113942972ac01c562621f48467a306d9e",
+  "frozen_file_count": 20,
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "0f1655546ea402857ab054421067f1bf075c4c20"
+  },
+  "row_hash": "ac2def58c237412c4c7072d087bf09f4c8c7e7ff92d2a933e52ab36509750a04"
+}

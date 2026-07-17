@@ -1,0 +1,40 @@
+{
+  "aggregate_input_sha256": "91bd7bd71da29c65f84bdd5ebcd78a76648f2ea389dc664fa9690d8bb74f4458",
+  "aggregate_output_sha256": "e749440f24601284d6eac14f75b350cfee773bcf382deba3821d6a8b7bdeff5c",
+  "background_control_count": 20,
+  "background_row_hash": "f2681f2983c4e9f736195d579cbef6f99a0d5d5eee787f50557c15d2d4e679b1",
+  "boundary": "v0_manual_review_seeded_atlas_no_representation_scoring_no_training",
+  "frame_count": 10,
+  "frame_row_hash": "ef2b227992e908134f5b5407d925fd0878b9b8c7195a0f8c6a1604c77d7e8df6",
+  "git": {
+    "branch": "feature/oty2-sar-gt-structure-foundation",
+    "head": "0f1655546ea402857ab054421067f1bf075c4c20"
+  },
+  "outputs": {
+    "oty2_rsa0_background_controls.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_background_controls.csv",
+      "sha256": "98e2fc891cd6beecee09239de4e30e4c45abf840f6595a2bf69ba447b8206b19"
+    },
+    "oty2_rsa0_response_atlas_direct_visual_review_20260717.md": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\reports\\oty2\\oty2_rsa0_response_atlas_direct_visual_review_20260717.md",
+      "sha256": "a3e6ece2a5c6f9820d399c98fcb7f04250e97f5f780a43de3075d96d5d028d0f"
+    },
+    "oty2_rsa0_response_atlas_frames.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_response_atlas_frames.csv",
+      "sha256": "cd48e22f970367728eb995abf310d5d4d49c529758bf171f24420b07fc53a5ba"
+    },
+    "oty2_rsa0_response_atlas_regions.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_response_atlas_regions.csv",
+      "sha256": "a5ff0d71237b3015cffce3024877ea9cbae408106a255b8e024449e52a8029bf"
+    },
+    "oty2_rsa0_response_skeletons.csv": {
+      "path": "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_response_skeletons.csv",
+      "sha256": "a78d66ccc98a932dd8f1e3eaf455d72e6f94d17caad937b2d58bb6a1205f662f"
+    }
+  },
+  "region_count": 50,
+  "region_row_hash": "8b78ddf9a5982672a72d8bb859b196922d8159755c5a69bbc9a3e0ab268fba89",
+  "skeleton_count": 20,
+  "skeleton_row_hash": "67a646311ccc2a173a8c2a278e8e19acd2693451e868d8dbcaeb10952f007a0d",
+  "version": "OTY2-RSA0-response-atlas-v0-manual-review-seeded"
+}

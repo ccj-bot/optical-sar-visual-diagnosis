@@ -1,0 +1,57 @@
+{
+  "version": "OTY2-RSA0-response-atlas-v0-manual-review-seeded",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "expected_start_head": "0f1655546ea402857ab054421067f1bf075c4c20",
+  "python": "D:/MINICONDA/envs/py311/python.exe",
+  "sources": {
+    "short_window_inventory": "manifests/oty2/oty2_rsa0_short_window_inventory.csv",
+    "visual_review_pack_manifest": "manifests/oty2/oty2_rsa0_visual_review_pack_manifest.csv",
+    "s1x_optical_condition_frames": "manifests/oty2/oty2_s1x_optical_condition_frames.csv",
+    "s0_sar_gt_quality_audit": "manifests/oty2/oty2_s0_sar_gt_quality_audit.csv"
+  },
+  "output_root": "D:/profile/research/workspace/output/oty2_rsa0_20260717/response_atlas_review",
+  "windows": [
+    {
+      "window_id": "RSA0_CANONICAL_GM_RM017_PV002_330_350",
+      "case_id": "PV002_330_350",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV002",
+      "keyframes": [330, 334, 339, 344, 350],
+      "uniform_control_frames": [330, 335, 340, 345, 350],
+      "skeleton_y_offsets": {
+        "330": 18,
+        "334": 20,
+        "339": 25,
+        "344": 29,
+        "350": 30
+      },
+      "review_note": "PV002 shows a lower near-horizontal main response with strengthening around 339-346, plus right-side vertical/fan-arc mixed background."
+    },
+    {
+      "window_id": "RSA0_SECONDARY_GM_RM017_PV003_360_384",
+      "case_id": "PV003_360_384",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV003",
+      "keyframes": [360, 364, 372, 378, 384],
+      "uniform_control_frames": [360, 366, 372, 378, 384],
+      "skeleton_y_offsets": {
+        "360": 8,
+        "364": 14,
+        "372": 25,
+        "378": 22,
+        "384": 18
+      },
+      "review_note": "PV003 is a second clear window with different local morphology and stronger proxy-coordinate drift in late frames."
+    }
+  ],
+  "geometry_template": {
+    "skeleton_x_offsets": [-95, -55, -15, 35, 90],
+    "definite_half_height": 8,
+    "probable_upper_component": [-130, -45, -58, -18],
+    "support_region": [-160, -70, 160, 90],
+    "vertical_background": [35, -25, 35, 95],
+    "fan_arc_background": [-145, 52, 145, 75],
+    "mixed_region": [75, -35, 165, 75],
+    "unresolved_region": [50, -55, 175, 105]
+  }
+}
