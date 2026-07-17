@@ -189,6 +189,30 @@ For the RSA0 visible-response-object route reset on `feature/oty2-sar-gt-structu
 
 RSA0 freezes S1X and S1D0 as failure baselines, changes the research unit to a short-window visible SAR response object, and requires atlas-before-representation ordering. It does not authorize pre-entry/closed SAR background negatives, whole-GT-box positive masks, lifecycle dynamics, candidate ranking, final boxes, weighted winners, training, or automatic annotation.
 
+For the explicitly bounded RSA1-A0 manual-seed micropilot, read and preserve the following order before creating hidden references or propagation code:
+
+1. `docs/OTY2_SESSION_START_HERE.md`
+2. `docs/OTY2_RSA0_GLOBAL_ROUTE_RESET_AND_RESEARCH_CONTRACT.md`
+3. `docs/OTY2_RSA0_FAILURE_LESSONS_AND_NON_NEGOTIABLES.md`
+4. `docs/OTY2_RSA0_VISIBLE_RESPONSE_OBJECT_SEMANTICS.md`
+5. `docs/OTY2_RSA0_R1_TEMPLATE_ATLAS_CORRECTION_ADDENDUM.md`
+6. `reports/oty2/oty2_rsa0_r1_representation_reaudit_20260717.md`
+7. `docs/OTY2_RSA0_R2_PIPELINE_FORENSIC_AUDIT_CONTRACT.md`
+8. `reports/oty2/oty2_rsa0_r2_pipeline_forensic_audit_20260717.md`
+9. `reports/oty2/oty2_rsa0_r2_phase_a_findings_20260717.md`
+10. `manifests/oty2/oty2_rsa0_r2_array_lineage.csv`
+11. `manifests/oty2/oty2_rsa0_r2_point_trace.csv`
+12. `manifests/oty2/oty2_rsa0_r2_atlas_point_audit.csv`
+13. `manifests/oty2/oty2_rsa0_r2_channel_semantic_audit.csv`
+14. `manifests/oty2/oty2_rsa0_r2_normalization_audit.csv`
+15. `manifests/oty2/oty2_rsa0_r2_sampling_auc_audit.csv`
+16. `manifests/oty2/oty2_rsa0_r2_fan_geometry_audit.csv`
+17. `manifests/oty2/oty2_rsa0_r2_conclusion_lineage.csv`
+18. all main R2 evidence cards under `D:/profile/research/workspace/output/oty2_rsa0_r2_20260717/evidence_cards`
+19. `docs/OTY2_RSA1_A0_SEED_OBJECT_EXTENSION_MICROPILOT_CONTRACT.md`
+
+RSA1-A0 does not overturn R2's `NEXT_PROPAGATION_DESIGN=NOT_AUTHORIZED` decision. It opens only `BOUNDED_MANUAL_SEED_OBJECT_PROPAGATION_MICROPILOT`: a two-window, manual-seed, hidden-reference-isolated, no-ranking experiment with a hard vertical-background veto and mandatory ambiguity stops. It does not authorize automatic propagation, training, final masks or boxes, automatic annotation, cross-scene generalization, or PV003 tuning.
+
 Every new OTY2-related session must first read:
 
 1. `docs/OTY2_SESSION_START_HERE.md`
