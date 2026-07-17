@@ -1,0 +1,62 @@
+{
+  "version": "OTY2-RSA1-A0-seed-object-extension-v1",
+  "expected_branch": "feature/oty2-sar-gt-structure-foundation",
+  "required_docs_commit": "fad2d8873d81746c8ae934cc4d5d202db9f23d6b",
+  "python": "D:/MINICONDA/envs/py311/python.exe",
+  "output_root": "D:/profile/research/workspace/output/oty2_rsa1_a0_20260717",
+  "r2_output_root": "D:/profile/research/workspace/output/oty2_rsa0_r2_20260717",
+  "primary_coordinate_family": "GT_ALIGNED_RESEARCH_STACK",
+  "sensitivity_coordinate_family": "OPTICAL_PROXY_ALIGNED_STACK",
+  "sources": {
+    "gt": "manifests/oty2/oty2_s0_sar_gt_quality_audit.csv",
+    "coordinate_audit": "manifests/oty2/oty2_rsa0_r2_coordinate_stack_audit.csv",
+    "atlas_skeletons": "manifests/oty2/oty2_rsa0_response_skeletons_v1.csv",
+    "atlas_background": "manifests/oty2/oty2_rsa0_background_controls_v1.csv",
+    "atlas_point_audit": "manifests/oty2/oty2_rsa0_r2_atlas_point_audit.csv",
+    "fan_config": "configs/oty2/oty2_rsa0_r2_forensic_audit.json"
+  },
+  "primitive_definition": {
+    "seed_length_px": 24.0,
+    "segment_length_px": 12.0,
+    "segment_half_width_px": 4,
+    "patch_radius_px": 8,
+    "max_steps_left": 10,
+    "max_steps_right": 10
+  },
+  "gates": {
+    "spatial_gap_max_px": 2.5,
+    "orientation_difference_max_deg": 45.0,
+    "width_ratio_min": 0.25,
+    "width_ratio_max": 4.0,
+    "ridge_relation_min": 0.20,
+    "contrast_relation_min": 0.25,
+    "temporal_ncc_min": 0.05,
+    "world_background_ncc_min": 0.55,
+    "world_minus_target_ncc_margin": 0.12,
+    "background_barrier_buffer_px": 2.0
+  },
+  "cases": [
+    {
+      "case_id": "PV002_337_341",
+      "source_case_id": "PV002_330_350",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV002",
+      "frames": [337, 338, 339, 340, 341],
+      "primary_frame": 339,
+      "development_role": "PV002_ONLY",
+      "endpoint_ambiguity_primary_raw": "1218.000,1038.000;1278.000,1038.000;1288.000,1085.000;1220.000,1085.000",
+      "arc_clutter_ambiguity_primary_raw": "1233.398,1013.798;1299.398,1010.798;1305.398,1103.798;1237.398,1087.798"
+    },
+    {
+      "case_id": "PV003_380_384",
+      "source_case_id": "PV003_360_384",
+      "scene": "GM_RM017",
+      "vehicle_id": "GM_RM017:PV003",
+      "frames": [380, 381, 382, 383, 384],
+      "primary_frame": 384,
+      "development_role": "FROZEN_REPLAY_ONLY",
+      "endpoint_ambiguity_primary_raw": "1285.000,978.000;1340.000,975.000;1348.000,1025.000;1288.000,1028.000",
+      "arc_clutter_ambiguity_primary_raw": "1329.552,955.773;1429.552,959.773;1441.552,1053.773;1337.552,1041.773"
+    }
+  ]
+}

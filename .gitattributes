@@ -1,0 +1,5 @@
+/.gitattributes text eol=lf
+/configs/oty2/oty2_rsa1_a0_*.json text eol=lf
+/manifests/oty2/oty2_rsa1_a0_*.csv text eol=lf
+/reports/oty2/oty2_rsa1_a0_*.md text eol=lf
+/tools/diagnostics/*oty2_rsa1_a0_*.py text eol=lf
