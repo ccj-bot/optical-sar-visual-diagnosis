@@ -181,6 +181,14 @@ S1X is a controlled transition from target-reference-neighbourhood audit to targ
 
 The S0-M correction is authoritative: the deterministic shared fan is the fixed `imaging_valid_mask`; mapping qualification is decided before residuals; only Mask-inside, optically complete, identity-clear anchors may support mapping freeze or future S1-L structure claims.
 
+For the RSA0 visible-response-object route reset on `feature/oty2-sar-gt-structure-foundation`, read before any RSA0 code, atlas output, representation metric, or seed-propagation design:
+
+1. `docs/OTY2_RSA0_GLOBAL_ROUTE_RESET_AND_RESEARCH_CONTRACT.md`
+2. `docs/OTY2_RSA0_FAILURE_LESSONS_AND_NON_NEGOTIABLES.md`
+3. `docs/OTY2_RSA0_VISIBLE_RESPONSE_OBJECT_SEMANTICS.md`
+
+RSA0 freezes S1X and S1D0 as failure baselines, changes the research unit to a short-window visible SAR response object, and requires atlas-before-representation ordering. It does not authorize pre-entry/closed SAR background negatives, whole-GT-box positive masks, lifecycle dynamics, candidate ranking, final boxes, weighted winners, training, or automatic annotation.
+
 Every new OTY2-related session must first read:
 
 1. `docs/OTY2_SESSION_START_HERE.md`
