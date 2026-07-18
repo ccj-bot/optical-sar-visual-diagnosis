@@ -1,0 +1,13 @@
+split_row_id,scene,canonical_vehicle_id,split_role,selection_rank,total_gt_rows,usable_gold_rows,usable_high_link_rows,core_full_untruncated_rows,optical_frame_start,optical_frame_end,sar_frame_start,sar_frame_end,target_gt_access_during_discovery,selection_reason
+G1S001,GM_RM011,GM_RM011:PV001,DEVELOPMENT_TRUNCATION_REFERENCE,1,62,60,49,0,0,28,0,58,ALLOWED_DEVELOPMENT_ONLY,"User-prioritized development vehicle; long reliable identity thread but no full-untruncated core rows; used to discover truncation and O2-control boundaries, not to fit the core radial relation"
+G1S002,GM_RM017,GM_RM017:PV003,DEVELOPMENT_CORE,1,75,67,67,52,151,189,315,394,ALLOWED_DEVELOPMENT_ONLY,"Highest full-untruncated core-row count among GM_RM017 complete vehicles; no identity conflict"
+G1S003,GM_RM017,GM_RM017:PV004,DEVELOPMENT_CORE,2,64,61,61,43,162,214,337,446,ALLOWED_DEVELOPMENT_ONLY,"Second-highest full-untruncated core-row count among GM_RM017 complete vehicles; no identity conflict"
+G1S004,GM_RM017,GM_RM017:PV002,HELDOUT_WITHIN_SCENE,1,68,66,66,37,145,185,302,386,FORBIDDEN_UNTIL_FORWARD_FREEZE,"Remaining complete GM_RM017 vehicle after deterministic top-two core-row selection"
+G1S005,GM_RM019,GM_RM019:PV001,HELDOUT_CROSS_SCENE,1,6,4,4,0,0,13,0,27,FORBIDDEN_UNTIL_FORWARD_FREEZE,"All cross-scene vehicles with at least four usable high-link GT rows are held out"
+G1S006,GM_RM019,GM_RM019:PV002,HELDOUT_CROSS_SCENE,2,6,5,5,0,13,42,27,88,FORBIDDEN_UNTIL_FORWARD_FREEZE,"All cross-scene vehicles with at least four usable high-link GT rows are held out"
+G1S007,GM_RM019,GM_RM019:PV004,HELDOUT_CROSS_SCENE,3,4,4,4,1,151,170,315,354,FORBIDDEN_UNTIL_FORWARD_FREEZE,"All cross-scene vehicles with at least four usable high-link GT rows are held out"
+G1S008,GM_RM019,GM_RM019:PV003,EXCLUDED_INSUFFICIENT_GT,4,6,0,0,0,102,139,212,290,FORBIDDEN,"No usable or gold GT row; retained as exclusion evidence and not silently replaced"
+G1S009,GM_RM011,GM_RM011:PV002,ADDITIONAL_STRESS_HELDOUT,1,8,7,7,0,0,3,0,7,FORBIDDEN_UNTIL_PRIMARY_REVEAL,"Reliable short high-link thread; no full-untruncated core row"
+G1S010,GM_RM011,GM_RM011:PV006,ADDITIONAL_STRESS_HELDOUT,2,37,4,4,0,117,136,244,284,FORBIDDEN_UNTIL_PRIMARY_REVEAL,"At least four usable high-link rows; long diagnostic thread but no full-untruncated core row"
+G1S011,GM_RM011,GM_RM011:PV007,ADDITIONAL_STRESS_HELDOUT,3,48,5,4,0,117,151,244,315,FORBIDDEN_UNTIL_PRIMARY_REVEAL,"At least four usable rows and four high-link rows; diagnostic/truncation pressure thread"
+G1S012,GM_RM011,GM_RM011:PV010,ADDITIONAL_STRESS_HELDOUT,4,5,5,5,0,212,245,442,510,FORBIDDEN_UNTIL_PRIMARY_REVEAL,"Five usable high-link rows; late observation-lifecycle pressure thread"
