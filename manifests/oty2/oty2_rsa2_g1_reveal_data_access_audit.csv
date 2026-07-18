@@ -1,0 +1,6 @@
+access_id,sequence,stage,artifact_path,contains_target_sar_gt,allowed,purpose,forward_freeze_verified_before_access,forward_artifacts_modified
+G1RACC001,1,PRE_REVEAL,manifests/oty2/oty2_rsa2_g1_forward_freeze_manifest.csv,false,true,Verify every forward CSV access-audit and F-figure SHA before opening target GT,true,false
+G1RACC002,2,REVEAL,manifests/oty2/oty2_s0_sar_gt_quality_audit.csv,true,true,Audit held-out GT coverage geometry quality and same-frame availability,true,false
+G1RACC003,3,REVEAL,manifests/oty2/oty2_rsa2_o2_r1_figure_provenance_audit.csv,true,true,Recheck actual O2 W1 red and yellow provenance controls after GT reveal,true,false
+G1RACC004,4,REVEAL,D:/profile/research/data/GM_RM011;GM_RM017;GM_RM019,false,true,Render raw optical and SAR context for reveal-only evidence figures,true,false
+G1RACC005,5,POST_REVEAL,manifests/oty2/oty2_rsa2_g1_forward_freeze_manifest.csv,false,true,Recompute every frozen artifact SHA after reveal,true,false

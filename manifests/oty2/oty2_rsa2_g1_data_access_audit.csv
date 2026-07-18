@@ -1,0 +1,6 @@
+access_id,stage,path,contains_target_gt,allowed,purpose
+G1ACC001,FORWARD,D:\profile\research\optical-sar-visual-diagnosis-sar-foundation\manifests\oty2\oty2_rsa2_g1_data_split.csv,false,true,frozen split roles
+G1ACC002,FORWARD,D:\profile\research\optical-sar-visual-diagnosis-sar-foundation\manifests\oty2\oty2_rsa2_g1_optical_observation_phase.csv,false,true,optical-only phase and geometry
+G1ACC003,FORWARD,D:\profile\research\optical-sar-visual-diagnosis-sar-foundation\manifests\oty2\oty2_rsa2_g1_coupled_relation_hypotheses.csv,development-derived frozen intervals only,true,frozen relation envelopes
+G1ACC004,FORWARD,D:\profile\research\optical-sar-visual-diagnosis-sar-foundation\manifests\oty2\oty2_p0_hard_sync_optical_to_sar.csv,false,true,operational time mapping
+G1ACC005,FORWARD,D:\profile\research\optical-sar-visual-diagnosis-sar-foundation\manifests\oty2\oty2_s0_sar_gt_quality_audit.csv,true,false,NOT_OPENED

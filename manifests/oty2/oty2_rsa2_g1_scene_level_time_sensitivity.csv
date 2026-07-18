@@ -1,0 +1,16 @@
+scene,uniform_sar_frame_offset,available_cases,azimuth_covered_cases,radius_covered_cases,joint_center_covered_cases,bounded_available_cases,bounded_azimuth_covered_cases,bounded_radius_covered_cases,bounded_joint_center_covered_cases,note
+GM_RM011,-2,4,4,4,4,0,0,0,0,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM011,-1,4,3,4,3,0,0,0,0,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM011,0,5,5,5,5,0,0,0,0,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM011,1,4,4,4,4,0,0,0,0,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM011,2,6,6,6,6,0,0,0,0,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM017,-2,3,3,3,3,2,2,2,2,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM017,-1,2,2,2,2,1,1,1,1,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM017,0,3,3,3,3,2,2,2,2,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM017,1,2,2,2,2,1,1,1,1,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM017,2,3,3,3,3,2,2,2,2,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM019,-2,1,0,1,0,0,0,0,0,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM019,-1,0,0,0,0,0,0,0,0,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM019,0,1,1,1,1,0,0,0,0,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM019,1,0,0,0,0,0,0,0,0,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
+GM_RM019,2,0,0,0,0,0,0,0,0,evaluation-only scene-level uniform offset; no per-vehicle tuning; forward intervals and main mapping unchanged
