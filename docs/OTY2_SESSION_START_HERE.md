@@ -163,7 +163,9 @@ Before entering any task-specific stack, every future OTY2 session must first re
 3. `reports/oty2/oty2_rsa2_o0_open_book_vehicle_level_multitimescale_mechanism_review_20260718.md`
 4. `docs/OTY2_RSA2_O1_VEHICLE_RESPONSE_STATE_AND_RELATION_SEMANTICS.md`
 5. `docs/OTY2_RSA2_O1_CANONICAL_VISUAL_EVIDENCE_GUIDE.md`
-6. 之后才进入旧路线、RSA0、RSA1 及其历史报告。
+6. `docs/OTY2_RSA2_O1_R1_CONDITIONAL_EVIDENCE_INTEGRATION.md`
+7. `reports/oty2/oty2_rsa2_o2_bidirectional_evidence_closure_gmrm011_20260718.md`
+8. 之后才进入旧路线、RSA0、RSA1 及其历史报告。
 
 - 后续会话不得只读取 RSA0/RSA1 而跳过本次全量深度复盘；上述复盘与状态索引必须位于 RSA0、RSA1 文档之前。
 - 若旧阶段术语或解释与本复盘冲突，以本复盘中的纠偏解释作为当前研究口径。
@@ -171,6 +173,8 @@ Before entering any task-specific stack, every future OTY2 session must first re
 - 本复盘不授权任何新的算法实现、实验、阈值调整、候选生成、打分、排序或自动标注。
 - RSA2-O0 报告是当前车辆级完整时序、四时间尺度、多车排他和响应对象语义的开卷审阅入口；后续会话不得跳过它而直接继承 RSA0/RSA1 的旧代理解释。该报告同样不授权算法实现。
 - RSA2-O1 冻结的是证据层、物理车辆、单帧响应实例、跨帧关系、背景、多车排他、GT 质量和未知状态，仍不授权任何算法实现。
+- RSA2-O1-R1 明确：单一弱证据不能无条件升级，但相对独立的身份、生命周期、物理尺度、SAR 观察、多车排他和背景反证可以在保留矛盾与未知时联合支持更强解释；该修订不引入分数、票数、阈值、排名或自动实现。
+- RSA2-O2 必须在 O1-R1 之后读取。它以 GM_RM011 的正向冻结、逆向 GT 审计和负控制表明：正确身份不等于正确 SAR 几何，`BIDIRECTIONALLY_CLOSED=0`，且逆向事后解释不能回写为正向机制支持。
 - 后续代码的数据结构必须能够表达 O1 冻结状态；若只能表达单帧分数、固定部件、候选排序或时序聚合，则不符合 O1。
 - 后续不得跳过 7 张核心视觉证据图而只读取文字定义；必须同时读取每张图的“支持什么”和“不支持什么”。
 
