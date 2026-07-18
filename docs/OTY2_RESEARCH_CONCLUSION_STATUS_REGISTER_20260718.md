@@ -2,7 +2,7 @@
 
 ## 文件性质与边界
 
-- 本索引只依据 `docs/reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md` 整理“旧结论/旧表述—当前状态—纠偏依据章节”的映射。
+- C01–C10 只依据 `docs/reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md` 整理；C11–C15 依据用户确认的静止车辆采集事实与 `docs/OTY2_RSA2_O2_R1_STATIC_SCENE_CAUSAL_CORRECTION.md` 追加“旧结论/旧表述—当前状态—纠偏依据”的映射。
 - 本索引不产生新的研究判断，不提出下一阶段算法，不授权实现、实验、阈值调整、候选生成、打分、排序或自动标注。
 - 与旧文档冲突时，以深度复盘中的纠偏解释作为当前研究口径；旧文档继续保留为历史记录，不应被改写成“从未发生”，也不应被误读为当前已经成立的科学结论。
 
@@ -20,5 +20,10 @@
 | C08 | `temporal propagation` 表示车辆响应结构随时序传播。 | **术语纠正；机制主张不成立。** | 现有实现主要是固定位置或固定几何的邻帧一致性支持，不能等同于车辆响应结构随时序传播。 | [§4.1 时序统计化退化](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-4-1)；[§17.1 错误登记](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-17-1) |
 | C09 | 仅使用中心平移或局部壳层已充分利用物理尺度、车辆长宽和旋转角。 | **未充分使用。** | 过去没有充分使用 GT 中的车长、车宽、朝向和米制结构；仅使用中心平移或局部壳层，丢失了大量开卷信息。 | [§3.4 错误造成的信息损失](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-3-4)；[§6.2 GT 的实际使用程度](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-6-2)；[§12 被忽略信息总表](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-12)；[附录 C](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#appendix-c) |
 | C10 | 同一车辆的多帧观测可由简单并集、交集、最大值、频率图或面积比较充分代表。 | **等同关系撤回。** | 同一车辆在不同帧中呈现不同局部响应；这些帧应被理解为对同一潜在车辆响应体的互补、不完整观测。简单并集、交集、最大值、频率图和面积比较都不能代替这种联合解释。 | [§4.3 GM17 多帧互补证据](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-4-3)；[§4.4 聚合指标边界](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#sec-4-4)；[附录 B](reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md#appendix-b) |
+| C11 | GM_RM011、GM_RM017、GM_RM019 中图像位置和响应变化可统称为车辆运动、车辆轨迹或车辆进入/退出世界场景。 | **因果模型纠正。** | 三场景所有车辆均静止，车辆世界位置与航向固定、世界速度为 0；变化来自移动平台和传感器投影。后续使用观测生命周期、视场准入/准出和平台自运动诱导表观变化。 | [O2-R1 §2–4](OTY2_RSA2_O2_R1_STATIC_SCENE_CAUSAL_CORRECTION.md) |
+| C12 | O2 `BIDIRECTIONALLY_CLOSED=0` 已检验并否定完整光学—SAR 联合假设的强版本。 | **范围收缩。** | O2 实际检验身份、观测生命周期、操作性时间代理、宽方位和人工响应区，没有使用完整静止世界二维几何链。当前状态为 `O2_DIAGNOSED_MISSING_STATIC_WORLD_GEOMETRY`。 | [O2-R1 §9](OTY2_RSA2_O2_R1_STATIC_SCENE_CAUSAL_CORRECTION.md) |
+| C13 | SAR 80 是 PV001 退出后的纯背景帧。 | **结论降级。** | SAR 80 只能排除 PV001 对持续结构的独占所有权；optical 36–41 中 PV003 仍存在。允许 `TARGET_VEHICLE_IDENTITY_EXCLUDED`、`OTHER_VEHICLE_PRESENT`、`BACKGROUND_OR_OTHER_STATIC_OBJECT` 或 `MIXED_OR_UNRESOLVED`，不允许未经审计的 `PURE_BACKGROUND_CONFIRMED`。 | [O2-R1 §7](OTY2_RSA2_O2_R1_STATIC_SCENE_CAUSAL_CORRECTION.md) |
+| C14 | C-W1 红框是正向预测/W1A/光学→SAR 映射结果，黄色框是候选。 | **来源纠正。** | 红框是 GT 平移 `x+260,y-250` 的错误位置负控制；黄色框是同中心 GT 旋转 90° 的错误方向负控制。W1A 是中心 `(1115,1085)`、`150×110 px` 的人工硬编码响应审阅区，非几何预测，且无法从已提交正向产物精确重建。 | [O2-R1 §6](OTY2_RSA2_O2_R1_STATIC_SCENE_CAUSAL_CORRECTION.md) |
+| C15 | `11.809661°` 是 GM_RM011 的历史预测方位。 | **数值语义纠正。** | 它是 optical 5 / SAR 10 旧线性模型中心残差 `-11.809660642°` 的量级；旧预测为 `-14.683983642°`，GT 中心为 `-2.874323°`。 | [O2-R1 §8](OTY2_RSA2_O2_R1_STATIC_SCENE_CAUSAL_CORRECTION.md) |
 
 本索引只登记上述状态映射，不构成实施计划。
