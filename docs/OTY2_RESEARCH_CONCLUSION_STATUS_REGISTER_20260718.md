@@ -2,7 +2,7 @@
 
 ## 文件性质与边界
 
-- C01–C10 只依据 `docs/reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md` 整理；C11–C15 依据用户确认的静止车辆采集事实与 `docs/OTY2_RSA2_O2_R1_STATIC_SCENE_CAUSAL_CORRECTION.md` 追加“旧结论/旧表述—当前状态—纠偏依据”的映射。
+- C01–C10 只依据 `docs/reviews/OTY2_SAR_ROUTE_ERRORS_AND_OMISSIONS_DEEP_REVIEW_20260718.md` 整理；C11–C15 依据用户确认的静止车辆采集事实与 `docs/OTY2_RSA2_O2_R1_STATIC_SCENE_CAUSAL_CORRECTION.md` 追加；C16–C20 依据 G0 成像后静止车辆多视角几何关系审计追加“旧结论/旧表述—当前状态—纠偏依据”的映射。
 - 本索引不产生新的研究判断，不提出下一阶段算法，不授权实现、实验、阈值调整、候选生成、打分、排序或自动标注。
 - 与旧文档冲突时，以深度复盘中的纠偏解释作为当前研究口径；旧文档继续保留为历史记录，不应被改写成“从未发生”，也不应被误读为当前已经成立的科学结论。
 
@@ -25,5 +25,10 @@
 | C13 | SAR 80 是 PV001 退出后的纯背景帧。 | **结论降级。** | SAR 80 只能排除 PV001 对持续结构的独占所有权；optical 36–41 中 PV003 仍存在。允许 `TARGET_VEHICLE_IDENTITY_EXCLUDED`、`OTHER_VEHICLE_PRESENT`、`BACKGROUND_OR_OTHER_STATIC_OBJECT` 或 `MIXED_OR_UNRESOLVED`，不允许未经审计的 `PURE_BACKGROUND_CONFIRMED`。 | [O2-R1 §7](OTY2_RSA2_O2_R1_STATIC_SCENE_CAUSAL_CORRECTION.md) |
 | C14 | C-W1 红框是正向预测/W1A/光学→SAR 映射结果，黄色框是候选。 | **来源纠正。** | 红框是 GT 平移 `x+260,y-250` 的错误位置负控制；黄色框是同中心 GT 旋转 90° 的错误方向负控制。W1A 是中心 `(1115,1085)`、`150×110 px` 的人工硬编码响应审阅区，非几何预测，且无法从已提交正向产物精确重建。 | [O2-R1 §6](OTY2_RSA2_O2_R1_STATIC_SCENE_CAUSAL_CORRECTION.md) |
 | C15 | `11.809661°` 是 GM_RM011 的历史预测方位。 | **数值语义纠正。** | 它是 optical 5 / SAR 10 旧线性模型中心残差 `-11.809660642°` 的量级；旧预测为 `-14.683983642°`，GT 中心为 `-2.874323°`。 | [O2-R1 §8](OTY2_RSA2_O2_R1_STATIC_SCENE_CAUSAL_CORRECTION.md) |
+| C16 | 没有成像前 SAR 数据、逐帧平台轨迹或 INS/IMU，就必须停止当前 G0。 | **范围纠正。** | G0 已修正为成像后静止车辆多视角几何关系审计。最终光学帧、最终 SAR 灰度帧、研究期 GT、身份与观测生命周期、显示坐标、`0.03 m/px`、操作性时间映射和 O2 框来源足以继续当前审计；成像前资产缺失不是本阶段阻塞条件。 | [G0 合同 §1](OTY2_RSA2_G0_STATIC_WORLD_MOVING_PLATFORM_GEOMETRY_CONTRACT.md)；[G0 报告 §2](../reports/oty2/oty2_rsa2_g0_static_geometry_asset_and_formula_audit_20260718.md) |
+| C17 | 光学横向位置要么完全无助于 SAR 几何，要么现有线性式已经构成精确部署方位映射。 | **限界保留。** | 同一静止车辆的光学横向顺序与 SAR 方位具有定性相容性，可提供宽方位和左右顺序约束；历史 `theta=0.0875154*x-40.413555` 依赖 GT 锚点、状态为 `MAPPING_BLOCKED`，不是跨场景部署映射。 | [G0 合同 §5.1](OTY2_RSA2_G0_STATIC_WORLD_MOVING_PLATFORM_GEOMETRY_CONTRACT.md)；[G0 报告 §7.1](../reports/oty2/oty2_rsa2_g0_static_geometry_asset_and_formula_audit_20260718.md) |
+| C18 | 光学 bbox 尺度、观察角或平台经过阶段已经可以稳定换算 SAR 径向距离。 | **尚未冻结。** | 部分完整线程内存在尺度/视角与 SAR 半径的趋势证据，但边界截断、投影语义、姿态和场景差异尚未闭合；当前不能可靠计算 SAR 半径或米制距离。历史 WGV3.5A 仅为场景/数据依赖的弱标定。 | [G0 合同 §5.2](OTY2_RSA2_G0_STATIC_WORLD_MOVING_PLATFORM_GEOMETRY_CONTRACT.md)；[G0 报告 §7.2](../reports/oty2/oty2_rsa2_g0_static_geometry_asset_and_formula_audit_20260718.md) |
+| C19 | 光学车身姿态不能约束 SAR 方向，或清晰侧视可以直接决定精确 SAR GT 角度。 | **粗排除成立，精确映射未成立。** | 清晰近水平侧视车身长轴可排除同中心旋转 90° 的近竖直错误方向；它不能单独决定每帧精确 SAR 角度、完整响应主轴或响应边界。 | [G0 合同 §5.3](OTY2_RSA2_G0_STATIC_WORLD_MOVING_PLATFORM_GEOMETRY_CONTRACT.md)；[G0 报告 §6、§7.3](../reports/oty2/oty2_rsa2_g0_static_geometry_asset_and_formula_audit_20260718.md) |
+| C20 | 当前已经存在完整二维光学→SAR 部署映射，或因为不存在该映射而无法进行任何图像域研究。 | **两种极端表述均撤回。** | 当前主状态为 `STATIC_GEOMETRY_CHAIN_PARTIALLY_AVAILABLE`：身份、观测生命周期、操作性时间、SAR 显示坐标、物理网格、宽方位和粗方向排除可用；次级边界为 `NO_DEPLOYMENT_COMPATIBLE_2D_MAPPING_FOUND`，仅禁止部署映射主张，不阻止成像后关系审计。 | [G0 合同 §7、§12](OTY2_RSA2_G0_STATIC_WORLD_MOVING_PLATFORM_GEOMETRY_CONTRACT.md)；[G0 报告 §12](../reports/oty2/oty2_rsa2_g0_static_geometry_asset_and_formula_audit_20260718.md) |
 
 本索引只登记上述状态映射，不构成实施计划。
