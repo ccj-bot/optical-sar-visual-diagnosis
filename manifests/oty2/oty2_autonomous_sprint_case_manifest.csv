@@ -1,0 +1,5 @@
+﻿case_id,case_role,scene,sar_frame,runtime_eligible,centre_source,gt_overlay_visible,canonical_vehicle_id,reference_sar_frame,executed_frames,allowed_inputs,forbidden_inputs
+TEACHER_STRESS_GM_RM011_256,TEACHER_POSTHOC_STRESS_ONLY,GM_RM011,256,false,RESEARCH_GT_DERIVED_POSTHOC_CASE_FREEZE,false,,,,,
+TEACHER_STRESS_GM_RM019_31,TEACHER_POSTHOC_STRESS_ONLY,GM_RM019,31,false,RESEARCH_GT_DERIVED_POSTHOC_CASE_FREEZE,false,,,,,
+G1F0002,RUNTIME_PRIMARY_GM17_HIGH_ALPHA,GM_RM017,,true,G1_FORWARD_INTERVAL_TARGET_GT_NOT_ACCESSED,,GM_RM017:PV002,342,339;341;342;343;344;347;348;349,raw SAR; adjacent frames; fan mask; G1 theta/radius/heading/size ranges,current target SAR GT centre/box; manual NSB; known peak; historical peak range
+G1F0001,RUNTIME_SECONDARY_GM17_INTERMEDIATE_ALPHA,GM_RM017,,true,G1_FORWARD_INTERVAL_TARGET_GT_NOT_ACCESSED,,GM_RM017:PV002,321,319;320;321;322;323,raw SAR; adjacent frames; fan mask; G1 theta/radius/heading/size ranges,current target SAR GT centre/box; manual NSB; known peak; historical peak range

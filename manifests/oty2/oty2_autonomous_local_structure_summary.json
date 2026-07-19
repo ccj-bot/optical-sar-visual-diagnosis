@@ -1,0 +1,67 @@
+{
+  "status": "LOCAL_STRUCTURE_EXTRACTION_CAPABILITY_ESTABLISHED_RESTRICTED_GM17_SIDE_DOMINANT_L1",
+  "final_result": "Result A: LOCAL_STRUCTURE_EXTRACTION_CAPABILITY_ESTABLISHED",
+  "capability_level": "L1_CONDITIONED_LOCAL_EXTRACTION",
+  "runtime_case": "G1F0002",
+  "runtime_gt_access": "TARGET_SAR_GT_NOT_ACCESSED_AT_RUNTIME",
+  "frames": [
+    339,
+    341,
+    342,
+    343,
+    344,
+    347,
+    348,
+    349
+  ],
+  "frame_states": {
+    "339": "TEMPORALLY_SUPPORTED_MULTIPLE_BANDS_UNRESOLVED",
+    "341": "TEMPORALLY_SUPPORTED_SPARSE_BAND",
+    "342": "TEMPORALLY_SUPPORTED_MULTIPLE_BANDS_UNRESOLVED",
+    "343": "TEMPORALLY_SUPPORTED_MULTIPLE_BANDS_UNRESOLVED",
+    "344": "TEMPORALLY_SUPPORTED_MULTIPLE_BANDS_UNRESOLVED",
+    "347": "TEMPORALLY_SUPPORTED_MULTIPLE_BANDS_UNRESOLVED",
+    "348": "TEMPORALLY_SUPPORTED_MULTIPLE_BANDS_UNRESOLVED",
+    "349": "TEMPORALLY_SUPPORTED_MULTIPLE_BANDS_UNRESOLVED"
+  },
+  "object_count": 872,
+  "ridge_segment_count": 435,
+  "lsd_segment_count": 6,
+  "hotspot_count": 396,
+  "band_centerline_count": 35,
+  "primary_object_count": 56,
+  "graph_edge_count": 18,
+  "persistent_group_count": 1,
+  "audited_frame": 344,
+  "audited_object_count": 100,
+  "audited_objects_overlapping_manual_nsb": 11,
+  "audited_objects_overlapping_gt_geometry": 25,
+  "posthoc_primary_band_audit": {
+    "339": {
+      "primary_band_count": 2,
+      "primary_bands_overlapping_manual_nsb": 1
+    },
+    "344": {
+      "primary_band_count": 2,
+      "primary_bands_overlapping_manual_nsb": 2
+    }
+  },
+  "teacher_board_count": 7,
+  "road_control_states_at_342": {
+    "ROAD_RC1": "NOT_IDENTIFIABLE_NO_TEMPORALLY_SUPPORTED_BAND",
+    "ROAD_RC2": "NOT_IDENTIFIABLE_NO_TEMPORALLY_SUPPORTED_BAND",
+    "ROAD_RC3": "NOT_IDENTIFIABLE_NO_TEMPORALLY_SUPPORTED_BAND"
+  },
+  "road_control_primary_band_count": 0,
+  "road_control_graph_edge_count": 7,
+  "teacher_warning": "RESEARCH_TEACHER_OUTPUT_NOT_GT_NOT_MASK",
+  "independent_teacher_model_status": "NOT_AVAILABLE_IN_CURRENT_TOOLING",
+  "forbidden_outputs": [
+    "target centre",
+    "winner",
+    "selector",
+    "final box",
+    "response mask",
+    "training annotation"
+  ]
+}
