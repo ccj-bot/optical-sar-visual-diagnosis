@@ -1,0 +1,63 @@
+{
+  "task": "OTY2-RSA2-G2-R2B",
+  "status": "ASPECT_CONDITIONED_RESPONSE_GRAMMAR_V1_PARTIALLY_ESTABLISHED",
+  "full_transition_status": "ASPECT_RANGE_INSUFFICIENT_FOR_FULL_TRANSITION",
+  "eligibility_rows": 337,
+  "component_cards": 51,
+  "lineage_relations": 27,
+  "actual_alpha_range_all_selected_deg": [
+    0.0,
+    89.971606
+  ],
+  "reliable_identifiable_gm17_alpha_range_deg": [
+    48.572405,
+    89.971606
+  ],
+  "manual_component_card_alpha_range_deg": [
+    73.145406,
+    89.971606
+  ],
+  "manual_component_card_alpha_scope": "NEAR_SIDE_LONGITUDINAL_BAND role only; this is not the alpha range of all 51 cards",
+  "same_vehicle_reliable_windows": [
+    "GM_RM017:PV002 source responsibility span SAR315-386; grammar-eligible selected frames SAR317-386 (n=64)",
+    "GM_RM017:PV003 source thread SAR315-394; grammar-eligible selected frames n=67 with 6 diagnostic-only gaps",
+    "GM_RM017:PV004 source thread SAR337-394; grammar-eligible selected frames n=58"
+  ],
+  "same_vehicle_window_scope": "thread-level identity/trajectory continuity; eligibility remains per selected row and does not imply that every integer frame in each span is admitted",
+  "near_end_status": "NOT_IDENTIFIABLE_IN_CURRENT_GM11_BACKGROUND_AND_GT_CONDITIONS",
+  "gm17_near_band_judgment": "primarily upper-observed-alpha / near-side conditioned; weaker fragments persist into intermediate alpha; not demonstrated for near-end",
+  "gt_blind_joint_qualification": "CONDITIONALLY_QUALIFIED_FOR_GM17_SIDE_DOMINANT_CARD_SUPPORTED_SCOPE_ONLY",
+  "gt_blind_scope_note": "Only GM17 side-dominant, high-identity, valid-interior, raw-visible windows inside the observed manual-card alpha envelope; this is evidence scope, not a runtime threshold.",
+  "forbidden": [
+    "R2A rerun",
+    "GT-blind execution",
+    "candidate generation",
+    "score/rank/selector/winner",
+    "centre recovery formula",
+    "response mask",
+    "final box",
+    "training annotation"
+  ],
+  "inputs": [
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_s0_sar_gt_quality_audit.csv",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_p1e_canonical_vehicle_frame_states.csv",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa0_response_atlas_regions_v1.csv"
+  ],
+  "missing_paths": [],
+  "assets": [
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\docs\\reviews\\assets\\20260719_rsa2_g2_r2b_aspect_conditioned_response_grammar\\D01_ALPHA_IDENTIFIABILITY_OVERVIEW.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\docs\\reviews\\assets\\20260719_rsa2_g2_r2b_aspect_conditioned_response_grammar\\D02_PV002_CONTINUOUS_ALPHA_WINDOW.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\docs\\reviews\\assets\\20260719_rsa2_g2_r2b_aspect_conditioned_response_grammar\\D03_RAW_GRAYSCALE_COMPONENT_CARDS.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\docs\\reviews\\assets\\20260719_rsa2_g2_r2b_aspect_conditioned_response_grammar\\D04_VEHICLE_AND_RADAR_COORDINATES.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\docs\\reviews\\assets\\20260719_rsa2_g2_r2b_aspect_conditioned_response_grammar\\D05_PV002_COMPONENT_LINEAGE.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\docs\\reviews\\assets\\20260719_rsa2_g2_r2b_aspect_conditioned_response_grammar\\D06_ASPECT_CASE_COMPARISON.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\docs\\reviews\\assets\\20260719_rsa2_g2_r2b_aspect_conditioned_response_grammar\\D07_BACKGROUND_AND_UNIDENTIFIABLE_CASES.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\docs\\reviews\\assets\\20260719_rsa2_g2_r2b_aspect_conditioned_response_grammar\\D08_GM17_VALIDATION_THREADS.png",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\docs\\reviews\\assets\\20260719_rsa2_g2_r2b_aspect_conditioned_response_grammar\\D09_ASPECT_CONDITIONED_GRAMMAR_SUMMARY.png"
+  ],
+  "manifests": [
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa2_g2_r2b_aspect_eligibility_manifest.csv",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa2_g2_r2b_component_cards.csv",
+    "D:\\profile\\research\\optical-sar-visual-diagnosis-sar-foundation\\manifests\\oty2\\oty2_rsa2_g2_r2b_component_lineage.csv"
+  ]
+}
